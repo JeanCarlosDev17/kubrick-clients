@@ -28,7 +28,7 @@ Configuración general de los medios de pago
 
 Métodos de pago:
 
-- PSE
+-  \_PSE_
 
 Observaciones:
 

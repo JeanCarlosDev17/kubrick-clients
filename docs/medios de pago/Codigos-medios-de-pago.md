@@ -25,4 +25,5 @@ stoplight-id: 83pc5ou37skx8
 | CREDIBANCO_AM           | CR_AM  |
 | CREDIBANCO_DN           | CR_DN  |
 | REDEBAN_MASTERCARD      | RM_MC  |
+| PSE                     | \_PSE_|
 
