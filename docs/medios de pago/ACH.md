@@ -4,7 +4,7 @@ stoplight-id: 5k3unmux2vm18
 
 # ACH
 
-- PSE
+- _PSE_
 
 Configuración general de los medios de pago
 
