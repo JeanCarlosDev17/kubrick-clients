@@ -1684,7 +1684,7 @@
                     },
                     "paymentMethods": [
                       {
-                        "code": "MC",
+                        "code": "CR_MP",
                         "commissionModel": "F",
                         "commissionValue": 2.5,
                         "accountNumber": "1234567811",
@@ -1764,6 +1764,198 @@
                       "document": {
                         "type": "string",
                         "identification": "900299823-1"
+                      }
+                    },
+                    "microsite": {
+                      "name": "Microsite name example",
+                      "alias": "example-slug",
+                      "type": "OPEN",
+                      "allowPartial": true,
+                      "categories": [
+                        "comercio_electronico"
+                      ],
+                      "loginFields": 2,
+                      "header": "https://header.com",
+                      "footer": "https://footer.com",
+                      "logo": "https://logo.com"
+                    }
+                  }
+                },
+                "Example 2": {
+                  "value": {
+                    "dueDiligenceId": 421828323801,
+                    "statusWebhook": "https://test.webhook.com/",
+                    "isCms": true,
+                    "cmsType": "woocommerce",
+                    "environments": {
+                      "test": {
+                        "isActive": true
+                      },
+                      "prod": {
+                        "isActive": true
+                      }
+                    },
+                    "corporateImage": {
+                      "logo": "https://google.com//logos/5be01d787b5e5b0001ebb.png",
+                      "primaryColor": "#0072E1",
+                      "secondaryColor": "#FFFFFF"
+                    },
+                    "merchant": {
+                      "name": "EVERTEC PLACETOPAY S.A.S",
+                      "brand": "Placetopay",
+                      "mcc": 7929,
+                      "languages": [
+                        "ES"
+                      ],
+                      "currencies": [
+                        "COP"
+                      ],
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "address": {
+                        "city": "medellin",
+                        "state": 1,
+                        "country": "CO"
+                      },
+                      "legalRepresentative": {
+                        "documentType": "CC",
+                        "document": "1037854200",
+                        "name": "Ricardo",
+                        "surname": "García"
+                      }
+                    },
+                    "paymentMethods": {
+                      "code": "MC",
+                      "oder": 3,
+                      "commissionModel": "F",
+                      "commissionValue": 2.5,
+                      "accountNumber": "1234567811",
+                      "financialEntity": 16,
+                      "accountType": 1,
+                      "threeDS": true,
+                      "settings": {
+                        "retailCode": "011211406",
+                        "terminalLocation": "Medellín",
+                        "terminalNumber": "00031431",
+                        "username": "FIDUCOLDEX01",
+                        "password": "FIDUCOLDEX01",
+                        "pfxID": 1,
+                        "entityCode": "9002992280",
+                        "serviceCode": "001",
+                        "isEcommerce": true,
+                        "merchantCode": "1269189"
+                      }
+                    },
+                    "site": {
+                      "displayName": "Site name example",
+                      "type": "INT",
+                      "category": "ECOMMERCE",
+                      "email": "admin@email.com",
+                      "currency": "COP",
+                      "language": "ES",
+                      "customBatch": 2345,
+                      "expiration": "2023-06-30 00:00:00",
+                      "analyticsCode": "UA-171313251-4, GTM-123812",
+                      "integration": {
+                        "allowPartial": false,
+                        "connectionMethod": "REDIRECT",
+                        "notificationUrl": "https://site-webhook.com"
+                      },
+                      "control": {
+                        "minAmount": "1000",
+                        "maxAmount": "1000000",
+                        "filterPse": false,
+                        "filterTuya": false,
+                        "filterSafetyPay": false,
+                        "prechargerFilter": 2,
+                        "filterByBin": false,
+                        "exceptionBinsList": [
+                          "123456"
+                        ]
+                      },
+                      "threeDS": {
+                        "setting": "VERY_LOW",
+                        "minAmount": 40
+                      },
+                      "historic": {
+                        "behaviour": "IGNORE",
+                        "lowerScore": "100",
+                        "rejectionScore": 300
+                      },
+                      "creditBureau": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onNoMatch": "REJECTED",
+                          "onMatch": "PROCESS"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 200
+                      },
+                      "riskEngine": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onLowRisk": "MANUAL",
+                          "onMediumRisk": null,
+                          "onHighRisk": "REJECTED"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 30,
+                        "approvalScore": 200,
+                        "rejectionScore": 250,
+                        "onCaibration": true
+                      },
+                      "securityFilters": {
+                        "allowedIssuerCountries": [
+                          "CO"
+                        ],
+                        "forceIPMatch": true,
+                        "excludeIPCountry": [
+                          "CL"
+                        ],
+                        "onlyWhitelisted": true,
+                        "allowedIPCountries": [
+                          "EC"
+                        ],
+                        "allowedCardsDay": 4,
+                        "allowedCardsByIP": 10,
+                        "allowedCardsMonth": 4,
+                        "allowedCardsYear": 2,
+                        "dayMax": 3,
+                        "dayMaxAmount": 30000,
+                        "monthMax": 3,
+                        "monthMaxAmount": 2000
+                      },
+                      "operation": {
+                        "disableTax": true,
+                        "calculateTax": true,
+                        "taxPercentage": 12,
+                        "patternReference": null,
+                        "mailCustomer": true,
+                        "mailMerchant": true
+                      }
+                    },
+                    "threeDS": {
+                      "brand": "ThreeDS brand example",
+                      "country": "COL",
+                      "currency": "COP",
+                      "url": "https://example.com",
+                      "mcc": 742,
+                      "isicClass": 111,
+                      "subscriptions": [
+                        {
+                          "franchise": 2,
+                          "acquirerBIN": 400900
+                        }
+                      ],
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
                       }
                     },
                     "microsite": {
@@ -9958,6 +10150,23 @@
             "example": "ES",
             "description": "Lenguaje que se usará para las transacciones."
           },
+          "customBatch": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "wvdjri1lw8flr"
+            },
+            "example": 2345,
+            "description": "Código servicio recaudo"
+          },
+          "expiration": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "6d702v94t9q31"
+            },
+            "description": "Fecha de expiración el sitio, si no es definido o su valor es null la fecha de expiración sera ilimitada.",
+            "example": "2023-06-30 00:00:00",
+            "default": null
+          },
           "analyticsCode": {
             "type": "string",
             "x-stoplight": {
@@ -10014,7 +10223,101 @@
               "id": "8so4vk19sor6y"
             }
           }
-        }
+        },
+        "examples": [
+          {
+            "displayName": "Site name example",
+            "type": "INT",
+            "category": "ECOMMERCE",
+            "email": "admin@email.com",
+            "currency": "COP",
+            "language": "ES",
+            "customBatch": 2345,
+            "expiration": "2023-06-30 00:00:00",
+            "analyticsCode": "UA-171313251-4, GTM-123812",
+            "integration": {
+              "allowPartial": false,
+              "connectionMethod": "REDIRECT",
+              "notificationUrl": "https://site-webhook.com"
+            },
+            "control": {
+              "minAmount": "1000",
+              "maxAmount": "1000000",
+              "filterPse": false,
+              "filterTuya": false,
+              "filterSafetyPay": false,
+              "prechargerFilter": 2,
+              "filterByBin": false,
+              "exceptionBinsList": [
+                "123456"
+              ]
+            },
+            "threeDS": {
+              "setting": "VERY_LOW",
+              "minAmount": 40
+            },
+            "historic": {
+              "behaviour": "IGNORE",
+              "lowerScore": "100",
+              "rejectionScore": 300
+            },
+            "creditBureau": {
+              "behaviours": {
+                "onFailed": "REJECTED",
+                "onNoMatch": "REJECTED",
+                "onMatch": "PROCESS"
+              },
+              "paymentGroups": [
+                "CASH"
+              ],
+              "minAmount": 200
+            },
+            "riskEngine": {
+              "behaviours": {
+                "onFailed": "REJECTED",
+                "onLowRisk": "MANUAL",
+                "onMediumRisk": null,
+                "onHighRisk": "REJECTED"
+              },
+              "paymentGroups": [
+                "CASH"
+              ],
+              "minAmount": 30,
+              "approvalScore": 200,
+              "rejectionScore": 250,
+              "onCaibration": true
+            },
+            "securityFilters": {
+              "allowedIssuerCountries": [
+                "CO"
+              ],
+              "forceIPMatch": true,
+              "excludeIPCountry": [
+                "CL"
+              ],
+              "onlyWhitelisted": true,
+              "allowedIPCountries": [
+                "EC"
+              ],
+              "allowedCardsDay": 4,
+              "allowedCardsByIP": 10,
+              "allowedCardsMonth": 4,
+              "allowedCardsYear": 2,
+              "dayMax": 3,
+              "dayMaxAmount": 30000,
+              "monthMax": 3,
+              "monthMaxAmount": 2000
+            },
+            "operation": {
+              "disableTax": true,
+              "calculateTax": true,
+              "taxPercentage": 12,
+              "patternReference": null,
+              "mailCustomer": true,
+              "mailMerchant": true
+            }
+          }
+        ]
       },
       "integration": {
         "title": "integration",
@@ -10134,8 +10437,48 @@
               "type": "string",
               "example": "123456"
             }
+          },
+          "allowedBankCountries": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "2jg565h2nhrob"
+            },
+            "items": {
+              "x-stoplight": {
+                "id": "eccamicsor42f"
+              },
+              "type": "string",
+              "example": "CO"
+            }
+          },
+          "delegatedAuthorization": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "6cg5alep63p4o"
+            },
+            "minLength": 42,
+            "maxLength": 42,
+            "pattern": "^([0-9a-f])"
           }
-        }
+        },
+        "examples": [
+          {
+            "minAmount": "1000",
+            "maxAmount": "1000000",
+            "filterPse": false,
+            "filterTuya": false,
+            "filterSafetyPay": false,
+            "prechargerFilter": 2,
+            "filterByBin": false,
+            "exceptionBinsList": [
+              "123456"
+            ],
+            "allowedBankCountries": [
+              "CO"
+            ],
+            "delegatedAuthorization": "stringstringstringstringstringstringstring"
+          }
+        ]
       },
       "subscriptions": {
         "type": "object",
@@ -11269,20 +11612,6 @@
         },
         "type": "object",
         "description": "Objeto que contiene los parametros adicionales para la creación del certificado de Credibanco y la configuración de medio de pago PSE.",
-        "examples": [
-          {
-            "retailCode": "011211406",
-            "terminalLocation": "Medellín",
-            "terminalNumber": "00031431",
-            "username": "FIDUCOLDEX01",
-            "password": "FIDUCOLDEX01",
-            "pfxID": "1",
-            "entityCode": "9002992280",
-            "serviceCode": "001",
-            "isEcommerce": true,
-            "merchantCode": "1269189"
-          }
-        ],
         "properties": {
           "retailCode": {
             "type": "string",
@@ -11313,7 +11642,7 @@
             "x-stoplight": {
               "id": "8juw8xpibekeu"
             },
-            "example": "FIDUCOLDEX01",
+            "example": "UserExample",
             "description": "usuario de la terminal"
           },
           "password": {
@@ -11321,24 +11650,23 @@
             "x-stoplight": {
               "id": "unjhsuu7z0ngx"
             },
-            "example": "FIDUCOLDEX01",
+            "example": "passwordExample",
             "description": "contraseña de la terminal"
           },
           "pfxID": {
-            "type": "string",
+            "type": "integer",
             "x-stoplight": {
               "id": "jjjeinbjwtrs8"
             },
-            "example": "1",
-            "description": "ID Certificado Credibanco registrado, este campo solo se envía cuando el certificado ya existe."
+            "description": "ID Certificado Credibanco registrado, este campo solo se envía cuando el certificado ya existe.",
+            "example": 1
           },
           "entityCode": {
             "type": "string",
             "x-stoplight": {
-              "id": "2e4l5rdxu0qw1"
+              "id": "eceehj2w93cj3"
             },
-            "example": "9002992280",
-            "description": "Código entidad PSE (Este número es generado por ACH)."
+            "example": "9002992280"
           },
           "serviceCode": {
             "type": "string",
@@ -11348,13 +11676,6 @@
             "description": "Código de servicio PSE (Este número es generado por ACH).",
             "example": "001"
           },
-          "isEcommerce": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "yeg54ulcdeyd3"
-            },
-            "description": "Determina si es un comercio electronico."
-          },
           "merchantCode": {
             "type": "string",
             "x-stoplight": {
@@ -11362,8 +11683,29 @@
             },
             "description": "Código que representa al comercio en la red procesadora",
             "example": "1269189"
+          },
+          "isEcommerce": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "yeg54ulcdeyd3"
+            },
+            "description": "Determina si es un comercio electronico."
           }
-        }
+        },
+        "examples": [
+          {
+            "retailCode": "011211406",
+            "terminalLocation": "Medellín",
+            "terminalNumber": "00031431",
+            "username": "FIDUCOLDEX01",
+            "password": "FIDUCOLDEX01",
+            "pfxID": 1,
+            "entityCode": "9002992280",
+            "serviceCode": "001",
+            "isEcommerce": true,
+            "merchantCode": "1269189"
+          }
+        ]
       },
       "site-threeDS": {
         "title": "site-threeDS",
