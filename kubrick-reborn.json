@@ -10615,7 +10615,6 @@
           "name",
           "alias",
           "type",
-          "allowPartial",
           "categories"
         ],
         "properties": {
@@ -10625,7 +10624,9 @@
               "id": "hixuqlur40fgq"
             },
             "example": "Microsite name example",
-            "description": "Nombre a asignar al micrositio."
+            "description": "Nombre a asignar al micrositio.",
+            "minLength": 3,
+            "maxLength": 56
           },
           "alias": {
             "type": "string",
@@ -10633,22 +10634,29 @@
               "id": "1gv4t58vz76d6"
             },
             "example": "example-slug",
-            "description": "Slug o URL amigable, no debe contener espacios, se puede usar guion medio y guion bajo."
+            "description": "Slug o URL amigable, no debe contener espacios, se puede usar guion medio y guion bajo.",
+            "pattern": "^[a-z0-9_\\-.]+$",
+            "maxLength": 24,
+            "minLength": 3
           },
           "type": {
-            "type": "string",
             "x-stoplight": {
               "id": "kspomyn34nb5g"
             },
             "example": "OPEN",
-            "description": "Determina el tipo de micrositio (OPEN, CLOSED)."
+            "description": "Determina el tipo de micrositio (OPEN, CLOSED).",
+            "enum": [
+              "OPEN",
+              "CLOSED"
+            ]
           },
           "allowPartial": {
             "type": "boolean",
             "x-stoplight": {
               "id": "v0lqkkuf49n13"
             },
-            "description": "Indica si se permite el pago parcial (Mixto) en el sitio, en caso de no enviarse se toma como “false”."
+            "description": "Indica si se permite el pago parcial (Mixto) en el sitio, en caso de no enviarse se toma como “false”. Solo es permitido en los Micrositios Type CLOSED",
+            "default": false
           },
           "categories": {
             "type": "array",
@@ -10656,6 +10664,7 @@
               "id": "pr4qhi20sb87a"
             },
             "description": "Categorías a las cuales pertenece el micrositio.",
+            "minItems": 1,
             "items": {
               "x-stoplight": {
                 "id": "zbnjivb80xwom"
@@ -10665,36 +10674,192 @@
             }
           },
           "loginFields": {
-            "type": "integer",
+            "type": "array",
             "x-stoplight": {
               "id": "b5g5rroh8w8pq"
             },
-            "description": "Solo es requerido si el tipo de micrositio es “CLOSED” y permite elegir los campos que se usarán para que el usuario ingrese al micrositio cerrado.",
-            "example": 2
+            "description": "Solo es requerido si el tipo de micrositio es “CLOSED” y permite elegir los campos que se usarán para que el usuario ingrese al micrositio cerrado, Solo es permitido en los Micrositios Type CLOSED.",
+            "example": 2,
+            "minItems": 2,
+            "uniqueItems": true,
+            "items": {
+              "x-stoplight": {
+                "id": "k2tnl1e88w36p"
+              },
+              "enum": [
+                "reference",
+                "document",
+                "alt_reference"
+              ]
+            }
           },
-          "header": {
-            "type": "string",
+          "disabled": {
+            "type": "boolean",
             "x-stoplight": {
-              "id": "f48tp3zc883w9"
+              "id": "lifh1ex4j7ril"
             },
-            "example": "https://header.com",
-            "description": "URL de la imagen a ubicar en el header del micrositio."
+            "description": "Determina si el micrositio está activo (true) o inactivo (false).",
+            "default": false
           },
-          "footer": {
-            "type": "string",
+          "useWcLightbox": {
+            "type": "boolean",
             "x-stoplight": {
-              "id": "ttbjr1p8f0owm"
+              "id": "suoe1dwt3rkmi"
             },
-            "example": "https://footer.com",
-            "description": "URL de la imagen a ubicar en el footer del micrositio."
+            "description": "Determina si se debe hacer redirección o levantar un [lightbox](https://docs.placetopay.dev/checkout/lightbox) durante el proceso de pago.",
+            "default": false
           },
-          "logo": {
-            "type": "string",
+          "hide": {
+            "type": "boolean",
             "x-stoplight": {
-              "id": "z8cr9jcwit89l"
+              "id": "juw8rgi8hqjlv"
             },
-            "example": "https://logo.com",
-            "description": "URL del logo del micrositio, este solo se visualizará en la interfaz de busqueda."
+            "default": false,
+            "description": "Permite configurar si el micrositio está disponible (true) o no (false) en el listado de búsqueda presentado al público en general."
+          },
+          "allowPayWithDuplicateReference": {
+            "x-stoplight": {
+              "id": "xuwk1otj5xry2"
+            },
+            "type": "boolean",
+            "default": false,
+            "description": "Permitir pagos con referencias duplicadas."
+          },
+          "isNoBuyerFill": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "wbvp8dkqwnq76"
+            },
+            "description": "Permite prediligenciar los datos del pagador en la sesión de pago o no. Solo es permitido en los Micrositios Type CLOSED",
+            "default": true
+          },
+          "allowDispersion": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "ivgwxhj4p1ibi"
+            },
+            "description": "Habilitar pagos con dispersión de fondos. Solo es permitido en los Micrositios Type CLOSED",
+            "default": false
+          },
+          "allowUnlimitedInstallments": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "ajemr5zxulfga"
+            },
+            "default": false,
+            "description": "Permitir depósitios ilimitados. Solo es permitido en los Micrositios Type CLOSED "
+          },
+          "autoReferenced": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "utujbvqfms6mw"
+            },
+            "default": false,
+            "description": "Generar referencias aleatorias en el proceso de pago. Solo es permitido en los Micrositios Type OPEN"
+          },
+          "allowRecurrence": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "qvjvefshxhbcw"
+            },
+            "default": false,
+            "description": "Permitir la configuración de recurrencias. Solo es permitido en los Micrositios Type OPEN"
+          },
+          "notSendBuyerAsPayer": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "368h9tp0ek52c"
+            },
+            "default": false,
+            "description": "Normalmente en el micrositio se captura los datos del comprador (buyer) y los datos del pagador (payer) se capturan en el proceso de pago. Esta configuración permite definir al comprador como el pagador usando los mismos datos. Solo es permitido en los Micrositios Type OPEN"
+          },
+          "onlyPaymentLink": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "hkex4ervtsrwp"
+            },
+            "default": false,
+            "description": "Determina si el micrositio solo se puede consumir usando [Links de Pago](https://placetopay-api.stoplight.io/docs/payment-links-docs/kl7noeqc5z13m-introduccion). Solo es permitido en los Micrositios Type OPEN"
+          },
+          "exactSearchByReference": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "wdzfje2dbygpy"
+            },
+            "description": "Determina si en el listado de ordenes de pago se debe mostrar únicamente la orden de pago asociada a los datos de inición de sesión suministrados. Solo es permitido en los Micrositios Type CLOSED",
+            "default": false
+          },
+          "allowPayMultipleInvoicesAtOnce": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "2b26zkmjl8ajn"
+            },
+            "default": false,
+            "description": "Permite definir si se permiten pagar múltiples ordenes de pago en una sola transacción agrupandolas en un solo monto de pago. Solo es permitido en los Micrositios Type CLOSED"
+          },
+          "showDescription": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "ltirfaumz30vg"
+            },
+            "default": true,
+            "description": "Permite configurar si la información de descripción de la orden de pago se muestra en el listado de ordenes de pago luego de iniciar una sesión de pago. Solo es permitido en los Micrositios Type CLOSED"
+          },
+          "allowShowDebtorName": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "4mgbmh35lgl3x"
+            },
+            "default": false,
+            "description": "Permite configurar si la información de persona responsable de la orden de pago se muestra en el listado de ordenes de pago luego de iniciar una sesión de pago. Solo es permitido en los Micrositios Type CLOSED"
+          },
+          "allowSendDebtorCode": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "qb0rna3icpnaw"
+            },
+            "default": false,
+            "description": "Permite configurar la referencia alterna como descripción del pago. Solo es permitido en los Micrositios Type CLOSED"
+          },
+          "allowChangeTotal": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "xtw7nk1h88s7w"
+            },
+            "description": "Permite cambiar el monto total al pagar de la orden de pago. Solo es permitido en los Micrositios Type CLOSED",
+            "default": false
+          },
+          "olderFirst": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "mzy7mr3b05p82"
+            },
+            "default": false,
+            "description": "Define si se deben pagar las ordenes antiguas primero (basado en la fecha creación/generación de la orden). Solo es permitido en los Micrositios Type CLOSED"
+          },
+          "allowSeeHistoryPayments": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "e25ttdnubtznm"
+            },
+            "description": "Determina si se puede ver el histórico de pagos asociados en el listado de ordenes de pago. Solo es permitido en los Micrositios Type CLOSED",
+            "default": true
+          },
+          "loginFromUrl": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "1fceeomzef2e2"
+            },
+            "description": "Determina si se puede iniciar sesión de pago usando los datos de autenticación entregados por URL (GET). Solo es permitido en los Micrositios Type CLOSED",
+            "default": true
+          },
+          "flushInvoices": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "7gprb0jy9ggu9"
+            },
+            "default": true,
+            "description": "Habilita la eliminación de ordenes de pago expiradas y no pagadas de forma automática. Solo es permitido en los Micrositios Type CLOSED"
           }
         }
       },
