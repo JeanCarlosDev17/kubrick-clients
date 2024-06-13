@@ -1,10 +1,11 @@
 ---
-stoplight-id: 5k3unmux2vm18
+stoplight-id: 8cwjgwxdg720y
 ---
 
-# ACH
+# ACH(PSE)
 
 -  \_PSE_
+
 
 Configuración general de los medios de pago
 
@@ -44,7 +45,7 @@ Ejemplo objeto paymentMethod:
 
 ```json
 {
-  "code": "PSE",
+  "code": "_PSE_",
   "commissionModel": "F",
   "commissionValue": 0,
   "accountNumber": "1234567811",
