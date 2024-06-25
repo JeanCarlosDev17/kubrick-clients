@@ -2047,43 +2047,64 @@
                     },
                     "requestId": {
                       "type": "integer",
-                      "example": 231
+                      "example": 231,
+                      "description": "Identificador de la petición."
                     },
                     "panelId": {
                       "type": "integer",
-                      "example": 1533
+                      "example": 1533,
+                      "description": "Identificador del comercio creado en el panel de ThreeDS."
                     },
                     "name": {
                       "type": "string",
-                      "example": "ThreeDS Name Example"
-                    },
-                    "branchName": {
-                      "type": "string",
-                      "example": "ThreeDS branch name"
+                      "example": "ThreeDS Name Example",
+                      "description": "Nombre del comercio creado en el panel de ThreeDS."
                     },
                     "token": {
                       "type": "string",
-                      "example": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV-"
+                      "example": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV-",
+                      "description": "Token del comercio."
+                    },
+                    "branches": {
+                      "type": "array",
+                      "example": "ThreeDS branch name",
+                      "x-stoplight": {
+                        "id": "htcl5njnjjqdg"
+                      },
+                      "description": "Ramas asociadas al comercio creado.",
+                      "items": {
+                        "x-stoplight": {
+                          "id": "02eusk4wnkcgj"
+                        },
+                        "type": "object",
+                        "properties": {
+                          "panelId": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "dhia7xw2w2opu"
+                            },
+                            "description": "Identificador de la rama asociada al comercio."
+                          },
+                          "name": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "16ppsy7pmddmt"
+                            },
+                            "description": "Nombre de a rama creada."
+                          },
+                          "token": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "ngcm2q0sxswfj"
+                            },
+                            "description": "Token de la rama."
+                          }
+                        }
+                      }
                     }
                   }
                 },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "status": {
-                        "status": "OK",
-                        "reason": "RC",
-                        "message": "The request has been processed successfully",
-                        "date": "2024-02-08T23:15:08+00:00"
-                      },
-                      "requestId": 231,
-                      "panelId": 1533,
-                      "name": "ThreeDS Name Example",
-                      "branchName": "ThreeDS branch name",
-                      "token": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV-"
-                    }
-                  }
-                }
+                "examples": {}
               }
             }
           },
@@ -2226,7 +2247,8 @@
                   "mcc",
                   "isicClass",
                   "document",
-                  "branch"
+                  "branches",
+                  "subscriptions"
                 ],
                 "properties": {
                   "onTest": {
@@ -2301,24 +2323,18 @@
                       "id": "4rpdz4bsjwbt4"
                     }
                   },
-                  "branch": {
-                    "$ref": "#/components/schemas/branch",
+                  "branches": {
+                    "$ref": "#/components/schemas/branches",
                     "x-stoplight": {
                       "id": "5c3xl0joedi4l"
                     }
                   },
-                  "bins": {
-                    "type": "array",
+                  "subscriptions": {
+                    "$ref": "#/components/schemas/subscriptions",
                     "x-stoplight": {
-                      "id": "xj5o4znehnhtd"
+                      "id": "xzmvqinp0jw4a"
                     },
-                    "description": "Objeto que contiene los bines para los cuales va a ser creado el token de ThreeDS, dichos bines se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario).",
-                    "items": {
-                      "$ref": "#/components/schemas/binRequest",
-                      "x-stoplight": {
-                        "id": "66hzkbk6i68rr"
-                      }
-                    }
+                    "description": "Objeto que contiene los bines para los cuales va a ser creado el token de ThreeDS, dichos bines se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario)."
                   }
                 }
               },
@@ -2326,26 +2342,38 @@
                 "Example 1": {
                   "value": {
                     "onTest": true,
+                    "name": "Merchant Example Name",
                     "brand": "ThreeDS brand example",
                     "country": "COL",
                     "currency": "COP",
-                    "URL": "https://example.com",
+                    "url": "https://example.com",
                     "mcc": 742,
                     "isicClass": 111,
                     "document": {
                       "type": "string",
-                      "identification": "900299823-1"
+                      "number": "900299823-1"
                     },
-                    "branch": {
-                      "name": "ThreeDS Branch Name",
-                      "brand": "branch brand example",
-                      "country": "COL",
-                      "currency": "COP"
-                    },
-                    "bins": [
+                    "branches": [
                       {
-                        "franchise": 2,
-                        "acquirerBIN": 400900
+                        "name": "ThreeDS Branch Name",
+                        "brand": "branch brand example",
+                        "country": "COL",
+                        "currency": "COP",
+                        "url": "https://www.branch-url.com",
+                        "subscriptions": [
+                          {
+                            "franchise": "visa",
+                            "acquirerBIN": 400900,
+                            "merchantCode": "1006"
+                          }
+                        ]
+                      }
+                    ],
+                    "subscriptions": [
+                      {
+                        "franchise": "visa",
+                        "acquirerBIN": 400900,
+                        "merchantCode": "5240"
                       }
                     ]
                   }
@@ -11035,9 +11063,6 @@
                   "acquirerBIN": {
                     "type": "integer"
                   },
-                  "version": {
-                    "type": "integer"
-                  },
                   "merchantCode": {
                     "type": "string"
                   }
@@ -11045,7 +11070,25 @@
               }
             }
           }
-        }
+        },
+        "examples": [
+          [
+            {
+              "name": "ThreeDS Branch Name",
+              "brand": "branch brand example",
+              "country": "COL",
+              "currency": "COP",
+              "url": "https://www.branch-url.com",
+              "subscriptions": [
+                {
+                  "franchise": "string",
+                  "acquirerBIN": 0,
+                  "merchantCode": "string"
+                }
+              ]
+            }
+          ]
+        ]
       },
       "notification": {
         "type": "object",
