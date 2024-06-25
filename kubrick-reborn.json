@@ -10936,15 +10936,13 @@
             "country": "COL",
             "currency": "COP",
             "url": "https://www.branch-url.com",
-            "subscriptions": {
-              "subscriptions": [
-                {
-                  "franchise": 1,
-                  "acquirerBIN": 400900,
-                  "merchantCode": "\"5240\""
-                }
-              ]
-            }
+            "subscriptions": [
+              {
+                "franchise": 1,
+                "acquirerBIN": 400900,
+                "merchantCode": "\"5240\""
+              }
+            ]
           }
         ]
       },
