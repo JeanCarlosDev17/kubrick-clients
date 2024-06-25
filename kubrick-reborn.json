@@ -2079,25 +2079,28 @@
                         "type": "object",
                         "properties": {
                           "panelId": {
-                            "type": "string",
+                            "type": "integer",
                             "x-stoplight": {
                               "id": "dhia7xw2w2opu"
                             },
-                            "description": "Identificador de la rama asociada al comercio."
+                            "description": "Identificador de la rama asociada al comercio.",
+                            "example": 1686
                           },
                           "name": {
                             "type": "string",
                             "x-stoplight": {
                               "id": "16ppsy7pmddmt"
                             },
-                            "description": "Nombre de a rama creada."
+                            "description": "Nombre de a rama creada.",
+                            "example": "ThreeDS Branch Name Example"
                           },
                           "token": {
                             "type": "string",
                             "x-stoplight": {
                               "id": "ngcm2q0sxswfj"
                             },
-                            "description": "Token de la rama."
+                            "description": "Token de la rama.",
+                            "example": "koskdopksakdaokdsas4d6asd6a451c56a4d8w782"
                           }
                         }
                       }
