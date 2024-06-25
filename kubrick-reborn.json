@@ -10609,7 +10609,8 @@
           "url",
           "mcc",
           "isicClass",
-          "subscriptions"
+          "subscriptions",
+          "branch"
         ],
         "properties": {
           "brand": {
@@ -10660,25 +10661,62 @@
             "description": "Código clase CIIU.",
             "example": 111
           },
-          "subscriptions": {
-            "x-stoplight": {
-              "id": "2iyq4ulrr5qsz"
-            },
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/binRequest",
-              "x-stoplight": {
-                "id": "6jwx6vvnelg0p"
-              }
-            }
-          },
           "document": {
             "$ref": "#/components/schemas/document",
             "x-stoplight": {
               "id": "tw05yrlhs1262"
             }
+          },
+          "subscriptions": {
+            "$ref": "#/components/schemas/subscriptions",
+            "x-stoplight": {
+              "id": "2iyq4ulrr5qsz"
+            }
+          },
+          "branch": {
+            "$ref": "#/components/schemas/branch",
+            "x-stoplight": {
+              "id": "11flmjjgzh88y"
+            }
           }
-        }
+        },
+        "examples": [
+          {
+            "brand": "ThreeDS brand example",
+            "country": "COL",
+            "currency": "COP",
+            "url": "https://example.com",
+            "mcc": 742,
+            "isicClass": 111,
+            "document": {
+              "type": "string",
+              "number": "900299823-1"
+            },
+            "subscriptions": [
+              {
+                "franchise": "visa",
+                "acquirerBIN": 400900,
+                "merchantCode": "5240"
+              }
+            ],
+            "branch": {
+              "name": "ThreeDS Branch Name",
+              "brand": "branch brand example",
+              "country": "COL",
+              "currency": "COP",
+              "url": "https://www.branch-url.com",
+              "subscriptions": {
+                "subscriptions": [
+                  {
+                    "franchise": 1,
+                    "acquirerBIN": 400900,
+                    "merchantCode": "\"5240\""
+                  }
+                ]
+              }
+            }
+          }
+        ]
       },
       "microsite": {
         "title": "microsite",
