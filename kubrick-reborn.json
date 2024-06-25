@@ -2107,7 +2107,29 @@
                     }
                   }
                 },
-                "examples": {}
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2024-02-08T23:15:08+00:00"
+                      },
+                      "requestId": 231,
+                      "panelId": 1533,
+                      "name": "ThreeDS Name Example",
+                      "token": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV-",
+                      "branches": [
+                        {
+                          "panelId": 8362,
+                          "name": "First branch example name",
+                          "token": "dshdkjandsadad54sa56d5asg54gdet4hf46b4sda1d"
+                        }
+                      ]
+                    }
+                  }
+                }
               }
             }
           },
