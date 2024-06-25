@@ -10481,7 +10481,7 @@
         ]
       },
       "subscriptions": {
-        "type": "object",
+        "type": "array",
         "x-stoplight": {
           "id": "398gbkwlj9tsy"
         },
@@ -10495,31 +10495,53 @@
             ]
           }
         },
-        "properties": {
-          "subscriptions": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": [
-                "franchise",
-                "acquirerBIN"
-              ],
-              "properties": {
-                "franchise": {
-                  "type": "integer",
-                  "description": "Código de la franquicia.",
-                  "example": 1
-                },
-                "acquirerBIN": {
-                  "type": "integer",
-                  "example": 400900,
-                  "description": "Bin del adquirente."
-                }
-              }
+        "title": "subscriptions",
+        "items": {
+          "x-stoplight": {
+            "id": "6xc69xs1vg2zn"
+          },
+          "type": "object",
+          "required": [
+            "franchise",
+            "acquirerBIN",
+            "merchantCode"
+          ],
+          "properties": {
+            "franchise": {
+              "type": "string",
+              "x-stoplight": {
+                "id": "u6eptx85xanov"
+              },
+              "example": "visa",
+              "description": "Código de la franquicia."
+            },
+            "acquirerBIN": {
+              "type": "integer",
+              "x-stoplight": {
+                "id": "4vhdyia9bqo8k"
+              },
+              "example": 400900,
+              "description": "Bin del adquirente."
+            },
+            "merchantCode": {
+              "type": "string",
+              "x-stoplight": {
+                "id": "25i4pk2rulhhx"
+              },
+              "example": "5240",
+              "maxLength": 30
             }
           }
         },
-        "title": "subscription"
+        "examples": [
+          [
+            {
+              "franchise": "visa",
+              "acquirerBIN": 400900,
+              "merchantCode": "5240"
+            }
+          ]
+        ]
       },
       "threeDS": {
         "title": "threeDS",
@@ -10873,7 +10895,8 @@
           "name",
           "brand",
           "country",
-          "currency"
+          "currency",
+          "subscriptions"
         ],
         "properties": {
           "name": {
@@ -10907,6 +10930,21 @@
             },
             "example": "COP",
             "description": "Moneda predeterminada de la rama, ISO 4217."
+          },
+          "url": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "zrui4trpkk78j"
+            },
+            "description": "URL del comercio.",
+            "example": "https://www.branch-url.com",
+            "maxLength": 200
+          },
+          "subscriptions": {
+            "$ref": "#/components/schemas/subscriptions",
+            "x-stoplight": {
+              "id": "jwv88l9gh0d7p"
+            }
           }
         },
         "examples": [
@@ -10914,9 +10952,100 @@
             "name": "ThreeDS Branch Name",
             "brand": "branch brand example",
             "country": "COL",
-            "currency": "COP"
+            "currency": "COP",
+            "url": "https://www.branch-url.com",
+            "subscriptions": {
+              "subscriptions": [
+                {
+                  "franchise": 1,
+                  "acquirerBIN": 400900,
+                  "merchantCode": "\"5240\""
+                }
+              ]
+            }
           }
         ]
+      },
+      "branches": {
+        "type": "array",
+        "x-examples": {
+          "Example 1": [
+            {
+              "name": "First branch example name",
+              "brand": "First branch brand",
+              "country": "CHL",
+              "currency": "CLP",
+              "url": "https://www.first-branch-url.com",
+              "subscriptions": [
+                {
+                  "franchise": "SubscriptionFranchises::VISA",
+                  "acquirerBIN": 400900,
+                  "version": 2,
+                  "merchantCode": "2222"
+                }
+              ]
+            }
+          ]
+        },
+        "title": "branches",
+        "items": {
+          "type": "object",
+          "required": [
+            "name",
+            "brand",
+            "country",
+            "currency",
+            "url",
+            "subscriptions"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "ThreeDS Branch Name",
+              "description": "Nombre a asignar a la rama de ThreeDS."
+            },
+            "brand": {
+              "type": "string",
+              "example": "branch brand example",
+              "description": "Marca de la rama."
+            },
+            "country": {
+              "type": "string",
+              "example": "COL",
+              "description": "Codigo País de origen de la rama, ISO 3166-1 alpha-3."
+            },
+            "currency": {
+              "type": "string",
+              "example": "COP",
+              "description": "Moneda predeterminada de la rama, ISO 4217."
+            },
+            "url": {
+              "type": "string",
+              "example": "https://www.branch-url.com",
+              "description": "Url del comercio."
+            },
+            "subscriptions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "franchise": {
+                    "type": "string"
+                  },
+                  "acquirerBIN": {
+                    "type": "integer"
+                  },
+                  "version": {
+                    "type": "integer"
+                  },
+                  "merchantCode": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       "notification": {
         "type": "object",
