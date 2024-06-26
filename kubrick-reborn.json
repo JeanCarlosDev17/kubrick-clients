@@ -1397,9 +1397,9 @@
         }
       }
     },
-    "/api/integration/create-from-merchant": {
+    "/api/integration/create": {
       "post": {
-        "summary": "create-from-merchant",
+        "summary": "create",
         "responses": {
           "200": {
             "description": "OK",
@@ -1864,46 +1864,15 @@
                 }
               }
             }
-          }
+          },
+          "description": ""
         },
         "tags": [
           "Integraciones"
         ],
         "description": "Este endpoint permite la creación de multiples recursos con una sola petición, tales como comercio, sitio, medios de pago, threeDS y micrositio, siendo estos dos últimos opcionales. [(Ver jerarquía y grupos)](docs/contexto/Jerarquia-y-grupos.md)\n\nAl ser un servicio asincrono, se debe contar con un webhook para recibir el resultado de la petición. [(Ver notificación)](reference/Kubrick.json/components/schemas/notification)"
       },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "example": "Bearer eYjdsjwpdm92j3k2j313j2m..."
-          },
-          "in": "header",
-          "name": "Authorization",
-          "description": "Bearer token usado para la autenticación con el servicio, el cual, lo puede generar un admin.",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string",
-            "example": "application/json"
-          },
-          "in": "header",
-          "name": "Content-type",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string",
-            "example": "application/json"
-          },
-          "in": "header",
-          "name": "Accept",
-          "required": true
-        }
-      ]
-    },
-    "/api/three-ds/create": {
-      "post": {
+      "post - copy 3": {
         "summary": "create",
         "responses": {
           "200": {
@@ -1912,110 +1881,19 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "x-examples": {
-                    "Example 1": {
-                      "status": {
-                        "status": "OK",
-                        "reason": "RC",
-                        "message": "ThreeDS creation success",
-                        "date": "2024-01-31T22:43:46+00:00"
-                      },
-                      "requestId": 1,
-                      "panelId": 1533,
-                      "name": "threeDs name 31.0117",
-                      "branchName": "Test name 31.0117",
-                      "token": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-ItyAnh9sBBQ65lFudmkxt6YqBXDYtwqDz9qiN6qxu7nV-"
-                    }
-                  },
                   "properties": {
                     "status": {
-                      "$ref": "#/components/schemas/status-ok",
-                      "x-stoplight": {
-                        "id": "6gv74cft3t89m"
-                      }
+                      "$ref": "#/components/schemas/status-ok"
                     },
-                    "requestId": {
+                    "integrationId": {
                       "type": "integer",
-                      "example": 231,
-                      "description": "Identificador de la petición."
+                      "example": 20,
+                      "description": "ID de la integración, puede usarse para consultar el estado de la misma y sus respectivos environments."
                     },
-                    "panelId": {
-                      "type": "integer",
-                      "example": 1533,
-                      "description": "Identificador del comercio creado en el panel de ThreeDS."
-                    },
-                    "name": {
+                    "integrationStatus": {
                       "type": "string",
-                      "example": "ThreeDS Name Example",
-                      "description": "Nombre del comercio creado en el panel de ThreeDS."
-                    },
-                    "token": {
-                      "type": "string",
-                      "example": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV-",
-                      "description": "Token del comercio."
-                    },
-                    "branches": {
-                      "type": "array",
-                      "example": "ThreeDS branch name",
-                      "x-stoplight": {
-                        "id": "htcl5njnjjqdg"
-                      },
-                      "description": "Ramas asociadas al comercio creado.",
-                      "items": {
-                        "x-stoplight": {
-                          "id": "02eusk4wnkcgj"
-                        },
-                        "type": "object",
-                        "properties": {
-                          "panelId": {
-                            "type": "integer",
-                            "x-stoplight": {
-                              "id": "dhia7xw2w2opu"
-                            },
-                            "description": "Identificador de la rama asociada al comercio.",
-                            "example": 1686
-                          },
-                          "name": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "16ppsy7pmddmt"
-                            },
-                            "description": "Nombre de a rama creada.",
-                            "example": "ThreeDS Branch Name Example"
-                          },
-                          "token": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "ngcm2q0sxswfj"
-                            },
-                            "description": "Token de la rama.",
-                            "example": "koskdopksakdaokdsas4d6asd6a451c56a4d8w782"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "status": {
-                        "status": "OK",
-                        "reason": "RC",
-                        "message": "The request has been processed successfully",
-                        "date": "2024-02-08T23:15:08+00:00"
-                      },
-                      "requestId": 231,
-                      "panelId": 1533,
-                      "name": "ThreeDS Name Example",
-                      "token": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV-",
-                      "branches": [
-                        {
-                          "panelId": 8362,
-                          "name": "First branch example name",
-                          "token": "dshdkjandsadad54sa56d5asg54gdet4hf46b4sda1d"
-                        }
-                      ]
+                      "example": "PENDING",
+                      "description": "Estado de la integración, en caso de que la petición sea correcta, el estado por defecto será “PENDING”."
                     }
                   }
                 }
@@ -2028,12 +1906,19 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The is cms field is required.",
+                        "date": "2024-02-14T13:48:14+00:00"
+                      }
+                    }
+                  },
                   "properties": {
                     "status": {
-                      "$ref": "#/components/schemas/status-ok",
-                      "x-stoplight": {
-                        "id": "hx07akb9zlwp7"
-                      }
+                      "$ref": "#/components/schemas/status-ok"
                     }
                   }
                 },
@@ -2043,8 +1928,8 @@
                       "status": {
                         "status": "FAILED",
                         "reason": "BR",
-                        "message": "The currency must be 3 characters.",
-                        "date": "2024-02-07T00:54:48+00:00"
+                        "message": "The is cms field is required.",
+                        "date": "2024-02-14T13:48:14+00:00"
                       }
                     }
                   }
@@ -2058,12 +1943,19 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2024-02-14T13:51:54+00:00"
+                      }
+                    }
+                  },
                   "properties": {
                     "status": {
-                      "$ref": "#/components/schemas/status-ok",
-                      "x-stoplight": {
-                        "id": "r6hr8s1jiet1t"
-                      }
+                      "$ref": "#/components/schemas/status-ok"
                     }
                   }
                 },
@@ -2074,7 +1966,7 @@
                         "status": "FAILED",
                         "reason": "FA",
                         "message": "Failed authentication check your credentials",
-                        "date": "2024-01-31T22:42:23+00:00"
+                        "date": "2024-02-14T13:51:54+00:00"
                       }
                     }
                   }
@@ -2082,39 +1974,8 @@
               }
             }
           },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "$ref": "#/components/schemas/status-ok",
-                      "x-stoplight": {
-                        "id": "koutkni84vz0m"
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "status": {
-                        "status": "FAILED",
-                        "reason": "RF",
-                        "message": "The branch.name has already been taken.",
-                        "date": "2024-02-07T00:55:07+00:00"
-                      },
-                      "requestId": 26
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
+          "5XX": {
+            "description": "Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -2142,133 +2003,247 @@
             }
           }
         },
-        "operationId": "post-api-three-ds-create",
-        "x-stoplight": {
-          "id": "zf60krl51674d"
-        },
+        "operationId": "integration-create-from-merchant",
+        "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "required": [
-                  "onTest",
-                  "name",
-                  "brand",
-                  "country",
-                  "currency",
-                  "url",
-                  "mcc",
-                  "isicClass",
-                  "document",
-                  "branches",
-                  "subscriptions"
+                  "statusWebhook",
+                  "isCms",
+                  "environments",
+                  "merchant",
+                  "paymentMethods",
+                  "site"
                 ],
                 "properties": {
-                  "onTest": {
+                  "dueDiligenceId": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 255,
+                    "description": "Identificador del proceso de debida diligencia, con este dato permite entender si el comercio a crear aprobó por el proceso.",
+                    "example": 421828323801
+                  },
+                  "statusWebhook": {
+                    "type": "string",
+                    "description": "URL a la cual se notificará luego de finalizar el proceso con la información de salida. Este campo debe ser en formato URL.",
+                    "example": "https://test.webhook.com/"
+                  },
+                  "isCms": {
                     "type": "boolean",
-                    "x-stoplight": {
-                      "id": "8tipd521oghzi"
-                    },
-                    "description": "Indica si el recurso solicitado es para un entorno de pruebas."
+                    "description": "Indica si la conexión se realizará mediante un CMS."
                   },
-                  "name": {
+                  "cmsType": {
                     "type": "string",
-                    "x-stoplight": {
-                      "id": "vag1rf8eq84jz"
-                    },
-                    "description": "Nombre del comercio en ThreeDS.",
-                    "example": "Merchant Example Name",
-                    "maxLength": 80
+                    "description": "En caso que isCms tenga el valor true, este campo se convierte en requerido. En este campo se indica el CMS a usar.",
+                    "example": "woocommerce"
                   },
-                  "brand": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "110x3ndbec7y2"
-                    },
-                    "example": "ThreeDS brand example",
-                    "description": "Marca del comercio de 3DS."
+                  "environments": {
+                    "$ref": "#/components/schemas/environments",
+                    "description": "Puede recibir dos objetos (test, prod), es obligatorio enviar, como mínimo uno de estos, e indica en que ambientes se quieren crear los recursos."
                   },
-                  "country": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "qj8ki55kxgy4u"
-                    },
-                    "example": "COL",
-                    "description": "Codigo País de origen del comercio ISO 3166-1 alpha-3.",
-                    "minLength": 3,
-                    "maxLength": 3
+                  "corporateImage": {
+                    "$ref": "#/components/schemas/corporateImage"
                   },
-                  "currency": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "ew35dzm8q64yi"
-                    },
-                    "example": "COP",
-                    "description": "Moneda predeterminada codigo ISO 4217."
+                  "merchant": {
+                    "$ref": "#/components/schemas/merchant"
                   },
-                  "url": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "l5aolynpyzuhb"
-                    },
-                    "example": "https://example.com",
-                    "description": "URL del comercio."
+                  "paymentMethods": {
+                    "$ref": "#/components/schemas/paymentMethods"
                   },
-                  "mcc": {
-                    "type": "integer",
-                    "x-stoplight": {
-                      "id": "mgq1u3uhjva5h"
-                    },
-                    "example": 742,
-                    "description": "Código de actividad económica."
+                  "site": {
+                    "$ref": "#/components/schemas/site"
                   },
-                  "isicClass": {
-                    "type": "integer",
-                    "x-stoplight": {
-                      "id": "k57ehmso0qhid"
-                    },
-                    "example": 111,
-                    "description": "Código clase CIIU."
+                  "threeDS": {
+                    "$ref": "#/components/schemas/threeDS",
+                    "description": "Este objeto solo es obligatorio en caso de que se envíe en true el atributo de \"threeDS\" de los medios de pago."
                   },
-                  "document": {
-                    "$ref": "#/components/schemas/document",
-                    "x-stoplight": {
-                      "id": "4rpdz4bsjwbt4"
-                    }
-                  },
-                  "branches": {
-                    "$ref": "#/components/schemas/branches",
-                    "x-stoplight": {
-                      "id": "5c3xl0joedi4l"
-                    }
-                  },
-                  "subscriptions": {
-                    "$ref": "#/components/schemas/subscriptions",
-                    "x-stoplight": {
-                      "id": "xzmvqinp0jw4a"
-                    },
-                    "description": "Objeto que contiene los bines para los cuales va a ser creado el token de ThreeDS, dichos bines se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario)."
+                  "microsite": {
+                    "$ref": "#/components/schemas/microsite"
                   }
                 }
               },
               "examples": {
                 "Example 1": {
                   "value": {
-                    "onTest": true,
-                    "name": "Merchant Example Name",
-                    "brand": "ThreeDS brand example",
-                    "country": "COL",
-                    "currency": "COP",
-                    "url": "https://example.com",
-                    "mcc": 742,
-                    "isicClass": 111,
-                    "document": {
-                      "type": "string",
-                      "number": "900299823-1"
+                    "dueDiligenceId": 421828323801,
+                    "statusWebhook": "https://test.webhook.com/",
+                    "isCms": true,
+                    "cmsType": "woocommerce",
+                    "environments": {
+                      "test": {
+                        "isActive": true
+                      },
+                      "prod": {
+                        "isActive": true
+                      }
                     },
-                    "branches": [
-                      {
+                    "corporateImage": {
+                      "logo": "https://google.com//logos/5be01d787b5e5b0001ebb.png",
+                      "primaryColor": "#0072E1",
+                      "secondaryColor": "#FFFFFF"
+                    },
+                    "merchant": {
+                      "name": "EVERTEC PLACETOPAY S.A.S",
+                      "brand": "Placetopay",
+                      "mcc": 7929,
+                      "languages": [
+                        "ES"
+                      ],
+                      "currencies": [
+                        "COP"
+                      ],
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "address": {
+                        "city": "medellin",
+                        "state": 1,
+                        "country": "CO"
+                      },
+                      "legalRepresentative": {
+                        "documentType": "CC",
+                        "document": "1037854200",
+                        "name": "Ricardo",
+                        "surname": "García"
+                      }
+                    },
+                    "paymentMethods": {
+                      "code": "MC",
+                      "oder": 3,
+                      "commissionModel": "F",
+                      "commissionValue": 2.5,
+                      "accountNumber": "1234567811",
+                      "financialEntity": 16,
+                      "accountType": 1,
+                      "threeDS": true,
+                      "settings": {
+                        "retailCode": "011211406",
+                        "terminalLocation": "Medellín",
+                        "terminalNumber": "00031431",
+                        "username": "FIDUCOLDEX01",
+                        "password": "FIDUCOLDEX01",
+                        "pfxID": 1,
+                        "entityCode": "9002992280",
+                        "serviceCode": "001",
+                        "isEcommerce": true,
+                        "merchantCode": "1269189"
+                      }
+                    },
+                    "site": {
+                      "displayName": "Site name example",
+                      "type": "INT",
+                      "category": "ECOMMERCE",
+                      "email": "admin@email.com",
+                      "currency": "COP",
+                      "language": "ES",
+                      "customBatch": 2345,
+                      "expiration": "2023-06-30 00:00:00",
+                      "analyticsCode": "UA-171313251-4, GTM-123812",
+                      "integration": {
+                        "allowPartial": false,
+                        "connectionMethod": "REDIRECT",
+                        "notificationUrl": "https://site-webhook.com"
+                      },
+                      "control": {
+                        "minAmount": "1000",
+                        "maxAmount": "1000000",
+                        "filterPse": false,
+                        "filterTuya": false,
+                        "filterSafetyPay": false,
+                        "prechargerFilter": 2,
+                        "filterByBin": false,
+                        "exceptionBinsList": [
+                          "123456"
+                        ]
+                      },
+                      "threeDS": {
+                        "setting": "VERY_LOW",
+                        "minAmount": 40
+                      },
+                      "historic": {
+                        "behaviour": "IGNORE",
+                        "lowerScore": "100",
+                        "rejectionScore": 300
+                      },
+                      "creditBureau": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onNoMatch": "REJECTED",
+                          "onMatch": "PROCESS"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 200
+                      },
+                      "riskEngine": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onLowRisk": "MANUAL",
+                          "onMediumRisk": null,
+                          "onHighRisk": "REJECTED"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 30,
+                        "approvalScore": 200,
+                        "rejectionScore": 250,
+                        "onCaibration": true
+                      },
+                      "securityFilters": {
+                        "allowedIssuerCountries": [
+                          "CO"
+                        ],
+                        "forceIPMatch": true,
+                        "excludeIPCountry": [
+                          "CL"
+                        ],
+                        "onlyWhitelisted": true,
+                        "allowedIPCountries": [
+                          "EC"
+                        ],
+                        "allowedCardsDay": 4,
+                        "allowedCardsByIP": 10,
+                        "allowedCardsMonth": 4,
+                        "allowedCardsYear": 2,
+                        "dayMax": 3,
+                        "dayMaxAmount": 30000,
+                        "monthMax": 3,
+                        "monthMaxAmount": 2000
+                      },
+                      "operation": {
+                        "disableTax": true,
+                        "calculateTax": true,
+                        "taxPercentage": 12,
+                        "patternReference": null,
+                        "mailCustomer": true,
+                        "mailMerchant": true
+                      }
+                    },
+                    "threeDS": {
+                      "brand": "ThreeDS brand example",
+                      "country": "COL",
+                      "currency": "COP",
+                      "url": "https://example.com",
+                      "mcc": 742,
+                      "isicClass": 111,
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "subscriptions": [
+                        {
+                          "franchise": "visa",
+                          "acquirerBIN": 400900,
+                          "merchantCode": "5240"
+                        }
+                      ],
+                      "branch": {
                         "name": "ThreeDS Branch Name",
                         "brand": "branch brand example",
                         "country": "COL",
@@ -2276,30 +2251,913 @@
                         "url": "https://www.branch-url.com",
                         "subscriptions": [
                           {
-                            "franchise": "visa",
+                            "franchise": 1,
                             "acquirerBIN": 400900,
-                            "merchantCode": "1006"
+                            "merchantCode": "\"5240\""
                           }
                         ]
                       }
-                    ],
-                    "subscriptions": [
-                      {
-                        "franchise": "visa",
-                        "acquirerBIN": 400900,
-                        "merchantCode": "5240"
+                    },
+                    "microsite": {
+                      "name": "Microsite name example",
+                      "alias": "example-slug",
+                      "type": "OPEN",
+                      "allowPartial": false,
+                      "categories": [
+                        "comercio_electronico"
+                      ],
+                      "loginFields": 2,
+                      "disabled": false,
+                      "useWcLightbox": false,
+                      "hide": false,
+                      "allowPayWithDuplicateReference": false,
+                      "isNoBuyerFill": true,
+                      "allowDispersion": false,
+                      "allowUnlimitedInstallments": false,
+                      "autoReferenced": false,
+                      "allowRecurrence": false,
+                      "notSendBuyerAsPayer": false,
+                      "onlyPaymentLink": false,
+                      "exactSearchByReference": false,
+                      "allowPayMultipleInvoicesAtOnce": false,
+                      "showDescription": true,
+                      "allowShowDebtorName": false,
+                      "allowSendDebtorCode": false,
+                      "allowChangeTotal": false,
+                      "olderFirst": false,
+                      "allowSeeHistoryPayments": true,
+                      "loginFromUrl": true,
+                      "flushInvoices": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "tags": [
+          "Integraciones"
+        ],
+        "description": "Este endpoint permite la creación de multiples recursos con una sola petición, tales como comercio, sitio, medios de pago, threeDS y micrositio, siendo estos dos últimos opcionales. [(Ver jerarquía y grupos)](docs/contexto/Jerarquia-y-grupos.md)\n\nAl ser un servicio asincrono, se debe contar con un webhook para recibir el resultado de la petición. [(Ver notificación)](reference/Kubrick.json/components/schemas/notification)"
+      },
+      "post - copy 2": {
+        "summary": "create",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "integrationId": {
+                      "type": "integer",
+                      "example": 20,
+                      "description": "ID de la integración, puede usarse para consultar el estado de la misma y sus respectivos environments."
+                    },
+                    "integrationStatus": {
+                      "type": "string",
+                      "example": "PENDING",
+                      "description": "Estado de la integración, en caso de que la petición sea correcta, el estado por defecto será “PENDING”."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The is cms field is required.",
+                        "date": "2024-02-14T13:48:14+00:00"
                       }
-                    ]
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The is cms field is required.",
+                        "date": "2024-02-14T13:48:14+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2024-02-14T13:51:54+00:00"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2024-02-14T13:51:54+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "message": "Server Error"
+                    }
+                  },
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "El server error representa una intermitencia en el sistema, en este caso se debe comnunicar con un administrador."
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "message": "Server Error"
+                    }
                   }
                 }
               }
             }
           }
         },
+        "operationId": "integration-create-from-merchant",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "statusWebhook",
+                  "isCms",
+                  "environments",
+                  "merchant",
+                  "paymentMethods",
+                  "site"
+                ],
+                "properties": {
+                  "dueDiligenceId": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 255,
+                    "description": "Identificador del proceso de debida diligencia, con este dato permite entender si el comercio a crear aprobó por el proceso.",
+                    "example": 421828323801
+                  },
+                  "statusWebhook": {
+                    "type": "string",
+                    "description": "URL a la cual se notificará luego de finalizar el proceso con la información de salida. Este campo debe ser en formato URL.",
+                    "example": "https://test.webhook.com/"
+                  },
+                  "isCms": {
+                    "type": "boolean",
+                    "description": "Indica si la conexión se realizará mediante un CMS."
+                  },
+                  "cmsType": {
+                    "type": "string",
+                    "description": "En caso que isCms tenga el valor true, este campo se convierte en requerido. En este campo se indica el CMS a usar.",
+                    "example": "woocommerce"
+                  },
+                  "environments": {
+                    "$ref": "#/components/schemas/environments",
+                    "description": "Puede recibir dos objetos (test, prod), es obligatorio enviar, como mínimo uno de estos, e indica en que ambientes se quieren crear los recursos."
+                  },
+                  "corporateImage": {
+                    "$ref": "#/components/schemas/corporateImage"
+                  },
+                  "merchant": {
+                    "$ref": "#/components/schemas/merchant"
+                  },
+                  "paymentMethods": {
+                    "$ref": "#/components/schemas/paymentMethods"
+                  },
+                  "site": {
+                    "$ref": "#/components/schemas/site"
+                  },
+                  "threeDS": {
+                    "$ref": "#/components/schemas/threeDS",
+                    "description": "Este objeto solo es obligatorio en caso de que se envíe en true el atributo de \"threeDS\" de los medios de pago."
+                  },
+                  "microsite": {
+                    "$ref": "#/components/schemas/microsite"
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "dueDiligenceId": 421828323801,
+                    "statusWebhook": "https://test.webhook.com/",
+                    "isCms": true,
+                    "cmsType": "woocommerce",
+                    "environments": {
+                      "test": {
+                        "isActive": true
+                      },
+                      "prod": {
+                        "isActive": true
+                      }
+                    },
+                    "corporateImage": {
+                      "logo": "https://google.com//logos/5be01d787b5e5b0001ebb.png",
+                      "primaryColor": "#0072E1",
+                      "secondaryColor": "#FFFFFF"
+                    },
+                    "merchant": {
+                      "name": "EVERTEC PLACETOPAY S.A.S",
+                      "brand": "Placetopay",
+                      "mcc": 7929,
+                      "languages": [
+                        "ES"
+                      ],
+                      "currencies": [
+                        "COP"
+                      ],
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "address": {
+                        "city": "medellin",
+                        "state": 1,
+                        "country": "CO"
+                      },
+                      "legalRepresentative": {
+                        "documentType": "CC",
+                        "document": "1037854200",
+                        "name": "Ricardo",
+                        "surname": "García"
+                      }
+                    },
+                    "paymentMethods": {
+                      "code": "MC",
+                      "oder": 3,
+                      "commissionModel": "F",
+                      "commissionValue": 2.5,
+                      "accountNumber": "1234567811",
+                      "financialEntity": 16,
+                      "accountType": 1,
+                      "threeDS": true,
+                      "settings": {
+                        "retailCode": "011211406",
+                        "terminalLocation": "Medellín",
+                        "terminalNumber": "00031431",
+                        "username": "FIDUCOLDEX01",
+                        "password": "FIDUCOLDEX01",
+                        "pfxID": 1,
+                        "entityCode": "9002992280",
+                        "serviceCode": "001",
+                        "isEcommerce": true,
+                        "merchantCode": "1269189"
+                      }
+                    },
+                    "site": {
+                      "displayName": "Site name example",
+                      "type": "INT",
+                      "category": "ECOMMERCE",
+                      "email": "admin@email.com",
+                      "currency": "COP",
+                      "language": "ES",
+                      "customBatch": 2345,
+                      "expiration": "2023-06-30 00:00:00",
+                      "analyticsCode": "UA-171313251-4, GTM-123812",
+                      "integration": {
+                        "allowPartial": false,
+                        "connectionMethod": "REDIRECT",
+                        "notificationUrl": "https://site-webhook.com"
+                      },
+                      "control": {
+                        "minAmount": "1000",
+                        "maxAmount": "1000000",
+                        "filterPse": false,
+                        "filterTuya": false,
+                        "filterSafetyPay": false,
+                        "prechargerFilter": 2,
+                        "filterByBin": false,
+                        "exceptionBinsList": [
+                          "123456"
+                        ]
+                      },
+                      "threeDS": {
+                        "setting": "VERY_LOW",
+                        "minAmount": 40
+                      },
+                      "historic": {
+                        "behaviour": "IGNORE",
+                        "lowerScore": "100",
+                        "rejectionScore": 300
+                      },
+                      "creditBureau": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onNoMatch": "REJECTED",
+                          "onMatch": "PROCESS"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 200
+                      },
+                      "riskEngine": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onLowRisk": "MANUAL",
+                          "onMediumRisk": null,
+                          "onHighRisk": "REJECTED"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 30,
+                        "approvalScore": 200,
+                        "rejectionScore": 250,
+                        "onCaibration": true
+                      },
+                      "securityFilters": {
+                        "allowedIssuerCountries": [
+                          "CO"
+                        ],
+                        "forceIPMatch": true,
+                        "excludeIPCountry": [
+                          "CL"
+                        ],
+                        "onlyWhitelisted": true,
+                        "allowedIPCountries": [
+                          "EC"
+                        ],
+                        "allowedCardsDay": 4,
+                        "allowedCardsByIP": 10,
+                        "allowedCardsMonth": 4,
+                        "allowedCardsYear": 2,
+                        "dayMax": 3,
+                        "dayMaxAmount": 30000,
+                        "monthMax": 3,
+                        "monthMaxAmount": 2000
+                      },
+                      "operation": {
+                        "disableTax": true,
+                        "calculateTax": true,
+                        "taxPercentage": 12,
+                        "patternReference": null,
+                        "mailCustomer": true,
+                        "mailMerchant": true
+                      }
+                    },
+                    "threeDS": {
+                      "brand": "ThreeDS brand example",
+                      "country": "COL",
+                      "currency": "COP",
+                      "url": "https://example.com",
+                      "mcc": 742,
+                      "isicClass": 111,
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "subscriptions": [
+                        {
+                          "franchise": "visa",
+                          "acquirerBIN": 400900,
+                          "merchantCode": "5240"
+                        }
+                      ],
+                      "branch": {
+                        "name": "ThreeDS Branch Name",
+                        "brand": "branch brand example",
+                        "country": "COL",
+                        "currency": "COP",
+                        "url": "https://www.branch-url.com",
+                        "subscriptions": [
+                          {
+                            "franchise": 1,
+                            "acquirerBIN": 400900,
+                            "merchantCode": "\"5240\""
+                          }
+                        ]
+                      }
+                    },
+                    "microsite": {
+                      "name": "Microsite name example",
+                      "alias": "example-slug",
+                      "type": "OPEN",
+                      "allowPartial": false,
+                      "categories": [
+                        "comercio_electronico"
+                      ],
+                      "loginFields": 2,
+                      "disabled": false,
+                      "useWcLightbox": false,
+                      "hide": false,
+                      "allowPayWithDuplicateReference": false,
+                      "isNoBuyerFill": true,
+                      "allowDispersion": false,
+                      "allowUnlimitedInstallments": false,
+                      "autoReferenced": false,
+                      "allowRecurrence": false,
+                      "notSendBuyerAsPayer": false,
+                      "onlyPaymentLink": false,
+                      "exactSearchByReference": false,
+                      "allowPayMultipleInvoicesAtOnce": false,
+                      "showDescription": true,
+                      "allowShowDebtorName": false,
+                      "allowSendDebtorCode": false,
+                      "allowChangeTotal": false,
+                      "olderFirst": false,
+                      "allowSeeHistoryPayments": true,
+                      "loginFromUrl": true,
+                      "flushInvoices": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
         "tags": [
-          "ThreeDS"
+          "Integraciones"
         ],
-        "description": "Este endpoint tiene como finalidad la creación del token de ThreeDS de manera individual, se debe tener en cuenta que solo se permite la creación de tokens para bines que hayan sido previamente registrados en la creación del usuario para conusmir la API."
+        "description": "Este endpoint permite la creación de multiples recursos con una sola petición, tales como comercio, sitio, medios de pago, threeDS y micrositio, siendo estos dos últimos opcionales. [(Ver jerarquía y grupos)](docs/contexto/Jerarquia-y-grupos.md)\n\nAl ser un servicio asincrono, se debe contar con un webhook para recibir el resultado de la petición. [(Ver notificación)](reference/Kubrick.json/components/schemas/notification)"
+      },
+      "post - copy": {
+        "summary": "create",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "integrationId": {
+                      "type": "integer",
+                      "example": 20,
+                      "description": "ID de la integración, puede usarse para consultar el estado de la misma y sus respectivos environments."
+                    },
+                    "integrationStatus": {
+                      "type": "string",
+                      "example": "PENDING",
+                      "description": "Estado de la integración, en caso de que la petición sea correcta, el estado por defecto será “PENDING”."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The is cms field is required.",
+                        "date": "2024-02-14T13:48:14+00:00"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The is cms field is required.",
+                        "date": "2024-02-14T13:48:14+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2024-02-14T13:51:54+00:00"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2024-02-14T13:51:54+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "message": "Server Error"
+                    }
+                  },
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "El server error representa una intermitencia en el sistema, en este caso se debe comnunicar con un administrador."
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "message": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "integration-create-from-merchant",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "statusWebhook",
+                  "isCms",
+                  "environments",
+                  "merchant",
+                  "paymentMethods",
+                  "site"
+                ],
+                "properties": {
+                  "dueDiligenceId": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 255,
+                    "description": "Identificador del proceso de debida diligencia, con este dato permite entender si el comercio a crear aprobó por el proceso.",
+                    "example": 421828323801
+                  },
+                  "statusWebhook": {
+                    "type": "string",
+                    "description": "URL a la cual se notificará luego de finalizar el proceso con la información de salida. Este campo debe ser en formato URL.",
+                    "example": "https://test.webhook.com/"
+                  },
+                  "isCms": {
+                    "type": "boolean",
+                    "description": "Indica si la conexión se realizará mediante un CMS."
+                  },
+                  "cmsType": {
+                    "type": "string",
+                    "description": "En caso que isCms tenga el valor true, este campo se convierte en requerido. En este campo se indica el CMS a usar.",
+                    "example": "woocommerce"
+                  },
+                  "environments": {
+                    "$ref": "#/components/schemas/environments",
+                    "description": "Puede recibir dos objetos (test, prod), es obligatorio enviar, como mínimo uno de estos, e indica en que ambientes se quieren crear los recursos."
+                  },
+                  "corporateImage": {
+                    "$ref": "#/components/schemas/corporateImage"
+                  },
+                  "merchant": {
+                    "$ref": "#/components/schemas/merchant"
+                  },
+                  "paymentMethods": {
+                    "$ref": "#/components/schemas/paymentMethods"
+                  },
+                  "site": {
+                    "$ref": "#/components/schemas/site"
+                  },
+                  "threeDS": {
+                    "$ref": "#/components/schemas/threeDS",
+                    "description": "Este objeto solo es obligatorio en caso de que se envíe en true el atributo de \"threeDS\" de los medios de pago."
+                  },
+                  "microsite": {
+                    "$ref": "#/components/schemas/microsite"
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "dueDiligenceId": 421828323801,
+                    "statusWebhook": "https://test.webhook.com/",
+                    "isCms": true,
+                    "cmsType": "woocommerce",
+                    "environments": {
+                      "test": {
+                        "isActive": true
+                      },
+                      "prod": {
+                        "isActive": true
+                      }
+                    },
+                    "corporateImage": {
+                      "logo": "https://google.com//logos/5be01d787b5e5b0001ebb.png",
+                      "primaryColor": "#0072E1",
+                      "secondaryColor": "#FFFFFF"
+                    },
+                    "merchant": {
+                      "name": "EVERTEC PLACETOPAY S.A.S",
+                      "brand": "Placetopay",
+                      "mcc": 7929,
+                      "languages": [
+                        "ES"
+                      ],
+                      "currencies": [
+                        "COP"
+                      ],
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "address": {
+                        "city": "medellin",
+                        "state": 1,
+                        "country": "CO"
+                      },
+                      "legalRepresentative": {
+                        "documentType": "CC",
+                        "document": "1037854200",
+                        "name": "Ricardo",
+                        "surname": "García"
+                      }
+                    },
+                    "paymentMethods": {
+                      "code": "MC",
+                      "oder": 3,
+                      "commissionModel": "F",
+                      "commissionValue": 2.5,
+                      "accountNumber": "1234567811",
+                      "financialEntity": 16,
+                      "accountType": 1,
+                      "threeDS": true,
+                      "settings": {
+                        "retailCode": "011211406",
+                        "terminalLocation": "Medellín",
+                        "terminalNumber": "00031431",
+                        "username": "FIDUCOLDEX01",
+                        "password": "FIDUCOLDEX01",
+                        "pfxID": 1,
+                        "entityCode": "9002992280",
+                        "serviceCode": "001",
+                        "isEcommerce": true,
+                        "merchantCode": "1269189"
+                      }
+                    },
+                    "site": {
+                      "displayName": "Site name example",
+                      "type": "INT",
+                      "category": "ECOMMERCE",
+                      "email": "admin@email.com",
+                      "currency": "COP",
+                      "language": "ES",
+                      "customBatch": 2345,
+                      "expiration": "2023-06-30 00:00:00",
+                      "analyticsCode": "UA-171313251-4, GTM-123812",
+                      "integration": {
+                        "allowPartial": false,
+                        "connectionMethod": "REDIRECT",
+                        "notificationUrl": "https://site-webhook.com"
+                      },
+                      "control": {
+                        "minAmount": "1000",
+                        "maxAmount": "1000000",
+                        "filterPse": false,
+                        "filterTuya": false,
+                        "filterSafetyPay": false,
+                        "prechargerFilter": 2,
+                        "filterByBin": false,
+                        "exceptionBinsList": [
+                          "123456"
+                        ]
+                      },
+                      "threeDS": {
+                        "setting": "VERY_LOW",
+                        "minAmount": 40
+                      },
+                      "historic": {
+                        "behaviour": "IGNORE",
+                        "lowerScore": "100",
+                        "rejectionScore": 300
+                      },
+                      "creditBureau": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onNoMatch": "REJECTED",
+                          "onMatch": "PROCESS"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 200
+                      },
+                      "riskEngine": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onLowRisk": "MANUAL",
+                          "onMediumRisk": null,
+                          "onHighRisk": "REJECTED"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 30,
+                        "approvalScore": 200,
+                        "rejectionScore": 250,
+                        "onCaibration": true
+                      },
+                      "securityFilters": {
+                        "allowedIssuerCountries": [
+                          "CO"
+                        ],
+                        "forceIPMatch": true,
+                        "excludeIPCountry": [
+                          "CL"
+                        ],
+                        "onlyWhitelisted": true,
+                        "allowedIPCountries": [
+                          "EC"
+                        ],
+                        "allowedCardsDay": 4,
+                        "allowedCardsByIP": 10,
+                        "allowedCardsMonth": 4,
+                        "allowedCardsYear": 2,
+                        "dayMax": 3,
+                        "dayMaxAmount": 30000,
+                        "monthMax": 3,
+                        "monthMaxAmount": 2000
+                      },
+                      "operation": {
+                        "disableTax": true,
+                        "calculateTax": true,
+                        "taxPercentage": 12,
+                        "patternReference": null,
+                        "mailCustomer": true,
+                        "mailMerchant": true
+                      }
+                    },
+                    "threeDS": {
+                      "brand": "ThreeDS brand example",
+                      "country": "COL",
+                      "currency": "COP",
+                      "url": "https://example.com",
+                      "mcc": 742,
+                      "isicClass": 111,
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "subscriptions": [
+                        {
+                          "franchise": "visa",
+                          "acquirerBIN": 400900,
+                          "merchantCode": "5240"
+                        }
+                      ],
+                      "branch": {
+                        "name": "ThreeDS Branch Name",
+                        "brand": "branch brand example",
+                        "country": "COL",
+                        "currency": "COP",
+                        "url": "https://www.branch-url.com",
+                        "subscriptions": [
+                          {
+                            "franchise": 1,
+                            "acquirerBIN": 400900,
+                            "merchantCode": "\"5240\""
+                          }
+                        ]
+                      }
+                    },
+                    "microsite": {
+                      "name": "Microsite name example",
+                      "alias": "example-slug",
+                      "type": "OPEN",
+                      "allowPartial": false,
+                      "categories": [
+                        "comercio_electronico"
+                      ],
+                      "loginFields": 2,
+                      "disabled": false,
+                      "useWcLightbox": false,
+                      "hide": false,
+                      "allowPayWithDuplicateReference": false,
+                      "isNoBuyerFill": true,
+                      "allowDispersion": false,
+                      "allowUnlimitedInstallments": false,
+                      "autoReferenced": false,
+                      "allowRecurrence": false,
+                      "notSendBuyerAsPayer": false,
+                      "onlyPaymentLink": false,
+                      "exactSearchByReference": false,
+                      "allowPayMultipleInvoicesAtOnce": false,
+                      "showDescription": true,
+                      "allowShowDebtorName": false,
+                      "allowSendDebtorCode": false,
+                      "allowChangeTotal": false,
+                      "olderFirst": false,
+                      "allowSeeHistoryPayments": true,
+                      "loginFromUrl": true,
+                      "flushInvoices": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "tags": [
+          "Integraciones"
+        ],
+        "description": "Este endpoint permite la creación de multiples recursos con una sola petición, tales como comercio, sitio, medios de pago, threeDS y micrositio, siendo estos dos últimos opcionales. [(Ver jerarquía y grupos)](docs/contexto/Jerarquia-y-grupos.md)\n\nAl ser un servicio asincrono, se debe contar con un webhook para recibir el resultado de la petición. [(Ver notificación)](reference/Kubrick.json/components/schemas/notification)"
       },
       "parameters": [
         {
@@ -2309,8 +3167,8 @@
           },
           "in": "header",
           "name": "Authorization",
-          "required": true,
-          "description": "Bearer token usado para la autenticación con el servicio, el cual, lo puede generar un admin."
+          "description": "Bearer token usado para la autenticación con el servicio, el cual, lo puede generar un admin.",
+          "required": true
         },
         {
           "schema": {
@@ -9092,6 +9950,11 @@
             }
           }
         }
+      }
+    },
+    "/api/three-ds/create": {
+      "post": {
+        "description": ""
       }
     }
   },
