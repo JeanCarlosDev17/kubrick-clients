@@ -11910,6 +11910,32 @@
         },
         "type": "object",
         "description": "Objeto que contiene los parametros adicionales para la creación del certificado de Credibanco y la configuración de medio de pago PSE.",
+        "examples": [
+          {
+            "retailCode": "011211406",
+            "terminalLocation": "Medellín",
+            "terminalNumber": "00031431",
+            "username": "FIDUCOLDEX01",
+            "password": "FIDUCOLDEX01",
+            "pfxID": 1,
+            "entityCode": "9002992280",
+            "serviceCode": "001",
+            "isEcommerce": true,
+            "merchantCode": "1269189"
+          },
+          {
+            "retailCode": "011211406",
+            "terminalLocation": "Medellín",
+            "terminalNumber": "00031431",
+            "username": "FIDUCOLDEX01",
+            "password": "FIDUCOLDEX01",
+            "pfxID": 1,
+            "entityCode": "9002992280",
+            "serviceCode": "001",
+            "isEcommerce": true,
+            "merchantCode": "1269189"
+          }
+        ],
         "properties": {
           "retailCode": {
             "type": "string",
@@ -11988,22 +12014,48 @@
               "id": "yeg54ulcdeyd3"
             },
             "description": "Determina si es un comercio electronico."
+          },
+          "agreement": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "i06w5r3xe49yd"
+            },
+            "minimum": 1,
+            "example": 12,
+            "description": "Código de convenio"
+          },
+          "agreementName": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "lxtwwmsdeju9t"
+            },
+            "maxLength": 50,
+            "description": "Nombre del convenio",
+            "example": "Placetopay"
+          },
+          "iacCode": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "qui6tsq03hau3"
+            },
+            "description": "Codigo IAC - EAN",
+            "example": "33456564"
+          },
+          "acceptChecks": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "lgmw1hts002yx"
+            },
+            "description": "Acepta cheques"
+          },
+          "disableBlocks": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "vs5zzx2u7dtpu"
+            },
+            "description": "Bloques a deshabilitar, Escriba uno o más nombres de bloque separado por comas, los bloques disponibles son: ath_baloto, ath_corresponsales, ath_cajas_exito, ath_efecty, ath_cajeros, ath_supergiros"
           }
-        },
-        "examples": [
-          {
-            "retailCode": "011211406",
-            "terminalLocation": "Medellín",
-            "terminalNumber": "00031431",
-            "username": "FIDUCOLDEX01",
-            "password": "FIDUCOLDEX01",
-            "pfxID": 1,
-            "entityCode": "9002992280",
-            "serviceCode": "001",
-            "isEcommerce": true,
-            "merchantCode": "1269189"
-          }
-        ]
+        }
       },
       "site-threeDS": {
         "title": "site-threeDS",

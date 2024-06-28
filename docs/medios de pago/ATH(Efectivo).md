@@ -20,9 +20,9 @@ Configuración general de los medios de pago
 | Tipo de cuenta | accountType | NO | | 2 | Sus valores posibles son 1, 2 y 3, donde  1 representa SAVINGS(Ahorros), 2 representa  CURRENT(Corriente), y 3 representa CREDIT CARD(Tarjeta de crédito) |
 | Código de convenio | agreement | YES | | 64654| |
 | Nombre del convenio | agreementName | YES | |"mi convenio" | |
-| Codigo IAC - EAN | iacCode | NO | | 4456464| |
+| Codigo IAC - EAN | iacCode | YES | | 4456464| |
 | Acepta cheques | acceptChecks | NO | | true| |
-| Bloques a deshabilitar | agreementName | NO | | ath_cajas_exito, ath_efecty | Escriba uno o más nombres de bloque separado por comas, los bloques disponibles son: ath_baloto, ath_corresponsales, ath_cajas_exito, ath_efecty, ath_cajeros, ath_supergiros |
+| Bloques a deshabilitar | disableBlocks | NO | | ath_cajas_exito, ath_efecty | Escriba uno o más nombres de bloque separado por comas, los bloques disponibles son: ath_baloto, ath_corresponsales, ath_cajas_exito, ath_efecty, ath_cajeros, ath_supergiros |
 
 
 ---------------------------------------------------
