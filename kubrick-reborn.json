@@ -2258,7 +2258,7 @@
                     "x-stoplight": {
                       "id": "xzmvqinp0jw4a"
                     },
-                    "description": "Objeto que contiene los bines para los cuales va a ser creado el token de ThreeDS, dichos bines se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario)."
+                    "description": "Objeto que contiene la información de los bines para los cuales va a ser creado el token de ThreeDS, para dichos bines su uso esta limitados a los que se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario)."
                   }
                 }
               },
