@@ -11911,32 +11911,6 @@
         },
         "type": "object",
         "description": "Objeto que contiene los parametros adicionales para la creación del certificado de Credibanco y la configuración de medio de pago PSE.",
-        "examples": [
-          {
-            "retailCode": "011211406",
-            "terminalLocation": "Medellín",
-            "terminalNumber": "00031431",
-            "username": "FIDUCOLDEX01",
-            "password": "FIDUCOLDEX01",
-            "pfxID": 1,
-            "entityCode": "9002992280",
-            "serviceCode": "001",
-            "isEcommerce": true,
-            "merchantCode": "1269189"
-          },
-          {
-            "retailCode": "011211406",
-            "terminalLocation": "Medellín",
-            "terminalNumber": "00031431",
-            "username": "FIDUCOLDEX01",
-            "password": "FIDUCOLDEX01",
-            "pfxID": 1,
-            "entityCode": "9002992280",
-            "serviceCode": "001",
-            "isEcommerce": true,
-            "merchantCode": "1269189"
-          }
-        ],
         "properties": {
           "retailCode": {
             "type": "string",
@@ -12054,9 +12028,30 @@
             "x-stoplight": {
               "id": "vs5zzx2u7dtpu"
             },
-            "description": "Bloques a deshabilitar, Escriba uno o más nombres de bloque separado por comas, los bloques disponibles son: ath_baloto, ath_corresponsales, ath_cajas_exito, ath_efecty, ath_cajeros, ath_supergiros"
+            "description": "Bloques a deshabilitar, Escriba uno o más nombres de bloque separado por comas, los bloques disponibles son: ath_baloto, ath_corresponsales, ath_cajas_exito, ath_efecty, ath_cajeros, ath_supergiros",
+            "example": "ath_cajas_exito, ath_efecty",
+            "maxLength": 255
           }
-        }
+        },
+        "examples": [
+          {
+            "retailCode": "011211406",
+            "terminalLocation": "Medellín",
+            "terminalNumber": "00031431",
+            "username": "UserExample",
+            "password": "passwordExample",
+            "pfxID": 1,
+            "entityCode": "9002992280",
+            "serviceCode": "001",
+            "merchantCode": "1269189",
+            "isEcommerce": true,
+            "agreement": 12,
+            "agreementName": "Placetopay",
+            "iacCode": "33456564",
+            "acceptChecks": true,
+            "disableBlocks": "ath_cajas_exito, ath_efecty"
+          }
+        ]
       },
       "site-threeDS": {
         "title": "site-threeDS",
