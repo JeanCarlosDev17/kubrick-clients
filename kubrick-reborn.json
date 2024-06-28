@@ -2160,6 +2160,7 @@
                   "url",
                   "mcc",
                   "isicClass",
+                  "allyName",
                   "document",
                   "branches",
                   "subscriptions"
@@ -2231,6 +2232,15 @@
                     "example": 111,
                     "description": "Código clase CIIU."
                   },
+                  "allyName": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "hoc7o2axmr21q"
+                    },
+                    "description": "Nombre del aliado comercial registrado en MPI.",
+                    "example": "Edward Elric",
+                    "maxLength": 30
+                  },
                   "document": {
                     "$ref": "#/components/schemas/document",
                     "x-stoplight": {
@@ -2263,6 +2273,7 @@
                     "url": "https://example.com",
                     "mcc": 742,
                     "isicClass": 111,
+                    "allyName": "Edward Elric",
                     "document": {
                       "type": "string",
                       "number": "900299823-1"
