@@ -1951,7 +1951,7 @@
                     },
                     "token": {
                       "type": "string",
-                      "example": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV-",
+                      "example": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV",
                       "description": "Token del comercio."
                     },
                     "branches": {
