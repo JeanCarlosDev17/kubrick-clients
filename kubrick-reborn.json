@@ -2162,8 +2162,7 @@
                   "isicClass",
                   "allyName",
                   "document",
-                  "branches",
-                  "subscriptions"
+                  "branches"
                 ],
                 "properties": {
                   "onTest": {
@@ -10978,6 +10977,24 @@
           ]
         },
         "title": "branches",
+        "examples": [
+          [
+            {
+              "name": "ThreeDS Branch Name",
+              "brand": "branch brand example",
+              "country": "COL",
+              "currency": "COP",
+              "url": "https://www.branch-url.com",
+              "subscriptions": [
+                {
+                  "franchise": "string",
+                  "acquirerBIN": 0,
+                  "merchantCode": "string"
+                }
+              ]
+            }
+          ]
+        ],
         "items": {
           "type": "object",
           "required": [
@@ -10985,8 +11002,7 @@
             "brand",
             "country",
             "currency",
-            "url",
-            "subscriptions"
+            "url"
           ],
           "properties": {
             "name": {
@@ -11032,25 +11048,7 @@
               }
             }
           }
-        },
-        "examples": [
-          [
-            {
-              "name": "ThreeDS Branch Name",
-              "brand": "branch brand example",
-              "country": "COL",
-              "currency": "COP",
-              "url": "https://www.branch-url.com",
-              "subscriptions": [
-                {
-                  "franchise": "string",
-                  "acquirerBIN": 0,
-                  "merchantCode": "string"
-                }
-              ]
-            }
-          ]
-        ]
+        }
       },
       "notification": {
         "type": "object",
