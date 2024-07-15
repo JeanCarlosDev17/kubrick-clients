@@ -12,7 +12,7 @@ Configuración general de los medios de pago
 | Name in panel | Name in API | Required  | Description | Example | Observations |
 | ------------- | ----------- | --------- | ----------- | ------- | ------------ |
 | Entidad financiera | financialEntity | YES |  | 16 |  |
-| N/A| code | YES | Propiedad de la request de la api que determina el medio de pago | CR_VS |
+| N/A| code | YES | Propiedad de la request de la api que determina el medio de pago | \_PSE_ |
 | Prioridad | Order | NO | | 2 | Indica la prioridad que se tiene en caso de que exita la misma franquicia pero de diferentes redes procesadoras, es decir, si se tiene AMEX de redeban y credibanco, la que tenga la priodidad 1 es la que va a intentar procesar primero la transacción. |
 | Modelo de comisión | comissionModel | NO |  | F | Sus valores posibles son F y P , donde F representa Valor Fijo y P representa  Valor en Porcentaje |
 | Comisión | comissionValue | NO |  | 2.5 |  |
