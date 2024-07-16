@@ -2,10 +2,6 @@
 stoplight-id: 8cwjgwxdg720y
 ---
 
-<details>
-<summary> ACH(PSE)</summary>
-
-
 # ACH(PSE)
 
 -  \_PSE_
@@ -61,6 +57,4 @@ Ejemplo objeto paymentMethod:
 
 ---------------------------------------------------
 
-
-</details>
 

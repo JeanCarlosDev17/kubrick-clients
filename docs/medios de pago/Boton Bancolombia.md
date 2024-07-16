@@ -2,7 +2,7 @@
 stoplight-id: loc71szb7mmpy
 ---
 
-# ACH(PSE)
+# Botón Bancolombia
 
 -  BTNBC
 
