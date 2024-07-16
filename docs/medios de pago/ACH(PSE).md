@@ -18,7 +18,7 @@ Configuración general de los medios de pago
 | Comisión | comissionValue | NO |  | 2.5 |  |
 | Número de cuenta | accountNumber | NO | | 26546 |  |
 | Tipo de cuenta | accountType | NO | | 2 | Sus valores posibles son 1, 2 y 3, donde  1 representa SAVINGS(Ahorros), 2 representa  CURRENT(Corriente), y 3 representa CREDIT CARD(Tarjeta de crédito) |
-| Código de entidad | entityCode | YES | Código generado por el comercio en la plataforma de ACH financiera | 9002992280 | |
+| Código de entidad | entityCode | YES | Usualmente es el nit o la identificación de la empresa | 9002992280 | |
 | Código de servicio | serviceCode | YES | Código generado por el comercio en la plataforma de ACH | 001 ||
 
 ---------------------------------------------------
@@ -36,10 +36,6 @@ Observaciones:
 - No se debe configurar el certificado
 - No permite threeDS
 - No se usan reglas de crédito
-
-Bancos: (Escribir bancos disponibles)
-
-- 
 
 Ejemplo objeto paymentMethod:
 

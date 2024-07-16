@@ -1,8 +1,8 @@
 ---
-stoplight-id: 28zrqnw5xlbh8
+stoplight-id: z9mzc44ujkb6b
 ---
 
-# ATH(Efectivo)
+# ATH(Efectivo) Colombia
 
 -  \_ATH_
 
@@ -39,10 +39,6 @@ Observaciones:
 
 - No permite threeDS
 - No se usan reglas de crédito
-
-Bancos: (Escribir bancos disponibles)
-
-- 
 
 Ejemplo objeto paymentMethod:
 

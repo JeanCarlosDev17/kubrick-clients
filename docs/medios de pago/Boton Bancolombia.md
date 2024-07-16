@@ -38,10 +38,6 @@ Observaciones:
 - No permite threeDS
 - No se usan reglas de crédito
 
-Bancos: (Escribir bancos disponibles)
-
-- 
-
 Ejemplo objeto paymentMethod:
 
 ```json
