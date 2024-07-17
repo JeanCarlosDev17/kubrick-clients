@@ -22,6 +22,7 @@ Configuración general de los medios de pago
 | iacCode | YES | | 4456464| |
 | acceptChecks | NO | | true| |
 | disableBlocks | NO | | ath_cajas_exito, ath_efecty | Escriba uno o más nombres de bloque separado por comas, los bloques disponibles son: ath_baloto, ath_corresponsales, ath_cajas_exito, ath_efecty, ath_cajeros, ath_supergiros |
+| threeDS | YES| Propiedad de la request de la api que determina si un medio de pago requiere ThreeDS| true| |
 
 
 ---------------------------------------------------

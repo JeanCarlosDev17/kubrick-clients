@@ -15,18 +15,18 @@ para credibanco hay 2 alternativas, si tenemos un certificado de credibanco pode
 
 Caso con certificado creado
 
-| Name in panel | Name in API | Required  | Description | Example | Observations |
-| ------------- | ----------- | --------- | ----------- | ------- | ------------ |
-| Entidad financiera | financialEntity | YES |  | 16 |  |
+| Field Name| Required  | Description | Example | Observations |
+ ----------- | --------- | ----------- | ------- | ------------ |
+| financialEntity | YES |  | 16 |  |
 | N/A| code | YES | Propiedad de la request de la api que determina el medio de pago | CR_VS |
-| Prioridad | Order | NO | | 2 | Indica la prioridad que se tiene en caso de que exita la misma franquicia pero de diferentes redes procesadoras, es decir, si se tiene AMEX de redeban y credibanco, la que tenga la priodidad 1 es la que va a intentar procesar primero la transacción. |
-| Modelo de comisión | comissionModel | NO |  | F | Sus valores posibles son F y P , donde F representa Valor Fijo y P representa  Valor en Porcentaje |
-| Comisión | comissionValue | NO |  | 2.5 |  |
+| order | NO | | 2 | Indica la prioridad que se tiene en caso de que exita la misma franquicia pero de diferentes redes procesadoras, es decir, si se tiene AMEX de redeban y credibanco, la que tenga la priodidad 1 es la que va a intentar procesar primero la transacción. |
+| comissionModel | NO |  | F | Sus valores posibles son F y P , donde F representa Valor Fijo y P representa  Valor en Porcentaje |
+| comissionValue | NO |  | 2.5 |  |
 | Número de cuenta | accountNumber | NO | | 26546 |  |
-| Tipo de cuenta | accountType | NO | | 2 | Sus valores posibles son 1, 2 y 3, donde  1 representa SAVINGS(Ahorros), 2 representa  CURRENT(Corriente), y 3 representa CREDIT CARD(Tarjeta de crédito) |
-| Certificado | pfxID | YES |	Identificador del certificado de credibanco exitente, este atributo se envía dentro del objeto "settings" | 12
-| Comercio electrónico | isEcommerce | YES| Propiedad de la request de la api que determina si es un comercio electrónico| true| |
-| N/A | threeDS | YES| Propiedad de la request de la api que determina si un medio de pago requiere ThreeDS| true| |
+| accountType | NO | | 2 | Sus valores posibles son 1, 2 y 3, donde  1 representa SAVINGS(Ahorros), 2 representa  CURRENT(Corriente), y 3 representa CREDIT CARD(Tarjeta de crédito) |
+| pfxID | YES |	Identificador del certificado de credibanco exitente, este atributo se envía dentro del objeto "settings" | 12
+| isEcommerce | YES| Propiedad de la request de la api que determina si es un comercio electrónico| true| |
+| threeDS | YES| Propiedad de la request de la api que determina si un medio de pago requiere ThreeDS| true| |
 
 ---------------------------------------------------
 

@@ -19,6 +19,7 @@ Configuración general de los medios de pago
 | accountType | NO | | 2 | Sus valores posibles son 1, 2 y 3, donde  1 representa SAVINGS(Ahorros), 2 representa  CURRENT(Corriente), y 3 representa CREDIT CARD(Tarjeta de crédito) |
 | entityCode | YES | Usualmente es el nit o la identificación de la empresa | 9002992280 | |
 | serviceCode | YES | Código generado por el comercio en la plataforma de ACH | 001 ||
+| threeDS | YES| Propiedad de la request de la api que determina si un medio de pago requiere ThreeDS| true| |
 
 ---------------------------------------------------
 
