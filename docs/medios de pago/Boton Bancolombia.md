@@ -20,6 +20,7 @@ Configuración general de los medios de pago
 | Tipo de cuenta | accountType | NO | | 2 | Sus valores posibles son 1, 2 y 3, donde  1 representa SAVINGS(Ahorros), 2 representa  CURRENT(Corriente), y 3 representa CREDIT CARD(Tarjeta de crédito) |
 | Hash | hash | YES | Código que identifica el botón de transferencia del comercio | 9002992280 | |
 | threeDS | YES| Propiedad de la request de la api que determina si un medio de pago requiere ThreeDS| true| |
+
 ---------------------------------------------------
 
 ## Información por paises:
@@ -32,7 +33,6 @@ Métodos de pago:
 
 Observaciones:
 
-- No se debe configurar el certificado
 - No permite threeDS
 - No se usan reglas de crédito
 
