@@ -30,7 +30,7 @@ Caso con certificado creado
 
 ---------------------------------------------------
 
-Caso sin certificado existente
+**Caso sin certificado existente**
 
 
 
@@ -67,10 +67,6 @@ Observaciones:
 - Se debe configurar el certificado
 - Si permite threeDS
 - No se usan reglas de crédito
-
-Bancos: (Escribir bancos disponibles)
-
-- 
 
 Ejemplo de objeto paymentMethod con certificado **no** existente:
 
