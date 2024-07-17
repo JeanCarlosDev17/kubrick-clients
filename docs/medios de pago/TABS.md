@@ -60,6 +60,10 @@ Ejemplo objeto paymentMethod:
   "threeDS": false
 }
 ```
+
+
+
+
 <!--
 type: tab
 title: ATH(Efectivo) Colombia
@@ -124,6 +128,8 @@ Ejemplo objeto paymentMethod:
 ```
 
 ---------------------------------------------------
+
+
 
 <!--
 type: tab
