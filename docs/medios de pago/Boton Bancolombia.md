@@ -19,8 +19,6 @@ Configuración general de los medios de pago
 | Número de cuenta | accountNumber | NO | | 26546 |  |
 | Tipo de cuenta | accountType | NO | | 2 | Sus valores posibles son 1, 2 y 3, donde  1 representa SAVINGS(Ahorros), 2 representa  CURRENT(Corriente), y 3 representa CREDIT CARD(Tarjeta de crédito) |
 | Hash | hash | YES | Código que identifica el botón de transferencia del comercio | 9002992280 | |
-| Identificador Cliente | identification | NO |  | 15916855 ||
-| Llave Secreta | secret | NO |  |cxdSYC4A59le||
 
 ---------------------------------------------------
 
@@ -49,9 +47,7 @@ Ejemplo objeto paymentMethod:
   "financialEntity": 16,
   "accountType": 1,
   "settings": {
-      "hash": "h4ShG3NER1C",
-      "identification": "15916855"
-      "secret": "cxdSYC4A59le"
+    "hash": "h4ShG3NER1C",
   },
   "threeDS": false
 }

@@ -9,20 +9,19 @@ stoplight-id: z9mzc44ujkb6b
 
 Configuración general de los medios de pago
 
-| Name in panel | Name in API | Required  | Description | Example | Observations |
-| ------------- | ----------- | --------- | ----------- | ------- | ------------ |
-| Entidad financiera | financialEntity | YES |  | 16 |  |
-| N/A| code | YES | Propiedad de la request de la api que determina el medio de pago | \_ATH_ |
-| Prioridad | Order | NO | | 2 | Indica la prioridad que se tiene en caso de que exita la misma franquicia pero de diferentes redes procesadoras, es decir, si se tiene AMEX de redeban y credibanco, la que tenga la priodidad 1 es la que va a intentar procesar primero la transacción. |
-| Modelo de comisión | comissionModel | NO |  | F | Sus valores posibles son F y P , donde F representa Valor Fijo y P representa  Valor en Porcentaje |
-| Comisión | comissionValue | NO |  | 2.5 |  |
-| Número de cuenta | accountNumber | NO | | 26546 |  |
-| Tipo de cuenta | accountType | NO | | 2 | Sus valores posibles son 1, 2 y 3, donde  1 representa SAVINGS(Ahorros), 2 representa  CURRENT(Corriente), y 3 representa CREDIT CARD(Tarjeta de crédito) |
-| Código de convenio | agreement | YES | | 64654| |
-| Nombre del convenio | agreementName | YES | |"mi convenio" | |
-| Codigo IAC - EAN | iacCode | YES | | 4456464| |
-| Acepta cheques | acceptChecks | NO | | true| |
-| Bloques a deshabilitar | disableBlocks | NO | | ath_cajas_exito, ath_efecty | Escriba uno o más nombres de bloque separado por comas, los bloques disponibles son: ath_baloto, ath_corresponsales, ath_cajas_exito, ath_efecty, ath_cajeros, ath_supergiros |
+| Field Name | Required  | Description | Example | Observations |
+| ----------- | --------- | ----------- | ------- | ------------ |
+| financialEntity | YES |  | 16 |  || N/A| code | YES | Propiedad de la request de la api que determina el medio de pago | \_ATH_ |
+| order | NO | | 2 | Indica la prioridad que se tiene en caso de que exita la misma franquicia pero de diferentes redes procesadoras, es decir, si se tiene AMEX de redeban y credibanco, la que tenga la priodidad 1 es la que va a intentar procesar primero la transacción. |
+| comissionModel | NO |  | F | Sus valores posibles son F y P , donde F representa Valor Fijo y P representa  Valor en Porcentaje |
+| comissionValue | NO |  | 2.5 |  |
+| accountNumber | NO | | 26546 |  |
+| accountType | NO | | 2 | Sus valores posibles son 1, 2 y 3, donde  1 representa SAVINGS(Ahorros), 2 representa  CURRENT(Corriente), y 3 representa CREDIT CARD(Tarjeta de crédito) |
+| agreement | YES | | 64654| |
+| agreementName | YES | |"mi convenio" | |
+| iacCode | YES | | 4456464| |
+| acceptChecks | NO | | true| |
+| disableBlocks | NO | | ath_cajas_exito, ath_efecty | Escriba uno o más nombres de bloque separado por comas, los bloques disponibles son: ath_baloto, ath_corresponsales, ath_cajas_exito, ath_efecty, ath_cajeros, ath_supergiros |
 
 
 ---------------------------------------------------
