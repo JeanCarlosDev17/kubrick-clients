@@ -10003,15 +10003,6 @@
           "id": "lixsrwizzez2p"
         },
         "type": "object",
-        "properties": {
-          "include": {
-            "type": "array",
-            "x-stoplight": {
-              "id": "7gos4ufmxgyqj"
-            },
-            "items": {}
-          }
-        },
         "examples": [
           {
             "include": [
