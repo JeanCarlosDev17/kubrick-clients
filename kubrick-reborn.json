@@ -1399,9 +1399,9 @@
         }
       }
     },
-    "/api/integration/create-from-merchant": {
+    "/api/integration/integration": {
       "post": {
-        "summary": "create-from-merchant",
+        "summary": "create-integration-from-zero",
         "responses": {
           "200": {
             "description": "OK",
@@ -1829,6 +1829,241 @@
                             "merchantCode": "\"5240\""
                           }
                         ]
+                      }
+                    },
+                    "microsite": {
+                      "name": "Microsite name example",
+                      "alias": "example-slug",
+                      "type": "OPEN",
+                      "allowPartial": false,
+                      "categories": [
+                        "comercio_electronico"
+                      ],
+                      "loginFields": 2,
+                      "disabled": false,
+                      "useWcLightbox": false,
+                      "hide": false,
+                      "allowPayWithDuplicateReference": false,
+                      "isNoBuyerFill": true,
+                      "allowDispersion": false,
+                      "allowUnlimitedInstallments": false,
+                      "autoReferenced": false,
+                      "allowRecurrence": false,
+                      "notSendBuyerAsPayer": false,
+                      "onlyPaymentLink": false,
+                      "exactSearchByReference": false,
+                      "allowPayMultipleInvoicesAtOnce": false,
+                      "showDescription": true,
+                      "allowShowDebtorName": false,
+                      "allowSendDebtorCode": false,
+                      "allowChangeTotal": false,
+                      "olderFirst": false,
+                      "allowSeeHistoryPayments": true,
+                      "loginFromUrl": true,
+                      "flushInvoices": true
+                    }
+                  }
+                },
+                "Example 2": {
+                  "value": {
+                    "dueDiligenceId": 421828323801,
+                    "statusWebhook": "https://test.webhook.com/",
+                    "isCms": true,
+                    "cmsType": "woocommerce",
+                    "environments": {
+                      "test": {
+                        "isActive": true
+                      },
+                      "prod": {
+                        "isActive": true
+                      }
+                    },
+                    "corporateImage": {
+                      "logo": "https://google.com//logos/5be01d787b5e5b0001ebb.png",
+                      "primaryColor": "#0072E1",
+                      "secondaryColor": "#FFFFFF"
+                    },
+                    "merchant": {
+                      "name": "EVERTEC PLACETOPAY S.A.S",
+                      "brand": "Placetopay",
+                      "mcc": 7929,
+                      "languages": [
+                        "ES"
+                      ],
+                      "currencies": [
+                        "COP"
+                      ],
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "address": {
+                        "city": "medellin",
+                        "state": 1,
+                        "country": "CO"
+                      },
+                      "legalRepresentative": {
+                        "documentType": "CC",
+                        "document": "1037854200",
+                        "name": "Ricardo",
+                        "surname": "García"
+                      }
+                    },
+                    "paymentMethods": [
+                      {
+                        "code": "MC",
+                        "order": 1,
+                        "financialEntity": 16,
+                        "commissionModel": "string",
+                        "commissionValue": 2.5,
+                        "accountNumber": "1234567811",
+                        "accountType": 1,
+                        "settings": {
+                          "retailCode": "011211406",
+                          "terminalLocation": "Medellín",
+                          "terminalNumber": "00031431",
+                          "username": "UserExample",
+                          "password": "passwordExample",
+                          "pfxID": 1,
+                          "entityCode": "9002992280",
+                          "serviceCode": "001",
+                          "merchantCode": "1269189",
+                          "isEcommerce": true,
+                          "agreement": 12,
+                          "agreementName": "Placetopay",
+                          "iacCode": "33456564",
+                          "acceptChecks": true,
+                          "disableBlocks": "ath_cajas_exito, ath_efecty",
+                          "hash": "456445646asdf52fd"
+                        },
+                        "threeDS": true
+                      }
+                    ],
+                    "site": {
+                      "displayName": "Site name example",
+                      "type": "INT",
+                      "category": "ECOMMERCE",
+                      "email": "admin@email.com",
+                      "currency": "COP",
+                      "language": "ES",
+                      "customBatch": 2345,
+                      "expiration": "2023-06-30 00:00:00",
+                      "analyticsCode": "UA-171313251-4, GTM-123812",
+                      "integration": {
+                        "allowPartial": false,
+                        "connectionMethod": "REDIRECT",
+                        "notificationUrl": "https://site-webhook.com"
+                      },
+                      "control": {
+                        "minAmount": "1000",
+                        "maxAmount": "1000000",
+                        "filterPse": false,
+                        "filterTuya": false,
+                        "filterSafetyPay": false,
+                        "prechargerFilter": 2,
+                        "filterByBin": false,
+                        "exceptionBinsList": [
+                          "123456"
+                        ]
+                      },
+                      "threeDS": {
+                        "setting": "VERY_LOW",
+                        "minAmount": 40
+                      },
+                      "historic": {
+                        "behaviour": "IGNORE",
+                        "lowerScore": "100",
+                        "rejectionScore": 300
+                      },
+                      "creditBureau": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onNoMatch": "REJECTED",
+                          "onMatch": "PROCESS"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 200
+                      },
+                      "riskEngine": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onLowRisk": "MANUAL",
+                          "onMediumRisk": null,
+                          "onHighRisk": "REJECTED"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 30,
+                        "approvalScore": 200,
+                        "rejectionScore": 250,
+                        "onCaibration": true
+                      },
+                      "securityFilters": {
+                        "allowedIssuerCountries": [
+                          "CO"
+                        ],
+                        "forceIPMatch": true,
+                        "excludeIPCountry": [
+                          "CL"
+                        ],
+                        "onlyWhitelisted": true,
+                        "allowedIPCountries": [
+                          "EC"
+                        ],
+                        "allowedCardsDay": 4,
+                        "allowedCardsByIP": 10,
+                        "allowedCardsMonth": 4,
+                        "allowedCardsYear": 2,
+                        "dayMax": 3,
+                        "dayMaxAmount": 30000,
+                        "monthMax": 3,
+                        "monthMaxAmount": 2000
+                      },
+                      "operation": {
+                        "disableTax": true,
+                        "calculateTax": true,
+                        "taxPercentage": 12,
+                        "patternReference": null,
+                        "mailCustomer": true,
+                        "mailMerchant": true
+                      }
+                    },
+                    "threeDS": {
+                      "brand": "ThreeDS brand example",
+                      "country": "COL",
+                      "currency": "COP",
+                      "url": "https://example.com",
+                      "mcc": 742,
+                      "isicClass": 111,
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "subscriptions": [
+                        {
+                          "franchise": "visa",
+                          "acquirerBIN": 400900,
+                          "merchantCode": "5240"
+                        }
+                      ],
+                      "branch": {
+                        "name": "ThreeDS Branch Name",
+                        "brand": "branch brand example",
+                        "country": "COL",
+                        "currency": "COP",
+                        "url": "https://www.branch-url.com",
+                        "subscriptions": {
+                          "subscriptions": [
+                            {
+                              "franchise": 1,
+                              "acquirerBIN": 400900,
+                              "merchantCode": "\"5240\""
+                            }
+                          ]
+                        }
                       }
                     },
                     "microsite": {
@@ -9949,30 +10184,6 @@
           ]
         },
         "title": "paymentMethods",
-        "examples": [
-          {
-            "code": "MC",
-            "oder": 3,
-            "commissionModel": "F",
-            "commissionValue": 2.5,
-            "accountNumber": "1234567811",
-            "financialEntity": 16,
-            "accountType": 1,
-            "threeDS": true,
-            "settings": {
-              "retailCode": "011211406",
-              "terminalLocation": "Medellín",
-              "terminalNumber": "00031431",
-              "username": "FIDUCOLDEX01",
-              "password": "FIDUCOLDEX01",
-              "pfxID": 1,
-              "entityCode": "9002992280",
-              "serviceCode": "001",
-              "isEcommerce": true,
-              "merchantCode": "1269189"
-            }
-          }
-        ],
         "items": {
           "type": "object",
           "required": [
@@ -10032,7 +10243,39 @@
               "description": "Indica si el medio de pago debe tener token de 3DS."
             }
           }
-        }
+        },
+        "examples": [
+          [
+            {
+              "code": "MC",
+              "order": 1,
+              "financialEntity": 16,
+              "commissionModel": "string",
+              "commissionValue": 2.5,
+              "accountNumber": "1234567811",
+              "accountType": 1,
+              "settings": {
+                "retailCode": "011211406",
+                "terminalLocation": "Medellín",
+                "terminalNumber": "00031431",
+                "username": "UserExample",
+                "password": "passwordExample",
+                "pfxID": 1,
+                "entityCode": "9002992280",
+                "serviceCode": "001",
+                "merchantCode": "1269189",
+                "isEcommerce": true,
+                "agreement": 12,
+                "agreementName": "Placetopay",
+                "iacCode": "33456564",
+                "acceptChecks": true,
+                "disableBlocks": "ath_cajas_exito, ath_efecty",
+                "hash": "456445646asdf52fd"
+              },
+              "threeDS": true
+            }
+          ]
+        ]
       },
       "creditRules": {
         "title": "creditRules",
@@ -12057,6 +12300,15 @@
             "description": "Bloques a deshabilitar, Escriba uno o más nombres de bloque separado por comas, los bloques disponibles son: ath_baloto, ath_corresponsales, ath_cajas_exito, ath_efecty, ath_cajeros, ath_supergiros",
             "example": "ath_cajas_exito, ath_efecty",
             "maxLength": 255
+          },
+          "hash": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "nv1zpmy810rjw"
+            },
+            "minLength": 15,
+            "maxLength": 50,
+            "example": "456445646asdf52fd"
           }
         },
         "examples": [
@@ -12075,7 +12327,8 @@
             "agreementName": "Placetopay",
             "iacCode": "33456564",
             "acceptChecks": true,
-            "disableBlocks": "ath_cajas_exito, ath_efecty"
+            "disableBlocks": "ath_cajas_exito, ath_efecty",
+            "hash": "456445646asdf52fd"
           }
         ]
       },
