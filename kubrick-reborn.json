@@ -96,7 +96,8 @@
                           "$ref": "#/components/schemas/user-response"
                         },
                         "token": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "dsf24sd52"
                         }
                       }
                     }
@@ -127,11 +128,12 @@
                           "updated_at": "2024-02-13T22:03:09.000000Z",
                           "created_at": "2024-02-13T22:03:09.000000Z",
                           "id": 6,
-                          "bins": [
+                          "subscrioptions": [
                             {
-                              "id": 1,
-                              "franchise": 1,
-                              "acquirer_bin": 400900,
+                              "id": 4,
+                              "franchise": 2,
+                              "acquirerBIN": 400900,
+                              "merchant_code": 166688,
                               "version": 2
                             }
                           ]
@@ -365,15 +367,15 @@
                     },
                     "description": "Objeto para crear una configuración de un tenant de micrositios, es necesario si el cliente requiere crear micrositios brindar un micrositeTenantId o el objeto micrositeTenant "
                   },
-                  "bins": {
+                  "subscrioptions": {
                     "type": "array",
                     "x-stoplight": {
                       "id": "f94eqrmwo0ygg"
                     },
-                    "description": "lista de objetos configuracion de bines para la creación de threeDS de forma individual, cada objeto de la lista esta conformado por franchise y adquirerBIN, como minimo debe tener un objeto si bins esta declarado en la request",
+                    "description": "lista de objetos configuracion de suscripcion de bines para la creación de threeDS de forma individual, cada objeto de la lista esta conformado por franchise y adquirerBIN, como minimo debe tener un objeto si bins esta declarado en la request",
                     "minItems": 1,
                     "items": {
-                      "$ref": "#/components/schemas/binRequest",
+                      "$ref": "#/components/schemas/subscriptionRequest",
                       "x-stoplight": {
                         "id": "850y5od9qc4er"
                       }
@@ -9213,22 +9215,17 @@
           }
         }
       },
-      "binRequest": {
-        "title": "bin-request",
+      "subscriptionRequest": {
+        "title": "subscription-request",
         "x-stoplight": {
           "id": "xcouxpvp91cv6"
         },
         "type": "object",
-        "examples": [
-          {
-            "franchise": 2,
-            "acquirerBIN": 400900
-          }
-        ],
-        "description": "Contiene la data requerida para crear un bin",
+        "description": "Petición con la data requerida para crear la configuración de una suscriptcion a un bin ",
         "required": [
           "franchise",
-          "acquirerBIN"
+          "acquirerBIN",
+          "merchantCode"
         ],
         "properties": {
           "franchise": {
@@ -9246,11 +9243,26 @@
             },
             "description": "Bin del adquirente",
             "example": 400900
+          },
+          "merchantCode": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "amv9ey5xx3n1a"
+            },
+            "description": "Codigo que identifica al comercio usualmente es numero de terminal",
+            "example": 4644986
           }
-        }
+        },
+        "examples": [
+          {
+            "franchise": 2,
+            "acquirerBIN": 400900,
+            "merchantCode": 4644986
+          }
+        ]
       },
-      "binResponseShort": {
-        "title": "bin-response",
+      "subscrioptionResponseShort": {
+        "title": "subscription-response",
         "x-stoplight": {
           "id": "4sk5sk4we6lob"
         },
@@ -9258,7 +9270,8 @@
         "description": "Es la data minimizada de los bines usada en la respuestas de los clientes",
         "required": [
           "franchise",
-          "acquirerBIN"
+          "acquirerBIN",
+          "merchant_code"
         ],
         "properties": {
           "id": {
@@ -9279,6 +9292,14 @@
             "description": "Bin del adquirente",
             "example": 400900
           },
+          "merchant_code": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "spk68obhwldl3"
+            },
+            "description": "Codigo que identifica al comercio usualmente es numero de terminal",
+            "example": 166688
+          },
           "version": {
             "type": "integer",
             "x-stoplight": {
@@ -9293,12 +9314,13 @@
             "id": 4,
             "franchise": 2,
             "acquirerBIN": 400900,
+            "merchant_code": 166688,
             "version": 2
           }
         ]
       },
-      "binResponseLong": {
-        "title": "Bin Response Full",
+      "subscrioptionResponseLong": {
+        "title": "Subscrioption Response Full",
         "x-stoplight": {
           "id": "qnd7vu5amp7ci"
         },
@@ -9319,6 +9341,14 @@
             "type": "number",
             "description": "Bin del adquirente",
             "example": 400900
+          },
+          "merchantCode": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "y56nkxf313p28"
+            },
+            "description": "Codigo que identifica al comercio usualmente es numero de terminal",
+            "example": 166688
           },
           "version": {
             "type": "integer",
@@ -9381,6 +9411,7 @@
             "id": 3,
             "franchise": 2,
             "acquirerBIN": 400900,
+            "merchantCode": 166688,
             "version": 2,
             "three_ds_id": null,
             "user_id": 12,
@@ -9438,33 +9469,6 @@
           "id": "mrderuyt2f5bm"
         },
         "type": "object",
-        "examples": [
-          {
-            "id": 3,
-            "name": "cliente name",
-            "email": "test4@email.com",
-            "country": "CL",
-            "status": true,
-            "seller": 1,
-            "reseller": 1,
-            "currency_id": 6,
-            "language_id": 1,
-            "tenant_id": 1,
-            "microsite_tenant_id": 2,
-            "deleted_at": null,
-            "remember_token": null,
-            "created_at": "2024-02-08T23:15:03.000000Z",
-            "updated_at": "2024-02-08T23:15:03.000000Z",
-            "bins": [
-              {
-                "id": 3,
-                "franchise": 2,
-                "acquirer_bin": 400900,
-                "version": 2
-              }
-            ]
-          }
-        ],
         "properties": {
           "id": {
             "type": "number",
@@ -9563,6 +9567,21 @@
               "id": "wv1q8rmilj4ik"
             }
           },
+          "subscrioptions": {
+            "x-stoplight": {
+              "id": "m2c8ysk6i781f"
+            },
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/subscrioptionResponseShort",
+              "x-stoplight": {
+                "id": "zss2tmq7xw6ui"
+              }
+            }
+          },
           "created_at": {
             "type": "string",
             "x-stoplight": {
@@ -9576,18 +9595,36 @@
               "id": "kulfya5niz3td"
             },
             "example": "2024-02-08T23:15:03.000000Z"
-          },
-          "bins": {
-            "x-stoplight": {
-              "id": "m2c8ysk6i781f"
-            },
-            "type": [
-              "array",
-              "null"
-            ],
-            "items": {}
           }
-        }
+        },
+        "examples": [
+          {
+            "id": 3,
+            "name": "cliente name",
+            "email": "test3@email.com",
+            "country": "CL",
+            "status": true,
+            "seller": 1,
+            "reseller": 1,
+            "currency_id": 6,
+            "language_id": 1,
+            "tenant_id": 1,
+            "microsite_tenant_id": 12,
+            "deleted_at": "string",
+            "remember_token": "string",
+            "subscrioptions": [
+              {
+                "id": 4,
+                "franchise": 2,
+                "acquirerBIN": 400900,
+                "merchant_code": 166688,
+                "version": 2
+              }
+            ],
+            "created_at": "2024-02-08T23:15:03.000000Z",
+            "updated_at": "2024-02-08T23:15:03.000000Z"
+          }
+        ]
       },
       "corporateImage": {
         "title": "corporateImage",
