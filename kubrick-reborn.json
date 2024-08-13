@@ -3983,7 +3983,7 @@
               }
             }
           },
-          "description": "Este servicio nos permite modificar la configuración de un bin"
+          "description": "Este servicio nos permite modificar la configuración de una suscripción"
         },
         "description": "Este servicio permite actualizar la información de una suscripción ",
         "tags": [
@@ -4325,7 +4325,8 @@
         },
         "tags": [
           "Admin Subscriptions"
-        ]
+        ],
+        "description": "Este servicio nos permite buscar la configuración de una suscripción"
       }
     },
     "/api/subscriptions": {
