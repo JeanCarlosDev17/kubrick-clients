@@ -9218,9 +9218,6 @@
     "/api/subscriptions/all": {
       "post": {
         "summary": "Listar",
-        "tags": [
-          "Admin Bins"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9313,7 +9310,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Admin Subscriptions"
+        ]
       },
       "parameters": []
     },
