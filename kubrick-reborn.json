@@ -1556,16 +1556,6 @@
                   "site"
                 ],
                 "properties": {
-                  "dueDiligenceId": {
-                    "type": "integer",
-                    "x-stoplight": {
-                      "id": "9bvjmpv2ug7c3"
-                    },
-                    "minimum": 1,
-                    "maximum": 255,
-                    "description": "Identificador del proceso de debida diligencia, con este dato permite entender si el comercio a crear aprobó por el proceso.",
-                    "example": 421828323801
-                  },
                   "statusWebhook": {
                     "type": "string",
                     "x-stoplight": {
@@ -1622,25 +1612,9 @@
                 }
               },
               "examples": {
-                "Example 1": {
+                "Petición desde cero": {
                   "value": {
-                    "dueDiligenceId": 421828323801,
                     "statusWebhook": "https://test.webhook.com/",
-                    "isCms": true,
-                    "cmsType": "woocommerce",
-                    "environments": {
-                      "test": {
-                        "isActive": true
-                      },
-                      "prod": {
-                        "isActive": true
-                      }
-                    },
-                    "corporateImage": {
-                      "logo": "https://google.com//logos/5be01d787b5e5b0001ebb.png",
-                      "primaryColor": "#0072E1",
-                      "secondaryColor": "#FFFFFF"
-                    },
                     "merchant": {
                       "name": "EVERTEC PLACETOPAY S.A.S",
                       "brand": "Placetopay",
@@ -1847,81 +1821,33 @@
                     }
                   }
                 },
-                "Example 2": {
+                "Petición con comercio existente": {
                   "value": {
-                    "dueDiligenceId": 421828323801,
                     "statusWebhook": "https://test.webhook.com/",
-                    "isCms": true,
-                    "cmsType": "woocommerce",
-                    "environments": {
-                      "test": {
-                        "isActive": true
-                      },
-                      "prod": {
-                        "isActive": true
+                    "merchantId": "3829",
+                    "merchantName": "Existing merchant",
+                    "paymentMethods": {
+                      "code": "MC",
+                      "oder": 3,
+                      "commissionModel": "F",
+                      "commissionValue": 2.5,
+                      "accountNumber": "1234567811",
+                      "financialEntity": 16,
+                      "accountType": 1,
+                      "threeDS": true,
+                      "settings": {
+                        "retailCode": "011211406",
+                        "terminalLocation": "Medellín",
+                        "terminalNumber": "00031431",
+                        "username": "FIDUCOLDEX01",
+                        "password": "FIDUCOLDEX01",
+                        "pfxID": 1,
+                        "entityCode": "9002992280",
+                        "serviceCode": "001",
+                        "isEcommerce": true,
+                        "merchantCode": "1269189"
                       }
                     },
-                    "corporateImage": {
-                      "logo": "https://google.com//logos/5be01d787b5e5b0001ebb.png",
-                      "primaryColor": "#0072E1",
-                      "secondaryColor": "#FFFFFF"
-                    },
-                    "merchant": {
-                      "name": "EVERTEC PLACETOPAY S.A.S",
-                      "brand": "Placetopay",
-                      "mcc": 7929,
-                      "languages": [
-                        "ES"
-                      ],
-                      "currencies": [
-                        "COP"
-                      ],
-                      "document": {
-                        "type": "string",
-                        "number": "900299823-1"
-                      },
-                      "address": {
-                        "city": "medellin",
-                        "state": 1,
-                        "country": "CO"
-                      },
-                      "legalRepresentative": {
-                        "documentType": "CC",
-                        "document": "1037854200",
-                        "name": "Ricardo",
-                        "surname": "García"
-                      }
-                    },
-                    "paymentMethods": [
-                      {
-                        "code": "MC",
-                        "order": 1,
-                        "financialEntity": 16,
-                        "commissionModel": "string",
-                        "commissionValue": 2.5,
-                        "accountNumber": "1234567811",
-                        "accountType": 1,
-                        "settings": {
-                          "retailCode": "011211406",
-                          "terminalLocation": "Medellín",
-                          "terminalNumber": "00031431",
-                          "username": "UserExample",
-                          "password": "passwordExample",
-                          "pfxID": 1,
-                          "entityCode": "9002992280",
-                          "serviceCode": "001",
-                          "merchantCode": "1269189",
-                          "isEcommerce": true,
-                          "agreement": 12,
-                          "agreementName": "Placetopay",
-                          "iacCode": "33456564",
-                          "acceptChecks": true,
-                          "disableBlocks": "ath_cajas_exito, ath_efecty",
-                          "hash": "456445646asdf52fd"
-                        },
-                        "threeDS": true
-                      }
-                    ],
                     "site": {
                       "displayName": "Site name example",
                       "type": "INT",
@@ -2038,15 +1964,13 @@
                         "country": "COL",
                         "currency": "COP",
                         "url": "https://www.branch-url.com",
-                        "subscriptions": {
-                          "subscriptions": [
-                            {
-                              "franchise": 1,
-                              "acquirerBIN": 400900,
-                              "merchantCode": "\"5240\""
-                            }
-                          ]
-                        }
+                        "subscriptions": [
+                          {
+                            "franchise": 1,
+                            "acquirerBIN": 400900,
+                            "merchantCode": "\"5240\""
+                          }
+                        ]
                       }
                     },
                     "microsite": {
@@ -2084,7 +2008,8 @@
                 }
               }
             }
-          }
+          },
+          "description": "Este endpoint permite crear una integración desde cero (Comercio nuevo), sin embargo, también, es posible crear recursos y asociarlos a un comercio ya existente, enviando los atributos de merchantId y merchantName para indicar el comercio al cual se desea asociar el sitio y demas recursos."
         },
         "tags": [
           "Integraciones"
@@ -2372,7 +2297,6 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "onTest",
                   "name",
                   "brand",
                   "country",
@@ -2385,13 +2309,6 @@
                   "branches"
                 ],
                 "properties": {
-                  "onTest": {
-                    "type": "boolean",
-                    "x-stoplight": {
-                      "id": "8tipd521oghzi"
-                    },
-                    "description": "Indica si el recurso solicitado es para un entorno de pruebas."
-                  },
                   "name": {
                     "type": "string",
                     "x-stoplight": {
@@ -2484,7 +2401,6 @@
               "examples": {
                 "Example 1": {
                   "value": {
-                    "onTest": true,
                     "name": "Merchant Example Name",
                     "brand": "ThreeDS brand example",
                     "country": "COL",
