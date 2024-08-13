@@ -1619,7 +1619,7 @@
                     "merchant": {
                       "name": "EVERTEC PLACETOPAY S.A.S",
                       "brand": "Placetopay",
-                      "mcc": 7929,
+                      "mcc": "7929",
                       "languages": [
                         "ES"
                       ],
@@ -1761,7 +1761,7 @@
                       "country": "COL",
                       "currency": "COP",
                       "url": "https://example.com",
-                      "mcc": 742,
+                      "mcc": "0742",
                       "isicClass": 111,
                       "document": {
                         "type": "string",
@@ -1946,7 +1946,7 @@
                       "country": "COL",
                       "currency": "COP",
                       "url": "https://example.com",
-                      "mcc": 742,
+                      "mcc": "0742",
                       "isicClass": 111,
                       "document": {
                         "type": "string",
@@ -2446,7 +2446,7 @@
         "tags": [
           "ThreeDS"
         ],
-        "description": "Este endpoint tiene como finalidad la creación del token de ThreeDS de manera individual, se debe tener en cuenta que solo se permite la creación de tokens para bines que hayan sido previamente registrados en la creación del usuario para conusmir la API."
+        "description": "Este endpoint tiene como finalidad la creación del token de ThreeDS de manera individual, se debe tener en cuenta que solo se permite la creación de tokens para subscriptions que hayan sido previamente registrados en la creación del usuario para conusmir la API."
       },
       "parameters": [
         {
@@ -9719,6 +9719,35 @@
           "id": "a1kbmdmxm8ss9"
         },
         "type": "object",
+        "description": "Contiene la configuración del comercio en panel.",
+        "examples": [
+          {
+            "name": "EVERTEC PLACETOPAY S.A.S",
+            "brand": "Placetopay",
+            "mcc": "7929",
+            "languages": [
+              "ES"
+            ],
+            "currencies": [
+              "COP"
+            ],
+            "document": {
+              "type": "string",
+              "number": "900299823-1"
+            },
+            "address": {
+              "city": "medellin",
+              "state": 1,
+              "country": "CO"
+            },
+            "legalRepresentative": {
+              "documentType": "CC",
+              "document": "1037854200",
+              "name": "Ricardo",
+              "surname": "García"
+            }
+          }
+        ],
         "required": [
           "name",
           "brand",
@@ -9746,7 +9775,7 @@
             "example": "Placetopay"
           },
           "mcc": {
-            "type": "integer",
+            "type": "number",
             "x-stoplight": {
               "id": "gozgx56ga7t1f"
             },
@@ -9799,8 +9828,7 @@
               "id": "wxs7plbw6zvpi"
             }
           }
-        },
-        "description": "Contiene la configuración del comercio en panel."
+        }
       },
       "document": {
         "title": "document",
@@ -10537,6 +10565,16 @@
           }
         },
         "title": "subscriptions",
+        "examples": [
+          [
+            {
+              "franchise": "visa",
+              "acquirerBIN": 400900,
+              "merchantCode": "5240"
+            }
+          ]
+        ],
+        "description": "Objeto que contiene la información de los bines para los cuales va a ser creado el token de ThreeDS, para dichos bines su uso esta limitados a los que se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario).",
         "items": {
           "x-stoplight": {
             "id": "6xc69xs1vg2zn"
@@ -10570,20 +10608,11 @@
                 "id": "25i4pk2rulhhx"
               },
               "example": "5240",
-              "maxLength": 30
+              "maxLength": 30,
+              "description": "Hace referencia al número de terminal entregado por las redes financieras (Terminal number)."
             }
           }
-        },
-        "examples": [
-          [
-            {
-              "franchise": "visa",
-              "acquirerBIN": 400900,
-              "merchantCode": "5240"
-            }
-          ]
-        ],
-        "description": "Objeto que contiene la información de los bines para los cuales va a ser creado el token de ThreeDS, para dichos bines su uso esta limitados a los que se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario)."
+        }
       },
       "threeDS": {
         "title": "threeDS",
@@ -10591,6 +10620,43 @@
           "id": "koadh4own8ew2"
         },
         "type": "object",
+        "examples": [
+          {
+            "brand": "ThreeDS brand example",
+            "country": "COL",
+            "currency": "COP",
+            "url": "https://example.com",
+            "mcc": "0742",
+            "isicClass": 111,
+            "document": {
+              "type": "string",
+              "number": "900299823-1"
+            },
+            "subscriptions": [
+              {
+                "franchise": "visa",
+                "acquirerBIN": 400900,
+                "merchantCode": "5240"
+              }
+            ],
+            "branch": {
+              "name": "ThreeDS Branch Name",
+              "brand": "branch brand example",
+              "country": "COL",
+              "currency": "COP",
+              "url": "https://www.branch-url.com",
+              "subscriptions": {
+                "subscriptions": [
+                  {
+                    "franchise": 1,
+                    "acquirerBIN": 400900,
+                    "merchantCode": "\"5240\""
+                  }
+                ]
+              }
+            }
+          }
+        ],
         "required": [
           "brand",
           "country",
@@ -10635,7 +10701,7 @@
             "description": "URL del comercio."
           },
           "mcc": {
-            "type": "integer",
+            "type": "number",
             "x-stoplight": {
               "id": "ka9krdx2qr0un"
             },
@@ -10668,44 +10734,7 @@
               "id": "11flmjjgzh88y"
             }
           }
-        },
-        "examples": [
-          {
-            "brand": "ThreeDS brand example",
-            "country": "COL",
-            "currency": "COP",
-            "url": "https://example.com",
-            "mcc": 742,
-            "isicClass": 111,
-            "document": {
-              "type": "string",
-              "number": "900299823-1"
-            },
-            "subscriptions": [
-              {
-                "franchise": "visa",
-                "acquirerBIN": 400900,
-                "merchantCode": "5240"
-              }
-            ],
-            "branch": {
-              "name": "ThreeDS Branch Name",
-              "brand": "branch brand example",
-              "country": "COL",
-              "currency": "COP",
-              "url": "https://www.branch-url.com",
-              "subscriptions": {
-                "subscriptions": [
-                  {
-                    "franchise": 1,
-                    "acquirerBIN": 400900,
-                    "merchantCode": "\"5240\""
-                  }
-                ]
-              }
-            }
-          }
-        ]
+        }
       },
       "microsite": {
         "title": "microsite",
