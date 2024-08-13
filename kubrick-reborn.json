@@ -9316,11 +9316,6 @@
         ]
       },
       "parameters": []
-    },
-    "/api/integration/integration": {
-      "post": {
-        "description": ""
-      }
     }
   },
   "components": {
