@@ -3725,12 +3725,9 @@
         }
       ]
     },
-    "/api/bins/{bin}": {
+    "/api/subscriptions/{subscription}": {
       "put": {
-        "summary": "Actualizar Bin",
-        "tags": [
-          "Admin Bins"
-        ],
+        "summary": "Actualizar",
         "responses": {
           "200": {
             "description": "OK",
@@ -3988,13 +3985,13 @@
           },
           "description": "Este servicio nos permite modificar la configuración de un bin"
         },
-        "description": "Este servicio permite actualizar la información de un bin "
+        "description": "Este servicio permite actualizar la información de una suscripción ",
+        "tags": [
+          "Admin Subscriptions"
+        ]
       },
       "delete": {
-        "summary": "Eliminar Bin",
-        "tags": [
-          "Admin Bins"
-        ],
+        "summary": "Eliminar",
         "responses": {
           "200": {
             "description": "OK",
@@ -4185,32 +4182,23 @@
             }
           }
         },
-        "description": "Este servicio permite elimiar un bin "
+        "description": "Este servicio permite elimiar una suscripción",
+        "tags": [
+          "Admin Subscriptions"
+        ]
       },
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "bin",
+          "name": "subscription",
           "in": "path",
           "required": true
-        },
-        {
-          "schema": {
-            "type": "number"
-          },
-          "name": "bin",
-          "in": "path",
-          "required": true,
-          "description": "id de la configuración del bin"
         }
       ],
       "post": {
-        "summary": "Buscar Bin",
-        "tags": [
-          "Admin Bins"
-        ],
+        "summary": "Buscar",
         "responses": {
           "200": {
             "description": "OK",
@@ -4334,15 +4322,15 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Admin Subscriptions"
+        ]
       }
     },
-    "/api/bins": {
+    "/api/subscriptions": {
       "post": {
-        "summary": "Crear bin",
-        "tags": [
-          "Admin Bins"
-        ],
+        "summary": "Crear",
         "responses": {
           "201": {
             "description": "Created",
@@ -4468,7 +4456,7 @@
             }
           }
         },
-        "operationId": "store-api-bins",
+        "operationId": "store-api-subscriptions",
         "x-stoplight": {
           "id": "wjkaea0unqa4m"
         },
@@ -4535,8 +4523,12 @@
               }
             }
           }
-        }
-      }
+        },
+        "tags": [
+          "Admin Subscriptions"
+        ]
+      },
+      "parameters": []
     },
     "/api/admins": {
       "post": {
@@ -9223,9 +9215,9 @@
         }
       }
     },
-    "/api/bins/all": {
+    "/api/subscriptions/all": {
       "post": {
-        "summary": "Listar bins",
+        "summary": "Listar",
         "tags": [
           "Admin Bins"
         ],
@@ -9297,11 +9289,11 @@
             }
           }
         },
-        "operationId": "post-api-bins-all",
+        "operationId": "post-api-subscriptions-all",
         "x-stoplight": {
           "id": "seln22m6a3qdu"
         },
-        "description": "Endpoint para listar todos los bins con sus respectivos datos.",
+        "description": "Endpoint para listar todos las suscripciones con sus respectivos datos.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9322,7 +9314,8 @@
             }
           }
         }
-      }
+      },
+      "parameters": []
     },
     "/api/integration/integration": {
       "post": {
