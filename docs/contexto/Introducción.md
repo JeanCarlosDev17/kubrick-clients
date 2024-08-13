@@ -10,6 +10,6 @@ enviando unicamente una [petición](reference/Kubrick.json/paths/\~1api\~1integr
 ya que internamente todos estos recursos solicitados se asocian entre si, evitando que el cliente API
 consuma multiples servicios con diferentes autenticaciones y condiciones, permitiendo de esta manera el enrolamiento de nuevos comercios para el uso de la pasarela.
 
-Adicional a lo anterior, la API cuenta con la posibilidad de crear tokens de ThreeDS para que el cliente API haga uso de ellos de forma individual.
+Adicional a lo anterior, la API cuenta con la posibilidad de [crear tokens de ThreeDS](https://kubrick.stoplight.io/docs/kubrick-docs/zf60krl51674d-create) para que el cliente API haga uso de ellos de forma individual.
 
 La API cuenta con 3 ambientes (DEV, UAT, PROD).
