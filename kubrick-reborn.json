@@ -1552,7 +1552,6 @@
                 "type": "object",
                 "required": [
                   "statusWebhook",
-                  "merchant",
                   "paymentMethods",
                   "site"
                 ],
@@ -1574,6 +1573,20 @@
                     },
                     "description": "URL a la cual se notificará luego de finalizar el proceso con la información de salida. Este campo debe ser en formato URL.",
                     "example": "https://test.webhook.com/"
+                  },
+                  "merchantId": {
+                    "type": "integer",
+                    "x-stoplight": {
+                      "id": "smexp7c69fdbi"
+                    },
+                    "description": "Este campo hace referencia al id del comercio en panel, este campo solo es necesario si ya se cuenta con un comercio creado previamente, adicional a esto, se debe enviar el \"merchantName\" y omitir el campo \"merchant\"."
+                  },
+                  "merchantName": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "lvsq825awqxn3"
+                    },
+                    "description": "Este campo hace referencia al nombre del comercio en panel, este campo solo es necesario si ya se cuenta con un comercio creado previamente, adicional a esto, se debe enviar el \"merchantId\" y omitir el campo \"merchant\"."
                   },
                   "merchant": {
                     "$ref": "#/components/schemas/merchant",
