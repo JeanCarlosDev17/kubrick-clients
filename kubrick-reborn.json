@@ -1399,9 +1399,9 @@
         }
       }
     },
-    "/api/integration/integration": {
+    "/api/integration/create": {
       "post": {
-        "summary": "create-integration-from-zero",
+        "summary": "create",
         "responses": {
           "200": {
             "description": "OK",
@@ -1540,7 +1540,7 @@
             }
           }
         },
-        "operationId": "integration-create-from-merchant",
+        "operationId": "create",
         "x-stoplight": {
           "id": "sa1wbtq1n5cz4"
         },
@@ -9322,6 +9322,11 @@
             }
           }
         }
+      }
+    },
+    "/api/integration/integration": {
+      "post": {
+        "description": ""
       }
     }
   },
