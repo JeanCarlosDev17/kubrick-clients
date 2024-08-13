@@ -1552,8 +1552,6 @@
                 "type": "object",
                 "required": [
                   "statusWebhook",
-                  "isCms",
-                  "environments",
                   "merchant",
                   "paymentMethods",
                   "site"
@@ -1576,34 +1574,6 @@
                     },
                     "description": "URL a la cual se notificará luego de finalizar el proceso con la información de salida. Este campo debe ser en formato URL.",
                     "example": "https://test.webhook.com/"
-                  },
-                  "isCms": {
-                    "type": "boolean",
-                    "x-stoplight": {
-                      "id": "uqksr2pavyuza"
-                    },
-                    "description": "Indica si la conexión se realizará mediante un CMS."
-                  },
-                  "cmsType": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "waw2rynpvtbjm"
-                    },
-                    "description": "En caso que isCms tenga el valor true, este campo se convierte en requerido. En este campo se indica el CMS a usar.",
-                    "example": "woocommerce"
-                  },
-                  "environments": {
-                    "$ref": "#/components/schemas/environments",
-                    "x-stoplight": {
-                      "id": "ku6h6bxin2m7n"
-                    },
-                    "description": "Puede recibir dos objetos (test, prod), es obligatorio enviar, como mínimo uno de estos, e indica en que ambientes se quieren crear los recursos."
-                  },
-                  "corporateImage": {
-                    "$ref": "#/components/schemas/corporateImage",
-                    "x-stoplight": {
-                      "id": "4i73nzo8o9a1a"
-                    }
                   },
                   "merchant": {
                     "$ref": "#/components/schemas/merchant",
@@ -9656,48 +9626,6 @@
           }
         ]
       },
-      "environments": {
-        "title": "environments",
-        "x-stoplight": {
-          "id": "1fvl6hot6u0xs"
-        },
-        "type": "object",
-        "properties": {
-          "test": {
-            "type": "object",
-            "x-stoplight": {
-              "id": "m1md14a145hkq"
-            },
-            "description": "Indica que se deben crear los recursos en test, este recurso es obligatorio si no se envía el objeto de “prod”.",
-            "properties": {
-              "isActive": {
-                "type": "boolean",
-                "x-stoplight": {
-                  "id": "2upcsy9mn5ngp"
-                },
-                "description": "Indica si el recurso de test se debe crear activo."
-              }
-            }
-          },
-          "prod": {
-            "type": "object",
-            "x-stoplight": {
-              "id": "nt0yk44mu1h1v"
-            },
-            "description": "Indica que se deben crear los recursos en prod, este recurso es obligatorio si no se envía el objeto de “test”.",
-            "properties": {
-              "isActive": {
-                "type": "boolean",
-                "x-stoplight": {
-                  "id": "yq2aj3ifodr3s"
-                },
-                "description": "Indica si el recurso de prod se debe crear activo."
-              }
-            }
-          }
-        },
-        "description": "Este objeto representa los entornos en los que se desean crear los recursos para el endpoint de [create-from-merchant](reference/Kubrick.json/paths/~1api~1integration~1create-from-merchant/post), es requerido enviar como mínimo un environment (test o prod)."
-      },
       "user-response": {
         "title": "user-response",
         "x-stoplight": {
@@ -9860,40 +9788,6 @@
             "updated_at": "2024-02-08T23:15:03.000000Z"
           }
         ]
-      },
-      "corporateImage": {
-        "title": "corporateImage",
-        "x-stoplight": {
-          "id": "x6osyn0ivxwj5"
-        },
-        "type": "object",
-        "properties": {
-          "logo": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "bu9y8fqn38p19"
-            },
-            "description": "URL del logo del comercio.",
-            "example": "https://google.com//logos/5be01d787b5e5b0001ebb.png"
-          },
-          "primaryColor": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "gb5y07uilz5tq"
-            },
-            "description": "Hexadecimal del color corporativo primario del comercio.",
-            "example": "#0072E1"
-          },
-          "secondaryColor": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "frh3n8qlu1hba"
-            },
-            "description": "Hexadecimal del color corporativo secundario del comercio.",
-            "example": "#FFFFFF"
-          }
-        },
-        "description": "Objeto que contiene la imagen corporativa."
       },
       "merchant": {
         "title": "merchant",
