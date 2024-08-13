@@ -12,4 +12,4 @@ consuma multiples servicios con diferentes autenticaciones y condiciones, permit
 
 Adicional a lo anterior, la API cuenta con la posibilidad de crear tokens de ThreeDS para que el cliente API haga uso de ellos de forma individual.
 
-La API cuenta con 3 ambientes [(DEV, UAT, PROD)](reference/Kubrick.json).
+La API cuenta con 3 ambientes (DEV, UAT, PROD).
