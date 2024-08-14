@@ -11107,13 +11107,11 @@
               "description": "Marca de la rama."
             },
             "country": {
-              "type": "string",
-              "example": "COL",
+              "$ref": "#/components/schemas/country-alpha-three",
               "description": "Codigo País de origen de la rama, ISO 3166-1 alpha-3."
             },
             "currency": {
-              "type": "string",
-              "example": "COP",
+              "$ref": "#/components/schemas/currency",
               "description": "Moneda predeterminada de la rama, ISO 4217."
             },
             "url": {
