@@ -9755,17 +9755,16 @@
             "example": 7929
           },
           "languages": {
-            "type": "array",
             "x-stoplight": {
               "id": "jl2ckhepz4e0o"
             },
             "description": "Arreglo con los idiomas (ISO 639-1).",
+            "type": "array",
             "items": {
+              "$ref": "#/components/schemas/language",
               "x-stoplight": {
                 "id": "xgaps58utzug6"
-              },
-              "type": "string",
-              "example": "ES"
+              }
             }
           },
           "currencies": {
@@ -9775,11 +9774,10 @@
             },
             "description": "Arreglo con los tipos de monedas disponibles por el comercio (ISO 4217.",
             "items": {
+              "$ref": "#/components/schemas/currency",
               "x-stoplight": {
                 "id": "1rapye4p1vm9v"
-              },
-              "type": "string",
-              "example": "COP"
+              }
             }
           },
           "document": {
@@ -10132,139 +10130,6 @@
           "id": "boc3j3wz5bfku"
         },
         "type": "object",
-        "required": [
-          "displayName",
-          "type",
-          "category",
-          "email",
-          "currency",
-          "language",
-          "integration",
-          "control"
-        ],
-        "properties": {
-          "displayName": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "hwyt462f70cc7"
-            },
-            "example": "Site name example",
-            "description": "Nombre del sitio a mostrar en panel."
-          },
-          "type": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "3w13em1rfjrbw"
-            },
-            "example": "INT",
-            "description": "Punto de origen de las transacciones que se realizarán por el sitio."
-          },
-          "category": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "nam9o378lyqpb"
-            },
-            "example": "ECOMMERCE",
-            "description": "Define la categoría del sitio."
-          },
-          "email": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "3ptzp3ktromwh"
-            },
-            "example": "admin@email.com",
-            "description": "Correo al cual llegarán los comprobantes de pago de las transacciones relizadas en el sitio."
-          },
-          "currency": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "bmucvdu9g4owo"
-            },
-            "example": "COP",
-            "description": "Moneda que se usará para las transacciones."
-          },
-          "language": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "waf6en84oo0tt"
-            },
-            "example": "ES",
-            "description": "Lenguaje que se usará para las transacciones."
-          },
-          "customBatch": {
-            "type": "number",
-            "x-stoplight": {
-              "id": "wvdjri1lw8flr"
-            },
-            "example": 2345,
-            "description": "Código servicio recaudo"
-          },
-          "expiration": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "6d702v94t9q31"
-            },
-            "description": "Fecha de expiración el sitio, si no es definido o su valor es null la fecha de expiración sera ilimitada.",
-            "example": "2023-06-30 00:00:00",
-            "default": null
-          },
-          "analyticsCode": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "49zhk8l8th2dj"
-            },
-            "description": "Permite añadir el código de google analytics.",
-            "example": "UA-171313251-4, GTM-123812"
-          },
-          "integration": {
-            "$ref": "#/components/schemas/integration",
-            "x-stoplight": {
-              "id": "qehwu80sfqd1h"
-            }
-          },
-          "control": {
-            "$ref": "#/components/schemas/control",
-            "x-stoplight": {
-              "id": "3itrmxog8dnwi"
-            }
-          },
-          "threeDS": {
-            "$ref": "#/components/schemas/site-threeDS",
-            "x-stoplight": {
-              "id": "26jgyubwm70wm"
-            }
-          },
-          "historic": {
-            "$ref": "#/components/schemas/site-historic",
-            "x-stoplight": {
-              "id": "jb67jeuvmxtb8"
-            }
-          },
-          "creditBureau": {
-            "$ref": "#/components/schemas/site-creditBureau",
-            "x-stoplight": {
-              "id": "vm8z96q62tv82"
-            }
-          },
-          "riskEngine": {
-            "$ref": "#/components/schemas/site-riskEngine",
-            "x-stoplight": {
-              "id": "hthx0ssh61iu0"
-            }
-          },
-          "securityFilters": {
-            "$ref": "#/components/schemas/site-securityFilters",
-            "x-stoplight": {
-              "id": "rpkzuvdfyl31o"
-            }
-          },
-          "operation": {
-            "$ref": "#/components/schemas/site-operation",
-            "x-stoplight": {
-              "id": "8so4vk19sor6y"
-            }
-          }
-        },
         "examples": [
           {
             "displayName": "Site name example",
@@ -10358,7 +10223,147 @@
               "mailMerchant": true
             }
           }
-        ]
+        ],
+        "required": [
+          "displayName",
+          "type",
+          "category",
+          "email",
+          "currency",
+          "language",
+          "integration",
+          "control"
+        ],
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "hwyt462f70cc7"
+            },
+            "example": "Site name example",
+            "description": "Nombre del sitio a mostrar en panel."
+          },
+          "type": {
+            "x-stoplight": {
+              "id": "3w13em1rfjrbw"
+            },
+            "example": "INT",
+            "description": "Punto de origen de las transacciones que se realizarán por el sitio.\n\nINT = Internet <br>\nPOS = Punto de venta <br>\nIVR = IVR <br>\nONE = Pago a un clic <br>\nREC = Recurrencia <br>",
+            "enum": [
+              "INT",
+              "POS",
+              "IVR",
+              "ONE",
+              "REC"
+            ]
+          },
+          "category": {
+            "x-stoplight": {
+              "id": "nam9o378lyqpb"
+            },
+            "example": "ECOMMERCE",
+            "description": "Define la categoría del sitio.\n\nECOMMERCE = Comercio electrónico <br>\nCOLLECT = Recaudos <br>",
+            "enum": [
+              "ECOMMERCE",
+              "COLLECT"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "3ptzp3ktromwh"
+            },
+            "example": "admin@email.com",
+            "description": "Correo al cual llegarán los comprobantes de pago de las transacciones relizadas en el sitio."
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currency",
+            "x-stoplight": {
+              "id": "bmucvdu9g4owo"
+            },
+            "description": "Moneda que se usará para las transacciones, la moneda que se envíe en este campo la debe tener el comercio."
+          },
+          "language": {
+            "$ref": "#/components/schemas/language",
+            "x-stoplight": {
+              "id": "waf6en84oo0tt"
+            },
+            "description": "Lenguaje que se usará para las transacciones, el lenguaje que se envíe en este campo lo debe tener el comercio."
+          },
+          "customBatch": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "wvdjri1lw8flr"
+            },
+            "example": 2345,
+            "description": "Código servicio recaudo"
+          },
+          "expiration": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "6d702v94t9q31"
+            },
+            "description": "Fecha de expiración el sitio, si no es definido o su valor es null la fecha de expiración sera ilimitada.",
+            "example": "2023-06-30 00:00:00",
+            "default": null
+          },
+          "analyticsCode": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "49zhk8l8th2dj"
+            },
+            "description": "Permite añadir el código de google analytics.",
+            "example": "UA-171313251-4, GTM-123812"
+          },
+          "integration": {
+            "$ref": "#/components/schemas/integration",
+            "x-stoplight": {
+              "id": "qehwu80sfqd1h"
+            }
+          },
+          "control": {
+            "$ref": "#/components/schemas/control",
+            "x-stoplight": {
+              "id": "3itrmxog8dnwi"
+            }
+          },
+          "threeDS": {
+            "$ref": "#/components/schemas/site-threeDS",
+            "x-stoplight": {
+              "id": "26jgyubwm70wm"
+            }
+          },
+          "historic": {
+            "$ref": "#/components/schemas/site-historic",
+            "x-stoplight": {
+              "id": "jb67jeuvmxtb8"
+            }
+          },
+          "creditBureau": {
+            "$ref": "#/components/schemas/site-creditBureau",
+            "x-stoplight": {
+              "id": "vm8z96q62tv82"
+            }
+          },
+          "riskEngine": {
+            "$ref": "#/components/schemas/site-riskEngine",
+            "x-stoplight": {
+              "id": "hthx0ssh61iu0"
+            }
+          },
+          "securityFilters": {
+            "$ref": "#/components/schemas/site-securityFilters",
+            "x-stoplight": {
+              "id": "rpkzuvdfyl31o"
+            }
+          },
+          "operation": {
+            "$ref": "#/components/schemas/site-operation",
+            "x-stoplight": {
+              "id": "8so4vk19sor6y"
+            }
+          }
+        }
       },
       "integration": {
         "title": "integration",
