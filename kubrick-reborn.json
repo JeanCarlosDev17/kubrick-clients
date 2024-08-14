@@ -367,7 +367,7 @@
                     },
                     "description": "Objeto para crear una configuración de un tenant de micrositios, es necesario si el cliente requiere crear micrositios brindar un micrositeTenantId o el objeto micrositeTenant "
                   },
-                  "subscrioptions": {
+                  "subscriptions": {
                     "type": "array",
                     "x-stoplight": {
                       "id": "f94eqrmwo0ygg"
@@ -9351,10 +9351,16 @@
         },
         "type": "object",
         "description": "Petición con la data requerida para crear la configuración de una suscriptcion a un bin ",
+        "examples": [
+          {
+            "franchise": 2,
+            "acquirerBIN": 400900,
+            "merchantCode": 4644986
+          }
+        ],
         "required": [
           "franchise",
-          "acquirerBIN",
-          "merchantCode"
+          "acquirerBIN"
         ],
         "properties": {
           "franchise": {
@@ -9372,23 +9378,8 @@
             },
             "description": "Bin del adquirente",
             "example": 400900
-          },
-          "merchantCode": {
-            "type": "number",
-            "x-stoplight": {
-              "id": "amv9ey5xx3n1a"
-            },
-            "description": "Codigo que identifica al comercio usualmente es numero de terminal",
-            "example": 4644986
           }
-        },
-        "examples": [
-          {
-            "franchise": 2,
-            "acquirerBIN": 400900,
-            "merchantCode": 4644986
-          }
-        ]
+        }
       },
       "subscrioptionResponseShort": {
         "title": "subscription-response",
