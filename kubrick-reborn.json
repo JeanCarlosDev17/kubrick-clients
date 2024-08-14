@@ -10654,19 +10654,17 @@
             "example": "ThreeDS brand example"
           },
           "country": {
-            "type": "string",
+            "$ref": "#/components/schemas/country",
             "x-stoplight": {
               "id": "f5de5knebu19i"
             },
-            "example": "COL",
             "description": "Codigo País de origen del comercio ISO 3166-1 alpha-3."
           },
           "currency": {
-            "type": "string",
+            "$ref": "#/components/schemas/currency",
             "x-stoplight": {
               "id": "y13xmav751diz"
             },
-            "example": "COP",
             "description": "Moneda predeterminada codigo ISO 4217."
           },
           "url": {
@@ -10977,6 +10975,22 @@
           "id": "n8bsvb4e9vr02"
         },
         "type": "object",
+        "examples": [
+          {
+            "name": "ThreeDS Branch Name",
+            "brand": "branch brand example",
+            "country": "COL",
+            "currency": "COP",
+            "url": "https://www.branch-url.com",
+            "subscriptions": [
+              {
+                "franchise": 1,
+                "acquirerBIN": 400900,
+                "merchantCode": "\"5240\""
+              }
+            ]
+          }
+        ],
         "required": [
           "name",
           "brand",
@@ -11002,19 +11016,17 @@
             "description": "Marca de la rama."
           },
           "country": {
-            "type": "string",
+            "$ref": "#/components/schemas/country",
             "x-stoplight": {
               "id": "my8f67uajzolj"
             },
-            "example": "COL",
             "description": "Codigo País de origen de la rama, ISO 3166-1 alpha-3."
           },
           "currency": {
-            "type": "string",
+            "$ref": "#/components/schemas/currency",
             "x-stoplight": {
               "id": "yvb1ugxl721l1"
             },
-            "example": "COP",
             "description": "Moneda predeterminada de la rama, ISO 4217."
           },
           "url": {
@@ -11032,23 +11044,7 @@
               "id": "jwv88l9gh0d7p"
             }
           }
-        },
-        "examples": [
-          {
-            "name": "ThreeDS Branch Name",
-            "brand": "branch brand example",
-            "country": "COL",
-            "currency": "COP",
-            "url": "https://www.branch-url.com",
-            "subscriptions": [
-              {
-                "franchise": 1,
-                "acquirerBIN": 400900,
-                "merchantCode": "\"5240\""
-              }
-            ]
-          }
-        ]
+        }
       },
       "branches": {
         "type": "array",
