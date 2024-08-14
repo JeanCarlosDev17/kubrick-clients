@@ -286,68 +286,25 @@
                     "example": "pagosex@email.com"
                   },
                   "country": {
+                    "$ref": "#/components/schemas/country",
                     "x-stoplight": {
                       "id": "i6vrpzbw8trlv"
                     },
-                    "description": "País del comercio (ISO 3166-1 alfa-2)",
-                    "example": "CO",
-                    "enum": [
-                      "CO",
-                      "BZ",
-                      "BR",
-                      "CL",
-                      "CR",
-                      "EC",
-                      "HN",
-                      "PR",
-                      "PE",
-                      "PA",
-                      "UY"
-                    ]
+                    "description": "País del comercio (ISO 3166-1 alfa-2)"
                   },
                   "language": {
+                    "$ref": "#/components/schemas/language",
                     "x-stoplight": {
                       "id": "r2qzjundkvkfy"
                     },
-                    "description": "Idioma principal del cliente en formato ISO 639-1, Puede ser usado en las peticiones realizadas por este cliente en la request de crear una integración como idioma por default del merchant si no son indicados los languages en dicha request",
-                    "example": "ES",
-                    "enum": [
-                      "ES",
-                      "EN",
-                      "FR",
-                      "IT",
-                      "PT"
-                    ]
+                    "description": "Idioma principal del cliente en formato ISO 639-1, Puede ser usado en las peticiones realizadas por este cliente en la request de crear una integración como idioma por default del merchant si no son indicados los languages en dicha request"
                   },
                   "currency": {
+                    "$ref": "#/components/schemas/currency",
                     "x-stoplight": {
                       "id": "7d2w8wvqe3e72"
                     },
-                    "description": "Moneda principal en formato ISO 4217 puede ser usado en las peticiones realizadas por este cliente en la request de integración como idioma por default del merchant si no son indicados las currencies en dicha request",
-                    "example": "COP",
-                    "enum": [
-                      "ARS",
-                      "AUD",
-                      "BRL",
-                      "BZD",
-                      "CAD",
-                      "CLP",
-                      "CNY",
-                      "COP",
-                      "CRC",
-                      "EUR",
-                      "GBP",
-                      "HLN",
-                      "JPY",
-                      "MXN",
-                      "PEN",
-                      "SGD",
-                      "THB",
-                      "USD",
-                      "UYU",
-                      "VEB",
-                      "ZAR"
-                    ]
+                    "description": "Moneda principal en formato ISO 4217 puede ser usado en las peticiones realizadas por este cliente en la request de integración como idioma por default del merchant si no son indicados las currencies en dicha request"
                   },
                   "status": {
                     "type": "boolean",
@@ -1340,68 +1297,25 @@
                     "description": "email del cliente"
                   },
                   "country": {
+                    "$ref": "#/components/schemas/country",
                     "x-stoplight": {
                       "id": "jeofe1ugvd0cv"
                     },
-                    "example": "CO",
-                    "description": "País del comercio (ISO 3166-1 alfa-2)",
-                    "enum": [
-                      "CO",
-                      "BZ",
-                      "BR",
-                      "CL",
-                      "CR",
-                      "EC",
-                      "HN",
-                      "PR",
-                      "PE",
-                      "PA",
-                      "UY"
-                    ]
+                    "description": "País del comercio (ISO 3166-1 alfa-2)"
                   },
                   "language": {
+                    "$ref": "#/components/schemas/language",
                     "x-stoplight": {
                       "id": "yesvxub8b700f"
                     },
-                    "example": "ES",
-                    "description": "Idioma principal del cliente en formato ISO 639-1, Puede ser usado en las peticiones realizadas por este cliente en la request de crear una integración como idioma por default del merchant si no son indicados los languages en dicha request",
-                    "enum": [
-                      "ES",
-                      "EN",
-                      "FR",
-                      "IT",
-                      "PT"
-                    ]
+                    "description": "Idioma principal del cliente en formato ISO 639-1, Puede ser usado en las peticiones realizadas por este cliente en la request de crear una integración como idioma por default del merchant si no son indicados los languages en dicha request"
                   },
                   "currency": {
+                    "$ref": "#/components/schemas/currency",
                     "x-stoplight": {
                       "id": "yxexsus6emcs8"
                     },
-                    "example": "COP",
-                    "description": "Moneda principal en formato ISO 4217 puede ser usado en las peticiones realizadas por este cliente en la request de integración como idioma por default del merchant si no son indicados las currencies en dicha request",
-                    "enum": [
-                      "ARS",
-                      "AUD",
-                      "BRL",
-                      "BZD",
-                      "CAD",
-                      "CLP",
-                      "CNY",
-                      "COP",
-                      "CRC",
-                      "EUR",
-                      "GBP",
-                      "HLN",
-                      "JPY",
-                      "MXN",
-                      "PEN",
-                      "SGD",
-                      "THB",
-                      "USD",
-                      "UYU",
-                      "VEB",
-                      "ZAR"
-                    ]
+                    "description": "Moneda principal en formato ISO 4217 puede ser usado en las peticiones realizadas por este cliente en la request de integración como idioma por default del merchant si no son indicados las currencies en dicha request"
                   },
                   "status": {
                     "type": "boolean",
@@ -12721,6 +12635,68 @@
             "description": "Indica si se debe enviar una copia del email al comercio cuando una transacción realizada en el panel administrativo es exitosa. Su valor por defecto es False."
           }
         }
+      },
+      "country": {
+        "title": "country",
+        "x-stoplight": {
+          "id": "sxa0mofxu6g3n"
+        },
+        "enum": [
+          "CO",
+          "BZ",
+          "BR",
+          "CL",
+          "CR",
+          "EC",
+          "HN",
+          "PR",
+          "PE",
+          "PA",
+          "UY"
+        ],
+        "description": ""
+      },
+      "language": {
+        "title": "language",
+        "x-stoplight": {
+          "id": "if9h2ltoey6jo"
+        },
+        "enum": [
+          "ES",
+          "EN",
+          "FR",
+          "IT",
+          "PT"
+        ]
+      },
+      "currency": {
+        "title": "currency",
+        "x-stoplight": {
+          "id": "rzl72fj2oxfst"
+        },
+        "enum": [
+          "ARS",
+          "AUD",
+          "BRL",
+          "BZD",
+          "CAD",
+          "CLP",
+          "CNY",
+          "COP",
+          "CRC",
+          "EUR",
+          "GBP",
+          "HLN",
+          "JPY",
+          "MXN",
+          "PEN",
+          "SGD",
+          "THB",
+          "USD",
+          "UYU",
+          "VEB",
+          "ZAR"
+        ]
       }
     },
     "requestBodies": {},
