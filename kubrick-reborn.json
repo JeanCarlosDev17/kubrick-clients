@@ -1583,7 +1583,7 @@
                     "x-stoplight": {
                       "id": "5d8rrny34wm0x"
                     },
-                    "description": "Este objeto es necesario cuando se desea crear un integración desde cero."
+                    "description": "Este objeto es necesario cuando se desea crear un integración desde cero, adicionalmente, se debe omitir el merchantId y merchantName."
                   },
                   "paymentMethods": {
                     "$ref": "#/components/schemas/paymentMethods",
@@ -2010,7 +2010,7 @@
               }
             }
           },
-          "description": "Este endpoint permite crear una integración desde cero (Comercio nuevo), adicional a esto, es posible crear recursos y asociarlos a un comercio ya existente, enviando los atributos de merchantId y merchantName para indicar el comercio al cual se desea asociar el sitio y demas recursos."
+          "description": "Este endpoint permite crear una integración desde cero (Comercio nuevo), adicional a esto, es posible crear recursos y asociarlos a un comercio ya existente, enviando los atributos de merchantId y merchantName para indicar el comercio al cual se desea asociar el sitio y demas recursos.\n\nEl servicio permite crear comercio, sitio, medios de pago, ThreeDS y micrositio."
         },
         "tags": [
           "Integraciones"
