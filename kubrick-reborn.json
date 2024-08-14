@@ -3359,14 +3359,7 @@
                     }
                   }
                 },
-                "required": [
-                  "onTest"
-                ],
                 "properties": {
-                  "onTest": {
-                    "type": "boolean",
-                    "description": "Indica el environment en el que se desea buscar el merchant."
-                  },
                   "id": {
                     "type": "integer",
                     "description": "Identificador en panel (panelId) del merchant a buscar."
