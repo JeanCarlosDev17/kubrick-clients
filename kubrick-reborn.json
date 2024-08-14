@@ -286,7 +286,7 @@
                     "example": "pagosex@email.com"
                   },
                   "country": {
-                    "$ref": "#/components/schemas/country",
+                    "$ref": "#/components/schemas/country-alpha-two",
                     "x-stoplight": {
                       "id": "i6vrpzbw8trlv"
                     },
@@ -1297,7 +1297,7 @@
                     "description": "email del cliente"
                   },
                   "country": {
-                    "$ref": "#/components/schemas/country",
+                    "$ref": "#/components/schemas/country-alpha-two",
                     "x-stoplight": {
                       "id": "jeofe1ugvd0cv"
                     },
@@ -10654,7 +10654,7 @@
             "example": "ThreeDS brand example"
           },
           "country": {
-            "$ref": "#/components/schemas/country",
+            "$ref": "#/components/schemas/country-alpha-three",
             "x-stoplight": {
               "id": "f5de5knebu19i"
             },
@@ -11016,7 +11016,7 @@
             "description": "Marca de la rama."
           },
           "country": {
-            "$ref": "#/components/schemas/country",
+            "$ref": "#/components/schemas/country-alpha-three",
             "x-stoplight": {
               "id": "my8f67uajzolj"
             },
@@ -12637,8 +12637,8 @@
           }
         }
       },
-      "country": {
-        "title": "country",
+      "country-alpha-two": {
+        "title": "country-alpha-two",
         "x-stoplight": {
           "id": "sxa0mofxu6g3n"
         },
@@ -12671,7 +12671,7 @@
         ]
       },
       "currency": {
-        "title": "currency",
+        "title": "currency-alpha-three",
         "x-stoplight": {
           "id": "rzl72fj2oxfst"
         },
@@ -12697,6 +12697,24 @@
           "UYU",
           "VEB",
           "ZAR"
+        ]
+      },
+      "country-alpha-three": {
+        "title": "country-alpha-three",
+        "x-stoplight": {
+          "id": "mecc8ckqfjguc"
+        },
+        "enum": [
+          "COL",
+          "PRI",
+          "CRI",
+          "BLZ",
+          "PAN",
+          "CHL",
+          "MEX",
+          "HND",
+          "URY",
+          "ECU"
         ]
       }
     },
