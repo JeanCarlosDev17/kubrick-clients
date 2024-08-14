@@ -1,0 +1,14 @@
+---
+stoplight-id: 7e0vj7ofjttof
+---
+
+# Collectiones de Postman
+
+Colección de Postman con los servicios para administradores:
+
+[![Ver en Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/36846959-6ce7bbd6-72d5-4efc-bd38-ce803978094c?action=collection%2Ffork&collection-url=entityId%3D36846959-6ce7bbd6-72d5-4efc-bd38-ce803978094c%26entityType%3Dcollection%26workspaceId%3D116e6451-e54c-465a-b2c0-76ea777d05ae)
+
+
+Colección de Postman con los servicios para clientes:
+
+[![Ver en Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/36846959-9f91f6a5-5732-4b2e-b026-1a4f1ee468dc?action=collection%2Ffork&collection-url=entityId%3D36846959-9f91f6a5-5732-4b2e-b026-1a4f1ee468dc%26entityType%3Dcollection%26workspaceId%3D116e6451-e54c-465a-b2c0-76ea777d05ae)
