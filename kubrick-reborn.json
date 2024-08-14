@@ -1540,7 +1540,7 @@
             }
           }
         },
-        "operationId": "create",
+        "operationId": "integration-create",
         "x-stoplight": {
           "id": "sa1wbtq1n5cz4"
         },
