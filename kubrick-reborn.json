@@ -96,7 +96,8 @@
                           "$ref": "#/components/schemas/user-response"
                         },
                         "token": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "dsf24sd52"
                         }
                       }
                     }
@@ -127,11 +128,12 @@
                           "updated_at": "2024-02-13T22:03:09.000000Z",
                           "created_at": "2024-02-13T22:03:09.000000Z",
                           "id": 6,
-                          "bins": [
+                          "subscrioptions": [
                             {
-                              "id": 1,
-                              "franchise": 1,
-                              "acquirer_bin": 400900,
+                              "id": 4,
+                              "franchise": 2,
+                              "acquirerBIN": 400900,
+                              "merchant_code": 166688,
                               "version": 2
                             }
                           ]
@@ -284,32 +286,25 @@
                     "example": "pagosex@email.com"
                   },
                   "country": {
-                    "type": "string",
+                    "$ref": "#/components/schemas/country-alpha-two",
                     "x-stoplight": {
                       "id": "i6vrpzbw8trlv"
                     },
-                    "description": "País del comercio (ISO 3166-1 alfa-2)",
-                    "minLength": 2,
-                    "maxLength": 2,
-                    "example": "CO"
+                    "description": "País del comercio (ISO 3166-1 alfa-2)"
                   },
                   "language": {
-                    "type": "string",
+                    "$ref": "#/components/schemas/language",
                     "x-stoplight": {
                       "id": "r2qzjundkvkfy"
                     },
-                    "description": "Idioma principal del cliente en formato ISO 639-1, Puede ser usado en las peticiones realizadas por este cliente en la request de crear una integración como idioma por default del merchant si no son indicados los languages en dicha request",
-                    "example": "ES"
+                    "description": "Idioma principal del cliente en formato ISO 639-1, Puede ser usado en las peticiones realizadas por este cliente en la request de crear una integración como idioma por default del merchant si no son indicados los languages en dicha request"
                   },
                   "currency": {
-                    "type": "string",
+                    "$ref": "#/components/schemas/currency",
                     "x-stoplight": {
                       "id": "7d2w8wvqe3e72"
                     },
-                    "minLength": 3,
-                    "maxLength": 3,
-                    "description": "Moneda principal en formato ISO 4217 puede ser usado en las peticiones realizadas por este cliente en la request de integración como idioma por default del merchant si no son indicados las currencies en dicha request",
-                    "example": "COP"
+                    "description": "Moneda principal en formato ISO 4217 puede ser usado en las peticiones realizadas por este cliente en la request de integración como idioma por default del merchant si no son indicados las currencies en dicha request"
                   },
                   "status": {
                     "type": "boolean",
@@ -365,15 +360,15 @@
                     },
                     "description": "Objeto para crear una configuración de un tenant de micrositios, es necesario si el cliente requiere crear micrositios brindar un micrositeTenantId o el objeto micrositeTenant "
                   },
-                  "bins": {
+                  "subscriptions": {
                     "type": "array",
                     "x-stoplight": {
                       "id": "f94eqrmwo0ygg"
                     },
-                    "description": "lista de objetos configuracion de bines para la creación de threeDS de forma individual, cada objeto de la lista esta conformado por franchise y adquirerBIN, como minimo debe tener un objeto si bins esta declarado en la request",
+                    "description": "lista de objetos configuracion de suscripcion de bines para la creación de threeDS de forma individual, cada objeto de la lista esta conformado por franchise y adquirerBIN, como minimo debe tener un objeto si bins esta declarado en la request",
                     "minItems": 1,
                     "items": {
-                      "$ref": "#/components/schemas/binRequest",
+                      "$ref": "#/components/schemas/subscriptionRequest",
                       "x-stoplight": {
                         "id": "850y5od9qc4er"
                       }
@@ -1302,29 +1297,24 @@
                     "description": "email del cliente"
                   },
                   "country": {
-                    "type": "string",
+                    "$ref": "#/components/schemas/country-alpha-two",
                     "x-stoplight": {
                       "id": "jeofe1ugvd0cv"
                     },
-                    "example": "CO",
                     "description": "País del comercio (ISO 3166-1 alfa-2)"
                   },
                   "language": {
-                    "type": "string",
+                    "$ref": "#/components/schemas/language",
                     "x-stoplight": {
                       "id": "yesvxub8b700f"
                     },
-                    "example": "ES",
                     "description": "Idioma principal del cliente en formato ISO 639-1, Puede ser usado en las peticiones realizadas por este cliente en la request de crear una integración como idioma por default del merchant si no son indicados los languages en dicha request"
                   },
                   "currency": {
-                    "type": "string",
+                    "$ref": "#/components/schemas/currency",
                     "x-stoplight": {
                       "id": "yxexsus6emcs8"
                     },
-                    "minLength": 3,
-                    "maxLength": 3,
-                    "example": "COP",
                     "description": "Moneda principal en formato ISO 4217 puede ser usado en las peticiones realizadas por este cliente en la request de integración como idioma por default del merchant si no son indicados las currencies en dicha request"
                   },
                   "status": {
@@ -1397,9 +1387,9 @@
         }
       }
     },
-    "/api/integration/create-from-merchant": {
+    "/api/integration/create": {
       "post": {
-        "summary": "create-from-merchant",
+        "summary": "create",
         "responses": {
           "200": {
             "description": "OK",
@@ -1538,7 +1528,7 @@
             }
           }
         },
-        "operationId": "integration-create-from-merchant",
+        "operationId": "integration-create",
         "x-stoplight": {
           "id": "sa1wbtq1n5cz4"
         },
@@ -1550,23 +1540,10 @@
                 "type": "object",
                 "required": [
                   "statusWebhook",
-                  "isCms",
-                  "environments",
-                  "merchant",
                   "paymentMethods",
                   "site"
                 ],
                 "properties": {
-                  "dueDiligenceId": {
-                    "type": "integer",
-                    "x-stoplight": {
-                      "id": "9bvjmpv2ug7c3"
-                    },
-                    "minimum": 1,
-                    "maximum": 255,
-                    "description": "Identificador del proceso de debida diligencia, con este dato permite entender si el comercio a crear aprobó por el proceso.",
-                    "example": 421828323801
-                  },
                   "statusWebhook": {
                     "type": "string",
                     "x-stoplight": {
@@ -1575,39 +1552,26 @@
                     "description": "URL a la cual se notificará luego de finalizar el proceso con la información de salida. Este campo debe ser en formato URL.",
                     "example": "https://test.webhook.com/"
                   },
-                  "isCms": {
-                    "type": "boolean",
+                  "merchantId": {
+                    "type": "integer",
                     "x-stoplight": {
-                      "id": "uqksr2pavyuza"
+                      "id": "smexp7c69fdbi"
                     },
-                    "description": "Indica si la conexión se realizará mediante un CMS."
+                    "description": "Este campo hace referencia al id del comercio en panel, este campo solo es necesario si ya se cuenta con un comercio creado previamente, adicional a esto, se debe enviar el \"merchantName\" y omitir el campo \"merchant\"."
                   },
-                  "cmsType": {
+                  "merchantName": {
                     "type": "string",
                     "x-stoplight": {
-                      "id": "waw2rynpvtbjm"
+                      "id": "lvsq825awqxn3"
                     },
-                    "description": "En caso que isCms tenga el valor true, este campo se convierte en requerido. En este campo se indica el CMS a usar.",
-                    "example": "woocommerce"
-                  },
-                  "environments": {
-                    "$ref": "#/components/schemas/environments",
-                    "x-stoplight": {
-                      "id": "ku6h6bxin2m7n"
-                    },
-                    "description": "Puede recibir dos objetos (test, prod), es obligatorio enviar, como mínimo uno de estos, e indica en que ambientes se quieren crear los recursos."
-                  },
-                  "corporateImage": {
-                    "$ref": "#/components/schemas/corporateImage",
-                    "x-stoplight": {
-                      "id": "4i73nzo8o9a1a"
-                    }
+                    "description": "Este campo hace referencia al nombre del comercio en panel, este campo solo es necesario si ya se cuenta con un comercio creado previamente, adicional a esto, se debe enviar el \"merchantId\" y omitir el campo \"merchant\"."
                   },
                   "merchant": {
                     "$ref": "#/components/schemas/merchant",
                     "x-stoplight": {
                       "id": "5d8rrny34wm0x"
-                    }
+                    },
+                    "description": "Este objeto es necesario cuando se desea crear un integración desde cero, adicionalmente, se debe omitir el merchantId y merchantName."
                   },
                   "paymentMethods": {
                     "$ref": "#/components/schemas/paymentMethods",
@@ -1632,34 +1596,19 @@
                     "$ref": "#/components/schemas/microsite",
                     "x-stoplight": {
                       "id": "4fu6869b97qfo"
-                    }
+                    },
+                    "description": "Este objeto contiene los parametros e información para crear un micrositio es requerido solo cuando se desear crear un micrositio abierto o cerrado"
                   }
                 }
               },
               "examples": {
-                "Example 1": {
+                "Petición desde cero": {
                   "value": {
-                    "dueDiligenceId": 421828323801,
                     "statusWebhook": "https://test.webhook.com/",
-                    "isCms": true,
-                    "cmsType": "woocommerce",
-                    "environments": {
-                      "test": {
-                        "isActive": true
-                      },
-                      "prod": {
-                        "isActive": true
-                      }
-                    },
-                    "corporateImage": {
-                      "logo": "https://google.com//logos/5be01d787b5e5b0001ebb.png",
-                      "primaryColor": "#0072E1",
-                      "secondaryColor": "#FFFFFF"
-                    },
                     "merchant": {
                       "name": "EVERTEC PLACETOPAY S.A.S",
                       "brand": "Placetopay",
-                      "mcc": 7929,
+                      "mcc": "7929",
                       "languages": [
                         "ES"
                       ],
@@ -1801,7 +1750,7 @@
                       "country": "COL",
                       "currency": "COP",
                       "url": "https://example.com",
-                      "mcc": 742,
+                      "mcc": "0742",
                       "isicClass": 111,
                       "document": {
                         "type": "string",
@@ -1830,25 +1779,595 @@
                       }
                     },
                     "microsite": {
-                      "name": "Microsite name example",
+                      "name": "Microsite OPEN name example",
                       "alias": "example-slug",
                       "type": "OPEN",
-                      "allowPartial": false,
                       "categories": [
-                        "comercio_electronico"
+                        "test_tecnologia"
                       ],
-                      "loginFields": 2,
                       "disabled": false,
                       "useWcLightbox": false,
                       "hide": false,
                       "allowPayWithDuplicateReference": false,
-                      "isNoBuyerFill": true,
-                      "allowDispersion": false,
-                      "allowUnlimitedInstallments": false,
                       "autoReferenced": false,
                       "allowRecurrence": false,
                       "notSendBuyerAsPayer": false,
-                      "onlyPaymentLink": false,
+                      "onlyPaymentLink": false
+                    }
+                  }
+                },
+                "Petición con comercio existente": {
+                  "value": {
+                    "statusWebhook": "https://test.webhook.com/",
+                    "merchantId": "3829",
+                    "merchantName": "Existing merchant",
+                    "paymentMethods": {
+                      "code": "MC",
+                      "oder": 3,
+                      "commissionModel": "F",
+                      "commissionValue": 2.5,
+                      "accountNumber": "1234567811",
+                      "financialEntity": 16,
+                      "accountType": 1,
+                      "threeDS": true,
+                      "settings": {
+                        "retailCode": "011211406",
+                        "terminalLocation": "Medellín",
+                        "terminalNumber": "00031431",
+                        "username": "FIDUCOLDEX01",
+                        "password": "FIDUCOLDEX01",
+                        "pfxID": 1,
+                        "entityCode": "9002992280",
+                        "serviceCode": "001",
+                        "isEcommerce": true,
+                        "merchantCode": "1269189"
+                      }
+                    },
+                    "site": {
+                      "displayName": "Site name example",
+                      "type": "INT",
+                      "category": "ECOMMERCE",
+                      "email": "admin@email.com",
+                      "currency": "COP",
+                      "language": "ES",
+                      "customBatch": 2345,
+                      "expiration": "2023-06-30 00:00:00",
+                      "analyticsCode": "UA-171313251-4, GTM-123812",
+                      "integration": {
+                        "allowPartial": false,
+                        "connectionMethod": "REDIRECT",
+                        "notificationUrl": "https://site-webhook.com"
+                      },
+                      "control": {
+                        "minAmount": "1000",
+                        "maxAmount": "1000000",
+                        "filterPse": false,
+                        "filterTuya": false,
+                        "filterSafetyPay": false,
+                        "prechargerFilter": 2,
+                        "filterByBin": false,
+                        "exceptionBinsList": [
+                          "123456"
+                        ]
+                      },
+                      "threeDS": {
+                        "setting": "VERY_LOW",
+                        "minAmount": 40
+                      },
+                      "historic": {
+                        "behaviour": "IGNORE",
+                        "lowerScore": "100",
+                        "rejectionScore": 300
+                      },
+                      "creditBureau": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onNoMatch": "REJECTED",
+                          "onMatch": "PROCESS"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 200
+                      },
+                      "riskEngine": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onLowRisk": "MANUAL",
+                          "onMediumRisk": null,
+                          "onHighRisk": "REJECTED"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 30,
+                        "approvalScore": 200,
+                        "rejectionScore": 250,
+                        "onCaibration": true
+                      },
+                      "securityFilters": {
+                        "allowedIssuerCountries": [
+                          "CO"
+                        ],
+                        "forceIPMatch": true,
+                        "excludeIPCountry": [
+                          "CL"
+                        ],
+                        "onlyWhitelisted": true,
+                        "allowedIPCountries": [
+                          "EC"
+                        ],
+                        "allowedCardsDay": 4,
+                        "allowedCardsByIP": 10,
+                        "allowedCardsMonth": 4,
+                        "allowedCardsYear": 2,
+                        "dayMax": 3,
+                        "dayMaxAmount": 30000,
+                        "monthMax": 3,
+                        "monthMaxAmount": 2000
+                      },
+                      "operation": {
+                        "disableTax": true,
+                        "calculateTax": true,
+                        "taxPercentage": 12,
+                        "patternReference": null,
+                        "mailCustomer": true,
+                        "mailMerchant": true
+                      }
+                    },
+                    "threeDS": {
+                      "brand": "ThreeDS brand example",
+                      "country": "COL",
+                      "currency": "COP",
+                      "url": "https://example.com",
+                      "mcc": "0742",
+                      "isicClass": 111,
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "subscriptions": [
+                        {
+                          "franchise": "visa",
+                          "acquirerBIN": 400900,
+                          "merchantCode": "5240"
+                        }
+                      ],
+                      "branch": {
+                        "name": "ThreeDS Branch Name",
+                        "brand": "branch brand example",
+                        "country": "COL",
+                        "currency": "COP",
+                        "url": "https://www.branch-url.com",
+                        "subscriptions": [
+                          {
+                            "franchise": 1,
+                            "acquirerBIN": 400900,
+                            "merchantCode": "\"5240\""
+                          }
+                        ]
+                      }
+                    },
+                    "microsite": {
+                      "name": "Microsite OPEN name example",
+                      "alias": "example-slug",
+                      "type": "OPEN",
+                      "categories": [
+                        "test_tecnologia"
+                      ],
+                      "disabled": false,
+                      "useWcLightbox": false,
+                      "hide": false,
+                      "allowPayWithDuplicateReference": false,
+                      "autoReferenced": false,
+                      "allowRecurrence": false,
+                      "notSendBuyerAsPayer": false,
+                      "onlyPaymentLink": false
+                    }
+                  }
+                },
+                "Peticion desde cero con micrositio abierto": {
+                  "value": {
+                    "statusWebhook": "https://test.webhook.com/",
+                    "merchant": {
+                      "name": "EVERTEC PLACETOPAY S.A.S",
+                      "brand": "Placetopay",
+                      "mcc": "7929",
+                      "languages": [
+                        "ES"
+                      ],
+                      "currencies": [
+                        "COP"
+                      ],
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "address": {
+                        "city": "medellin",
+                        "state": 1,
+                        "country": "CO"
+                      },
+                      "legalRepresentative": {
+                        "documentType": "CC",
+                        "document": "1037854200",
+                        "name": "Ricardo",
+                        "surname": "García"
+                      }
+                    },
+                    "paymentMethods": {
+                      "code": "MC",
+                      "oder": 3,
+                      "commissionModel": "F",
+                      "commissionValue": 2.5,
+                      "accountNumber": "1234567811",
+                      "financialEntity": 16,
+                      "accountType": 1,
+                      "threeDS": true,
+                      "settings": {
+                        "retailCode": "011211406",
+                        "terminalLocation": "Medellín",
+                        "terminalNumber": "00031431",
+                        "username": "FIDUCOLDEX01",
+                        "password": "FIDUCOLDEX01",
+                        "pfxID": 1,
+                        "entityCode": "9002992280",
+                        "serviceCode": "001",
+                        "isEcommerce": true,
+                        "merchantCode": "1269189"
+                      }
+                    },
+                    "site": {
+                      "displayName": "Site name example",
+                      "type": "INT",
+                      "category": "ECOMMERCE",
+                      "email": "admin@email.com",
+                      "currency": "COP",
+                      "language": "ES",
+                      "customBatch": 2345,
+                      "expiration": "2023-06-30 00:00:00",
+                      "analyticsCode": "UA-171313251-4, GTM-123812",
+                      "integration": {
+                        "allowPartial": false,
+                        "connectionMethod": "REDIRECT",
+                        "notificationUrl": "https://site-webhook.com"
+                      },
+                      "control": {
+                        "minAmount": "1000",
+                        "maxAmount": "1000000",
+                        "filterPse": false,
+                        "filterTuya": false,
+                        "filterSafetyPay": false,
+                        "prechargerFilter": 2,
+                        "filterByBin": false,
+                        "exceptionBinsList": [
+                          "123456"
+                        ]
+                      },
+                      "threeDS": {
+                        "setting": "VERY_LOW",
+                        "minAmount": 40
+                      },
+                      "historic": {
+                        "behaviour": "IGNORE",
+                        "lowerScore": "100",
+                        "rejectionScore": 300
+                      },
+                      "creditBureau": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onNoMatch": "REJECTED",
+                          "onMatch": "PROCESS"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 200
+                      },
+                      "riskEngine": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onLowRisk": "MANUAL",
+                          "onMediumRisk": null,
+                          "onHighRisk": "REJECTED"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 30,
+                        "approvalScore": 200,
+                        "rejectionScore": 250,
+                        "onCaibration": true
+                      },
+                      "securityFilters": {
+                        "allowedIssuerCountries": [
+                          "CO"
+                        ],
+                        "forceIPMatch": true,
+                        "excludeIPCountry": [
+                          "CL"
+                        ],
+                        "onlyWhitelisted": true,
+                        "allowedIPCountries": [
+                          "EC"
+                        ],
+                        "allowedCardsDay": 4,
+                        "allowedCardsByIP": 10,
+                        "allowedCardsMonth": 4,
+                        "allowedCardsYear": 2,
+                        "dayMax": 3,
+                        "dayMaxAmount": 30000,
+                        "monthMax": 3,
+                        "monthMaxAmount": 2000
+                      },
+                      "operation": {
+                        "disableTax": true,
+                        "calculateTax": true,
+                        "taxPercentage": 12,
+                        "patternReference": null,
+                        "mailCustomer": true,
+                        "mailMerchant": true
+                      }
+                    },
+                    "threeDS": {
+                      "brand": "ThreeDS brand example",
+                      "country": "COL",
+                      "currency": "COP",
+                      "url": "https://example.com",
+                      "mcc": "0742",
+                      "isicClass": 111,
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "subscriptions": [
+                        {
+                          "franchise": "visa",
+                          "acquirerBIN": 400900,
+                          "merchantCode": "5240"
+                        }
+                      ],
+                      "branch": {
+                        "name": "ThreeDS Branch Name",
+                        "brand": "branch brand example",
+                        "country": "COL",
+                        "currency": "COP",
+                        "url": "https://www.branch-url.com",
+                        "subscriptions": [
+                          {
+                            "franchise": 1,
+                            "acquirerBIN": 400900,
+                            "merchantCode": "\"5240\""
+                          }
+                        ]
+                      }
+                    },
+                    "microsite": {
+                      "name": "Microsite OPEN name example",
+                      "alias": "example-slug",
+                      "type": "OPEN",
+                      "categories": [
+                        "test_tecnologia"
+                      ],
+                      "disabled": false,
+                      "useWcLightbox": false,
+                      "hide": false,
+                      "allowPayWithDuplicateReference": false,
+                      "autoReferenced": false,
+                      "allowRecurrence": false,
+                      "notSendBuyerAsPayer": false,
+                      "onlyPaymentLink": false
+                    }
+                  }
+                },
+                "eticion desde cero con micrositio cerrado": {
+                  "value": {
+                    "statusWebhook": "https://test.webhook.com/",
+                    "merchantId": 0,
+                    "merchantName": "string",
+                    "merchant": {
+                      "name": "EVERTEC PLACETOPAY S.A.S",
+                      "brand": "Placetopay",
+                      "mcc": "7929",
+                      "languages": [
+                        "ES"
+                      ],
+                      "currencies": [
+                        "COP"
+                      ],
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "address": {
+                        "city": "medellin",
+                        "state": 1,
+                        "country": "CO"
+                      },
+                      "legalRepresentative": {
+                        "documentType": "CC",
+                        "document": "1037854200",
+                        "name": "Ricardo",
+                        "surname": "García"
+                      }
+                    },
+                    "paymentMethods": [
+                      {
+                        "code": "MC",
+                        "order": 1,
+                        "financialEntity": 16,
+                        "commissionModel": "string",
+                        "commissionValue": 2.5,
+                        "accountNumber": "1234567811",
+                        "accountType": 1,
+                        "settings": {
+                          "retailCode": "011211406",
+                          "terminalLocation": "Medellín",
+                          "terminalNumber": "00031431",
+                          "username": "UserExample",
+                          "password": "passwordExample",
+                          "pfxID": 1,
+                          "entityCode": "9002992280",
+                          "serviceCode": "001",
+                          "merchantCode": "1269189",
+                          "isEcommerce": true,
+                          "agreement": 12,
+                          "agreementName": "Placetopay",
+                          "iacCode": "33456564",
+                          "acceptChecks": true,
+                          "disableBlocks": "ath_cajas_exito, ath_efecty",
+                          "hash": "456445646asdf52fd"
+                        },
+                        "threeDS": true
+                      }
+                    ],
+                    "site": {
+                      "displayName": "Site name example",
+                      "type": "INT",
+                      "category": "ECOMMERCE",
+                      "email": "admin@email.com",
+                      "currency": "COP",
+                      "language": "ES",
+                      "customBatch": 2345,
+                      "expiration": "2023-06-30 00:00:00",
+                      "analyticsCode": "UA-171313251-4, GTM-123812",
+                      "integration": {
+                        "allowPartial": false,
+                        "connectionMethod": "REDIRECT",
+                        "notificationUrl": "https://site-webhook.com"
+                      },
+                      "control": {
+                        "minAmount": "1000",
+                        "maxAmount": "1000000",
+                        "filterPse": false,
+                        "filterTuya": false,
+                        "filterSafetyPay": false,
+                        "prechargerFilter": 2,
+                        "filterByBin": false,
+                        "exceptionBinsList": [
+                          "123456"
+                        ]
+                      },
+                      "threeDS": {
+                        "setting": "VERY_LOW",
+                        "minAmount": 40
+                      },
+                      "historic": {
+                        "behaviour": "IGNORE",
+                        "lowerScore": "100",
+                        "rejectionScore": 300
+                      },
+                      "creditBureau": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onNoMatch": "REJECTED",
+                          "onMatch": "PROCESS"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 200
+                      },
+                      "riskEngine": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onLowRisk": "MANUAL",
+                          "onMediumRisk": null,
+                          "onHighRisk": "REJECTED"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 30,
+                        "approvalScore": 200,
+                        "rejectionScore": 250,
+                        "onCaibration": true
+                      },
+                      "securityFilters": {
+                        "allowedIssuerCountries": [
+                          "CO"
+                        ],
+                        "forceIPMatch": true,
+                        "excludeIPCountry": [
+                          "CL"
+                        ],
+                        "onlyWhitelisted": true,
+                        "allowedIPCountries": [
+                          "EC"
+                        ],
+                        "allowedCardsDay": 4,
+                        "allowedCardsByIP": 10,
+                        "allowedCardsMonth": 4,
+                        "allowedCardsYear": 2,
+                        "dayMax": 3,
+                        "dayMaxAmount": 30000,
+                        "monthMax": 3,
+                        "monthMaxAmount": 2000
+                      },
+                      "operation": {
+                        "disableTax": true,
+                        "calculateTax": true,
+                        "taxPercentage": 12,
+                        "patternReference": null,
+                        "mailCustomer": true,
+                        "mailMerchant": true
+                      }
+                    },
+                    "threeDS": {
+                      "brand": "ThreeDS brand example",
+                      "country": "COL",
+                      "currency": "COP",
+                      "url": "https://example.com",
+                      "mcc": "0742",
+                      "isicClass": 111,
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "subscriptions": [
+                        {
+                          "franchise": "visa",
+                          "acquirerBIN": 400900,
+                          "merchantCode": "5240"
+                        }
+                      ],
+                      "branch": {
+                        "name": "ThreeDS Branch Name",
+                        "brand": "branch brand example",
+                        "country": "COL",
+                        "currency": "COP",
+                        "url": "https://www.branch-url.com",
+                        "subscriptions": {
+                          "subscriptions": [
+                            {
+                              "franchise": 1,
+                              "acquirerBIN": 400900,
+                              "merchantCode": "\"5240\""
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "microsite": {
+                      "name": "Microsite CLOSED name example",
+                      "alias": "example-slug",
+                      "type": "CLOSED",
+                      "categories": [
+                        "test_tecnologia"
+                      ],
+                      "loginFields": [
+                        "document",
+                        "reference",
+                        "alt_reference"
+                      ],
+                      "disabled": false,
+                      "useWcLightbox": false,
+                      "hide": false,
+                      "allowPayWithDuplicateReference": false,
+                      "allowPartial": false,
+                      "isNoBuyerFill": true,
+                      "allowDispersion": false,
+                      "allowUnlimitedInstallments": false,
                       "exactSearchByReference": false,
                       "allowPayMultipleInvoicesAtOnce": false,
                       "showDescription": true,
@@ -1864,7 +2383,8 @@
                 }
               }
             }
-          }
+          },
+          "description": "Este endpoint permite crear una integración desde cero (Comercio nuevo), adicional a esto, es posible crear recursos y asociarlos a un comercio ya existente, enviando los atributos de merchantId y merchantName para indicar el comercio al cual se desea asociar el sitio y demas recursos.\n\nEl servicio permite crear comercio, sitio, medios de pago, ThreeDS y micrositio."
         },
         "tags": [
           "Integraciones"
@@ -2152,7 +2672,6 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "onTest",
                   "name",
                   "brand",
                   "country",
@@ -2165,13 +2684,6 @@
                   "branches"
                 ],
                 "properties": {
-                  "onTest": {
-                    "type": "boolean",
-                    "x-stoplight": {
-                      "id": "8tipd521oghzi"
-                    },
-                    "description": "Indica si el recurso solicitado es para un entorno de pruebas."
-                  },
                   "name": {
                     "type": "string",
                     "x-stoplight": {
@@ -2264,7 +2776,6 @@
               "examples": {
                 "Example 1": {
                   "value": {
-                    "onTest": true,
                     "name": "Merchant Example Name",
                     "brand": "ThreeDS brand example",
                     "country": "COL",
@@ -2309,7 +2820,7 @@
         "tags": [
           "ThreeDS"
         ],
-        "description": "Este endpoint tiene como finalidad la creación del token de ThreeDS de manera individual, se debe tener en cuenta que solo se permite la creación de tokens para bines que hayan sido previamente registrados en la creación del usuario para conusmir la API."
+        "description": "Este endpoint tiene como finalidad la creación del token de ThreeDS de manera individual, se debe tener en cuenta que solo se permite la creación de tokens para subscriptions que hayan sido previamente registrados en la creación del usuario para conusmir la API."
       },
       "parameters": [
         {
@@ -3222,14 +3733,7 @@
                     }
                   }
                 },
-                "required": [
-                  "onTest"
-                ],
                 "properties": {
-                  "onTest": {
-                    "type": "boolean",
-                    "description": "Indica el environment en el que se desea buscar el merchant."
-                  },
                   "id": {
                     "type": "integer",
                     "description": "Identificador en panel (panelId) del merchant a buscar."
@@ -3505,12 +4009,9 @@
         }
       ]
     },
-    "/api/bins/{bin}": {
+    "/api/subscriptions/{subscription}": {
       "put": {
-        "summary": "Actualizar Bin",
-        "tags": [
-          "Admin Bins"
-        ],
+        "summary": "Actualizar",
         "responses": {
           "200": {
             "description": "OK",
@@ -3766,15 +4267,15 @@
               }
             }
           },
-          "description": "Este servicio nos permite modificar la configuración de un bin"
+          "description": "Este servicio nos permite modificar la configuración de una suscripción"
         },
-        "description": "Este servicio permite actualizar la información de un bin "
+        "description": "Este servicio permite actualizar la información de una suscripción ",
+        "tags": [
+          "Admin Subscriptions"
+        ]
       },
       "delete": {
-        "summary": "Eliminar Bin",
-        "tags": [
-          "Admin Bins"
-        ],
+        "summary": "Eliminar",
         "responses": {
           "200": {
             "description": "OK",
@@ -3965,32 +4466,23 @@
             }
           }
         },
-        "description": "Este servicio permite elimiar un bin "
+        "description": "Este servicio permite elimiar una suscripción",
+        "tags": [
+          "Admin Subscriptions"
+        ]
       },
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "bin",
+          "name": "subscription",
           "in": "path",
           "required": true
-        },
-        {
-          "schema": {
-            "type": "number"
-          },
-          "name": "bin",
-          "in": "path",
-          "required": true,
-          "description": "id de la configuración del bin"
         }
       ],
       "post": {
-        "summary": "Buscar Bin",
-        "tags": [
-          "Admin Bins"
-        ],
+        "summary": "Buscar",
         "responses": {
           "200": {
             "description": "OK",
@@ -4114,15 +4606,16 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Admin Subscriptions"
+        ],
+        "description": "Este servicio nos permite buscar la configuración de una suscripción"
       }
     },
-    "/api/bins": {
+    "/api/subscriptions": {
       "post": {
-        "summary": "Crear bin",
-        "tags": [
-          "Admin Bins"
-        ],
+        "summary": "Crear",
         "responses": {
           "201": {
             "description": "Created",
@@ -4248,7 +4741,7 @@
             }
           }
         },
-        "operationId": "store-api-bins",
+        "operationId": "store-api-subscriptions",
         "x-stoplight": {
           "id": "wjkaea0unqa4m"
         },
@@ -4315,8 +4808,12 @@
               }
             }
           }
-        }
-      }
+        },
+        "tags": [
+          "Admin Subscriptions"
+        ]
+      },
+      "parameters": []
     },
     "/api/admins": {
       "post": {
@@ -4550,9 +5047,8 @@
                     "example": "elliot.alderson@test.com"
                   },
                   "country": {
-                    "type": "string",
-                    "description": "País del admin a crear (ISO 3166-1 alfa-2).",
-                    "example": "CO"
+                    "$ref": "#/components/schemas/country-alpha-two",
+                    "description": "País del admin a crear (ISO 3166-1 alfa-2)."
                   },
                   "password": {
                     "type": "string",
@@ -5104,9 +5600,8 @@
                     "example": "Elliot Alderson Updated"
                   },
                   "country": {
-                    "type": "string",
-                    "description": "Indicativo del país en ISO 3166-1 alpha-2.",
-                    "example": "CR"
+                    "$ref": "#/components/schemas/country-alpha-two",
+                    "description": "Indicativo del país en ISO 3166-1 alpha-2."
                   },
                   "status": {
                     "type": "boolean",
@@ -6593,33 +7088,59 @@
                     "prodSecretKey": "kojj554n85q"
                   }
                 },
+                "required": [
+                  "auth",
+                  "name",
+                  "description",
+                  "baseUrl",
+                  "login",
+                  "secretKey"
+                ],
                 "properties": {
                   "auth": {
                     "$ref": "#/components/schemas/admin-auth"
                   },
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 3,
+                    "description": "Nombre para identificar el tenant.",
+                    "maxLength": 255,
+                    "example": "Tenant name"
                   },
                   "description": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 255,
+                    "example": "Tenant generic description",
+                    "description": "Descripción del tenant."
                   },
-                  "baseUrlTest": {
-                    "type": "string"
+                  "baseUrl": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "q9jsocqbzb7o0"
+                    },
+                    "description": "URL del tenant de rest, en el cual, se crearán los recursos (Comercios, sitios, medios de pago)",
+                    "example": "https://tenant-url.com",
+                    "minLength": 13,
+                    "maxLength": 255
                   },
-                  "testLogin": {
-                    "type": "string"
+                  "login": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "p7fiqz9rll2l0"
+                    },
+                    "example": "jdjiw32141oij2ddn9g8tze28",
+                    "minLength": 2,
+                    "maxLength": 255,
+                    "description": "Login con el que se construye la autenticación."
                   },
-                  "testSecretKey": {
-                    "type": "string"
-                  },
-                  "baseUrlProd": {
-                    "type": "string"
-                  },
-                  "prodLogin": {
-                    "type": "string"
-                  },
-                  "prodSecretKey": {
-                    "type": "string"
+                  "secretKey": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "2mengznj0e3fu"
+                    },
+                    "example": "n88te55gdsfd11bga6a",
+                    "description": "SecretKey con el que se construye la autenticación."
                   }
                 }
               },
@@ -6642,7 +7163,8 @@
                 }
               }
             }
-          }
+          },
+          "description": ""
         }
       }
     },
@@ -7158,33 +7680,54 @@
                     "prodSecretKey": "kojj554n85qsjdljbn33221-actualizado"
                   }
                 },
+                "required": [
+                  "auth"
+                ],
                 "properties": {
                   "auth": {
                     "$ref": "#/components/schemas/admin-auth"
                   },
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Nombre del tenant a actualizar",
+                    "minLength": 3,
+                    "maxLength": 255
                   },
                   "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Descripción del tenant a actualizar",
+                    "minLength": 3,
+                    "maxLength": 255
                   },
-                  "baseUrlTest": {
-                    "type": "string"
+                  "baseUrl": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "nytevyf4z05ub"
+                    },
+                    "minLength": 13,
+                    "maxLength": 255,
+                    "description": "URL base del tenant a actualizar",
+                    "example": "https://tenant-url-updated.com"
                   },
-                  "testLogin": {
-                    "type": "string"
+                  "login": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "azz26m1ivqqeo"
+                    },
+                    "example": "jy84trthdbcxxx884pqzz",
+                    "minLength": 2,
+                    "maxLength": 255,
+                    "description": "Login del tenant a actualizar"
                   },
-                  "testSecretKey": {
-                    "type": "string"
-                  },
-                  "baseUrlProd": {
-                    "type": "string"
-                  },
-                  "prodLogin": {
-                    "type": "string"
-                  },
-                  "prodSecretKey": {
-                    "type": "string"
+                  "secretKey": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "m5nss74ckd9ry"
+                    },
+                    "description": "SecretKey del tenant a actualizar",
+                    "pattern": "pkoe85xswn800s2",
+                    "minLength": 2,
+                    "maxLength": 255
                   }
                 }
               },
@@ -7207,7 +7750,8 @@
                 }
               }
             }
-          }
+          },
+          "description": ""
         },
         "description": "El endpoint para actualizar permite modificar los datos de un registro enviando el ID del recurso como último parametro del endpoint, en este caso, la petición que se envía contiene un cuerpo similar que la petición de [crear tenant](reference/Kubrick.json/paths/~1api~1integration~1create-from-merchant/post)."
       },
@@ -7412,6 +7956,9 @@
                     }
                   }
                 },
+                "required": [
+                  "auth"
+                ],
                 "properties": {
                   "auth": {
                     "$ref": "#/components/schemas/admin-auth"
@@ -7429,7 +7976,8 @@
                 }
               }
             }
-          }
+          },
+          "description": "Este servicio permite eliminar un tenant existente."
         },
         "description": "El endpoint de eliminar permite borrar un admin de la BD enviando el ID como último parametro en el endpoint y la [autenticación](reference/Kubrick.json/components/schemas/admin-auth) en el cuerpo de la petición."
       },
@@ -7585,6 +8133,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "auth"
+                ],
                 "properties": {
                   "auth": {
                     "$ref": "#/components/schemas/admin-auth",
@@ -7760,23 +8311,14 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "auth"
+                ],
                 "properties": {
                   "auth": {
                     "$ref": "#/components/schemas/admin-auth",
                     "x-stoplight": {
                       "id": "yyeh0ga5gvvhn"
-                    }
-                  },
-                  "data": {
-                    "type": "array",
-                    "x-stoplight": {
-                      "id": "aiyt6277c241r"
-                    },
-                    "items": {
-                      "$ref": "#/components/schemas/micrositeTenantResponse",
-                      "x-stoplight": {
-                        "id": "ice7mic4jqei4"
-                      }
                     }
                   }
                 }
@@ -7986,9 +8528,9 @@
                   "auth",
                   "name",
                   "description",
-                  "baseUrlProd",
-                  "prodLogin",
-                  "prodSecretKey"
+                  "baseUrl",
+                  "login",
+                  "secretKey"
                 ],
                 "properties": {
                   "auth": {
@@ -8002,64 +8544,50 @@
                     "x-stoplight": {
                       "id": "rwilrzfb8o4av"
                     },
-                    "description": "Nombre del tenant, es un dato unico no puede existir otro microsite tenant con el mismo nombre",
-                    "example": "CHpay Microsite tenant"
+                    "description": "Nombre del tenant de micrositio, es un dato unico no puede existir otro microsite tenant con el mismo nombre",
+                    "example": "Microsite tenant name",
+                    "minLength": 3,
+                    "maxLength": 255
                   },
                   "description": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "nc85vhr4s8vmt"
                     },
-                    "description": "La Descripción del tenant de micrositios",
-                    "example": "Microsite Tenant de CHpay"
+                    "description": "Descripción del tenant de micrositios",
+                    "example": "Microsite Tenant de CHpay",
+                    "minLength": 3,
+                    "maxLength": 255
                   },
-                  "baseUrlProd": {
+                  "baseUrl": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "3mrm4mx7mwcmi"
                     },
-                    "description": "Url de producción del tenant de micrositio ligado a rest de en donde se crearan los micrositios en producción,es requerido si el Objeto micrositeTenant esta en la request, Es importante que la url brindada tenga una relación correcta con el tenant de produccion de rest brindado, ya que los sitios creados, por crear o existentes deben estar en dicho tenant de rest",
-                    "example": "https://chpay.cl/microsite"
+                    "description": "URL del tenant de micrositio, en el cual, se crearán los micrositios",
+                    "example": "https://microsite-tenant.com/microsite",
+                    "minLength": 13,
+                    "maxLength": 255
                   },
-                  "prodLogin": {
+                  "login": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "x527ui6hslnd7"
                     },
-                    "description": "Login del micrositeTenant de produción de rest para crear las solicitudes de micrositios en producción",
-                    "example": "myProdLogin"
+                    "description": "Login del micrositeTenant de rest para crear las solicitudes de micrositios",
+                    "example": "po1ewm25ssd7",
+                    "minLength": 2,
+                    "maxLength": 255
                   },
-                  "prodSecretKey": {
+                  "secretKey": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "982bmn7j0l67r"
                     },
-                    "description": "Secretkey del micrositeTenant de producción para crear las solicitudes de micrositios en producción",
-                    "example": "myprodSecretHash"
-                  },
-                  "baseUrlTest": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "hxvlyeiu6b71a"
-                    },
-                    "description": "Url del tenant de micrositio de test ligado al tenant rest de test de en donde se crearan los micrositios en test,es requerido si  esta testLogin o testSecretKey estan en la request, Es importante que la url brindada tenga una relación correcta con el tenant de rest de test con el cual se pretende utilizar esta configuración, ya que los sitios creados, por crear o existentes deben estar en dicho tenant de rest",
-                    "example": "https://test.chpay.cl/rest/core"
-                  },
-                  "testLogin": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "0h49txoue4pj8"
-                    },
-                    "description": "testLogin del micrositeTenant de test para crear las solicitudes de micrositios en test, es requerido si el esta baseUrlTest o testSecretKey estan en la request",
-                    "example": "myTestLogin"
-                  },
-                  "testSecretKey": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "h7kteu0tocteg"
-                    },
-                    "description": "Secretkey del micrositeTenant de test para crear las solicitudes de micrositios en test, es requerido si el Objeto micrositeTenant y en el esta baseUrlTest o testSecretKey estan en la request",
-                    "example": "myTestSecretHash"
+                    "description": "Secretkey del micrositeTenant para crear las solicitudes de micrositios",
+                    "example": "wdjwid",
+                    "minLength": 2,
+                    "maxLength": 255
                   }
                 }
               },
@@ -8085,7 +8613,7 @@
           },
           "description": ""
         },
-        "description": "Este servicio permite crear una configuracion de micrositeTenant"
+        "description": "Este servicio permite añadir la configuración de los tenants para la creacion de micrositios. Se debe tener en cuenta que la \"baseUrl\" hace referencia al tenant en el servicio de Micrositios."
       }
     },
     "/api/micorsite-tenants/{micrositeTenant}": {
@@ -8524,64 +9052,48 @@
                     "x-stoplight": {
                       "id": "rwilrzfb8o4av"
                     },
-                    "description": "Nombre del tenant, es un dato unico no puede existir otro microsite tenant con el mismo nombre",
-                    "example": "CHpay Microsite tenant"
+                    "description": "Nombre del tenant de micrositios a actualizar, es un dato unico no puede existir otro microsite tenant con el mismo nombre",
+                    "example": "Microsite Tenant Name Updated",
+                    "minLength": 3,
+                    "maxLength": 255
                   },
                   "description": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "nc85vhr4s8vmt"
                     },
-                    "description": "La Descripción del tenant de micrositios",
-                    "example": "Microsite Tenant de CHpay"
+                    "description": "Descripción del tenant de micrositios a actualizar",
+                    "example": "Microsite Tenant generic description",
+                    "minLength": 3,
+                    "maxLength": 255
                   },
-                  "baseUrlProd": {
+                  "baseUrl": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "3mrm4mx7mwcmi"
                     },
-                    "description": "Url de producción del tenant de micrositio ligado a rest de en donde se crearan los micrositios en producción,es requerido si el Objeto micrositeTenant esta en la request, Es importante que la url brindada tenga una relación correcta con el tenant de produccion de rest brindado, ya que los sitios creados, por crear o existentes deben estar en dicho tenant de rest",
-                    "example": "https://chpay.cl/microsite"
+                    "example": "https://chpay.cl/microsite",
+                    "description": "URL del tenant de micrositios a actualizar"
                   },
-                  "prodLogin": {
+                  "login": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "x527ui6hslnd7"
                     },
-                    "description": "Login del micrositeTenant de produción de rest para crear las solicitudes de micrositios en producción",
-                    "example": "myProdLogin"
+                    "description": "Login del micrositeTenant de rest para crear las solicitudes de micrositios",
+                    "example": "jidjw88755csdwmzz1c8q1",
+                    "minLength": 2,
+                    "maxLength": 255
                   },
-                  "prodSecretKey": {
+                  "secretKey": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "982bmn7j0l67r"
                     },
-                    "description": "Secretkey del micrositeTenant de producción para crear las solicitudes de micrositios en producción",
-                    "example": "myprodSecretHash"
-                  },
-                  "baseUrlTest": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "hxvlyeiu6b71a"
-                    },
-                    "description": "Url del tenant de micrositio de test ligado al tenant rest de test de en donde se crearan los micrositios en test",
-                    "example": "https://test.chpay.cl/rest/core"
-                  },
-                  "testLogin": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "0h49txoue4pj8"
-                    },
-                    "description": "testLogin del micrositeTenant de test para crear las solicitudes de micrositios en test",
-                    "example": "myTestLogin"
-                  },
-                  "testSecretKey": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "h7kteu0tocteg"
-                    },
-                    "description": "Secretkey del micrositeTenant de test para crear las solicitudes de micrositios en test",
-                    "example": "myTestSecretHash"
+                    "description": "Secretkey del micrositeTenant para crear las solicitudes de micrositios",
+                    "example": "djiw8754csa1",
+                    "minLength": 2,
+                    "maxLength": 255
                   }
                 }
               },
@@ -8625,7 +9137,7 @@
             "description": "application/json"
           }
         ],
-        "description": "Este servicio permite actualizar la información de un micrositeTenant"
+        "description": "Este servicio permite actualizar un tenant de micrositios existente."
       },
       "delete": {
         "summary": "Eliminar micrositeTenant",
@@ -8841,7 +9353,7 @@
             }
           }
         },
-        "description": "Este servicio permite elimiar un micrositeTenant "
+        "description": "Este servicio permite eliminar un micrositeTenant existente"
       }
     },
     "/api/tenants/all": {
@@ -8979,6 +9491,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "auth"
+                ],
                 "properties": {
                   "auth": {
                     "$ref": "#/components/schemas/admin-auth",
@@ -8999,16 +9514,14 @@
                 }
               }
             }
-          }
+          },
+          "description": "Este permiso permite eliminar un tenant de micrositios existente."
         }
       }
     },
-    "/api/bins/all": {
+    "/api/subscriptions/all": {
       "post": {
-        "summary": "Listar bins",
-        "tags": [
-          "Admin Bins"
-        ],
+        "summary": "Listar",
         "responses": {
           "200": {
             "description": "OK",
@@ -9077,11 +9590,11 @@
             }
           }
         },
-        "operationId": "post-api-bins-all",
+        "operationId": "post-api-subscriptions-all",
         "x-stoplight": {
           "id": "seln22m6a3qdu"
         },
-        "description": "Endpoint para listar todos los bins con sus respectivos datos.",
+        "description": "Endpoint para listar todos las suscripciones con sus respectivos datos.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9101,8 +9614,12 @@
               }
             }
           }
-        }
-      }
+        },
+        "tags": [
+          "Admin Subscriptions"
+        ]
+      },
+      "parameters": []
     }
   },
   "components": {
@@ -9213,19 +9730,20 @@
           }
         }
       },
-      "binRequest": {
-        "title": "bin-request",
+      "subscriptionRequest": {
+        "title": "subscription-request",
         "x-stoplight": {
           "id": "xcouxpvp91cv6"
         },
         "type": "object",
+        "description": "Petición con la data requerida para crear la configuración de una suscriptcion a un bin ",
         "examples": [
           {
             "franchise": 2,
-            "acquirerBIN": 400900
+            "acquirerBIN": 400900,
+            "merchantCode": 4644986
           }
         ],
-        "description": "Contiene la data requerida para crear un bin",
         "required": [
           "franchise",
           "acquirerBIN"
@@ -9249,8 +9767,8 @@
           }
         }
       },
-      "binResponseShort": {
-        "title": "bin-response",
+      "subscrioptionResponseShort": {
+        "title": "subscription-response",
         "x-stoplight": {
           "id": "4sk5sk4we6lob"
         },
@@ -9258,7 +9776,8 @@
         "description": "Es la data minimizada de los bines usada en la respuestas de los clientes",
         "required": [
           "franchise",
-          "acquirerBIN"
+          "acquirerBIN",
+          "merchant_code"
         ],
         "properties": {
           "id": {
@@ -9279,6 +9798,14 @@
             "description": "Bin del adquirente",
             "example": 400900
           },
+          "merchant_code": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "spk68obhwldl3"
+            },
+            "description": "Codigo que identifica al comercio usualmente es numero de terminal",
+            "example": 166688
+          },
           "version": {
             "type": "integer",
             "x-stoplight": {
@@ -9293,12 +9820,13 @@
             "id": 4,
             "franchise": 2,
             "acquirerBIN": 400900,
+            "merchant_code": 166688,
             "version": 2
           }
         ]
       },
-      "binResponseLong": {
-        "title": "Bin Response Full",
+      "subscrioptionResponseLong": {
+        "title": "Subscrioption Response Full",
         "x-stoplight": {
           "id": "qnd7vu5amp7ci"
         },
@@ -9319,6 +9847,14 @@
             "type": "number",
             "description": "Bin del adquirente",
             "example": 400900
+          },
+          "merchantCode": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "y56nkxf313p28"
+            },
+            "description": "Codigo que identifica al comercio usualmente es numero de terminal",
+            "example": 166688
           },
           "version": {
             "type": "integer",
@@ -9381,6 +9917,7 @@
             "id": 3,
             "franchise": 2,
             "acquirerBIN": 400900,
+            "merchantCode": 166688,
             "version": 2,
             "three_ds_id": null,
             "user_id": 12,
@@ -9390,81 +9927,12 @@
           }
         ]
       },
-      "environments": {
-        "title": "environments",
-        "x-stoplight": {
-          "id": "1fvl6hot6u0xs"
-        },
-        "type": "object",
-        "properties": {
-          "test": {
-            "type": "object",
-            "x-stoplight": {
-              "id": "m1md14a145hkq"
-            },
-            "description": "Indica que se deben crear los recursos en test, este recurso es obligatorio si no se envía el objeto de “prod”.",
-            "properties": {
-              "isActive": {
-                "type": "boolean",
-                "x-stoplight": {
-                  "id": "2upcsy9mn5ngp"
-                },
-                "description": "Indica si el recurso de test se debe crear activo."
-              }
-            }
-          },
-          "prod": {
-            "type": "object",
-            "x-stoplight": {
-              "id": "nt0yk44mu1h1v"
-            },
-            "description": "Indica que se deben crear los recursos en prod, este recurso es obligatorio si no se envía el objeto de “test”.",
-            "properties": {
-              "isActive": {
-                "type": "boolean",
-                "x-stoplight": {
-                  "id": "yq2aj3ifodr3s"
-                },
-                "description": "Indica si el recurso de prod se debe crear activo."
-              }
-            }
-          }
-        },
-        "description": "Este objeto representa los entornos en los que se desean crear los recursos para el endpoint de [create-from-merchant](reference/Kubrick.json/paths/~1api~1integration~1create-from-merchant/post), es requerido enviar como mínimo un environment (test o prod)."
-      },
       "user-response": {
         "title": "user-response",
         "x-stoplight": {
           "id": "mrderuyt2f5bm"
         },
         "type": "object",
-        "examples": [
-          {
-            "id": 3,
-            "name": "cliente name",
-            "email": "test4@email.com",
-            "country": "CL",
-            "status": true,
-            "seller": 1,
-            "reseller": 1,
-            "currency_id": 6,
-            "language_id": 1,
-            "tenant_id": 1,
-            "microsite_tenant_id": 2,
-            "deleted_at": null,
-            "remember_token": null,
-            "created_at": "2024-02-08T23:15:03.000000Z",
-            "updated_at": "2024-02-08T23:15:03.000000Z",
-            "bins": [
-              {
-                "id": 3,
-                "franchise": 2,
-                "acquirer_bin": 400900,
-                "version": 2
-              }
-            ]
-          }
-        ],
         "properties": {
           "id": {
             "type": "number",
@@ -9563,6 +10031,21 @@
               "id": "wv1q8rmilj4ik"
             }
           },
+          "subscrioptions": {
+            "x-stoplight": {
+              "id": "m2c8ysk6i781f"
+            },
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/subscrioptionResponseShort",
+              "x-stoplight": {
+                "id": "zss2tmq7xw6ui"
+              }
+            }
+          },
           "created_at": {
             "type": "string",
             "x-stoplight": {
@@ -9576,52 +10059,36 @@
               "id": "kulfya5niz3td"
             },
             "example": "2024-02-08T23:15:03.000000Z"
-          },
-          "bins": {
-            "x-stoplight": {
-              "id": "m2c8ysk6i781f"
-            },
-            "type": [
-              "array",
-              "null"
+          }
+        },
+        "examples": [
+          {
+            "id": 3,
+            "name": "cliente name",
+            "email": "test3@email.com",
+            "country": "CL",
+            "status": true,
+            "seller": 1,
+            "reseller": 1,
+            "currency_id": 6,
+            "language_id": 1,
+            "tenant_id": 1,
+            "microsite_tenant_id": 12,
+            "deleted_at": "string",
+            "remember_token": "string",
+            "subscrioptions": [
+              {
+                "id": 4,
+                "franchise": 2,
+                "acquirerBIN": 400900,
+                "merchant_code": 166688,
+                "version": 2
+              }
             ],
-            "items": {}
+            "created_at": "2024-02-08T23:15:03.000000Z",
+            "updated_at": "2024-02-08T23:15:03.000000Z"
           }
-        }
-      },
-      "corporateImage": {
-        "title": "corporateImage",
-        "x-stoplight": {
-          "id": "x6osyn0ivxwj5"
-        },
-        "type": "object",
-        "properties": {
-          "logo": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "bu9y8fqn38p19"
-            },
-            "description": "URL del logo del comercio.",
-            "example": "https://google.com//logos/5be01d787b5e5b0001ebb.png"
-          },
-          "primaryColor": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "gb5y07uilz5tq"
-            },
-            "description": "Hexadecimal del color corporativo primario del comercio.",
-            "example": "#0072E1"
-          },
-          "secondaryColor": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "frh3n8qlu1hba"
-            },
-            "description": "Hexadecimal del color corporativo secundario del comercio.",
-            "example": "#FFFFFF"
-          }
-        },
-        "description": "Objeto que contiene la imagen corporativa."
+        ]
       },
       "merchant": {
         "title": "merchant",
@@ -9629,6 +10096,35 @@
           "id": "a1kbmdmxm8ss9"
         },
         "type": "object",
+        "description": "Contiene la configuración del comercio en panel.",
+        "examples": [
+          {
+            "name": "EVERTEC PLACETOPAY S.A.S",
+            "brand": "Placetopay",
+            "mcc": "7929",
+            "languages": [
+              "ES"
+            ],
+            "currencies": [
+              "COP"
+            ],
+            "document": {
+              "type": "string",
+              "number": "900299823-1"
+            },
+            "address": {
+              "city": "medellin",
+              "state": 1,
+              "country": "CO"
+            },
+            "legalRepresentative": {
+              "documentType": "CC",
+              "document": "1037854200",
+              "name": "Ricardo",
+              "surname": "García"
+            }
+          }
+        ],
         "required": [
           "name",
           "brand",
@@ -9656,7 +10152,7 @@
             "example": "Placetopay"
           },
           "mcc": {
-            "type": "integer",
+            "type": "number",
             "x-stoplight": {
               "id": "gozgx56ga7t1f"
             },
@@ -9664,17 +10160,16 @@
             "example": 7929
           },
           "languages": {
-            "type": "array",
             "x-stoplight": {
               "id": "jl2ckhepz4e0o"
             },
             "description": "Arreglo con los idiomas (ISO 639-1).",
+            "type": "array",
             "items": {
+              "$ref": "#/components/schemas/language",
               "x-stoplight": {
                 "id": "xgaps58utzug6"
-              },
-              "type": "string",
-              "example": "ES"
+              }
             }
           },
           "currencies": {
@@ -9684,11 +10179,10 @@
             },
             "description": "Arreglo con los tipos de monedas disponibles por el comercio (ISO 4217.",
             "items": {
+              "$ref": "#/components/schemas/currency",
               "x-stoplight": {
                 "id": "1rapye4p1vm9v"
-              },
-              "type": "string",
-              "example": "COP"
+              }
             }
           },
           "document": {
@@ -9709,8 +10203,7 @@
               "id": "wxs7plbw6zvpi"
             }
           }
-        },
-        "description": "Contiene la configuración del comercio en panel."
+        }
       },
       "document": {
         "title": "document",
@@ -9912,30 +10405,6 @@
           ]
         },
         "title": "paymentMethods",
-        "examples": [
-          {
-            "code": "MC",
-            "oder": 3,
-            "commissionModel": "F",
-            "commissionValue": 2.5,
-            "accountNumber": "1234567811",
-            "financialEntity": 16,
-            "accountType": 1,
-            "threeDS": true,
-            "settings": {
-              "retailCode": "011211406",
-              "terminalLocation": "Medellín",
-              "terminalNumber": "00031431",
-              "username": "FIDUCOLDEX01",
-              "password": "FIDUCOLDEX01",
-              "pfxID": 1,
-              "entityCode": "9002992280",
-              "serviceCode": "001",
-              "isEcommerce": true,
-              "merchantCode": "1269189"
-            }
-          }
-        ],
         "items": {
           "type": "object",
           "required": [
@@ -9995,7 +10464,39 @@
               "description": "Indica si el medio de pago debe tener token de 3DS."
             }
           }
-        }
+        },
+        "examples": [
+          [
+            {
+              "code": "MC",
+              "order": 1,
+              "financialEntity": 16,
+              "commissionModel": "string",
+              "commissionValue": 2.5,
+              "accountNumber": "1234567811",
+              "accountType": 1,
+              "settings": {
+                "retailCode": "011211406",
+                "terminalLocation": "Medellín",
+                "terminalNumber": "00031431",
+                "username": "UserExample",
+                "password": "passwordExample",
+                "pfxID": 1,
+                "entityCode": "9002992280",
+                "serviceCode": "001",
+                "merchantCode": "1269189",
+                "isEcommerce": true,
+                "agreement": 12,
+                "agreementName": "Placetopay",
+                "iacCode": "33456564",
+                "acceptChecks": true,
+                "disableBlocks": "ath_cajas_exito, ath_efecty",
+                "hash": "456445646asdf52fd"
+              },
+              "threeDS": true
+            }
+          ]
+        ]
       },
       "creditRules": {
         "title": "creditRules",
@@ -10003,15 +10504,6 @@
           "id": "lixsrwizzez2p"
         },
         "type": "object",
-        "properties": {
-          "include": {
-            "type": "array",
-            "x-stoplight": {
-              "id": "7gos4ufmxgyqj"
-            },
-            "items": {}
-          }
-        },
         "examples": [
           {
             "include": [
@@ -10043,139 +10535,6 @@
           "id": "boc3j3wz5bfku"
         },
         "type": "object",
-        "required": [
-          "displayName",
-          "type",
-          "category",
-          "email",
-          "currency",
-          "language",
-          "integration",
-          "control"
-        ],
-        "properties": {
-          "displayName": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "hwyt462f70cc7"
-            },
-            "example": "Site name example",
-            "description": "Nombre del sitio a mostrar en panel."
-          },
-          "type": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "3w13em1rfjrbw"
-            },
-            "example": "INT",
-            "description": "Punto de origen de las transacciones que se realizarán por el sitio."
-          },
-          "category": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "nam9o378lyqpb"
-            },
-            "example": "ECOMMERCE",
-            "description": "Define la categoría del sitio."
-          },
-          "email": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "3ptzp3ktromwh"
-            },
-            "example": "admin@email.com",
-            "description": "Correo al cual llegarán los comprobantes de pago de las transacciones relizadas en el sitio."
-          },
-          "currency": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "bmucvdu9g4owo"
-            },
-            "example": "COP",
-            "description": "Moneda que se usará para las transacciones."
-          },
-          "language": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "waf6en84oo0tt"
-            },
-            "example": "ES",
-            "description": "Lenguaje que se usará para las transacciones."
-          },
-          "customBatch": {
-            "type": "number",
-            "x-stoplight": {
-              "id": "wvdjri1lw8flr"
-            },
-            "example": 2345,
-            "description": "Código servicio recaudo"
-          },
-          "expiration": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "6d702v94t9q31"
-            },
-            "description": "Fecha de expiración el sitio, si no es definido o su valor es null la fecha de expiración sera ilimitada.",
-            "example": "2023-06-30 00:00:00",
-            "default": null
-          },
-          "analyticsCode": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "49zhk8l8th2dj"
-            },
-            "description": "Permite añadir el código de google analytics.",
-            "example": "UA-171313251-4, GTM-123812"
-          },
-          "integration": {
-            "$ref": "#/components/schemas/integration",
-            "x-stoplight": {
-              "id": "qehwu80sfqd1h"
-            }
-          },
-          "control": {
-            "$ref": "#/components/schemas/control",
-            "x-stoplight": {
-              "id": "3itrmxog8dnwi"
-            }
-          },
-          "threeDS": {
-            "$ref": "#/components/schemas/site-threeDS",
-            "x-stoplight": {
-              "id": "26jgyubwm70wm"
-            }
-          },
-          "historic": {
-            "$ref": "#/components/schemas/site-historic",
-            "x-stoplight": {
-              "id": "jb67jeuvmxtb8"
-            }
-          },
-          "creditBureau": {
-            "$ref": "#/components/schemas/site-creditBureau",
-            "x-stoplight": {
-              "id": "vm8z96q62tv82"
-            }
-          },
-          "riskEngine": {
-            "$ref": "#/components/schemas/site-riskEngine",
-            "x-stoplight": {
-              "id": "hthx0ssh61iu0"
-            }
-          },
-          "securityFilters": {
-            "$ref": "#/components/schemas/site-securityFilters",
-            "x-stoplight": {
-              "id": "rpkzuvdfyl31o"
-            }
-          },
-          "operation": {
-            "$ref": "#/components/schemas/site-operation",
-            "x-stoplight": {
-              "id": "8so4vk19sor6y"
-            }
-          }
-        },
         "examples": [
           {
             "displayName": "Site name example",
@@ -10269,7 +10628,147 @@
               "mailMerchant": true
             }
           }
-        ]
+        ],
+        "required": [
+          "displayName",
+          "type",
+          "category",
+          "email",
+          "currency",
+          "language",
+          "integration",
+          "control"
+        ],
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "hwyt462f70cc7"
+            },
+            "example": "Site name example",
+            "description": "Nombre del sitio a mostrar en panel."
+          },
+          "type": {
+            "x-stoplight": {
+              "id": "3w13em1rfjrbw"
+            },
+            "example": "INT",
+            "description": "Punto de origen de las transacciones que se realizarán por el sitio.\n\nINT = Internet <br>\nPOS = Punto de venta <br>\nIVR = IVR <br>\nONE = Pago a un clic <br>\nREC = Recurrencia <br>",
+            "enum": [
+              "INT",
+              "POS",
+              "IVR",
+              "ONE",
+              "REC"
+            ]
+          },
+          "category": {
+            "x-stoplight": {
+              "id": "nam9o378lyqpb"
+            },
+            "example": "ECOMMERCE",
+            "description": "Define la categoría del sitio.\n\nECOMMERCE = Comercio electrónico <br>\nCOLLECT = Recaudos <br>",
+            "enum": [
+              "ECOMMERCE",
+              "COLLECT"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "3ptzp3ktromwh"
+            },
+            "example": "admin@email.com",
+            "description": "Correo al cual llegarán los comprobantes de pago de las transacciones relizadas en el sitio."
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currency",
+            "x-stoplight": {
+              "id": "bmucvdu9g4owo"
+            },
+            "description": "Moneda que se usará para las transacciones, la moneda que se envíe en este campo la debe tener el comercio."
+          },
+          "language": {
+            "$ref": "#/components/schemas/language",
+            "x-stoplight": {
+              "id": "waf6en84oo0tt"
+            },
+            "description": "Lenguaje que se usará para las transacciones, el lenguaje que se envíe en este campo lo debe tener el comercio."
+          },
+          "customBatch": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "wvdjri1lw8flr"
+            },
+            "example": 2345,
+            "description": "Código servicio recaudo"
+          },
+          "expiration": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "6d702v94t9q31"
+            },
+            "description": "Fecha de expiración el sitio, si no es definido o su valor es null la fecha de expiración sera ilimitada.",
+            "example": "2023-06-30 00:00:00",
+            "default": null
+          },
+          "analyticsCode": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "49zhk8l8th2dj"
+            },
+            "description": "Permite añadir el código de google analytics.",
+            "example": "UA-171313251-4, GTM-123812"
+          },
+          "integration": {
+            "$ref": "#/components/schemas/integration",
+            "x-stoplight": {
+              "id": "qehwu80sfqd1h"
+            }
+          },
+          "control": {
+            "$ref": "#/components/schemas/control",
+            "x-stoplight": {
+              "id": "3itrmxog8dnwi"
+            }
+          },
+          "threeDS": {
+            "$ref": "#/components/schemas/site-threeDS",
+            "x-stoplight": {
+              "id": "26jgyubwm70wm"
+            }
+          },
+          "historic": {
+            "$ref": "#/components/schemas/site-historic",
+            "x-stoplight": {
+              "id": "jb67jeuvmxtb8"
+            }
+          },
+          "creditBureau": {
+            "$ref": "#/components/schemas/site-creditBureau",
+            "x-stoplight": {
+              "id": "vm8z96q62tv82"
+            }
+          },
+          "riskEngine": {
+            "$ref": "#/components/schemas/site-riskEngine",
+            "x-stoplight": {
+              "id": "hthx0ssh61iu0"
+            }
+          },
+          "securityFilters": {
+            "$ref": "#/components/schemas/site-securityFilters",
+            "x-stoplight": {
+              "id": "rpkzuvdfyl31o"
+            }
+          },
+          "operation": {
+            "$ref": "#/components/schemas/site-operation",
+            "x-stoplight": {
+              "id": "8so4vk19sor6y"
+            }
+          }
+        }
       },
       "integration": {
         "title": "integration",
@@ -10448,6 +10947,16 @@
           }
         },
         "title": "subscriptions",
+        "examples": [
+          [
+            {
+              "franchise": "visa",
+              "acquirerBIN": 400900,
+              "merchantCode": "5240"
+            }
+          ]
+        ],
+        "description": "Objeto que contiene la información de los bines para los cuales va a ser creado el token de ThreeDS, para dichos bines su uso esta limitados a los que se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario).",
         "items": {
           "x-stoplight": {
             "id": "6xc69xs1vg2zn"
@@ -10481,20 +10990,11 @@
                 "id": "25i4pk2rulhhx"
               },
               "example": "5240",
-              "maxLength": 30
+              "maxLength": 30,
+              "description": "Hace referencia al número de terminal entregado por las redes financieras (Terminal number)."
             }
           }
-        },
-        "examples": [
-          [
-            {
-              "franchise": "visa",
-              "acquirerBIN": 400900,
-              "merchantCode": "5240"
-            }
-          ]
-        ],
-        "description": "Objeto que contiene la información de los bines para los cuales va a ser creado el token de ThreeDS, para dichos bines su uso esta limitados a los que se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario)."
+        }
       },
       "threeDS": {
         "title": "threeDS",
@@ -10502,6 +11002,43 @@
           "id": "koadh4own8ew2"
         },
         "type": "object",
+        "examples": [
+          {
+            "brand": "ThreeDS brand example",
+            "country": "COL",
+            "currency": "COP",
+            "url": "https://example.com",
+            "mcc": "0742",
+            "isicClass": 111,
+            "document": {
+              "type": "string",
+              "number": "900299823-1"
+            },
+            "subscriptions": [
+              {
+                "franchise": "visa",
+                "acquirerBIN": 400900,
+                "merchantCode": "5240"
+              }
+            ],
+            "branch": {
+              "name": "ThreeDS Branch Name",
+              "brand": "branch brand example",
+              "country": "COL",
+              "currency": "COP",
+              "url": "https://www.branch-url.com",
+              "subscriptions": {
+                "subscriptions": [
+                  {
+                    "franchise": 1,
+                    "acquirerBIN": 400900,
+                    "merchantCode": "\"5240\""
+                  }
+                ]
+              }
+            }
+          }
+        ],
         "required": [
           "brand",
           "country",
@@ -10522,19 +11059,17 @@
             "example": "ThreeDS brand example"
           },
           "country": {
-            "type": "string",
+            "$ref": "#/components/schemas/country-alpha-three",
             "x-stoplight": {
               "id": "f5de5knebu19i"
             },
-            "example": "COL",
             "description": "Codigo País de origen del comercio ISO 3166-1 alpha-3."
           },
           "currency": {
-            "type": "string",
+            "$ref": "#/components/schemas/currency",
             "x-stoplight": {
               "id": "y13xmav751diz"
             },
-            "example": "COP",
             "description": "Moneda predeterminada codigo ISO 4217."
           },
           "url": {
@@ -10546,7 +11081,7 @@
             "description": "URL del comercio."
           },
           "mcc": {
-            "type": "integer",
+            "type": "number",
             "x-stoplight": {
               "id": "ka9krdx2qr0un"
             },
@@ -10579,44 +11114,7 @@
               "id": "11flmjjgzh88y"
             }
           }
-        },
-        "examples": [
-          {
-            "brand": "ThreeDS brand example",
-            "country": "COL",
-            "currency": "COP",
-            "url": "https://example.com",
-            "mcc": 742,
-            "isicClass": 111,
-            "document": {
-              "type": "string",
-              "number": "900299823-1"
-            },
-            "subscriptions": [
-              {
-                "franchise": "visa",
-                "acquirerBIN": 400900,
-                "merchantCode": "5240"
-              }
-            ],
-            "branch": {
-              "name": "ThreeDS Branch Name",
-              "brand": "branch brand example",
-              "country": "COL",
-              "currency": "COP",
-              "url": "https://www.branch-url.com",
-              "subscriptions": {
-                "subscriptions": [
-                  {
-                    "franchise": 1,
-                    "acquirerBIN": 400900,
-                    "merchantCode": "\"5240\""
-                  }
-                ]
-              }
-            }
-          }
-        ]
+        }
       },
       "microsite": {
         "title": "microsite",
@@ -10624,6 +11122,55 @@
           "id": "23anwat52ahvb"
         },
         "type": "object",
+        "examples": [
+          {
+            "name": "Microsite CLOSED name example",
+            "alias": "example-slug",
+            "type": "CLOSED",
+            "categories": [
+              "test_tecnologia"
+            ],
+            "loginFields": [
+              "document",
+              "reference",
+              "alt_reference"
+            ],
+            "disabled": false,
+            "useWcLightbox": false,
+            "hide": false,
+            "allowPayWithDuplicateReference": false,
+            "allowPartial": false,
+            "isNoBuyerFill": true,
+            "allowDispersion": false,
+            "allowUnlimitedInstallments": false,
+            "exactSearchByReference": false,
+            "allowPayMultipleInvoicesAtOnce": false,
+            "showDescription": true,
+            "allowShowDebtorName": false,
+            "allowSendDebtorCode": false,
+            "allowChangeTotal": false,
+            "olderFirst": false,
+            "allowSeeHistoryPayments": true,
+            "loginFromUrl": true,
+            "flushInvoices": true
+          },
+          {
+            "name": "Microsite OPEN name example",
+            "alias": "example-slug",
+            "type": "OPEN",
+            "categories": [
+              "test_tecnologia"
+            ],
+            "disabled": false,
+            "useWcLightbox": false,
+            "hide": false,
+            "allowPayWithDuplicateReference": false,
+            "autoReferenced": false,
+            "allowRecurrence": false,
+            "notSendBuyerAsPayer": false,
+            "onlyPaymentLink": false
+          }
+        ],
         "required": [
           "name",
           "alias",
@@ -10639,7 +11186,8 @@
             "example": "Microsite name example",
             "description": "Nombre a asignar al micrositio.",
             "minLength": 3,
-            "maxLength": 56
+            "maxLength": 56,
+            "pattern": "'/^[a-zñáéíóúäëïöüàèìòùÑÁÉÍÓÚÄËÏÖÜÀÈÌÒÙÇçÃã\\s\\d\\[\\]\\.,\\$#\\&\\-\\_(\\)\\/\\%\\+\\\\\\':;\\<\\>\\|\\=@]{2,250}$/i'"
           },
           "alias": {
             "type": "string",
@@ -10683,7 +11231,7 @@
                 "id": "zbnjivb80xwom"
               },
               "type": "string",
-              "example": "comercio_electronico"
+              "example": "test_tecnologia"
             }
           },
           "loginFields": {
@@ -10692,7 +11240,11 @@
               "id": "b5g5rroh8w8pq"
             },
             "description": "Solo es requerido si el tipo de micrositio es “CLOSED” y permite elegir los campos que se usarán para que el usuario ingrese al micrositio cerrado, Solo es permitido en los Micrositios Type CLOSED.",
-            "example": 2,
+            "example": [
+              "document",
+              "reference",
+              "alt_reference"
+            ],
             "minItems": 2,
             "uniqueItems": true,
             "items": {
@@ -10882,6 +11434,22 @@
           "id": "n8bsvb4e9vr02"
         },
         "type": "object",
+        "examples": [
+          {
+            "name": "ThreeDS Branch Name",
+            "brand": "branch brand example",
+            "country": "COL",
+            "currency": "COP",
+            "url": "https://www.branch-url.com",
+            "subscriptions": [
+              {
+                "franchise": 1,
+                "acquirerBIN": 400900,
+                "merchantCode": "\"5240\""
+              }
+            ]
+          }
+        ],
         "required": [
           "name",
           "brand",
@@ -10907,19 +11475,17 @@
             "description": "Marca de la rama."
           },
           "country": {
-            "type": "string",
+            "$ref": "#/components/schemas/country-alpha-three",
             "x-stoplight": {
               "id": "my8f67uajzolj"
             },
-            "example": "COL",
             "description": "Codigo País de origen de la rama, ISO 3166-1 alpha-3."
           },
           "currency": {
-            "type": "string",
+            "$ref": "#/components/schemas/currency",
             "x-stoplight": {
               "id": "yvb1ugxl721l1"
             },
-            "example": "COP",
             "description": "Moneda predeterminada de la rama, ISO 4217."
           },
           "url": {
@@ -10937,23 +11503,7 @@
               "id": "jwv88l9gh0d7p"
             }
           }
-        },
-        "examples": [
-          {
-            "name": "ThreeDS Branch Name",
-            "brand": "branch brand example",
-            "country": "COL",
-            "currency": "COP",
-            "url": "https://www.branch-url.com",
-            "subscriptions": [
-              {
-                "franchise": 1,
-                "acquirerBIN": 400900,
-                "merchantCode": "\"5240\""
-              }
-            ]
-          }
-        ]
+        }
       },
       "branches": {
         "type": "array",
@@ -11016,13 +11566,11 @@
               "description": "Marca de la rama."
             },
             "country": {
-              "type": "string",
-              "example": "COL",
+              "$ref": "#/components/schemas/country-alpha-three",
               "description": "Codigo País de origen de la rama, ISO 3166-1 alpha-3."
             },
             "currency": {
-              "type": "string",
-              "example": "COP",
+              "$ref": "#/components/schemas/currency",
               "description": "Moneda predeterminada de la rama, ISO 4217."
             },
             "url": {
@@ -11909,6 +12457,26 @@
         },
         "type": "object",
         "description": "Objeto que contiene los parametros adicionales para la creación del certificado de Credibanco y la configuración de medio de pago PSE.",
+        "examples": [
+          {
+            "retailCode": "011211406",
+            "terminalLocation": "Medellín",
+            "terminalNumber": "00031431",
+            "username": "UserExample",
+            "password": "passwordExample",
+            "pfxID": 1,
+            "entityCode": "9002992280",
+            "serviceCode": "001",
+            "merchantCode": "1269189",
+            "isEcommerce": true,
+            "agreement": 12,
+            "agreementName": "Placetopay",
+            "iacCode": "33456564",
+            "acceptChecks": true,
+            "disableBlocks": "ath_cajas_exito, ath_efecty",
+            "hash": "456445646asdf52fd"
+          }
+        ],
         "properties": {
           "retailCode": {
             "type": "string",
@@ -12029,27 +12597,23 @@
             "description": "Bloques a deshabilitar, Escriba uno o más nombres de bloque separado por comas, los bloques disponibles son: ath_baloto, ath_corresponsales, ath_cajas_exito, ath_efecty, ath_cajeros, ath_supergiros",
             "example": "ath_cajas_exito, ath_efecty",
             "maxLength": 255
+          },
+          "hash": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "nv1zpmy810rjw"
+            },
+            "minLength": 15,
+            "maxLength": 50,
+            "example": "456445646asdf52fd"
+          },
+          "forceConversionCurrency": {
+            "$ref": "#/components/schemas/currency",
+            "x-stoplight": {
+              "id": "6h089qrhi1wat"
+            }
           }
-        },
-        "examples": [
-          {
-            "retailCode": "011211406",
-            "terminalLocation": "Medellín",
-            "terminalNumber": "00031431",
-            "username": "UserExample",
-            "password": "passwordExample",
-            "pfxID": 1,
-            "entityCode": "9002992280",
-            "serviceCode": "001",
-            "merchantCode": "1269189",
-            "isEcommerce": true,
-            "agreement": 12,
-            "agreementName": "Placetopay",
-            "iacCode": "33456564",
-            "acceptChecks": true,
-            "disableBlocks": "ath_cajas_exito, ath_efecty"
-          }
-        ]
+        }
       },
       "site-threeDS": {
         "title": "site-threeDS",
@@ -12535,6 +13099,86 @@
             "description": "Indica si se debe enviar una copia del email al comercio cuando una transacción realizada en el panel administrativo es exitosa. Su valor por defecto es False."
           }
         }
+      },
+      "country-alpha-two": {
+        "title": "country-alpha-two",
+        "x-stoplight": {
+          "id": "sxa0mofxu6g3n"
+        },
+        "enum": [
+          "CO",
+          "BZ",
+          "BR",
+          "CL",
+          "CR",
+          "EC",
+          "HN",
+          "PR",
+          "PE",
+          "PA",
+          "UY"
+        ],
+        "description": ""
+      },
+      "language": {
+        "title": "language",
+        "x-stoplight": {
+          "id": "if9h2ltoey6jo"
+        },
+        "enum": [
+          "ES",
+          "EN",
+          "FR",
+          "IT",
+          "PT"
+        ]
+      },
+      "currency": {
+        "title": "currency-alpha-three",
+        "x-stoplight": {
+          "id": "rzl72fj2oxfst"
+        },
+        "enum": [
+          "ARS",
+          "AUD",
+          "BRL",
+          "BZD",
+          "CAD",
+          "CLP",
+          "CNY",
+          "COP",
+          "CRC",
+          "EUR",
+          "GBP",
+          "HLN",
+          "JPY",
+          "MXN",
+          "PEN",
+          "SGD",
+          "THB",
+          "USD",
+          "UYU",
+          "VEB",
+          "ZAR"
+        ]
+      },
+      "country-alpha-three": {
+        "title": "country-alpha-three",
+        "x-stoplight": {
+          "id": "mecc8ckqfjguc"
+        },
+        "enum": [
+          "COL",
+          "PRI",
+          "CRI",
+          "BLZ",
+          "PAN",
+          "CHL",
+          "MEX",
+          "HND",
+          "URY",
+          "ECU"
+        ]
       }
     },
     "requestBodies": {},
