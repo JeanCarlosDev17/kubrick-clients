@@ -6733,7 +6733,7 @@
                     "x-stoplight": {
                       "id": "q9jsocqbzb7o0"
                     },
-                    "description": "URL base del tenant, esta hace referencia al tenant en el servicio de rest",
+                    "description": "Url del del tenant de rest, en el cual, se crearán los recursos (Comercios, sitios, medios de pago)",
                     "example": "https://tenant-url.com",
                     "minLength": 13,
                     "maxLength": 255
@@ -6778,7 +6778,7 @@
               }
             }
           },
-          "description": "Este servicio permite añadir la configuración de los tenants para la creacion de los recursos en panel. Se debe tener en cuenta que la \"baseUrl\" hace referencia al tenant en el servicio de Rest."
+          "description": ""
         }
       }
     },
@@ -7320,7 +7320,7 @@
                     },
                     "minLength": 13,
                     "maxLength": 255,
-                    "description": "ULR base del tenant a actualizar",
+                    "description": "URL base del tenant a actualizar",
                     "example": "https://tenant-url-updated.com"
                   },
                   "login": {
@@ -7365,7 +7365,7 @@
               }
             }
           },
-          "description": "Este servicio permite actualizar la información de un tenant existente"
+          "description": ""
         },
         "description": "El endpoint para actualizar permite modificar los datos de un registro enviando el ID del recurso como último parametro del endpoint, en este caso, la petición que se envía contiene un cuerpo similar que la petición de [crear tenant](reference/Kubrick.json/paths/~1api~1integration~1create-from-merchant/post)."
       },
@@ -8178,7 +8178,7 @@
                     "x-stoplight": {
                       "id": "3mrm4mx7mwcmi"
                     },
-                    "description": "Url del del tenant de micrositio ligado a rest de en donde se crearan los micrositios,es requerido si el objeto micrositeTenant esta en la request, es importante que la url brindada tenga una relación correcta con el tenant de produccion de rest brindado, ya que los sitios creados, por crear o existentes deben estar en dicho tenant de rest",
+                    "description": "Url del del tenant de micrositio, en el cual, se crearán los micrositios",
                     "example": "https://microsite-tenant.com/microsite",
                     "minLength": 13,
                     "maxLength": 255
@@ -8686,8 +8686,8 @@
                     "x-stoplight": {
                       "id": "3mrm4mx7mwcmi"
                     },
-                    "description": "Url de del tenant de micrositio ligado a rest de en donde se crearan los micrositios en producción, es requerido si el objeto micrositeTenant esta en la request, es importante que la url brindada tenga una relación correcta con el tenant de produccion de rest brindado, ya que los sitios creados, por crear o existentes deben estar en dicho tenant de rest",
-                    "example": "https://chpay.cl/microsite"
+                    "example": "https://chpay.cl/microsite",
+                    "description": "URL del tenant de micrositios a actualizar"
                   },
                   "login": {
                     "type": "string",
