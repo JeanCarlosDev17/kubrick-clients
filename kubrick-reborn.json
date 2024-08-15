@@ -6702,33 +6702,59 @@
                     "prodSecretKey": "kojj554n85q"
                   }
                 },
+                "required": [
+                  "auth",
+                  "name",
+                  "description",
+                  "baseUrl",
+                  "login",
+                  "secretKey"
+                ],
                 "properties": {
                   "auth": {
                     "$ref": "#/components/schemas/admin-auth"
                   },
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 3,
+                    "description": "Nombre para identificar el tenant.",
+                    "maxLength": 255,
+                    "example": "Tenant name"
                   },
                   "description": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 255,
+                    "example": "Tenant generic description",
+                    "description": "Descripción del tenant."
                   },
-                  "baseUrlTest": {
-                    "type": "string"
+                  "baseUrl": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "q9jsocqbzb7o0"
+                    },
+                    "description": "URL base del tenant, esta hace referencia al tenant en el servicio de rest",
+                    "example": "https://tenant-url.com",
+                    "minLength": 13,
+                    "maxLength": 255
                   },
-                  "testLogin": {
-                    "type": "string"
+                  "login": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "p7fiqz9rll2l0"
+                    },
+                    "example": "jdjiw32141oij2ddn9g8tze28",
+                    "minLength": 2,
+                    "maxLength": 255,
+                    "description": "Login con el que se construye la autenticación."
                   },
-                  "testSecretKey": {
-                    "type": "string"
-                  },
-                  "baseUrlProd": {
-                    "type": "string"
-                  },
-                  "prodLogin": {
-                    "type": "string"
-                  },
-                  "prodSecretKey": {
-                    "type": "string"
+                  "secretKey": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "2mengznj0e3fu"
+                    },
+                    "example": "n88te55gdsfd11bga6a",
+                    "description": "SecretKey con el que se construye la autenticación."
                   }
                 }
               },
@@ -6751,7 +6777,8 @@
                 }
               }
             }
-          }
+          },
+          "description": "Este servicio permite añadir la configuración de los tenants para la creacion de los recursos en panel. Se debe tener en cuenta que la \"baseUrl\" hace referencia al tenant en el servicio de Rest."
         }
       }
     },
@@ -7267,33 +7294,54 @@
                     "prodSecretKey": "kojj554n85qsjdljbn33221-actualizado"
                   }
                 },
+                "required": [
+                  "auth"
+                ],
                 "properties": {
                   "auth": {
                     "$ref": "#/components/schemas/admin-auth"
                   },
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Nombre del tenant a actualizar",
+                    "minLength": 3,
+                    "maxLength": 255
                   },
                   "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Descripción del tenant a actualizar",
+                    "minLength": 3,
+                    "maxLength": 255
                   },
-                  "baseUrlTest": {
-                    "type": "string"
+                  "baseUrl": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "nytevyf4z05ub"
+                    },
+                    "minLength": 13,
+                    "maxLength": 255,
+                    "description": "ULR base del tenant a actualizar",
+                    "example": "https://tenant-url-updated.com"
                   },
-                  "testLogin": {
-                    "type": "string"
+                  "login": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "azz26m1ivqqeo"
+                    },
+                    "example": "jy84trthdbcxxx884pqzz",
+                    "minLength": 2,
+                    "maxLength": 255,
+                    "description": "Login del tenant a actualizar"
                   },
-                  "testSecretKey": {
-                    "type": "string"
-                  },
-                  "baseUrlProd": {
-                    "type": "string"
-                  },
-                  "prodLogin": {
-                    "type": "string"
-                  },
-                  "prodSecretKey": {
-                    "type": "string"
+                  "secretKey": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "m5nss74ckd9ry"
+                    },
+                    "description": "SecretKey del tenant a actualizar",
+                    "pattern": "pkoe85xswn800s2",
+                    "minLength": 2,
+                    "maxLength": 255
                   }
                 }
               },
@@ -7316,7 +7364,8 @@
                 }
               }
             }
-          }
+          },
+          "description": "Este servicio permite actualizar la información de un tenant existente"
         },
         "description": "El endpoint para actualizar permite modificar los datos de un registro enviando el ID del recurso como último parametro del endpoint, en este caso, la petición que se envía contiene un cuerpo similar que la petición de [crear tenant](reference/Kubrick.json/paths/~1api~1integration~1create-from-merchant/post)."
       },
@@ -7521,6 +7570,9 @@
                     }
                   }
                 },
+                "required": [
+                  "auth"
+                ],
                 "properties": {
                   "auth": {
                     "$ref": "#/components/schemas/admin-auth"
@@ -7538,7 +7590,8 @@
                 }
               }
             }
-          }
+          },
+          "description": "Este servicio permite eliminar un tenant existente."
         },
         "description": "El endpoint de eliminar permite borrar un admin de la BD enviando el ID como último parametro en el endpoint y la [autenticación](reference/Kubrick.json/components/schemas/admin-auth) en el cuerpo de la petición."
       },
@@ -7694,6 +7747,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "auth"
+                ],
                 "properties": {
                   "auth": {
                     "$ref": "#/components/schemas/admin-auth",
