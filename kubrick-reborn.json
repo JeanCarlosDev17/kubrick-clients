@@ -7925,23 +7925,14 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "auth"
+                ],
                 "properties": {
                   "auth": {
                     "$ref": "#/components/schemas/admin-auth",
                     "x-stoplight": {
                       "id": "yyeh0ga5gvvhn"
-                    }
-                  },
-                  "data": {
-                    "type": "array",
-                    "x-stoplight": {
-                      "id": "aiyt6277c241r"
-                    },
-                    "items": {
-                      "$ref": "#/components/schemas/micrositeTenantResponse",
-                      "x-stoplight": {
-                        "id": "ice7mic4jqei4"
-                      }
                     }
                   }
                 }
@@ -8151,9 +8142,9 @@
                   "auth",
                   "name",
                   "description",
-                  "baseUrlProd",
-                  "prodLogin",
-                  "prodSecretKey"
+                  "baseUrl",
+                  "login",
+                  "secretKey"
                 ],
                 "properties": {
                   "auth": {
@@ -8167,64 +8158,50 @@
                     "x-stoplight": {
                       "id": "rwilrzfb8o4av"
                     },
-                    "description": "Nombre del tenant, es un dato unico no puede existir otro microsite tenant con el mismo nombre",
-                    "example": "CHpay Microsite tenant"
+                    "description": "Nombre del tenant de micrositio, es un dato unico no puede existir otro microsite tenant con el mismo nombre",
+                    "example": "Microsite tenant name",
+                    "minLength": 3,
+                    "maxLength": 255
                   },
                   "description": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "nc85vhr4s8vmt"
                     },
-                    "description": "La Descripción del tenant de micrositios",
-                    "example": "Microsite Tenant de CHpay"
+                    "description": "Descripción del tenant de micrositios",
+                    "example": "Microsite Tenant de CHpay",
+                    "minLength": 3,
+                    "maxLength": 255
                   },
-                  "baseUrlProd": {
+                  "baseUrl": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "3mrm4mx7mwcmi"
                     },
-                    "description": "Url de producción del tenant de micrositio ligado a rest de en donde se crearan los micrositios en producción,es requerido si el Objeto micrositeTenant esta en la request, Es importante que la url brindada tenga una relación correcta con el tenant de produccion de rest brindado, ya que los sitios creados, por crear o existentes deben estar en dicho tenant de rest",
-                    "example": "https://chpay.cl/microsite"
+                    "description": "Url del del tenant de micrositio ligado a rest de en donde se crearan los micrositios,es requerido si el objeto micrositeTenant esta en la request, es importante que la url brindada tenga una relación correcta con el tenant de produccion de rest brindado, ya que los sitios creados, por crear o existentes deben estar en dicho tenant de rest",
+                    "example": "https://microsite-tenant.com/microsite",
+                    "minLength": 13,
+                    "maxLength": 255
                   },
-                  "prodLogin": {
+                  "login": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "x527ui6hslnd7"
                     },
-                    "description": "Login del micrositeTenant de produción de rest para crear las solicitudes de micrositios en producción",
-                    "example": "myProdLogin"
+                    "description": "Login del micrositeTenant de rest para crear las solicitudes de micrositios",
+                    "example": "po1ewm25ssd7",
+                    "minLength": 2,
+                    "maxLength": 255
                   },
-                  "prodSecretKey": {
+                  "secretKey": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "982bmn7j0l67r"
                     },
-                    "description": "Secretkey del micrositeTenant de producción para crear las solicitudes de micrositios en producción",
-                    "example": "myprodSecretHash"
-                  },
-                  "baseUrlTest": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "hxvlyeiu6b71a"
-                    },
-                    "description": "Url del tenant de micrositio de test ligado al tenant rest de test de en donde se crearan los micrositios en test,es requerido si  esta testLogin o testSecretKey estan en la request, Es importante que la url brindada tenga una relación correcta con el tenant de rest de test con el cual se pretende utilizar esta configuración, ya que los sitios creados, por crear o existentes deben estar en dicho tenant de rest",
-                    "example": "https://test.chpay.cl/rest/core"
-                  },
-                  "testLogin": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "0h49txoue4pj8"
-                    },
-                    "description": "testLogin del micrositeTenant de test para crear las solicitudes de micrositios en test, es requerido si el esta baseUrlTest o testSecretKey estan en la request",
-                    "example": "myTestLogin"
-                  },
-                  "testSecretKey": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "h7kteu0tocteg"
-                    },
-                    "description": "Secretkey del micrositeTenant de test para crear las solicitudes de micrositios en test, es requerido si el Objeto micrositeTenant y en el esta baseUrlTest o testSecretKey estan en la request",
-                    "example": "myTestSecretHash"
+                    "description": "Secretkey del micrositeTenant para crear las solicitudes de micrositios",
+                    "example": "wdjwid",
+                    "minLength": 2,
+                    "maxLength": 255
                   }
                 }
               },
@@ -8250,7 +8227,7 @@
           },
           "description": ""
         },
-        "description": "Este servicio permite crear una configuracion de micrositeTenant"
+        "description": "Este servicio permite añadir la configuración de los tenants para la creacion de micrositios. Se debe tener en cuenta que la \"baseUrl\" hace referencia al tenant en el servicio de Micrositios."
       }
     },
     "/api/micorsite-tenants/{micrositeTenant}": {
@@ -8689,64 +8666,48 @@
                     "x-stoplight": {
                       "id": "rwilrzfb8o4av"
                     },
-                    "description": "Nombre del tenant, es un dato unico no puede existir otro microsite tenant con el mismo nombre",
-                    "example": "CHpay Microsite tenant"
+                    "description": "Nombre del tenant de micrositios a actualizar, es un dato unico no puede existir otro microsite tenant con el mismo nombre",
+                    "example": "Microsite Tenant Name Updated",
+                    "minLength": 3,
+                    "maxLength": 255
                   },
                   "description": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "nc85vhr4s8vmt"
                     },
-                    "description": "La Descripción del tenant de micrositios",
-                    "example": "Microsite Tenant de CHpay"
+                    "description": "Descripción del tenant de micrositios a actualizar",
+                    "example": "Microsite Tenant generic description",
+                    "minLength": 3,
+                    "maxLength": 255
                   },
-                  "baseUrlProd": {
+                  "baseUrl": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "3mrm4mx7mwcmi"
                     },
-                    "description": "Url de producción del tenant de micrositio ligado a rest de en donde se crearan los micrositios en producción,es requerido si el Objeto micrositeTenant esta en la request, Es importante que la url brindada tenga una relación correcta con el tenant de produccion de rest brindado, ya que los sitios creados, por crear o existentes deben estar en dicho tenant de rest",
+                    "description": "Url de del tenant de micrositio ligado a rest de en donde se crearan los micrositios en producción, es requerido si el objeto micrositeTenant esta en la request, es importante que la url brindada tenga una relación correcta con el tenant de produccion de rest brindado, ya que los sitios creados, por crear o existentes deben estar en dicho tenant de rest",
                     "example": "https://chpay.cl/microsite"
                   },
-                  "prodLogin": {
+                  "login": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "x527ui6hslnd7"
                     },
-                    "description": "Login del micrositeTenant de produción de rest para crear las solicitudes de micrositios en producción",
-                    "example": "myProdLogin"
+                    "description": "Login del micrositeTenant de rest para crear las solicitudes de micrositios",
+                    "example": "jidjw88755csdwmzz1c8q1",
+                    "minLength": 2,
+                    "maxLength": 255
                   },
-                  "prodSecretKey": {
+                  "secretKey": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "982bmn7j0l67r"
                     },
-                    "description": "Secretkey del micrositeTenant de producción para crear las solicitudes de micrositios en producción",
-                    "example": "myprodSecretHash"
-                  },
-                  "baseUrlTest": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "hxvlyeiu6b71a"
-                    },
-                    "description": "Url del tenant de micrositio de test ligado al tenant rest de test de en donde se crearan los micrositios en test",
-                    "example": "https://test.chpay.cl/rest/core"
-                  },
-                  "testLogin": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "0h49txoue4pj8"
-                    },
-                    "description": "testLogin del micrositeTenant de test para crear las solicitudes de micrositios en test",
-                    "example": "myTestLogin"
-                  },
-                  "testSecretKey": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "h7kteu0tocteg"
-                    },
-                    "description": "Secretkey del micrositeTenant de test para crear las solicitudes de micrositios en test",
-                    "example": "myTestSecretHash"
+                    "description": "Secretkey del micrositeTenant para crear las solicitudes de micrositios",
+                    "example": "djiw8754csa1",
+                    "minLength": 2,
+                    "maxLength": 255
                   }
                 }
               },
@@ -8790,7 +8751,7 @@
             "description": "application/json"
           }
         ],
-        "description": "Este servicio permite actualizar la información de un micrositeTenant"
+        "description": "Este servicio permite actualizar un tenant de micrositios existente."
       },
       "delete": {
         "summary": "Eliminar micrositeTenant",
@@ -9006,7 +8967,7 @@
             }
           }
         },
-        "description": "Este servicio permite elimiar un micrositeTenant "
+        "description": "Este servicio permite eliminar un micrositeTenant existente"
       }
     },
     "/api/tenants/all": {
@@ -9144,6 +9105,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "auth"
+                ],
                 "properties": {
                   "auth": {
                     "$ref": "#/components/schemas/admin-auth",
@@ -9164,7 +9128,8 @@
                 }
               }
             }
-          }
+          },
+          "description": "Este permiso permite eliminar un tenant de micrositios existente."
         }
       }
     },
