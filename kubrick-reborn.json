@@ -4661,9 +4661,8 @@
                     "example": "elliot.alderson@test.com"
                   },
                   "country": {
-                    "type": "string",
-                    "description": "País del admin a crear (ISO 3166-1 alfa-2).",
-                    "example": "CO"
+                    "$ref": "#/components/schemas/country-alpha-two",
+                    "description": "País del admin a crear (ISO 3166-1 alfa-2)."
                   },
                   "password": {
                     "type": "string",
@@ -5215,9 +5214,8 @@
                     "example": "Elliot Alderson Updated"
                   },
                   "country": {
-                    "type": "string",
-                    "description": "Indicativo del país en ISO 3166-1 alpha-2.",
-                    "example": "CR"
+                    "$ref": "#/components/schemas/country-alpha-two",
+                    "description": "Indicativo del país en ISO 3166-1 alpha-2."
                   },
                   "status": {
                     "type": "boolean",
