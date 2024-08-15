@@ -6733,7 +6733,7 @@
                     "x-stoplight": {
                       "id": "q9jsocqbzb7o0"
                     },
-                    "description": "Url del del tenant de rest, en el cual, se crearán los recursos (Comercios, sitios, medios de pago)",
+                    "description": "URL del tenant de rest, en el cual, se crearán los recursos (Comercios, sitios, medios de pago)",
                     "example": "https://tenant-url.com",
                     "minLength": 13,
                     "maxLength": 255
@@ -8178,7 +8178,7 @@
                     "x-stoplight": {
                       "id": "3mrm4mx7mwcmi"
                     },
-                    "description": "Url del del tenant de micrositio, en el cual, se crearán los micrositios",
+                    "description": "URL del tenant de micrositio, en el cual, se crearán los micrositios",
                     "example": "https://microsite-tenant.com/microsite",
                     "minLength": 13,
                     "maxLength": 255
