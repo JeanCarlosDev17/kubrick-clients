@@ -1783,7 +1783,7 @@
                       "alias": "example-slug",
                       "type": "OPEN",
                       "categories": [
-                        "comercio_electronico"
+                        "test_tecnologia"
                       ],
                       "disabled": false,
                       "useWcLightbox": false,
@@ -1953,7 +1953,7 @@
                       "alias": "example-slug",
                       "type": "OPEN",
                       "categories": [
-                        "comercio_electronico"
+                        "test_tecnologia"
                       ],
                       "disabled": false,
                       "useWcLightbox": false,
@@ -2147,7 +2147,7 @@
                       "alias": "example-slug",
                       "type": "OPEN",
                       "categories": [
-                        "comercio_electronico"
+                        "test_tecnologia"
                       ],
                       "disabled": false,
                       "useWcLightbox": false,
@@ -2353,7 +2353,7 @@
                       "alias": "example-slug",
                       "type": "CLOSED",
                       "categories": [
-                        "comercio_electronico"
+                        "test_tecnologia"
                       ],
                       "loginFields": [
                         "document",
@@ -11122,6 +11122,55 @@
           "id": "23anwat52ahvb"
         },
         "type": "object",
+        "examples": [
+          {
+            "name": "Microsite CLOSED name example",
+            "alias": "example-slug",
+            "type": "CLOSED",
+            "categories": [
+              "test_tecnologia"
+            ],
+            "loginFields": [
+              "document",
+              "reference",
+              "alt_reference"
+            ],
+            "disabled": false,
+            "useWcLightbox": false,
+            "hide": false,
+            "allowPayWithDuplicateReference": false,
+            "allowPartial": false,
+            "isNoBuyerFill": true,
+            "allowDispersion": false,
+            "allowUnlimitedInstallments": false,
+            "exactSearchByReference": false,
+            "allowPayMultipleInvoicesAtOnce": false,
+            "showDescription": true,
+            "allowShowDebtorName": false,
+            "allowSendDebtorCode": false,
+            "allowChangeTotal": false,
+            "olderFirst": false,
+            "allowSeeHistoryPayments": true,
+            "loginFromUrl": true,
+            "flushInvoices": true
+          },
+          {
+            "name": "Microsite OPEN name example",
+            "alias": "example-slug",
+            "type": "OPEN",
+            "categories": [
+              "test_tecnologia"
+            ],
+            "disabled": false,
+            "useWcLightbox": false,
+            "hide": false,
+            "allowPayWithDuplicateReference": false,
+            "autoReferenced": false,
+            "allowRecurrence": false,
+            "notSendBuyerAsPayer": false,
+            "onlyPaymentLink": false
+          }
+        ],
         "required": [
           "name",
           "alias",
@@ -11182,7 +11231,7 @@
                 "id": "zbnjivb80xwom"
               },
               "type": "string",
-              "example": "comercio_electronico"
+              "example": "test_tecnologia"
             }
           },
           "loginFields": {
@@ -11377,57 +11426,7 @@
             "default": true,
             "description": "Habilita la eliminación de ordenes de pago expiradas y no pagadas de forma automática. Solo es permitido en los Micrositios Type CLOSED"
           }
-        },
-        "description": "",
-        "examples": [
-          {
-            "name": "Microsite CLOSED name example",
-            "alias": "example-slug",
-            "type": "CLOSED",
-            "categories": [
-              "comercio_electronico"
-            ],
-            "loginFields": [
-              "document",
-              "reference",
-              "alt_reference"
-            ],
-            "disabled": false,
-            "useWcLightbox": false,
-            "hide": false,
-            "allowPayWithDuplicateReference": false,
-            "allowPartial": false,
-            "isNoBuyerFill": true,
-            "allowDispersion": false,
-            "allowUnlimitedInstallments": false,
-            "exactSearchByReference": false,
-            "allowPayMultipleInvoicesAtOnce": false,
-            "showDescription": true,
-            "allowShowDebtorName": false,
-            "allowSendDebtorCode": false,
-            "allowChangeTotal": false,
-            "olderFirst": false,
-            "allowSeeHistoryPayments": true,
-            "loginFromUrl": true,
-            "flushInvoices": true
-          },
-          {
-            "name": "Microsite OPEN name example",
-            "alias": "example-slug",
-            "type": "OPEN",
-            "categories": [
-              "comercio_electronico"
-            ],
-            "disabled": false,
-            "useWcLightbox": false,
-            "hide": false,
-            "allowPayWithDuplicateReference": false,
-            "autoReferenced": false,
-            "allowRecurrence": false,
-            "notSendBuyerAsPayer": false,
-            "onlyPaymentLink": false
-          }
-        ]
+        }
       },
       "branch": {
         "title": "branch",
