@@ -1128,9 +1128,15 @@
                       "example": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV",
                       "description": "Token del comercio."
                     },
+                    "tokenExpiresAt": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "x3i7qvv3id6in"
+                      },
+                      "example": "2025-09-25 00:15:48"
+                    },
                     "branches": {
                       "type": "array",
-                      "example": "ThreeDS branch name",
                       "x-stoplight": {
                         "id": "htcl5njnjjqdg"
                       },
@@ -1164,6 +1170,13 @@
                             },
                             "description": "Token de la rama.",
                             "example": "koskdopksakdaokdsas4d6asd6a451c56a4d8w782"
+                          },
+                          "tokenExpiresAt": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "22nn0od8ufy6s"
+                            },
+                            "example": "2025-09-25 00:15:13"
                           }
                         }
                       }
@@ -1171,7 +1184,7 @@
                   }
                 },
                 "examples": {
-                  "Example 1": {
+                  "Example 2": {
                     "value": {
                       "status": {
                         "status": "OK",
@@ -1182,12 +1195,14 @@
                       "requestId": 231,
                       "panelId": 1533,
                       "name": "ThreeDS Name Example",
-                      "token": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV-",
+                      "token": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV",
+                      "tokenExpiresAt": "2025-09-25 00:15:48",
                       "branches": [
                         {
-                          "panelId": 8362,
-                          "name": "First branch example name",
-                          "token": "dshdkjandsadad54sa56d5asg54gdet4hf46b4sda1d"
+                          "panelId": 1686,
+                          "name": "ThreeDS Branch Name Example",
+                          "token": "koskdopksakdaokdsas4d6asd6a451c56a4d8w782",
+                          "tokenExpiresAt": "2025-09-25 00:15:13"
                         }
                       ]
                     }
@@ -4342,14 +4357,16 @@
             "x-stoplight": {
               "id": "rizw7tdxwgrq6"
             },
-            "description": "Marca con la cual fue creado el comercio en el panel de mpi."
+            "description": "Marca con la cual fue creado el comercio en el panel de mpi.",
+            "example": "marca example"
           },
           "token": {
             "type": "string",
             "x-stoplight": {
               "id": "5j6v6cwlgj8vn"
             },
-            "description": "token del comercio creado\n"
+            "description": "token del comercio creado\n",
+            "example": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2"
           },
           "tokenExpiresAt": {
             "type": "string",
@@ -4357,14 +4374,15 @@
               "id": "6z64mfxyi2k90"
             },
             "description": "fecha de expiracion del token",
-            "example": "YTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2NjM2QyOTNhN"
+            "example": "2025-09-25 00:15:48"
           },
           "status": {
             "type": "string",
             "x-stoplight": {
               "id": "sr8aibmijtvng"
             },
-            "description": "Estado del recurso."
+            "description": "Estado del recurso.",
+            "example": "FINISHED"
           },
           "branches": {
             "type": "array",
@@ -4380,13 +4398,37 @@
             }
           },
           "details": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "x-stoplight": {
               "id": "1ivc8myaj1gls"
             },
-            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
+            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error.",
+            "example": "null"
           }
-        }
+        },
+        "examples": [
+          {
+            "panelId": 9361,
+            "name": "merchant threeDS name",
+            "brand": "marca example",
+            "token": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2",
+            "tokenExpiresAt": "2025-09-25 00:15:48",
+            "status": "FINISHED",
+            "branches": [
+              {
+                "panelId": 187,
+                "name": "branch name",
+                "brand": "branch brach example",
+                "token": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
+                "tokenExpiresAt": "2025-09-25 00:15:48"
+              }
+            ],
+            "details": "null"
+          }
+        ]
       },
       "paymentMethods-info": {
         "title": "paymentMethods-info",
