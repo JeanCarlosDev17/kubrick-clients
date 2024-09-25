@@ -4055,62 +4055,6 @@
         },
         "title": "notification",
         "description": "Esta URL debe estar expuesta en un puerto público (80 o 443) y debe tener la capacidad de recibir una petición tipo POST; se enviará una notificación por cada [environment](reference/Kubrick.json/components/schemas/environments) que se haya solcitado, a continuación se muestra la estructura de la notificación:",
-        "examples": [
-          {
-            "integrationId": 0,
-            "environment": "test",
-            "status": {
-              "status": "OK",
-              "reason": "RC",
-              "message": "The request has been processed successfully",
-              "date": "2024-02-08T23:15:08+00:00"
-            },
-            "merchant": {
-              "panelId": 4123,
-              "status": "PENDING",
-              "name": "Merchant name",
-              "details": "string"
-            },
-            "site": {
-              "panelId": 8532,
-              "status": "FINISHED",
-              "name": "Site Name",
-              "login": "ji09u1j3jkb2k3kb1z102z",
-              "secretKey": "mffdcx558w",
-              "details": "string"
-            },
-            "threeDs": {
-              "panelId": 9361,
-              "status": "string",
-              "brand": "string",
-              "details": "string"
-            },
-            "paymentMethods": [
-              {
-                "panelId": 3652,
-                "status": "PARTIAL",
-                "code": "MC",
-                "type": "sitePaymentMethod",
-                "details": "string"
-              }
-            ],
-            "microsite": {
-              "panelId": 4521,
-              "status": "FAILED",
-              "name": "Test Microsite",
-              "micrositeUrl": "https://dev.placetopay.com/microsites/microsite-example-doc",
-              "details": "string"
-            },
-            "user": {
-              "panelId": "1",
-              "status": "failed",
-              "fullName": "pepito perez",
-              "userName": "pepitouser03",
-              "email": "pepitoperez@mail.com",
-              "details": "el usuario ya se encuentra registrado"
-            }
-          }
-        ],
         "x-stoplight": {
           "id": "k1kyhvfxg3i0l"
         },
@@ -4148,7 +4092,75 @@
               "id": "yhlzy91ul6a3q"
             }
           }
-        }
+        },
+        "examples": [
+          {
+            "integrationId": 0,
+            "environment": "test",
+            "status": {
+              "status": "OK",
+              "reason": "RC",
+              "message": "The request has been processed successfully",
+              "date": "2024-02-08T23:15:08+00:00"
+            },
+            "merchant": {
+              "panelId": 4123,
+              "status": "PENDING",
+              "name": "Merchant name",
+              "details": "string"
+            },
+            "site": {
+              "panelId": 8532,
+              "status": "FINISHED",
+              "name": "Site Name",
+              "login": "ji09u1j3jkb2k3kb1z102z",
+              "secretKey": "mffdcx558w",
+              "details": "string"
+            },
+            "threeDs": {
+              "panelId": 9361,
+              "name": "merchant threeDS name",
+              "brand": "marca example",
+              "token": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2",
+              "tokenExpiresAt": "2025-09-25 00:15:48",
+              "status": "FINISHED",
+              "branches": [
+                {
+                  "panelId": 187,
+                  "name": "branch name",
+                  "brand": "branch brach example",
+                  "token": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
+                  "tokenExpiresAt": "2025-09-25 00:15:48"
+                }
+              ],
+              "details": null
+            },
+            "paymentMethods": [
+              {
+                "panelId": 3652,
+                "status": "PARTIAL",
+                "code": "MC",
+                "type": "sitePaymentMethod",
+                "details": "string"
+              }
+            ],
+            "microsite": {
+              "panelId": 4521,
+              "status": "FAILED",
+              "name": "Test Microsite",
+              "micrositeUrl": "https://dev.placetopay.com/microsites/microsite-example-doc",
+              "details": "string"
+            },
+            "user": {
+              "panelId": "1",
+              "status": "failed",
+              "fullName": "pepito perez",
+              "userName": "pepitouser03",
+              "email": "pepitoperez@mail.com",
+              "details": "el usuario ya se encuentra registrado"
+            }
+          }
+        ]
       },
       "pagination": {
         "type": "object",
@@ -4380,7 +4392,7 @@
                 "tokenExpiresAt": "2025-09-25 00:15:48"
               }
             ],
-            "details": "null"
+            "details": null
           }
         ]
       },
