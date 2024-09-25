@@ -4040,35 +4040,6 @@
         },
         "title": "notification",
         "description": "Esta URL debe estar expuesta en un puerto público (80 o 443) y debe tener la capacidad de recibir una petición tipo POST; se enviará una notificación por cada [environment](reference/Kubrick.json/components/schemas/environments) que se haya solcitado, a continuación se muestra la estructura de la notificación:",
-        "properties": {
-          "integrationId": {
-            "type": "integer",
-            "description": "ID de la integración, puede usarse para consultar el estado de la misma y sus respectivos environments."
-          },
-          "environment": {
-            "description": "Entorno al cual pertenece la notificación, estos pueden ser \"test\" o \"prod\".",
-            "example": "test",
-            "type": "string"
-          },
-          "status": {
-            "$ref": "#/components/schemas/status-ok"
-          },
-          "merchant": {
-            "$ref": "#/components/schemas/merchant-info"
-          },
-          "site": {
-            "$ref": "#/components/schemas/site-info"
-          },
-          "threeDs": {
-            "$ref": "#/components/schemas/threeDS-info"
-          },
-          "paymentMethods": {
-            "$ref": "#/components/schemas/paymentMethods-info"
-          },
-          "microsite": {
-            "$ref": "#/components/schemas/microsite-info"
-          }
-        },
         "examples": [
           {
             "integrationId": 0,
@@ -4115,10 +4086,99 @@
               "micrositeUrl": "https://dev.placetopay.com/microsites/microsite-example-doc",
               "details": "string"
             }
+          },
+          {
+            "integrationId": 0,
+            "environment": "test",
+            "status": {
+              "status": "OK",
+              "reason": "RC",
+              "message": "The request has been processed successfully",
+              "date": "2024-02-08T23:15:08+00:00"
+            },
+            "merchant": {
+              "panelId": 4123,
+              "status": "PENDING",
+              "name": "Merchant name",
+              "details": "string"
+            },
+            "site": {
+              "panelId": 8532,
+              "status": "FINISHED",
+              "name": "Site Name",
+              "login": "ji09u1j3jkb2k3kb1z102z",
+              "secretKey": "mffdcx558w",
+              "details": "string"
+            },
+            "threeDs": {
+              "panelId": 9361,
+              "status": "string",
+              "brand": "string",
+              "details": "string"
+            },
+            "paymentMethods": [
+              {
+                "panelId": 3652,
+                "status": "PARTIAL",
+                "code": "MC",
+                "type": "sitePaymentMethod",
+                "details": "string"
+              }
+            ],
+            "microsite": {
+              "panelId": 4521,
+              "status": "FAILED",
+              "name": "Test Microsite",
+              "micrositeUrl": "https://dev.placetopay.com/microsites/microsite-example-doc",
+              "details": "string"
+            },
+            "user": {
+              "panelId": "1",
+              "status": "failed",
+              "fullName": "pepito perez",
+              "userName": "pepitouser03",
+              "email": "pepitoperez@mail.com",
+              "details": "el usuario ya se encuentra registrado"
+            }
           }
         ],
         "x-stoplight": {
           "id": "k1kyhvfxg3i0l"
+        },
+        "properties": {
+          "integrationId": {
+            "type": "integer",
+            "description": "ID de la integración, puede usarse para consultar el estado de la misma y sus respectivos environments."
+          },
+          "environment": {
+            "description": "Entorno al cual pertenece la notificación, estos pueden ser \"test\" o \"prod\".",
+            "example": "test",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/status-ok"
+          },
+          "merchant": {
+            "$ref": "#/components/schemas/merchant-info"
+          },
+          "site": {
+            "$ref": "#/components/schemas/site-info"
+          },
+          "threeDs": {
+            "$ref": "#/components/schemas/threeDS-info"
+          },
+          "paymentMethods": {
+            "$ref": "#/components/schemas/paymentMethods-info"
+          },
+          "microsite": {
+            "$ref": "#/components/schemas/microsite-info"
+          },
+          "user": {
+            "$ref": "#/components/schemas/user-info",
+            "x-stoplight": {
+              "id": "yhlzy91ul6a3q"
+            }
+          }
         }
       },
       "pagination": {
@@ -4267,7 +4327,37 @@
               "id": "8qy4izgebnu5o"
             },
             "default": 9361,
-            "description": "ID del recurso en panel."
+            "description": "ID del recurso en panel de mpi."
+          },
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "dhitam5ars9dq"
+            },
+            "example": "merchant threeDS name",
+            "description": "Nombre con el cual fue creado el comercio en el panel mpi  "
+          },
+          "brand": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "rizw7tdxwgrq6"
+            },
+            "description": "Marca con la cual fue creado el comercio en el panel de mpi."
+          },
+          "token": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "5j6v6cwlgj8vn"
+            },
+            "description": "token del comercio creado\n"
+          },
+          "tokenExpiresAt": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "6z64mfxyi2k90"
+            },
+            "description": "fecha de expiracion del token",
+            "example": "YTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2NjM2QyOTNhN"
           },
           "status": {
             "type": "string",
@@ -4276,12 +4366,18 @@
             },
             "description": "Estado del recurso."
           },
-          "brand": {
-            "type": "string",
+          "branches": {
+            "type": "array",
             "x-stoplight": {
-              "id": "rizw7tdxwgrq6"
+              "id": "yfb49mda76g1l"
             },
-            "description": "Marca con la cual fue creado el recurso."
+            "description": "Sucursales del comercio solicitadas a crear",
+            "items": {
+              "$ref": "#/components/schemas/branches-Info",
+              "x-stoplight": {
+                "id": "o96gc29ii7bbf"
+              }
+            }
           },
           "details": {
             "type": "string",
@@ -4318,7 +4414,7 @@
               "x-stoplight": {
                 "id": "7o4rgyxej9q5d"
               },
-              "description": "ID del recurso en panel.",
+              "description": "Estado del recurso.",
               "example": "PARTIAL"
             },
             "code": {
@@ -4402,7 +4498,8 @@
             "micrositeUrl": "https://dev.placetopay.com/microsites/microsite-example-doc",
             "details": "string"
           }
-        ]
+        ],
+        "description": ""
       },
       "paymentMethods-settings": {
         "title": "paymentMethods-settings",
@@ -5639,6 +5736,124 @@
             "mobile": "string",
             "language": "312588921",
             "timezone": "Asia/Kabul"
+          }
+        ]
+      },
+      "branches-Info": {
+        "title": "branches-Info",
+        "x-stoplight": {
+          "id": "tmn8f2pt4aygu"
+        },
+        "type": "object",
+        "properties": {
+          "panelId": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "zzm76eoddgbda"
+            },
+            "example": 187,
+            "description": "Identificador de la sucursal creada en el sistema del panel MPI"
+          },
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ywhc3g8wd4n6k"
+            },
+            "example": "branch name",
+            "description": "Nombre de la sucursal creada en el panel de mpi "
+          },
+          "brand": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "35irk2f5ogszy"
+            },
+            "example": "branch brach example",
+            "description": "Marca de la sucursal creada en el panel de mpi"
+          },
+          "token": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "lcruweva5ig3k"
+            },
+            "example": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
+            "description": "token de la sucursal "
+          },
+          "tokenExpiresAt": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "mz38uh7cuo9vr"
+            },
+            "example": "2025-09-25 00:15:48",
+            "description": "fecha de expiracion del token de la sucursal"
+          }
+        }
+      },
+      "user-info": {
+        "title": "user-info",
+        "x-stoplight": {
+          "id": "5io3x4yx7eca5"
+        },
+        "type": "object",
+        "properties": {
+          "panelId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "jq6gfl7xx7vkh"
+            },
+            "example": "1"
+          },
+          "status": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "mptef8msb3yk6"
+            },
+            "description": "Estado del recurso.",
+            "example": "failed"
+          },
+          "fullName": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "zm39fibppdl84"
+            },
+            "description": "Nombre completo del usuario solicitado",
+            "example": "pepito perez"
+          },
+          "userName": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "koksm27qkrzak"
+            },
+            "description": "username del usuario sokicitado",
+            "example": "pepitouser03"
+          },
+          "email": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "qbb2h2mo4498r"
+            },
+            "description": "email del usuario solicitado",
+            "example": "pepitoperez@mail.com"
+          },
+          "details": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-stoplight": {
+              "id": "q90x46sbup4fq"
+            },
+            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error.",
+            "example": "el usuario ya se encuentra registrado"
+          }
+        },
+        "examples": [
+          {
+            "panelId": "1",
+            "status": "failed",
+            "fullName": "pepito perez",
+            "userName": "pepitouser03",
+            "email": "pepitoperez@mail.com",
+            "details": "el usuario ya se encuentra registrado"
           }
         ]
       }
