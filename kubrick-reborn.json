@@ -2570,12 +2570,12 @@
           {
             "name": "EVERTEC PLACETOPAY S.A.S",
             "brand": "Placetopay",
-            "mcc": "7929",
+            "mcc": 7929,
             "languages": [
               "ES"
             ],
             "currencies": [
-              "COP"
+              "ARS"
             ],
             "document": {
               "type": "string",
@@ -2591,7 +2591,9 @@
               "document": "1037854200",
               "name": "Ricardo",
               "surname": "García"
-            }
+            },
+            "url": "https://dnetix.co/",
+            "paymentFacilitator": 1
           }
         ],
         "required": [
@@ -2671,6 +2673,22 @@
             "x-stoplight": {
               "id": "wxs7plbw6zvpi"
             }
+          },
+          "url": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "x4fg0p7f8kknn"
+            },
+            "description": "url del comercio",
+            "example": "https://dnetix.co/"
+          },
+          "paymentFacilitator": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "6hnhcl0z03uxt"
+            },
+            "example": 1,
+            "description": "Id del facilitador de pago"
           }
         }
       },
@@ -3006,95 +3024,100 @@
         "type": "object",
         "examples": [
           {
-            "displayName": "Site name example",
-            "type": "INT",
-            "category": "ECOMMERCE",
-            "email": "admin@email.com",
-            "currency": "COP",
-            "language": "ES",
-            "customBatch": 2345,
-            "expiration": "2023-06-30 00:00:00",
-            "analyticsCode": "UA-171313251-4, GTM-123812",
-            "integration": {
-              "allowPartial": false,
-              "connectionMethod": "REDIRECT",
-              "notificationUrl": "https://site-webhook.com"
-            },
-            "control": {
-              "minAmount": "1000",
-              "maxAmount": "1000000",
-              "filterPse": false,
-              "filterTuya": false,
-              "filterSafetyPay": false,
-              "prechargerFilter": 2,
-              "filterByBin": false,
-              "exceptionBinsList": [
-                "123456"
-              ]
-            },
-            "threeDS": {
-              "setting": "VERY_LOW",
-              "minAmount": 40
-            },
-            "historic": {
-              "behaviour": "IGNORE",
-              "lowerScore": "100",
-              "rejectionScore": 300
-            },
-            "creditBureau": {
-              "behaviours": {
-                "onFailed": "REJECTED",
-                "onNoMatch": "REJECTED",
-                "onMatch": "PROCESS"
+            "site": {
+              "type": "INT",
+              "email": "admin@email.com",
+              "control": {
+                "filterPse": false,
+                "maxAmount": "1000000",
+                "minAmount": "1000",
+                "filterTuya": false,
+                "filterByBin": false,
+                "filterSafetyPay": false,
+                "prechargerFilter": 2,
+                "exceptionBinsList": [
+                  "123456"
+                ]
               },
-              "paymentGroups": [
-                "CASH"
-              ],
-              "minAmount": 200
-            },
-            "riskEngine": {
-              "behaviours": {
-                "onFailed": "REJECTED",
-                "onLowRisk": "MANUAL",
-                "onMediumRisk": null,
-                "onHighRisk": "REJECTED"
+              "threeDS": {
+                "setting": "VERY_LOW",
+                "minAmount": 40
               },
-              "paymentGroups": [
-                "CASH"
-              ],
-              "minAmount": 30,
-              "approvalScore": 200,
-              "rejectionScore": 250,
-              "onCaibration": true
-            },
-            "securityFilters": {
-              "allowedIssuerCountries": [
-                "CO"
-              ],
-              "forceIPMatch": true,
-              "excludeIPCountry": [
-                "CL"
-              ],
-              "onlyWhitelisted": true,
-              "allowedIPCountries": [
-                "EC"
-              ],
-              "allowedCardsDay": 4,
-              "allowedCardsByIP": 10,
-              "allowedCardsMonth": 4,
-              "allowedCardsYear": 2,
-              "dayMax": 3,
-              "dayMaxAmount": 30000,
-              "monthMax": 3,
-              "monthMaxAmount": 2000
-            },
-            "operation": {
-              "disableTax": true,
-              "calculateTax": true,
-              "taxPercentage": 12,
-              "patternReference": null,
-              "mailCustomer": true,
-              "mailMerchant": true
+              "category": "ECOMMERCE",
+              "currency": "COP",
+              "historic": {
+                "behaviour": "IGNORE",
+                "lowerScore": "100",
+                "rejectionScore": 300
+              },
+              "language": "ES",
+              "operation": {
+                "disableTax": true,
+                "calculateTax": true,
+                "mailCustomer": true,
+                "mailMerchant": true,
+                "taxPercentage": 12,
+                "patternReference": null
+              },
+              "expiration": "2023-06-30 00:00:00",
+              "productionDate": "2023-06-30 ",
+              "riskEngine": {
+                "minAmount": 30,
+                "behaviours": {
+                  "onFailed": "REJECTED",
+                  "onLowRisk": "MANUAL",
+                  "onHighRisk": "REJECTED",
+                  "onMediumRisk": null
+                },
+                "onCaibration": true,
+                "approvalScore": 200,
+                "paymentGroups": [
+                  "CASH"
+                ],
+                "rejectionScore": 250
+              },
+              "customBatch": 2345,
+              "displayName": "Site name example",
+              "integration": {
+                "allowPartial": false,
+                "connectionMethod": "REDIRECT",
+                "notificationUrl": "https://site-webhook.com",
+                "sourceRestriction": "api",
+                "analyticsCode": "UA-171313251-4, GTM-123812"
+              },
+              "creditBureau": {
+                "minAmount": 200,
+                "behaviours": {
+                  "onMatch": "PROCESS",
+                  "onFailed": "REJECTED",
+                  "onNoMatch": "REJECTED"
+                },
+                "paymentGroups": [
+                  "CASH"
+                ]
+              },
+              "analyticsCode": "UA-171313251-4, GTM-123812",
+              "securityFilters": {
+                "dayMax": 3,
+                "monthMax": 3,
+                "dayMaxAmount": 30000,
+                "forceIPMatch": true,
+                "monthMaxAmount": 2000,
+                "allowedCardsDay": 4,
+                "onlyWhitelisted": true,
+                "allowedCardsByIP": 10,
+                "allowedCardsYear": 2,
+                "excludeIPCountry": [
+                  "CL"
+                ],
+                "allowedCardsMonth": 4,
+                "allowedIPCountries": [
+                  "EC"
+                ],
+                "allowedIssuerCountries": [
+                  "CO"
+                ]
+              }
             }
           }
         ],
@@ -3181,13 +3204,17 @@
             "example": "2023-06-30 00:00:00",
             "default": null
           },
-          "analyticsCode": {
-            "type": "string",
+          "productionDate": {
+            "type": [
+              "string",
+              "null"
+            ],
             "x-stoplight": {
-              "id": "49zhk8l8th2dj"
+              "id": "xzq1qstc7ovsa"
             },
-            "description": "Permite añadir el código de google analytics.",
-            "example": "UA-171313251-4, GTM-123812"
+            "format": "date",
+            "description": "fecha de salida a produccion formato Y-m-d",
+            "example": "2023-06-30"
           },
           "integration": {
             "$ref": "#/components/schemas/integration",
@@ -3272,8 +3299,39 @@
             },
             "description": "En caso de que el tipo de conexión sea “REDIRECT”, a esta URL llegará el resultado de las transacciones.",
             "example": "https://site-webhook.com"
+          },
+          "sourceRestriction": {
+            "x-stoplight": {
+              "id": "8kpv8x5s0jibu"
+            },
+            "description": "Restriccion de origen",
+            "enum": [
+              "microsites",
+              "ivr",
+              "checkout",
+              "panel",
+              "api",
+              "plugins"
+            ]
+          },
+          "analyticsCode": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "gh3fx4trn3ypc"
+            },
+            "description": "Permite añadir el código de google analytics.",
+            "example": "UA-171313251-4, GTM-123812"
           }
-        }
+        },
+        "examples": [
+          {
+            "allowPartial": false,
+            "connectionMethod": "REDIRECT",
+            "notificationUrl": "https://site-webhook.com",
+            "sourceRestriction": "microsites",
+            "analyticsCode": "UA-171313251-4, GTM-123812"
+          }
+        ]
       },
       "control": {
         "title": "control",
