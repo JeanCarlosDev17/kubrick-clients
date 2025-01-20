@@ -5950,6 +5950,15 @@
           "id": "vkmj7aeb93on4"
         },
         "type": "object",
+        "examples": [
+          {
+            "franchise": "mastercard",
+            "uuid": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
+            "status": "SUCCESS",
+            "reason": "request completed",
+            "subscriptionId": 77
+          }
+        ],
         "required": [
           "franchise",
           "status",
@@ -5961,14 +5970,16 @@
             "x-stoplight": {
               "id": "yg7kfkua5187g"
             },
-            "example": "mastercard"
+            "example": "mastercard",
+            "description": "Representa la franquicia con la cual se realizó el enrolamiento en Mastercard."
           },
           "uuid": {
             "type": "string",
             "x-stoplight": {
               "id": "scq4o67y2zdlt"
             },
-            "example": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b"
+            "example": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
+            "description": "Identificador único que identifica el merchant en Mastercard."
           },
           "status": {
             "x-stoplight": {
@@ -5977,32 +5988,26 @@
             "enum": [
               "SUCCESS",
               "FAILED"
-            ]
+            ],
+            "description": "Estado final del enrolamiento en Mastercard"
           },
           "reason": {
             "type": "string",
             "x-stoplight": {
               "id": "1evo6otxfop9y"
             },
-            "example": "request completed"
+            "example": "request completed",
+            "description": "Contiene observaciones sobre el proceso solicitado."
           },
           "subscriptionId": {
             "type": "integer",
             "x-stoplight": {
               "id": "8zmi4fksxwece"
             },
-            "example": 77
+            "example": 77,
+            "description": "Identificador de la suscripción en el servicio interno de 3DS."
           }
-        },
-        "examples": [
-          {
-            "franchise": "mastercard",
-            "uuid": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
-            "status": "SUCCESS",
-            "reason": "request completed",
-            "subscriptionId": 77
-          }
-        ]
+        }
       }
     },
     "requestBodies": {},
