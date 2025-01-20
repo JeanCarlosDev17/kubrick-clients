@@ -1485,6 +1485,7 @@
                         "country": "COL",
                         "currency": "COP",
                         "url": "https://www.branch-url.com",
+                        "requireEnrollment": true,
                         "subscriptions": [
                           {
                             "franchise": "visa",
