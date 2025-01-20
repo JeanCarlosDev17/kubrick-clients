@@ -1086,21 +1086,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "x-examples": {
-                    "Example 1": {
-                      "status": {
-                        "status": "OK",
-                        "reason": "RC",
-                        "message": "ThreeDS creation success",
-                        "date": "2024-01-31T22:43:46+00:00"
-                      },
-                      "requestId": 1,
-                      "panelId": 1533,
-                      "name": "threeDs name 31.0117",
-                      "branchName": "Test name 31.0117",
-                      "token": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-ItyAnh9sBBQ65lFudmkxt6YqBXDYtwqDz9qiN6qxu7nV-"
-                    }
-                  },
                   "properties": {
                     "status": {
                       "$ref": "#/components/schemas/status-ok",
@@ -1139,7 +1124,8 @@
                       "$ref": "#/components/schemas/enrollment",
                       "x-stoplight": {
                         "id": "z1euo3314pt19"
-                      }
+                      },
+                      "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
                     },
                     "branches": {
                       "type": "array",
@@ -1214,7 +1200,7 @@
                         "uuid": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
                         "status": "SUCCESS",
                         "reason": "request completed",
-                        "subscriptionId": 77
+                        "subscriptionId": 79
                       },
                       "branches": [
                         {
@@ -1477,7 +1463,46 @@
                 }
               },
               "examples": {
-                "Example 1": {}
+                "Example 1": {
+                  "value": {
+                    "name": "Merchant Example Name",
+                    "brand": "ThreeDS brand example",
+                    "country": "COL",
+                    "currency": "COP",
+                    "url": "https://example.com",
+                    "mcc": 742,
+                    "isicClass": 111,
+                    "allyName": "Edward Elric",
+                    "document": {
+                      "type": "string",
+                      "number": "900299823-1"
+                    },
+                    "requireEnrollment": true,
+                    "branches": [
+                      {
+                        "name": "ThreeDS Branch Name",
+                        "brand": "branch brand example",
+                        "country": "COL",
+                        "currency": "COP",
+                        "url": "https://www.branch-url.com",
+                        "subscriptions": [
+                          {
+                            "franchise": "visa",
+                            "acquirerBIN": 400900,
+                            "merchantCode": "1006"
+                          }
+                        ]
+                      }
+                    ],
+                    "subscriptions": [
+                      {
+                        "franchise": "mastercard",
+                        "acquirerBIN": 400900,
+                        "merchantCode": "5240"
+                      }
+                    ]
+                  }
+                }
               }
             }
           }
@@ -4009,7 +4034,7 @@
               "country": "COL",
               "currency": "COP",
               "url": "https://www.branch-url.com",
-              "requireEnrollment": false,
+              "requireEnrollment": true,
               "subscriptions": [
                 {
                   "franchise": "string",
@@ -4079,7 +4104,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       },
       "notification": {
         "type": "object",
@@ -5950,15 +5976,6 @@
           "id": "vkmj7aeb93on4"
         },
         "type": "object",
-        "examples": [
-          {
-            "franchise": "mastercard",
-            "uuid": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
-            "status": "SUCCESS",
-            "reason": "request completed",
-            "subscriptionId": 77
-          }
-        ],
         "required": [
           "franchise",
           "status",
@@ -6007,7 +6024,16 @@
             "example": 77,
             "description": "Identificador de la suscripción en el servicio interno de 3DS."
           }
-        }
+        },
+        "examples": [
+          {
+            "franchise": "mastercard",
+            "uuid": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
+            "status": "SUCCESS",
+            "reason": "request completed",
+            "subscriptionId": 77
+          }
+        ]
       }
     },
     "requestBodies": {},
