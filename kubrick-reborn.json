@@ -1125,7 +1125,7 @@
                       "x-stoplight": {
                         "id": "z1euo3314pt19"
                       },
-                      "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
+                      "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento o no tener subscripciones de Mastercard, el campo tendrá un valor de null."
                     },
                     "branches": {
                       "type": "array",
@@ -1195,13 +1195,7 @@
                       "name": "ThreeDS Name Example",
                       "token": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV",
                       "tokenExpiresAt": "2025-09-25 00:15:48",
-                      "enrrollment": {
-                        "franchise": "mastercard",
-                        "uuid": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
-                        "status": "SUCCESS",
-                        "reason": "request completed",
-                        "subscriptionId": 79
-                      },
+                      "enrrollment": null,
                       "branches": [
                         {
                           "panelId": 1686,
