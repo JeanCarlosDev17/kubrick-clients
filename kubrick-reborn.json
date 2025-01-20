@@ -1135,6 +1135,12 @@
                       },
                       "example": "2025-09-25 00:15:48"
                     },
+                    "enrrollment": {
+                      "$ref": "#/components/schemas/enrollment",
+                      "x-stoplight": {
+                        "id": "z1euo3314pt19"
+                      }
+                    },
                     "branches": {
                       "type": "array",
                       "x-stoplight": {
@@ -1177,6 +1183,12 @@
                               "id": "22nn0od8ufy6s"
                             },
                             "example": "2025-09-25 00:15:13"
+                          },
+                          "enrollment": {
+                            "$ref": "#/components/schemas/enrollment",
+                            "x-stoplight": {
+                              "id": "gd78yryar4sue"
+                            }
                           }
                         }
                       }
@@ -1184,7 +1196,7 @@
                   }
                 },
                 "examples": {
-                  "Example 2": {
+                  "Example 1": {
                     "value": {
                       "status": {
                         "status": "OK",
@@ -1197,12 +1209,26 @@
                       "name": "ThreeDS Name Example",
                       "token": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV",
                       "tokenExpiresAt": "2025-09-25 00:15:48",
+                      "enrrollment": {
+                        "franchise": "mastercard",
+                        "uuid": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
+                        "status": "SUCCESS",
+                        "reason": "request completed",
+                        "subscriptionId": 77
+                      },
                       "branches": [
                         {
                           "panelId": 1686,
                           "name": "ThreeDS Branch Name Example",
                           "token": "koskdopksakdaokdsas4d6asd6a451c56a4d8w782",
-                          "tokenExpiresAt": "2025-09-25 00:15:13"
+                          "tokenExpiresAt": "2025-09-25 00:15:13",
+                          "enrollment": {
+                            "franchise": "mastercard",
+                            "uuid": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
+                            "status": "SUCCESS",
+                            "reason": "request completed",
+                            "subscriptionId": 77
+                          }
                         }
                       ]
                     }
@@ -1421,6 +1447,14 @@
                     "example": "Edward Elric",
                     "maxLength": 30
                   },
+                  "requireEnrollment": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "25i03j0mx1t8v"
+                    },
+                    "default": true,
+                    "description": "Define si va ser solicitado enrolamiento ante mastercard"
+                  },
                   "document": {
                     "$ref": "#/components/schemas/document",
                     "x-stoplight": {
@@ -1443,45 +1477,7 @@
                 }
               },
               "examples": {
-                "Example 1": {
-                  "value": {
-                    "name": "Merchant Example Name",
-                    "brand": "ThreeDS brand example",
-                    "country": "COL",
-                    "currency": "COP",
-                    "url": "https://example.com",
-                    "mcc": 742,
-                    "isicClass": 111,
-                    "allyName": "Edward Elric",
-                    "document": {
-                      "type": "string",
-                      "number": "900299823-1"
-                    },
-                    "branches": [
-                      {
-                        "name": "ThreeDS Branch Name",
-                        "brand": "branch brand example",
-                        "country": "COL",
-                        "currency": "COP",
-                        "url": "https://www.branch-url.com",
-                        "subscriptions": [
-                          {
-                            "franchise": "visa",
-                            "acquirerBIN": 400900,
-                            "merchantCode": "1006"
-                          }
-                        ]
-                      }
-                    ],
-                    "subscriptions": [
-                      {
-                        "franchise": "visa",
-                        "acquirerBIN": 400900,
-                        "merchantCode": "5240"
-                      }
-                    ]
-                  }
-                }
+                "Example 1": {}
               }
             }
           }
@@ -4013,6 +4009,7 @@
               "country": "COL",
               "currency": "COP",
               "url": "https://www.branch-url.com",
+              "requireEnrollment": false,
               "subscriptions": [
                 {
                   "franchise": "string",
@@ -4055,6 +4052,14 @@
               "type": "string",
               "example": "https://www.branch-url.com",
               "description": "Url del comercio."
+            },
+            "requireEnrollment": {
+              "type": "boolean",
+              "x-stoplight": {
+                "id": "6p54i7i3fm6g5"
+              },
+              "default": true,
+              "description": "Define si va ser solicitado enrolamiento ante mastercard"
             },
             "subscriptions": {
               "type": "array",
@@ -5936,6 +5941,66 @@
             "userName": "pepitouser03",
             "email": "pepitoperez@mail.com",
             "details": "el usuario ya se encuentra registrado"
+          }
+        ]
+      },
+      "enrollment": {
+        "title": "enrollment",
+        "x-stoplight": {
+          "id": "vkmj7aeb93on4"
+        },
+        "type": "object",
+        "required": [
+          "franchise",
+          "status",
+          "reason"
+        ],
+        "properties": {
+          "franchise": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "yg7kfkua5187g"
+            },
+            "example": "mastercard"
+          },
+          "uuid": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "scq4o67y2zdlt"
+            },
+            "example": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b"
+          },
+          "status": {
+            "x-stoplight": {
+              "id": "rjycpefm0itqq"
+            },
+            "enum": [
+              "SUCCESS",
+              "FAILED"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "1evo6otxfop9y"
+            },
+            "example": "request completed"
+          },
+          "subscriptionId": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "8zmi4fksxwece"
+            },
+            "example": 77
+          }
+        },
+        "examples": [
+          {
+            "franchise": "mastercard",
+            "uuid": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
+            "status": "SUCCESS",
+            "reason": "request completed",
+            "subscriptionId": 77
           }
         ]
       }
