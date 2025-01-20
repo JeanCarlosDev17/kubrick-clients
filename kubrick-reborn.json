@@ -1482,7 +1482,7 @@
                         "requireEnrollment": true,
                         "subscriptions": [
                           {
-                            "franchise": "visa",
+                            "franchise": "mastercard",
                             "acquirerBIN": 400900,
                             "merchantCode": "1006"
                           }
@@ -1491,7 +1491,7 @@
                     ],
                     "subscriptions": [
                       {
-                        "franchise": "mastercard",
+                        "franchise": "visa",
                         "acquirerBIN": 400900,
                         "merchantCode": "5240"
                       }
