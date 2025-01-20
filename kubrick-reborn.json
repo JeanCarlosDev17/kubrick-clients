@@ -1043,7 +1043,7 @@
         "tags": [
           "Integraciones"
         ],
-        "description": "Este endpoint permite la creación de multiples recursos con una sola petición, tales como comercio, sitio, medios de pago, threeDS y micrositio, siendo estos dos últimos opcionales. [(Ver jerarquía y grupos)](docs/contexto/Jerarquia-y-grupos.md)\n\nAl ser un servicio asincrono, se debe contar con un webhook para recibir el resultado de la petición. [(Ver notificación)](reference/Kubrick.json/components/schemas/notification)"
+        "description": "Este endpoint permite la creación de multiples recursos con una sola petición, tales como comercio, sitio, medios de pago, threeDS y micrositio, siendo estos dos últimos opcionales. [(Ver jerarquía y grupos)](docs/contexto/Jerarquia-y-grupos.md)\n\nAl ser un servicio asincrono, se debe contar con un webhook para recibir el resultado de la petición. [(Ver notificación)](reference/Kubrick-reborn.json/components/schemas/notification)"
       },
       "parameters": [
         {
