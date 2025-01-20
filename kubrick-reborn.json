@@ -4401,6 +4401,26 @@
         },
         "type": "object",
         "description": "Contiene la información del threeDS creado.",
+        "examples": [
+          {
+            "panelId": 9361,
+            "name": "merchant threeDS name",
+            "brand": "marca example",
+            "token": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2",
+            "tokenExpiresAt": "2025-09-25 00:15:48",
+            "status": "FINISHED",
+            "branches": [
+              {
+                "panelId": 187,
+                "name": "branch name",
+                "brand": "branch brach example",
+                "token": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
+                "tokenExpiresAt": "2025-09-25 00:15:48"
+              }
+            ],
+            "details": null
+          }
+        ],
         "properties": {
           "panelId": {
             "type": "integer",
@@ -4450,6 +4470,13 @@
             "description": "Estado del recurso.",
             "example": "FINISHED"
           },
+          "enrollment": {
+            "$ref": "#/components/schemas/enrollment",
+            "x-stoplight": {
+              "id": "x6as3uxf1tjkz"
+            },
+            "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
+          },
           "branches": {
             "type": "array",
             "x-stoplight": {
@@ -4474,27 +4501,7 @@
             "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error.",
             "example": "null"
           }
-        },
-        "examples": [
-          {
-            "panelId": 9361,
-            "name": "merchant threeDS name",
-            "brand": "marca example",
-            "token": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2",
-            "tokenExpiresAt": "2025-09-25 00:15:48",
-            "status": "FINISHED",
-            "branches": [
-              {
-                "panelId": 187,
-                "name": "branch name",
-                "brand": "branch brach example",
-                "token": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
-                "tokenExpiresAt": "2025-09-25 00:15:48"
-              }
-            ],
-            "details": null
-          }
-        ]
+        }
       },
       "paymentMethods-info": {
         "title": "paymentMethods-info",
@@ -5893,6 +5900,13 @@
             },
             "example": "2025-09-25 00:15:48",
             "description": "fecha de expiracion del token de la sucursal"
+          },
+          "enrollment": {
+            "$ref": "#/components/schemas/enrollment",
+            "x-stoplight": {
+              "id": "0uslswtxkm46p"
+            },
+            "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
           }
         }
       },
@@ -6028,7 +6042,8 @@
             "reason": "request completed",
             "subscriptionId": 77
           }
-        ]
+        ],
+        "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
       }
     },
     "requestBodies": {},
