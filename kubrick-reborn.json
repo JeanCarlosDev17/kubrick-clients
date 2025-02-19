@@ -275,6 +275,15 @@
                         "document": "1037854200",
                         "name": "Ricardo",
                         "surname": "García"
+                      },
+                      "url": "https://dnetix.co/",
+                      "billing": {
+                        "ciiu": "3214"
+                      },
+                      "control": {
+                        "seller": 1,
+                        "reseller": 2,
+                        "paymentFacilitator": 1
                       }
                     },
                     "paymentMethods": {
@@ -2609,7 +2618,14 @@
               "surname": "García"
             },
             "url": "https://dnetix.co/",
-            "paymentFacilitator": 1
+            "billing": {
+              "ciiu": "3214"
+            },
+            "control": {
+              "seller": 1,
+              "reseller": 2,
+              "paymentFacilitator": 1
+            }
           }
         ],
         "required": [
@@ -6075,6 +6091,13 @@
           "id": "8zzjfsasck07v"
         },
         "type": "object",
+        "examples": [
+          {
+            "seller": 2,
+            "reseller": 2,
+            "paymentFacilitator": 23
+          }
+        ],
         "properties": {
           "seller": {
             "type": "integer",
@@ -6095,13 +6118,12 @@
             "description": "Código del banco adquirente."
           },
           "paymentFacilitator": {
-            "type": "string",
+            "type": "integer",
             "x-stoplight": {
               "id": "a0zvl1rpqw1v0"
             },
             "description": "Id del facilitador de pago.",
-            "example": "23",
-            "minLength": 1
+            "example": "23"
           }
         }
       }
