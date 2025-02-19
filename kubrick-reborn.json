@@ -2705,6 +2705,12 @@
             },
             "example": 1,
             "description": "Id del facilitador de pago"
+          },
+          "billing": {
+            "$ref": "#/components/schemas/billing",
+            "x-stoplight": {
+              "id": "sjaqrqos2v0x5"
+            }
           }
         }
       },
@@ -6044,6 +6050,26 @@
           }
         ],
         "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
+      },
+      "billing": {
+        "title": "billing",
+        "x-stoplight": {
+          "id": "q7ha52pxvq5ad"
+        },
+        "type": "object",
+        "properties": {
+          "ciiu": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "7nxtey0ifwqaf"
+            },
+            "example": "5852",
+            "minLength": 4,
+            "maxLength": 4,
+            "description": "Código que representa la actividad económica acorde a CIIU Rev4."
+          }
+        },
+        "description": ""
       }
     },
     "requestBodies": {},
