@@ -2698,18 +2698,16 @@
             "description": "url del comercio",
             "example": "https://dnetix.co/"
           },
-          "paymentFacilitator": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "6hnhcl0z03uxt"
-            },
-            "example": 1,
-            "description": "Id del facilitador de pago"
-          },
           "billing": {
             "$ref": "#/components/schemas/billing",
             "x-stoplight": {
               "id": "sjaqrqos2v0x5"
+            }
+          },
+          "control": {
+            "$ref": "#/components/schemas/control-merchant",
+            "x-stoplight": {
+              "id": "sg1ei28gl007u"
             }
           }
         }
@@ -6070,6 +6068,42 @@
           }
         },
         "description": ""
+      },
+      "control-merchant": {
+        "title": "control-merchant",
+        "x-stoplight": {
+          "id": "8zzjfsasck07v"
+        },
+        "type": "object",
+        "properties": {
+          "seller": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "uu6ma5u796x4g"
+            },
+            "description": "Código del consultor comercial asignado en Placetopay.",
+            "minimum": 1,
+            "example": 2
+          },
+          "reseller": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "ijghafoqni2m6"
+            },
+            "minimum": 1,
+            "example": 2,
+            "description": "Código del banco adquirente."
+          },
+          "paymentFacilitator": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "a0zvl1rpqw1v0"
+            },
+            "description": "Id del facilitador de pago.",
+            "example": "23",
+            "minLength": 1
+          }
+        }
       }
     },
     "requestBodies": {},
