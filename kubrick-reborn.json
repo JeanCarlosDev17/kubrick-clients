@@ -399,7 +399,7 @@
                       "mcc": "0742",
                       "isicClass": 111,
                       "document": {
-                        "type": "string",
+                        "type": "NIT",
                         "number": "900299823-1"
                       },
                       "subscriptions": [
@@ -444,8 +444,8 @@
                       "fullName": "Mercatodo SaS",
                       "username": "myUserName",
                       "email": "user@mail.com",
-                      "mobile": "string",
-                      "language": "312588921",
+                      "mobile": "312588921",
+                      "language": "es",
                       "timezone": "Asia/Kabul"
                     }
                   }
@@ -814,10 +814,10 @@
                     }
                   }
                 },
-                "eticion desde cero con micrositio cerrado": {
+                "Peticion desde cero con micrositio cerrado": {
                   "value": {
                     "statusWebhook": "https://test.webhook.com/",
-                    "merchantId": 0,
+                    "merchantId": 22,
                     "merchantName": "string",
                     "merchant": {
                       "name": "EVERTEC PLACETOPAY S.A.S",
@@ -850,7 +850,7 @@
                         "code": "MC",
                         "order": 1,
                         "financialEntity": 16,
-                        "commissionModel": "string",
+                        "commissionModel": "P",
                         "commissionValue": 2.5,
                         "accountNumber": "1234567811",
                         "accountType": 1,
@@ -1762,9 +1762,10 @@
                             "secretKey": "E27gywYoAm6H28Xt"
                           },
                           "threeDs": {
-                            "panelId": null,
+                            "panelId": 585,
                             "status": "FINISHED",
-                            "brand": null
+                            "name": "Threeds name",
+                            "brand": "Threeds brand"
                           },
                           "paymentMethods": [
                             {
@@ -1805,9 +1806,10 @@
                             "secretKey": "X7xKn2aypQOD0GBj"
                           },
                           "threeDs": {
-                            "panelId": null,
+                            "panelId": 128,
                             "status": "FINISHED",
-                            "brand": "threeDs merchant test 5"
+                            "name": "Threeds name",
+                            "brand": "threeDs merchant brand"
                           },
                           "paymentMethods": [
                             {
@@ -3212,7 +3214,10 @@
             "description": "Código servicio recaudo"
           },
           "expiration": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "x-stoplight": {
               "id": "6d702v94t9q31"
             },
@@ -3669,11 +3674,11 @@
             "x-stoplight": {
               "id": "hixuqlur40fgq"
             },
-            "example": "Microsite name example",
+            "example": "microsite_name_example",
             "description": "Nombre a asignar al micrositio.",
             "minLength": 3,
             "maxLength": 56,
-            "pattern": "'/^[a-zñáéíóúäëïöüàèìòùÑÁÉÍÓÚÄËÏÖÜÀÈÌÒÙÇçÃã\\s\\d\\[\\]\\.,\\$#\\&\\-\\_(\\)\\/\\%\\+\\\\\\':;\\<\\>\\|\\=@]{2,250}$/i'"
+            "pattern": "^[a-zñáéíóúäëïöüàèìòùÑÁÉÍÓÚÄËÏÖÜÀÈÌÒÙÇçÃã\\s\\d\\[\\]\\.,\\$#\\&\\-\\_(\\)\\/\\%\\+\\\\\\':;\\<\\>\\|\\=@]{2,250}$"
           },
           "alias": {
             "type": "string",
@@ -4423,7 +4428,10 @@
         ],
         "properties": {
           "panelId": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "x-stoplight": {
               "id": "8qy4izgebnu5o"
             },
@@ -4831,26 +4839,32 @@
             "description": "Comportamiento a seguir cuando el puntaje obtenido por la transacción sea igual o menor al establecido."
           },
           "lowerScore": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "x-stoplight": {
               "id": "vf40fo0ejfxei"
             },
             "default": null,
-            "example": "100",
+            "example": 100,
             "description": "Puntaje de apetito al riesgo, indica el puntaje máximo para categorizar las operaciones como operaciones de bajo riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'.",
             "minimum": 1,
             "maximum": 999
           },
           "rejectionScore": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "x-stoplight": {
               "id": "5b7tuhwq7rkm3"
             },
-            "default": null,
             "example": 300,
+            "description": "Puntaje de tolerancia al riesgo, indica el puntaje a partir del cual se declinarán transacciones debido al riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'.",
+            "default": null,
             "minimum": 1,
-            "maximum": 999,
-            "description": "Puntaje de tolerancia al riesgo, indica el puntaje a partir del cual se declinarán transacciones debido al riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'."
+            "maximum": 999
           }
         }
       },
@@ -5013,37 +5027,45 @@
             }
           },
           "minAmount": {
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "x-stoplight": {
               "id": "32nfg3s4swhit"
             },
-            "default": 0,
             "example": 30,
-            "minimum": 1,
+            "description": "Monto mínimo para activar. Este campo es requerido siempre que riskEngine no sea nulo.",
             "maximum": 999999999,
-            "description": "Monto mínimo para activar. Este campo es requerido siempre que riskEngine no sea nulo."
+            "minimum": 1
           },
           "approvalScore": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "x-stoplight": {
               "id": "lmgqg17z0qw3l"
             },
             "description": "Puntaje de apetito al riesgo. Este campo es requerido siempre que riskEngine no sea nulo.",
+            "example": 200,
             "minimum": 1,
             "maximum": 999,
-            "default": 0,
-            "example": 200
+            "default": null
           },
           "rejectionScore": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "x-stoplight": {
               "id": "rww075fejbhqa"
             },
-            "default": 0,
             "example": 250,
+            "description": "Puntaje de tolerancia al riesgo. Este campo es requerido siempre que riskEngine no sea nulo.",
             "minimum": 1,
             "maximum": 999,
-            "description": "Puntaje de tolerancia al riesgo. Este campo es requerido siempre que riskEngine no sea nulo."
+            "default": null
           },
           "onCaibration": {
             "type": "boolean",
@@ -5246,7 +5268,7 @@
               "id": "mgka1u419sllx"
             },
             "description": "Expresión regular para validar que la referencia es válida.",
-            "default": null,
+            "default": "",
             "minLength": 0,
             "maxLength": 30
           },
@@ -5406,7 +5428,7 @@
               "id": "zu559k8t7z438"
             },
             "description": "Idioma",
-            "example": "312588921",
+            "example": "en",
             "enum": [
               "en",
               "en_CL",
