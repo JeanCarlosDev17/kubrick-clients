@@ -3597,6 +3597,7 @@
               "id": "2iyq4ulrr5qsz"
             },
             "type": "array",
+            "minItems": 1,
             "items": {
               "$ref": "#/components/schemas/subscription",
               "x-stoplight": {
