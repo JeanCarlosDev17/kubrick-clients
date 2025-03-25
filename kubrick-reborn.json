@@ -4092,9 +4092,15 @@
             "maxLength": 200
           },
           "subscriptions": {
-            "$ref": "#/components/schemas/subscriptions",
             "x-stoplight": {
               "id": "jwv88l9gh0d7p"
+            },
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/subscription",
+              "x-stoplight": {
+                "id": "ssz71y2l0f4p2"
+              }
             }
           }
         }
