@@ -1591,32 +1591,50 @@
                           "merchant": {
                             "panelId": 3523,
                             "status": "FINISHED",
-                            "name": "Customer 2023-12-11T15:53:01-05:00 - Test"
+                            "name": "Customer 2023-12-11T15:53:01-05:00 - Test",
+                            "details": null
                           },
                           "site": {
                             "panelId": 2708,
                             "status": "FINISHED",
                             "name": "site display name - Test",
                             "login": "93f3ed619d946ae3fb3c39981fa9d1ef",
-                            "secretKey": "E27gywYoAm6H28Xt"
+                            "secretKey": "E27gywYoAm6H28Xt",
+                            "isActive": 1,
+                            "details": null
                           },
                           "threeDs": {
-                            "panelId": null,
+                            "panelId": 9361,
+                            "name": "merchant threeDS name",
+                            "brand": "marca example",
+                            "token": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2",
+                            "tokenExpiresAt": "2025-09-25 00:15:48",
                             "status": "FINISHED",
-                            "brand": null
+                            "branches": [
+                              {
+                                "panelId": 187,
+                                "name": "branch name",
+                                "brand": "branch brach example",
+                                "token": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
+                                "tokenExpiresAt": "2025-09-25 00:15:48"
+                              }
+                            ],
+                            "details": null
                           },
                           "paymentMethods": [
                             {
                               "panelId": 7279,
                               "status": "FINISHED",
                               "code": "PS_AM",
-                              "type": "sitePaymentMethod"
+                              "type": "sitePaymentMethod",
+                              "details": null
                             },
                             {
                               "panelId": 7280,
                               "status": "FINISHED",
                               "code": "PS_VS",
-                              "type": "sitePaymentMethod"
+                              "type": "sitePaymentMethod",
+                              "details": null
                             }
                           ]
                         }
@@ -1634,32 +1652,50 @@
                           "merchant": {
                             "panelId": 3524,
                             "status": "FINISHED",
-                            "name": "Customer 2023-12-11T15:53:01-05:00"
+                            "name": "Customer 2023-12-11T15:53:01-05:00",
+                            "details": null
                           },
                           "site": {
                             "panelId": 2709,
                             "status": "FINISHED",
                             "name": "site display name",
                             "login": "0195e33e3e3002cb120699abd503ed47",
-                            "secretKey": "X7xKn2aypQOD0GBj"
+                            "secretKey": "X7xKn2aypQOD0GBj",
+                            "isActive": 1,
+                            "details": null
                           },
                           "threeDs": {
-                            "panelId": null,
+                            "panelId": 9361,
+                            "name": "merchant threeDS name",
+                            "brand": "marca example",
+                            "token": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2",
+                            "tokenExpiresAt": "2025-09-25 00:15:48",
                             "status": "FINISHED",
-                            "brand": "threeDs merchant test 5"
+                            "branches": [
+                              {
+                                "panelId": 187,
+                                "name": "branch name",
+                                "brand": "branch brach example",
+                                "token": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
+                                "tokenExpiresAt": "2025-09-25 00:15:48"
+                              }
+                            ],
+                            "details": null
                           },
                           "paymentMethods": [
                             {
                               "panelId": 7281,
                               "status": "FINISHED",
                               "code": "PS_AM",
-                              "type": "sitePaymentMethod"
+                              "type": "sitePaymentMethod",
+                              "details": null
                             },
                             {
                               "panelId": 7282,
                               "status": "FINISHED",
                               "code": "PS_VS",
-                              "type": "sitePaymentMethod"
+                              "type": "sitePaymentMethod",
+                              "details": null
                             }
                           ]
                         }
@@ -1761,32 +1797,51 @@
                           "merchant": {
                             "panelId": 3523,
                             "status": "FINISHED",
-                            "name": "Customer 2023-12-11T15:53:01-05:00 - Test"
+                            "name": "Customer 2023-12-11T15:53:01-05:00 - Test",
+                            "details": null
                           },
                           "site": {
                             "panelId": 2708,
                             "status": "FINISHED",
                             "name": "site display name - Test",
                             "login": "93f3ed619d946ae3fb3c39981fa9d1ef",
-                            "secretKey": "E27gywYoAm6H28Xt"
+                            "secretKey": "E27gywYoAm6H28Xt",
+                            "isActive": 1,
+                            "details": null
                           },
                           "threeDs": {
-                            "panelId": null,
+                            "panelId": 9361,
+                            "name": "merchant threeDS name",
+                            "brand": "marca example",
+                            "token": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2",
+                            "tokenExpiresAt": "2025-09-25 00:15:48",
                             "status": "FINISHED",
-                            "brand": null
+                            "branches": [
+                              {
+                                "panelId": 187,
+                                "name": "branch name",
+                                "brand": "branch brach example",
+                                "token": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
+                                "tokenExpiresAt": "2025-09-25 00:15:48"
+                              }
+                            ],
+                            "details": null
                           },
                           "paymentMethods": [
                             {
                               "panelId": 7279,
                               "status": "FINISHED",
                               "code": "PS_AM",
-                              "type": "sitePaymentMethod"
+                              "type": "sitePaymentMethod",
+                              "details": null
+                              
                             },
                             {
                               "panelId": 7280,
                               "status": "FINISHED",
                               "code": "PS_VS",
-                              "type": "sitePaymentMethod"
+                              "type": "sitePaymentMethod",
+                              "details": null
                             }
                           ]
                         }
@@ -1804,32 +1859,50 @@
                           "merchant": {
                             "panelId": 3524,
                             "status": "FINISHED",
-                            "name": "Customer 2023-12-11T15:53:01-05:00"
+                            "name": "Customer 2023-12-11T15:53:01-05:00",
+                            "details": null
                           },
                           "site": {
                             "panelId": 2709,
                             "status": "FINISHED",
                             "name": "site display name",
                             "login": "0195e33e3e3002cb120699abd503ed47",
-                            "secretKey": "X7xKn2aypQOD0GBj"
+                            "secretKey": "X7xKn2aypQOD0GBj",
+                            "isActive":1,
+                            "details": null
                           },
                           "threeDs": {
-                            "panelId": null,
+                            "panelId": 9361,
+                            "name": "merchant threeDS name",
+                            "brand": "marca example",
+                            "token": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2",
+                            "tokenExpiresAt": "2025-09-25 00:15:48",
                             "status": "FINISHED",
-                            "brand": "threeDs merchant test 5"
+                            "branches": [
+                              {
+                                "panelId": 187,
+                                "name": "branch name",
+                                "brand": "branch brach example",
+                                "token": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
+                                "tokenExpiresAt": "2025-09-25 00:15:48"
+                              }
+                            ],
+                            "details": null
                           },
                           "paymentMethods": [
                             {
                               "panelId": 7281,
                               "status": "FINISHED",
                               "code": "PS_AM",
-                              "type": "sitePaymentMethod"
+                              "type": "sitePaymentMethod",
+                              "details": null
                             },
                             {
                               "panelId": 7282,
                               "status": "FINISHED",
                               "code": "PS_VS",
-                              "type": "sitePaymentMethod"
+                              "type": "sitePaymentMethod",
+                              "details": null
                             }
                           ]
                         }
@@ -3701,7 +3774,7 @@
             "description": "Nombre a asignar al micrositio.",
             "minLength": 3,
             "maxLength": 56,
-            "pattern": "'/^[a-zñáéíóúäëïöüàèìòùÑÁÉÍÓÚÄËÏÖÜÀÈÌÒÙÇçÃã\\s\\d\\[\\]\\.,\\$#\\&\\-\\_(\\)\\/\\%\\+\\\\\\':;\\<\\>\\|\\=@]{2,250}$/i'"
+            "pattern": "^[a-zñáéíóúäëïöüàèìòùÑÁÉÍÓÚÄËÏÖÜÀÈÌÒÙÇçÃã\\s\\d\\[\\]\\.,\\$#\\&\\-\\_(\\)\\/\\%\\+\\\\\\':;\\<\\>\\|\\=@]{2,250}$"
           },
           "alias": {
             "type": "string",
@@ -4145,39 +4218,58 @@
             "merchant": {
               "panelId": 3098,
               "status": "ok",
-              "name": "Merchant name"
+              "name": "Merchant name",
+              "details": null
             },
             "site": {
               "panelId": 2293,
               "status": "ok",
               "name": "site name",
               "login": "88csccsd83235njnds",
-              "secretKey": "8q8edqb"
+              "secretKey": "8q8edqb",
+              "isActive": 1,
+              "details": null
             },
             "threeDs": {
-              "panelId": 1356,
-              "status": "ok",
-              "brand": "threeDs merchant name"
+              "panelId": 9361,
+              "name": "merchant threeDS name",
+              "brand": "marca example",
+              "token": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2",
+              "tokenExpiresAt": "2025-09-25 00:15:48",
+              "status": "FINISHED",
+              "branches": [
+                {
+                  "panelId": 187,
+                  "name": "branch name",
+                  "brand": "branch brach example",
+                  "token": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
+                  "tokenExpiresAt": "2025-09-25 00:15:48"
+                }
+              ],
+              "details": null
             },
             "paymentMethods": [
               {
                 "panelId": 6841,
                 "status": "ok",
                 "code": "VS",
-                "type": "sitePaymentMethod"
+                "type": "sitePaymentMethod",
+                "details": null
               },
               {
                 "panelId": 6842,
                 "status": "ok",
                 "code": "MC",
-                "type": "sitePaymentMethod"
+                "type": "sitePaymentMethod",
+                "details": null
               }
             ],
             "microsite": {
               "panelId": "1497",
               "status": "ok",
               "name": "microsite name",
-              "microsite_url": "https://dev.placetopay.com/microsites/microsite-example-doc"
+              "microsite_url": "https://dev.placetopay.com/microsites/microsite-example-doc",
+              "details": null
             }
           }
         },
@@ -4243,6 +4335,7 @@
               "name": "Site Name",
               "login": "ji09u1j3jkb2k3kb1z102z",
               "secretKey": "mffdcx558w",
+              "isActive": 1,
               "details": "string"
             },
             "threeDs": {
@@ -4864,7 +4957,7 @@
               "id": "vf40fo0ejfxei"
             },
             "default": null,
-            "example": "100",
+            "example": 100,
             "description": "Puntaje de apetito al riesgo, indica el puntaje máximo para categorizar las operaciones como operaciones de bajo riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'.",
             "minimum": 1,
             "maximum": 999
