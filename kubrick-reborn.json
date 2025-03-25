@@ -4029,9 +4029,9 @@
             "url": "https://www.branch-url.com",
             "subscriptions": [
               {
-                "franchise": 1,
+                "franchise": "visa",
                 "acquirerBIN": 400900,
-                "merchantCode": "\"5240\""
+                "merchantCode": 45455
               }
             ]
           }
