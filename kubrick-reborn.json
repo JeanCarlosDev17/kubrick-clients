@@ -6066,6 +6066,40 @@
           }
         ],
         "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
+      },
+      "subscription": {
+        "title": "subscriptions",
+        "x-stoplight": {
+          "id": "rs4sctscjne0x"
+        },
+        "type": "object",
+        "properties": {
+          "franchise": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "540rt1aeggajf"
+            },
+            "example": "visa",
+            "maxLength": 30,
+            "pattern": "^[a-zA-Z]+$",
+            "description": "Nombre de la franquicia en ThreDS MPI."
+          },
+          "acquirerBIN": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "80intxv8z9tcm"
+            },
+            "description": "Bin del adquirente"
+          },
+          "merchantCode": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ju68mk8lam8qa"
+            },
+            "maxLength": 30,
+            "example": "46416456"
+          }
+        }
       }
     },
     "requestBodies": {},
