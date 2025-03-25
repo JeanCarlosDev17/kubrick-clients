@@ -3609,17 +3609,17 @@
             }
           },
           "subscriptions": {
-            "$ref": "#/components/schemas/subscriptions",
             "x-stoplight": {
               "id": "2iyq4ulrr5qsz"
             },
             "type": "array",
             "minItems": 1,
             "items": {
-              "$ref": "#/components/schemas/subscription",
               "x-stoplight": {
-                "id": "cuu9judfqhy44"
-              }
+                "id": "spivxbp5ya7jc"
+              },
+              "type": "array",
+              "items": {}
             }
           },
           "branch": {
