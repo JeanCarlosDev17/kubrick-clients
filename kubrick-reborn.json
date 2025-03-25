@@ -1834,7 +1834,6 @@
                               "code": "PS_AM",
                               "type": "sitePaymentMethod",
                               "details": null
-                              
                             },
                             {
                               "panelId": 7280,
@@ -1868,7 +1867,7 @@
                             "name": "site display name",
                             "login": "0195e33e3e3002cb120699abd503ed47",
                             "secretKey": "X7xKn2aypQOD0GBj",
-                            "isActive":1,
+                            "isActive": 1,
                             "details": null
                           },
                           "threeDs": {
@@ -4450,7 +4449,10 @@
             "example": "Merchant name"
           },
           "details": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "x-stoplight": {
               "id": "xe590i94ej4tk"
             },
@@ -4507,11 +4509,20 @@
             "example": "mffdcx558w"
           },
           "details": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "x-stoplight": {
               "id": "qppic5jqy6peb"
             },
             "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
+          },
+          "isActive": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "digztu4p2qg4h"
+            }
           }
         }
       },
@@ -4670,7 +4681,10 @@
               "example": "sitePaymentMethod"
             },
             "details": {
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "x-stoplight": {
                 "id": "p6qyvivba5ug5"
               },
@@ -4685,6 +4699,15 @@
           "id": "ynts9614xvi3l"
         },
         "type": "object",
+        "examples": [
+          {
+            "panelId": 4521,
+            "status": "SUCESS",
+            "name": "Test Microsite",
+            "micrositeUrl": "https://dev.placetopay.com/microsites/microsite-example-doc",
+            "details": "string"
+          }
+        ],
         "properties": {
           "panelId": {
             "type": "integer",
@@ -4719,23 +4742,16 @@
             "example": "https://dev.placetopay.com/microsites/microsite-example-doc"
           },
           "details": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "x-stoplight": {
               "id": "30oewdg1lesyp"
             },
             "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
           }
-        },
-        "examples": [
-          {
-            "panelId": 4521,
-            "status": "SUCESS",
-            "name": "Test Microsite",
-            "micrositeUrl": "https://dev.placetopay.com/microsites/microsite-example-doc",
-            "details": "string"
-          }
-        ],
-        "description": ""
+        }
       },
       "paymentMethods-settings": {
         "title": "paymentMethods-settings",
