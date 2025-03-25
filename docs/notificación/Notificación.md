@@ -5,11 +5,34 @@ tags: [notificación]
 
 # Notificación
 
-Al momento de finalizar el procesamiento de una petición, sin importar que esta sea exitosa, fallida o parcial, se notificará a la url “statusWebhook” indicada en la petición con la información de los recursos solicitados, para el caso de la integración [create-from-merchant](kubrick-reborn.json/paths/~1api~1integration~1create/post), se enviará una notificación 
+Al momento de finalizar el procesamiento de una petición, sin importar que esta sea exitosa, fallida o parcial, se notificará a la url “statusWebhook” indicada en la petición con la información de los recursos solicitados, para el caso de la integración [create-from-merchant](kubrick-reborn.json/paths/~1api~1integration~1create/post), se enviará una notificación.
 
 Esta URL debe estar expuesta en un puerto público (80 o 443) y debe tener la capacidad de recibir una petición tipo POST.
 
 Para ver la estructura completa de la notificación [observe el modelo de notification](kubrick-reborn.json/components/schemas/notification).
+
+### Estados en la notificación
+
+La notificación contiene un objeto de "status", en el cual, se puede visualizar un estado general de los recursos que se crearon en la integración:
+
+```json
+{
+  "status": {
+      "status": "OK",
+      "reason": "RC",
+      "message": "Successful integration creation",
+      "date": "2025-01-15T15:39:01+00:00"
+  }
+}
+```
+
+Posibles estados de la notificación:
+
+- OK: Todos los recursos se crearon correctamente.
+- PARTIAL: Este estado se muestra cuando al menos uno de los recursos de ThreeDS, Micrositios o Usuarios falló en su creación.
+- FAILED: Falló en la creación de los recursos.
+- PENDING: El servicio aún se encuentra creando los recursos.
+
 
 # Proceso de sonda
 

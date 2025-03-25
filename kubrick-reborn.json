@@ -275,6 +275,15 @@
                         "document": "1037854200",
                         "name": "Ricardo",
                         "surname": "García"
+                      },
+                      "url": "https://dnetix.co/",
+                      "billing": {
+                        "ciiu": "3214"
+                      },
+                      "control": {
+                        "seller": 1,
+                        "reseller": 2,
+                        "paymentFacilitator": 1
                       }
                     },
                     "paymentMethods": {
@@ -399,7 +408,7 @@
                       "mcc": "0742",
                       "isicClass": 111,
                       "document": {
-                        "type": "NIT",
+                        "type": "string",
                         "number": "900299823-1"
                       },
                       "subscriptions": [
@@ -444,8 +453,8 @@
                       "fullName": "Mercatodo SaS",
                       "username": "myUserName",
                       "email": "user@mail.com",
-                      "mobile": "312588921",
-                      "language": "es",
+                      "mobile": "string",
+                      "language": "312588921",
                       "timezone": "Asia/Kabul"
                     }
                   }
@@ -814,10 +823,10 @@
                     }
                   }
                 },
-                "Peticion desde cero con micrositio cerrado": {
+                "eticion desde cero con micrositio cerrado": {
                   "value": {
                     "statusWebhook": "https://test.webhook.com/",
-                    "merchantId": 22,
+                    "merchantId": 0,
                     "merchantName": "string",
                     "merchant": {
                       "name": "EVERTEC PLACETOPAY S.A.S",
@@ -850,7 +859,7 @@
                         "code": "MC",
                         "order": 1,
                         "financialEntity": 16,
-                        "commissionModel": "P",
+                        "commissionModel": "string",
                         "commissionValue": 2.5,
                         "accountNumber": "1234567811",
                         "accountType": 1,
@@ -1043,7 +1052,7 @@
         "tags": [
           "Integraciones"
         ],
-        "description": "Este endpoint permite la creación de multiples recursos con una sola petición, tales como comercio, sitio, medios de pago, threeDS y micrositio, siendo estos dos últimos opcionales. [(Ver jerarquía y grupos)](docs/contexto/Jerarquia-y-grupos.md)\n\nAl ser un servicio asincrono, se debe contar con un webhook para recibir el resultado de la petición. [(Ver notificación)](reference/Kubrick.json/components/schemas/notification)"
+        "description": "Este endpoint permite la creación de multiples recursos con una sola petición, tales como comercio, sitio, medios de pago, threeDS y micrositio, siendo estos dos últimos opcionales. [(Ver jerarquía y grupos)](docs/contexto/Jerarquia-y-grupos.md)\n\nAl ser un servicio asincrono, se debe contar con un webhook para recibir el resultado de la petición. [(Ver notificación)](kubrick-reborn.json/components/schemas/notification) "
       },
       "parameters": [
         {
@@ -1482,7 +1491,7 @@
                         "requireEnrollment": true,
                         "subscriptions": [
                           {
-                            "franchise": "visa",
+                            "franchise": "mastercard",
                             "acquirerBIN": 400900,
                             "merchantCode": "1006"
                           }
@@ -1491,7 +1500,7 @@
                     ],
                     "subscriptions": [
                       {
-                        "franchise": "mastercard",
+                        "franchise": "visa",
                         "acquirerBIN": 400900,
                         "merchantCode": "5240"
                       }
@@ -1762,10 +1771,9 @@
                             "secretKey": "E27gywYoAm6H28Xt"
                           },
                           "threeDs": {
-                            "panelId": 585,
+                            "panelId": null,
                             "status": "FINISHED",
-                            "name": "Threeds name",
-                            "brand": "Threeds brand"
+                            "brand": null
                           },
                           "paymentMethods": [
                             {
@@ -1806,10 +1814,9 @@
                             "secretKey": "X7xKn2aypQOD0GBj"
                           },
                           "threeDs": {
-                            "panelId": 128,
+                            "panelId": null,
                             "status": "FINISHED",
-                            "name": "Threeds name",
-                            "brand": "threeDs merchant brand"
+                            "brand": "threeDs merchant test 5"
                           },
                           "paymentMethods": [
                             {
@@ -2611,7 +2618,14 @@
               "surname": "García"
             },
             "url": "https://dnetix.co/",
-            "paymentFacilitator": 1
+            "billing": {
+              "ciiu": "3214"
+            },
+            "control": {
+              "seller": 1,
+              "reseller": 2,
+              "paymentFacilitator": 1
+            }
           }
         ],
         "required": [
@@ -2700,13 +2714,17 @@
             "description": "url del comercio",
             "example": "https://dnetix.co/"
           },
-          "paymentFacilitator": {
-            "type": "integer",
+          "billing": {
+            "$ref": "#/components/schemas/billing",
             "x-stoplight": {
-              "id": "6hnhcl0z03uxt"
-            },
-            "example": 1,
-            "description": "Id del facilitador de pago"
+              "id": "sjaqrqos2v0x5"
+            }
+          },
+          "control": {
+            "$ref": "#/components/schemas/control-merchant",
+            "x-stoplight": {
+              "id": "sg1ei28gl007u"
+            }
           }
         }
       },
@@ -3214,10 +3232,7 @@
             "description": "Código servicio recaudo"
           },
           "expiration": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": "string",
             "x-stoplight": {
               "id": "6d702v94t9q31"
             },
@@ -3528,6 +3543,7 @@
           "currency",
           "url",
           "mcc",
+          "isicClass",
           "subscriptions",
           "branch"
         ],
@@ -3593,6 +3609,7 @@
             }
           },
           "subscriptions": {
+            "$ref": "#/components/schemas/subscriptions",
             "x-stoplight": {
               "id": "2iyq4ulrr5qsz"
             },
@@ -3680,11 +3697,11 @@
             "x-stoplight": {
               "id": "hixuqlur40fgq"
             },
-            "example": "microsite_name_example",
+            "example": "Microsite name example",
             "description": "Nombre a asignar al micrositio.",
             "minLength": 3,
             "maxLength": 56,
-            "pattern": "^[a-zñáéíóúäëïöüàèìòùÑÁÉÍÓÚÄËÏÖÜÀÈÌÒÙÇçÃã\\s\\d\\[\\]\\.,\\$#\\&\\-\\_(\\)\\/\\%\\+\\\\\\':;\\<\\>\\|\\=@]{2,250}$"
+            "pattern": "'/^[a-zñáéíóúäëïöüàèìòùÑÁÉÍÓÚÄËÏÖÜÀÈÌÒÙÇçÃã\\s\\d\\[\\]\\.,\\$#\\&\\-\\_(\\)\\/\\%\\+\\\\\\':;\\<\\>\\|\\=@]{2,250}$/i'"
           },
           "alias": {
             "type": "string",
@@ -4003,15 +4020,9 @@
             "maxLength": 200
           },
           "subscriptions": {
+            "$ref": "#/components/schemas/subscriptions",
             "x-stoplight": {
               "id": "jwv88l9gh0d7p"
-            },
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/subscription",
-              "x-stoplight": {
-                "id": "261wx5w7j831q"
-              }
             }
           }
         }
@@ -4440,10 +4451,7 @@
         ],
         "properties": {
           "panelId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "integer",
             "x-stoplight": {
               "id": "8qy4izgebnu5o"
             },
@@ -4672,6 +4680,14 @@
             "description": "Código único de venta no presente generado por Credibanco (Si este dato no existe en nuestros registros se creará un certificado nuevo).",
             "example": "011211406"
           },
+          "terminalLocation": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "a8i83r90em2fe"
+            },
+            "description": "Ubicación de la terminal.",
+            "example": "Medellín"
+          },
           "terminalNumber": {
             "type": "string",
             "x-stoplight": {
@@ -4843,32 +4859,26 @@
             "description": "Comportamiento a seguir cuando el puntaje obtenido por la transacción sea igual o menor al establecido."
           },
           "lowerScore": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "integer",
             "x-stoplight": {
               "id": "vf40fo0ejfxei"
             },
             "default": null,
-            "example": 100,
+            "example": "100",
             "description": "Puntaje de apetito al riesgo, indica el puntaje máximo para categorizar las operaciones como operaciones de bajo riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'.",
             "minimum": 1,
             "maximum": 999
           },
           "rejectionScore": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "integer",
             "x-stoplight": {
               "id": "5b7tuhwq7rkm3"
             },
-            "example": 300,
-            "description": "Puntaje de tolerancia al riesgo, indica el puntaje a partir del cual se declinarán transacciones debido al riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'.",
             "default": null,
+            "example": 300,
             "minimum": 1,
-            "maximum": 999
+            "maximum": 999,
+            "description": "Puntaje de tolerancia al riesgo, indica el puntaje a partir del cual se declinarán transacciones debido al riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'."
           }
         }
       },
@@ -5031,45 +5041,37 @@
             }
           },
           "minAmount": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": "number",
             "x-stoplight": {
               "id": "32nfg3s4swhit"
             },
+            "default": 0,
             "example": 30,
-            "description": "Monto mínimo para activar. Este campo es requerido siempre que riskEngine no sea nulo.",
+            "minimum": 1,
             "maximum": 999999999,
-            "minimum": 1
+            "description": "Monto mínimo para activar. Este campo es requerido siempre que riskEngine no sea nulo."
           },
           "approvalScore": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "integer",
             "x-stoplight": {
               "id": "lmgqg17z0qw3l"
             },
             "description": "Puntaje de apetito al riesgo. Este campo es requerido siempre que riskEngine no sea nulo.",
-            "example": 200,
             "minimum": 1,
             "maximum": 999,
-            "default": null
+            "default": 0,
+            "example": 200
           },
           "rejectionScore": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "integer",
             "x-stoplight": {
               "id": "rww075fejbhqa"
             },
+            "default": 0,
             "example": 250,
-            "description": "Puntaje de tolerancia al riesgo. Este campo es requerido siempre que riskEngine no sea nulo.",
             "minimum": 1,
             "maximum": 999,
-            "default": null
+            "description": "Puntaje de tolerancia al riesgo. Este campo es requerido siempre que riskEngine no sea nulo."
           },
           "onCaibration": {
             "type": "boolean",
@@ -5272,7 +5274,7 @@
               "id": "mgka1u419sllx"
             },
             "description": "Expresión regular para validar que la referencia es válida.",
-            "default": "",
+            "default": null,
             "minLength": 0,
             "maxLength": 30
           },
@@ -5432,7 +5434,7 @@
               "id": "zu559k8t7z438"
             },
             "description": "Idioma",
-            "example": "en",
+            "example": "312588921",
             "enum": [
               "en",
               "en_CL",
@@ -6070,6 +6072,68 @@
           }
         ],
         "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
+      },
+      "billing": {
+        "title": "billing",
+        "x-stoplight": {
+          "id": "q7ha52pxvq5ad"
+        },
+        "type": "object",
+        "properties": {
+          "ciiu": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "7nxtey0ifwqaf"
+            },
+            "example": "5852",
+            "minLength": 4,
+            "maxLength": 4,
+            "description": "Código que representa la actividad económica acorde a CIIU Rev4."
+          }
+        },
+        "description": ""
+      },
+      "control-merchant": {
+        "title": "control-merchant",
+        "x-stoplight": {
+          "id": "8zzjfsasck07v"
+        },
+        "type": "object",
+        "examples": [
+          {
+            "seller": 2,
+            "reseller": 2,
+            "paymentFacilitator": 23
+          }
+        ],
+        "properties": {
+          "seller": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "uu6ma5u796x4g"
+            },
+            "description": "Código del consultor comercial asignado en Placetopay.",
+            "minimum": 1,
+            "example": 2
+          },
+          "reseller": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "ijghafoqni2m6"
+            },
+            "minimum": 1,
+            "example": 2,
+            "description": "Código del banco adquirente."
+          },
+          "paymentFacilitator": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "a0zvl1rpqw1v0"
+            },
+            "description": "Id del facilitador de pago.",
+            "example": "23"
+          }
+        }
       },
       "subscription": {
         "title": "subscriptions",
