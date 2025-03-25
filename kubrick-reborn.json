@@ -3528,7 +3528,6 @@
           "currency",
           "url",
           "mcc",
-          "isicClass",
           "subscriptions",
           "branch"
         ],
@@ -3594,9 +3593,15 @@
             }
           },
           "subscriptions": {
-            "$ref": "#/components/schemas/subscriptions",
             "x-stoplight": {
               "id": "2iyq4ulrr5qsz"
+            },
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/subscription",
+              "x-stoplight": {
+                "id": "cuu9judfqhy44"
+              }
             }
           },
           "branch": {
@@ -3997,9 +4002,15 @@
             "maxLength": 200
           },
           "subscriptions": {
-            "$ref": "#/components/schemas/subscriptions",
             "x-stoplight": {
               "id": "jwv88l9gh0d7p"
+            },
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/subscription",
+              "x-stoplight": {
+                "id": "261wx5w7j831q"
+              }
             }
           }
         }
@@ -4659,14 +4670,6 @@
             },
             "description": "Código único de venta no presente generado por Credibanco (Si este dato no existe en nuestros registros se creará un certificado nuevo).",
             "example": "011211406"
-          },
-          "terminalLocation": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "a8i83r90em2fe"
-            },
-            "description": "Ubicación de la terminal.",
-            "example": "Medellín"
           },
           "terminalNumber": {
             "type": "string",
@@ -6073,6 +6076,13 @@
           "id": "rs4sctscjne0x"
         },
         "type": "object",
+        "examples": [
+          {
+            "franchise": "visa",
+            "acquirerBIN": 400111,
+            "merchantCode": 46416456
+          }
+        ],
         "properties": {
           "franchise": {
             "type": "string",
@@ -6089,15 +6099,16 @@
             "x-stoplight": {
               "id": "80intxv8z9tcm"
             },
-            "description": "Bin del adquirente"
+            "description": "Bin del adquirente",
+            "example": 400111
           },
           "merchantCode": {
-            "type": "string",
+            "type": "integer",
             "x-stoplight": {
               "id": "ju68mk8lam8qa"
             },
-            "maxLength": 30,
-            "example": "46416456"
+            "example": "46416456",
+            "description": "Codigo alphanumerico del comercio"
           }
         }
       }
