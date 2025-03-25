@@ -4870,15 +4870,18 @@
             "maximum": 999
           },
           "rejectionScore": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "x-stoplight": {
               "id": "5b7tuhwq7rkm3"
             },
             "default": null,
             "example": 300,
+            "description": "Puntaje de tolerancia al riesgo, indica el puntaje a partir del cual se declinarán transacciones debido al riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'.",
             "minimum": 1,
-            "maximum": 999,
-            "description": "Puntaje de tolerancia al riesgo, indica el puntaje a partir del cual se declinarán transacciones debido al riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'."
+            "maximum": 999
           }
         }
       },
@@ -5052,26 +5055,32 @@
             "description": "Monto mínimo para activar. Este campo es requerido siempre que riskEngine no sea nulo."
           },
           "approvalScore": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "x-stoplight": {
               "id": "lmgqg17z0qw3l"
             },
             "description": "Puntaje de apetito al riesgo. Este campo es requerido siempre que riskEngine no sea nulo.",
-            "minimum": 1,
-            "maximum": 999,
             "default": 0,
-            "example": 200
+            "example": 200,
+            "minimum": 1,
+            "maximum": 999
           },
           "rejectionScore": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "x-stoplight": {
               "id": "rww075fejbhqa"
             },
-            "default": 0,
+            "default": null,
             "example": 250,
+            "description": "Puntaje de tolerancia al riesgo. Este campo es requerido siempre que riskEngine no sea nulo.",
             "minimum": 1,
-            "maximum": 999,
-            "description": "Puntaje de tolerancia al riesgo. Este campo es requerido siempre que riskEngine no sea nulo."
+            "maximum": 999
           },
           "onCaibration": {
             "type": "boolean",
@@ -5269,7 +5278,10 @@
             "description": "Porcentaje de IVA."
           },
           "patternReference": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "x-stoplight": {
               "id": "mgka1u419sllx"
             },
@@ -5434,7 +5446,7 @@
               "id": "zu559k8t7z438"
             },
             "description": "Idioma",
-            "example": "312588921",
+            "example": "en",
             "enum": [
               "en",
               "en_CL",
@@ -6131,7 +6143,7 @@
               "id": "a0zvl1rpqw1v0"
             },
             "description": "Id del facilitador de pago.",
-            "example": "23"
+            "example": 23
           }
         }
       },
@@ -6172,7 +6184,7 @@
             "x-stoplight": {
               "id": "ju68mk8lam8qa"
             },
-            "example": "46416456",
+            "example": 46416456,
             "description": "Codigo alphanumerico del comercio"
           }
         }
