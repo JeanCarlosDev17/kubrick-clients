@@ -6126,6 +6126,48 @@
             "example": "23"
           }
         }
+      },
+      "subscription": {
+        "title": "subscriptions",
+        "x-stoplight": {
+          "id": "rs4sctscjne0x"
+        },
+        "type": "object",
+        "examples": [
+          {
+            "franchise": "visa",
+            "acquirerBIN": 400111,
+            "merchantCode": 46416456
+          }
+        ],
+        "properties": {
+          "franchise": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "540rt1aeggajf"
+            },
+            "example": "visa",
+            "maxLength": 30,
+            "pattern": "^[a-zA-Z]+$",
+            "description": "Nombre de la franquicia en ThreDS MPI."
+          },
+          "acquirerBIN": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "80intxv8z9tcm"
+            },
+            "description": "Bin del adquirente",
+            "example": 400111
+          },
+          "merchantCode": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "ju68mk8lam8qa"
+            },
+            "example": "46416456",
+            "description": "Codigo alphanumerico del comercio"
+          }
+        }
       }
     },
     "requestBodies": {},
