@@ -408,7 +408,7 @@
                       "mcc": "0742",
                       "isicClass": 111,
                       "document": {
-                        "type": "string",
+                        "type": "NIT",
                         "number": "900299823-1"
                       },
                       "subscriptions": [
@@ -426,9 +426,9 @@
                         "url": "https://www.branch-url.com",
                         "subscriptions": [
                           {
-                            "franchise": 1,
+                            "franchise": "visa",
                             "acquirerBIN": 400900,
-                            "merchantCode": "\"5240\""
+                            "merchantCode": "5240"
                           }
                         ]
                       }
@@ -604,9 +604,9 @@
                         "url": "https://www.branch-url.com",
                         "subscriptions": [
                           {
-                            "franchise": 1,
+                            "franchise": "visa",
                             "acquirerBIN": 400900,
-                            "merchantCode": "\"5240\""
+                            "merchantCode": "5240"
                           }
                         ]
                       }
@@ -798,9 +798,9 @@
                         "url": "https://www.branch-url.com",
                         "subscriptions": [
                           {
-                            "franchise": 1,
+                            "franchise": "visa",
                             "acquirerBIN": 400900,
-                            "merchantCode": "\"5240\""
+                            "merchantCode": "5240"
                           }
                         ]
                       }
@@ -1003,9 +1003,9 @@
                         "subscriptions": {
                           "subscriptions": [
                             {
-                              "franchise": 1,
+                              "franchise": "visa",
                               "acquirerBIN": 400900,
-                              "merchantCode": "\"5240\""
+                              "merchantCode": "5240"
                             }
                           ]
                         }
@@ -3691,7 +3691,12 @@
                 "id": "spivxbp5ya7jc"
               },
               "type": "array",
-              "items": {}
+              "items": {
+                "$ref": "#/components/schemas/subscription",
+                "x-stoplight": {
+                  "id": "3axhe574y42ts"
+                }
+              }
             }
           },
           "branch": {
@@ -4127,25 +4132,6 @@
           ]
         },
         "title": "branches",
-        "examples": [
-          [
-            {
-              "name": "ThreeDS Branch Name",
-              "brand": "branch brand example",
-              "country": "COL",
-              "currency": "COP",
-              "url": "https://www.branch-url.com",
-              "requireEnrollment": true,
-              "subscriptions": [
-                {
-                  "franchise": "string",
-                  "acquirerBIN": 0,
-                  "merchantCode": "string"
-                }
-              ]
-            }
-          ]
-        ],
         "items": {
           "type": "object",
           "required": [
@@ -4193,20 +4179,41 @@
                 "type": "object",
                 "properties": {
                   "franchise": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "visa"
                   },
                   "acquirerBIN": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 499999
                   },
                   "merchantCode": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "4646456"
                   }
                 }
               }
             }
           }
         },
-        "description": ""
+        "examples": [
+          [
+            {
+              "name": "ThreeDS Branch Name",
+              "brand": "branch brand example",
+              "country": "COL",
+              "currency": "COP",
+              "url": "https://www.branch-url.com",
+              "requireEnrollment": true,
+              "subscriptions": [
+                {
+                  "franchise": "visa",
+                  "acquirerBIN": 499999,
+                  "merchantCode": "125899"
+                }
+              ]
+            }
+          ]
+        ]
       },
       "notification": {
         "type": "object",
