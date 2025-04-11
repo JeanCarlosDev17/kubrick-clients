@@ -4766,26 +4766,6 @@
         },
         "type": "object",
         "description": "Objeto que contiene los parametros adicionales para la creación del certificado de Credibanco y la configuración de medio de pago PSE.",
-        "examples": [
-          {
-            "retailCode": "011211406",
-            "terminalLocation": "Medellín",
-            "terminalNumber": "00031431",
-            "username": "UserExample",
-            "password": "passwordExample",
-            "pfxID": 1,
-            "entityCode": "9002992280",
-            "serviceCode": "001",
-            "merchantCode": "1269189",
-            "isEcommerce": true,
-            "agreement": 12,
-            "agreementName": "Placetopay",
-            "iacCode": "33456564",
-            "acceptChecks": true,
-            "disableBlocks": "ath_cajas_exito, ath_efecty",
-            "hash": "456445646asdf52fd"
-          }
-        ],
         "properties": {
           "retailCode": {
             "type": "string",
@@ -4921,8 +4901,38 @@
             "x-stoplight": {
               "id": "6h089qrhi1wat"
             }
+          },
+          "pseAggregatorModel": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "jmaxoi3myso6z"
+            },
+            "description": "Determina si es modelo agregador (PSE)",
+            "default": false
           }
-        }
+        },
+        "examples": [
+          {
+            "retailCode": "011211406",
+            "terminalLocation": "Medellín",
+            "terminalNumber": "00031431",
+            "username": "UserExample",
+            "password": "passwordExample",
+            "pfxID": 1,
+            "entityCode": "9002992280",
+            "serviceCode": "001",
+            "merchantCode": "1269189",
+            "isEcommerce": true,
+            "agreement": 12,
+            "agreementName": "Placetopay",
+            "iacCode": "33456564",
+            "acceptChecks": true,
+            "disableBlocks": "ath_cajas_exito, ath_efecty",
+            "hash": "456445646asdf52fd",
+            "forceConversionCurrency": "USD",
+            "pseAggregatorModel": false
+          }
+        ]
       },
       "site-threeDS": {
         "title": "site-threeDS",
