@@ -1457,7 +1457,7 @@
                     }
                   },
                   "subscriptions": {
-                    "$ref": "#/components/schemas/subscriptions",
+                    "$ref": "#/components/schemas/subscription",
                     "x-stoplight": {
                       "id": "xzmvqinp0jw4a"
                     },
@@ -4038,7 +4038,6 @@
           "url",
           "mcc",
           "isicClass",
-          "subscriptions",
           "branch"
         ],
         "properties": {
