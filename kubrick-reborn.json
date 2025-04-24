@@ -5337,6 +5337,21 @@
             },
             "description": "Determina si es modelo agregador (PSE)",
             "default": false
+          },
+          "collectionId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "lxuimy5ktu878"
+            },
+            "maxLength": 12,
+            "example": "5645648"
+          },
+          "accountVerification": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "coke359km76y2"
+            },
+            "default": true
           }
         },
         "examples": [
@@ -5357,8 +5372,10 @@
             "acceptChecks": true,
             "disableBlocks": "ath_cajas_exito, ath_efecty",
             "hash": "456445646asdf52fd",
-            "forceConversionCurrency": "USD",
-            "pseAggregatorModel": false
+            "forceConversionCurrency": "ARS",
+            "pseAggregatorModel": false,
+            "collectionId": "5645648",
+            "accountVerification": true
           }
         ]
       },
