@@ -3303,12 +3303,41 @@
         ],
         "properties": {
           "documentType": {
-            "type": "string",
             "x-stoplight": {
               "id": "y400bqhmbsn6v"
             },
             "example": "CC",
-            "description": "Tipo de documento del representante legal."
+            "description": "Tipo de documento del representante legal.",
+            "enum": [
+                  "CC",
+                  "TI",
+                  "NIT",
+                  "RUT",
+                  "CE",
+                  "CLRUT",
+                  "BZSSN",
+                  "BRN",
+                  "CPF",
+                  "DIDI",
+                  "DIMEX",
+                  "CPJ",
+                  "CRCPF",
+                  "CI",
+                  "RUC",
+                  "LIC",
+                  "TAX",
+                  "PPN",
+                  "RTN",
+                  "HNDNI",
+                  "HNDR",
+                  "EIN",
+                  "PERUC",
+                  "DNI",
+                  "PARUC",
+                  "CIP",
+                  "UYCI",
+                  "UYRUT"
+            ]
           },
           "document": {
             "type": "string",
