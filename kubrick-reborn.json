@@ -5877,7 +5877,7 @@
             "x-stoplight": {
               "id": "8wsnbr1mexqyg"
             },
-            "description": "Indica si se debe enviar automáticamente un email con el comprobante de una transacción exitosa realizada en el panel adminsitrativo. Su valor por defecto es True."
+            "description": "Indica si se debe enviar automáticamente un email al cliente con el comprobante de una transacción exitosa realizada en el panel adminsitrativo. Su valor por defecto es True."
           },
           "mailMerchant": {
             "x-stoplight": {
