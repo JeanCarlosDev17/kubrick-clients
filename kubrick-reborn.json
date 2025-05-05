@@ -5578,7 +5578,7 @@
                 "x-stoplight": {
                   "id": "0nqjeu596j3va"
                 },
-                "description": "Comportamiento a seguir en caso de fallo. Este campo es requerido siempre que riskEngine no sea nulo.",
+                "description": "Comportamiento a seguir en caso de fallo. Este campo es requerido siempre que riskEngine behaviours sea enviado.",
                 "enum": [
                   "REJECTED",
                   "MANUAL",
@@ -5594,14 +5594,14 @@
                   "IGNORE",
                   "PROCESS"
                 ],
-                "description": "Comportamiento a seguir ante nivel de riesgo bajo Este campo es requerido siempre que riskEngine no sea nulo."
+                "description": "Comportamiento a seguir ante nivel de riesgo bajo Este campo es requerido siempre que riskEngine  behaviours sea enviado."
               },
               "onMediumRisk": {
                 "x-stoplight": {
                   "id": "jtj0h2gub0mwd"
                 },
                 "enum": [],
-                "description": "Comportamiento a seguir ante nivel de riesgo medio. Este campo es requerido siempre que riskEngine no sea nulo."
+                "description": "Comportamiento a seguir ante nivel de riesgo medio. Este campo es requerido siempre que riskEngine  behaviours sea enviado."
               },
               "onHighRisk": {
                 "x-stoplight": {
@@ -5612,7 +5612,7 @@
                   "MANUAL",
                   "IGNORE"
                 ],
-                "description": "Comportamiento a seguir ante nivel de riesgo alto. Este campo es requerido siempre que riskEngine no sea nulo."
+                "description": "Comportamiento a seguir ante nivel de riesgo alto. Este campo es requerido siempre que riskEngine  behaviours sea enviado."
               }
             }
           },
@@ -5644,42 +5644,32 @@
             "example": 30,
             "minimum": 1,
             "maximum": 999999999,
-            "description": "Monto mínimo para activar. Este campo es requerido siempre que riskEngine no sea nulo."
+            "description": "Monto mínimo para activar. Este campo es requerido siempre que riskEngine sea enviado."
           },
           "approvalScore": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "integer",
             "x-stoplight": {
               "id": "lmgqg17z0qw3l"
             },
-            "description": "Puntaje de apetito al riesgo. Este campo es requerido siempre que riskEngine no sea nulo.",
+            "description": "Puntaje de apetito al riesgo. Este campo es requerido siempre que riskEngine sea enviado.",
             "default": 0,
-            "example": 200,
-            "minimum": 1,
-            "maximum": 999
+            "example": 200
           },
           "rejectionScore": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "integer",
             "x-stoplight": {
               "id": "rww075fejbhqa"
             },
             "default": null,
             "example": 250,
-            "description": "Puntaje de tolerancia al riesgo. Este campo es requerido siempre que riskEngine no sea nulo.",
-            "minimum": 1,
-            "maximum": 999
+            "description": "Puntaje de tolerancia al riesgo. Este campo es requerido siempre que riskEngine sea enviado."
           },
           "onCaibration": {
             "type": "boolean",
             "x-stoplight": {
               "id": "q3k0lwq60w5uy"
             },
-            "description": "Indica el estado en calibración. Este campo es requerido siempre que riskEngine no sea nulo."
+            "description": "Indica el estado en calibración. Este campo es requerido siempre que riskEngine sea enviado."
           }
         }
       },
