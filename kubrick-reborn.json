@@ -3691,6 +3691,15 @@
           "control"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "2kaa4wb6yy70r"
+            },
+            "description": "nombre del sitio",
+            "example": "site company name",
+            "maxLength": 128
+          },
           "displayName": {
             "type": "string",
             "x-stoplight": {
@@ -3787,10 +3796,10 @@
               "id": "3itrmxog8dnwi"
             }
           },
-          "threeDS": {
-            "$ref": "#/components/schemas/site-threeDS",
+          "creditBureau": {
+            "$ref": "#/components/schemas/site-creditBureau",
             "x-stoplight": {
-              "id": "26jgyubwm70wm"
+              "id": "vm8z96q62tv82"
             }
           },
           "historic": {
@@ -3799,10 +3808,10 @@
               "id": "jb67jeuvmxtb8"
             }
           },
-          "creditBureau": {
-            "$ref": "#/components/schemas/site-creditBureau",
+          "threeDS": {
+            "$ref": "#/components/schemas/site-threeDS",
             "x-stoplight": {
-              "id": "vm8z96q62tv82"
+              "id": "26jgyubwm70wm"
             }
           },
           "riskEngine": {
