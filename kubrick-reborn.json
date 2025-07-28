@@ -3849,6 +3849,15 @@
           "id": "l3nvabqo75a4u"
         },
         "type": "object",
+        "examples": [
+          {
+            "allowPartial": false,
+            "connectionMethod": "REDIRECT",
+            "notificationUrl": "https://site-webhook.com",
+            "sourceRestriction": "microsites",
+            "analyticsCode": "UA-171313251-4, GTM-123812"
+          }
+        ],
         "required": [
           "connectionMethod"
         ],
@@ -3898,17 +3907,33 @@
             },
             "description": "Permite añadir el código de google analytics.",
             "example": "UA-171313251-4, GTM-123812"
+          },
+          "allowWallet": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "ayaqjt1mezbyc"
+            },
+            "description": "Indicador de si que permite pago con billetera Placetopay.\n\n"
+          },
+          "returnAdditional": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "ykrusrvseduka"
+            },
+            "description": "Permite devolver o no los datos adicionales"
+          },
+          "payerFieldsType": {
+            "x-stoplight": {
+              "id": "c116k9hzyxhpr"
+            },
+            "description": "Tipos del campo de pagador:\n\n0 = Con documento\n\n1 = Sin documento\n\n2 = Solo email",
+            "enum": [
+              0,
+              1,
+              2
+            ]
           }
-        },
-        "examples": [
-          {
-            "allowPartial": false,
-            "connectionMethod": "REDIRECT",
-            "notificationUrl": "https://site-webhook.com",
-            "sourceRestriction": "microsites",
-            "analyticsCode": "UA-171313251-4, GTM-123812"
-          }
-        ]
+        }
       },
       "control": {
         "title": "control",
