@@ -3286,6 +3286,15 @@
             },
             "description": "País del comercio (ISO 3166-1 alfa-2).",
             "example": "CO"
+          },
+          "street": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ezjz5nhd38n1s"
+            },
+            "maxLength": 128,
+            "example": "Transversal 123 # 12 a",
+            "description": "Dirección del comercio"
           }
         }
       },
