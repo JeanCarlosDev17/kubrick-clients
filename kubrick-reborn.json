@@ -2046,7 +2046,7 @@
     },
     "/api/merchant/search": {
       "post": {
-        "summary": "search",
+        "summary": "merchant search",
         "responses": {
           "200": {
             "description": "OK",
@@ -2545,6 +2545,646 @@
         "tags": [
           "Merchant"
         ]
+      }
+    },
+    "/api/site/update": {
+      "post": {
+        "summary": "Update site",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RU",
+                        "message": "The request has been processed successfully",
+                        "date": "2025-08-11T15:34:20+00:00"
+                      },
+                      "requestId": 358
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "requestId": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RU",
+                        "message": "The request has been processed successfully",
+                        "date": "2024-02-08T23:15:08+00:00"
+                      },
+                      "requestId": 11
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok",
+                      "x-stoplight": {
+                        "id": "ukdw142eotd58"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The id field is required.",
+                        "date": "2025-08-11T16:48:48+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FSU",
+                        "message": "Internal server error, try later please",
+                        "date": "2025-08-11T16:57:31+00:00"
+                      },
+                      "requestId": 360
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "requestId": {
+                      "type": "integer",
+                      "example": 12
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FSU",
+                        "message": "Internal server error, try later please",
+                        "date": "2024-02-08T23:15:08+00:00"
+                      },
+                      "requestId": 12
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-api-site-update",
+        "x-stoplight": {
+          "id": "n7z95km3h5t86"
+        },
+        "description": "Este endpoint permite la actualización de sitios que hayan sido creados en kubrick, para ello el cliente debe ser el mismo que creo el sitio. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "id": 14296,
+                    "login": "89as7d978a67",
+                    "secretKey": "kp777899f6544",
+                    "md5Hash": "abcd1234abcd1234abcd1234abcd12",
+                    "name": "site name example",
+                    "displayName": "site display name",
+                    "type": "INT",
+                    "category": "ECOMMERCE",
+                    "email": "email@test.com",
+                    "currency": "COP",
+                    "language": "ES",
+                    "analyticsCode": "UA-171315311-4, GTM-123422",
+                    "isActive": true,
+                    "onTest": false,
+                    "expiration": "2025-12-31 23:59:59",
+                    "productionDate": "2025-08-11",
+                    "customBatch": 123,
+                    "integration": {
+                      "allowPartial": false,
+                      "connectionMethod": "REDIRECT",
+                      "checkoutVersion": "2",
+                      "notificationUrl": "https://midominio.com/notificacion",
+                      "analyticsCode": "UA-171315311-4, GTM-123422",
+                      "sourceRestriction": "api",
+                      "allowWallet": true,
+                      "returnAdditional": true,
+                      "payerFieldsType": 1
+                    },
+                    "control": {
+                      "allowedDays": 127,
+                      "allowedHours": "ffffffffffffffffffffffffffffffffffffffffff",
+                      "allowedBankCountries": [
+                        "CO",
+                        "CL"
+                      ],
+                      "delegatedAuthorization": "ffffffffffffffffffffffffffffffffffffffffff",
+                      "minAmount": "1.00",
+                      "maxAmount": "4000000.00",
+                      "filterPse": true,
+                      "filterTuya": true,
+                      "filterSafetypay": true,
+                      "prechargerFilter": "1",
+                      "filterByBin": true,
+                      "exceptionBinsList": [
+                        "123456",
+                        "654321"
+                      ]
+                    },
+                    "threeDS": {
+                      "setting": "LOW",
+                      "minAmount": "111111111111.1"
+                    },
+                    "historic": {
+                      "behaviour": "DISABLED",
+                      "lowerScore": 100,
+                      "rejectionScore": 200
+                    },
+                    "creditBureau": {
+                      "behaviours": {
+                        "onFailed": "IGNORE",
+                        "onNoMatch": "IGNORE",
+                        "onMatch": "IGNORE"
+                      },
+                      "minAmount": 12,
+                      "paymentGroups": [
+                        "CASH",
+                        "E-WALLET"
+                      ]
+                    },
+                    "riskEngine": {
+                      "behaviours": {
+                        "onFailed": "IGNORE",
+                        "onLowRisk": "PROCESS",
+                        "onMediumRisk": "MANUAL",
+                        "onHighRisk": "REJECTED"
+                      },
+                      "paymentGroups": [
+                        "CASH",
+                        "CREDITCARD"
+                      ],
+                      "minAmount": 1000,
+                      "approvalScore": 500,
+                      "rejectionScore": 800,
+                      "onCalibration": false
+                    },
+                    "securityFilters": {
+                      "filterLockedByTries": false,
+                      "allowedIssuerCountries": [
+                        "CO",
+                        "CL"
+                      ],
+                      "forceIPMatch": false,
+                      "excludeIPCountry": [
+                        "AR",
+                        "BR"
+                      ],
+                      "onlyWhitelisted": false,
+                      "allowedIPCountries": [
+                        "JP",
+                        "HK"
+                      ],
+                      "allowedCardsDay": 12,
+                      "allowedCardsByIP": 30,
+                      "allowedCardsMonth": 2,
+                      "allowedCardsYear": 5,
+                      "dayMax": 2,
+                      "dayMaxAmount": 100000000,
+                      "monthMax": 5,
+                      "monthMaxAmount": 100000000
+                    },
+                    "operation": {
+                      "disableTax": true,
+                      "calculateTax": true,
+                      "taxPercentage": 12,
+                      "patternReference": "29",
+                      "mailCustomer": true,
+                      "mailMerchant": true
+                    }
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Identificador del sitio."
+                  },
+                  "login": {
+                    "type": "string",
+                    "maxLength": 32,
+                    "example": "89as7d978a67",
+                    "description": "Login del sitio"
+                  },
+                  "secretKey": {
+                    "type": "string",
+                    "example": "kp777899f6544",
+                    "maxLength": 32,
+                    "description": "Llave transaccional de sitio."
+                  },
+                  "md5Hash": {
+                    "type": "string",
+                    "maxLength": 32,
+                    "example": "abcd1234abcd1234abcd1234abcd12",
+                    "description": "Algoritmo de enmascaramiento de datos."
+                  },
+                  "name": {
+                    "type": "string",
+                    "maxLength": 128,
+                    "description": "Nombre del sitio."
+                  },
+                  "displayName": {
+                    "type": "string",
+                    "maxLength": 128,
+                    "description": "Nombre a mostrar del sitio."
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "INT",
+                    "description": "Punto de origen de las transacciones que se realizarán por el sitio.\n\nINT = Internet <br>\nPOS = Punto de venta <br>\nIVR = IVR <br>\nONE = Pago a un clic <br>\nREC = Recurrencia <br>",
+                    "enum": [
+                      "INT",
+                      "POS",
+                      "IVR",
+                      "ONE",
+                      "REC"
+                    ]
+                  },
+                  "category": {
+                    "example": "ECOMMERCE",
+                    "description": "Define la categoría del sitio.\n\nECOMMERCE = Comercio electrónico <br>\nCOLLECT = Recaudos <br>",
+                    "enum": [
+                      "ECOMMERCE",
+                      "COLLECT"
+                    ]
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "admin@email.com",
+                    "description": "Correo al cual llegarán los comprobantes de pago de las transacciones relizadas en el sitio.",
+                    "maxLength": 256
+                  },
+                  "currency": {
+                    "$ref": "#/components/schemas/currency",
+                    "description": "Moneda que se usará para las transacciones"
+                  },
+                  "language": {
+                    "$ref": "#/components/schemas/language",
+                    "description": "Lenguaje que se usará para las transacciones"
+                  },
+                  "isActive": {
+                    "type": "boolean",
+                    "description": "Indicador del estado del sitio."
+                  },
+                  "onTest": {
+                    "type": "boolean",
+                    "description": "Indicador de sitio en pruebas."
+                  },
+                  "expiration": {
+                    "type": "string",
+                    "example": "2023-06-30 00:00:00",
+                    "description": "Fecha de expiración el sitio, si no es definido o su valor es null la fecha de expiración sera ilimitada."
+                  },
+                  "productionDate": {
+                    "type": "string",
+                    "example": "2023-06-30",
+                    "description": "fecha de salida a produccion formato Y-m-d"
+                  },
+                  "customBatch": {
+                    "type": "number",
+                    "example": 2345,
+                    "description": "Código servicio recaudo"
+                  },
+                  "integration": {
+                    "type": "object",
+                    "properties": {
+                      "allowPartial": {
+                        "type": "boolean",
+                        "description": "Indica si se permite el pago parcial (Mixto) en el sitio, en caso de no enviarse se toma como “false”."
+                      },
+                      "connectionMethod": {
+                        "example": "REDIRECT",
+                        "description": "Especifica el tipo de producto que se adquirió en el sitio.",
+                        "enum": [
+                          "REDIRECT",
+                          "SERVICES",
+                          "LINK",
+                          "QR",
+                          "MS_OPEN",
+                          "MS_CLOSED",
+                          "MS_CUSTOM",
+                          "IVR",
+                          "INVOICE_API",
+                          "RECURRENCE"
+                        ]
+                      },
+                      "checkoutVersion": {
+                        "type": "string",
+                        "description": "Versión de redirección."
+                      },
+                      "notificationUrl": {
+                        "type": "string",
+                        "description": "En caso de que el tipo de conexión sea “REDIRECT”, a esta URL llegará el resultado de las transacciones.",
+                        "example": "https://site-webhook.com",
+                        "maxLength": 128
+                      },
+                      "analyticsCode": {
+                        "type": "string",
+                        "description": "Permite añadir el código de google analytics.",
+                        "example": "UA-171313251-4, GTM-123812"
+                      },
+                      "sourceRestriction": {
+                        "type": "string",
+                        "description": "Restriccion de origen",
+                        "enum": [
+                          "microsites",
+                          "ivr",
+                          "checkout",
+                          "panel",
+                          "api",
+                          "plugins"
+                        ]
+                      },
+                      "allowWallet": {
+                        "type": "boolean",
+                        "description": "Indicador de pago con billetera Placetopay."
+                      },
+                      "returnAdditional": {
+                        "type": "boolean",
+                        "description": "Permite devolver o no los datos adicionales"
+                      },
+                      "payerFieldsType": {
+                        "description": "Tipos del campo de pagador:\n\n0 = Con documento\n\n1 = Sin documento\n\n2 = Solo email",
+                        "enum": [
+                          0,
+                          1,
+                          2
+                        ]
+                      }
+                    }
+                  },
+                  "control": {
+                    "type": "object",
+                    "properties": {
+                      "allowedDays": {
+                        "type": "integer"
+                      },
+                      "allowedHours": {
+                        "type": "string"
+                      },
+                      "allowedBankCountries": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "delegatedAuthorization": {
+                        "type": "string"
+                      },
+                      "minAmount": {
+                        "type": "string"
+                      },
+                      "maxAmount": {
+                        "type": "string"
+                      },
+                      "filterPse": {
+                        "type": "boolean"
+                      },
+                      "filterTuya": {
+                        "type": "boolean"
+                      },
+                      "filterSafetypay": {
+                        "type": "boolean"
+                      },
+                      "prechargerFilter": {
+                        "type": "string"
+                      },
+                      "filterByBin": {
+                        "type": "boolean"
+                      },
+                      "exceptionBinsList": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "threeDS": {
+                    "type": "object",
+                    "properties": {
+                      "setting": {
+                        "type": "string"
+                      },
+                      "minAmount": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "historic": {
+                    "type": "object",
+                    "properties": {
+                      "behaviour": {
+                        "type": "string"
+                      },
+                      "lowerScore": {
+                        "type": "integer"
+                      },
+                      "rejectionScore": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "creditBureau": {
+                    "type": "object",
+                    "properties": {
+                      "behaviours": {
+                        "type": "object",
+                        "properties": {
+                          "onFailed": {
+                            "type": "string"
+                          },
+                          "onNoMatch": {
+                            "type": "string"
+                          },
+                          "onMatch": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "minAmount": {
+                        "type": "integer"
+                      },
+                      "paymentGroups": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "riskEngine": {
+                    "type": "object",
+                    "properties": {
+                      "behaviours": {
+                        "type": "object",
+                        "properties": {
+                          "onFailed": {
+                            "type": "string"
+                          },
+                          "onLowRisk": {
+                            "type": "string"
+                          },
+                          "onMediumRisk": {
+                            "type": "string"
+                          },
+                          "onHighRisk": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "paymentGroups": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "minAmount": {
+                        "type": "integer"
+                      },
+                      "approvalScore": {
+                        "type": "integer"
+                      },
+                      "rejectionScore": {
+                        "type": "integer"
+                      },
+                      "onCalibration": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "securityFilters": {
+                    "type": "object",
+                    "properties": {
+                      "filterLockedByTries": {
+                        "type": "boolean"
+                      },
+                      "allowedIssuerCountries": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "forceIPMatch": {
+                        "type": "boolean"
+                      },
+                      "excludeIPCountry": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "onlyWhitelisted": {
+                        "type": "boolean"
+                      },
+                      "allowedIPCountries": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "allowedCardsDay": {
+                        "type": "integer"
+                      },
+                      "allowedCardsByIP": {
+                        "type": "integer"
+                      },
+                      "allowedCardsMonth": {
+                        "type": "integer"
+                      },
+                      "allowedCardsYear": {
+                        "type": "integer"
+                      },
+                      "dayMax": {
+                        "type": "integer"
+                      },
+                      "dayMaxAmount": {
+                        "type": "integer"
+                      },
+                      "monthMax": {
+                        "type": "integer"
+                      },
+                      "monthMaxAmount": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "operation": {
+                    "type": "object",
+                    "properties": {
+                      "disableTax": {
+                        "type": "boolean"
+                      },
+                      "calculateTax": {
+                        "type": "boolean"
+                      },
+                      "taxPercentage": {
+                        "type": "integer"
+                      },
+                      "patternReference": {
+                        "type": "string"
+                      },
+                      "mailCustomer": {
+                        "type": "boolean"
+                      },
+                      "mailMerchant": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -3849,15 +4489,6 @@
           "id": "l3nvabqo75a4u"
         },
         "type": "object",
-        "examples": [
-          {
-            "allowPartial": false,
-            "connectionMethod": "REDIRECT",
-            "notificationUrl": "https://site-webhook.com",
-            "sourceRestriction": "microsites",
-            "analyticsCode": "UA-171313251-4, GTM-123812"
-          }
-        ],
         "required": [
           "connectionMethod"
         ],
@@ -3933,7 +4564,16 @@
               2
             ]
           }
-        }
+        },
+        "examples": [
+          {
+            "allowPartial": false,
+            "connectionMethod": "REDIRECT",
+            "notificationUrl": "https://site-webhook.com",
+            "sourceRestriction": "microsites",
+            "analyticsCode": "UA-171313251-4, GTM-123812"
+          }
+        ]
       },
       "control": {
         "title": "control",
@@ -4061,7 +4701,7 @@
         ]
       },
       "threeDS": {
-        "title": "threeDS",
+        "title": "threeDS ",
         "x-stoplight": {
           "id": "koadh4own8ew2"
         },
