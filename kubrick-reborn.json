@@ -4100,6 +4100,38 @@
           ]
         },
         "title": "paymentMethods",
+        "examples": [
+          [
+            {
+              "code": "MC",
+              "order": 1,
+              "financialEntity": 16,
+              "commissionModel": "string",
+              "commissionValue": 2.5,
+              "accountNumber": "1234567811",
+              "accountType": 1,
+              "settings": {
+                "retailCode": "011211406",
+                "terminalLocation": "Medellín",
+                "terminalNumber": "00031431",
+                "username": "UserExample",
+                "password": "passwordExample",
+                "pfxID": 1,
+                "entityCode": "9002992280",
+                "serviceCode": "001",
+                "merchantCode": "1269189",
+                "isEcommerce": true,
+                "agreement": 12,
+                "agreementName": "Placetopay",
+                "iacCode": "33456564",
+                "acceptChecks": true,
+                "disableBlocks": "ath_cajas_exito, ath_efecty",
+                "hash": "456445646asdf52fd"
+              },
+              "threeDS": true
+            }
+          ]
+        ],
         "items": {
           "type": "object",
           "required": [
@@ -4154,44 +4186,19 @@
             "settings": {
               "$ref": "#/components/schemas/paymentMethods-settings"
             },
+            "creditRules": {
+              "type": "array",
+              "x-stoplight": {
+                "id": "hfbbg7qiopqau"
+              },
+              "items": {}
+            },
             "threeDS": {
               "type": "boolean",
               "description": "Indica si el medio de pago debe tener token de 3DS."
             }
           }
-        },
-        "examples": [
-          [
-            {
-              "code": "MC",
-              "order": 1,
-              "financialEntity": 16,
-              "commissionModel": "string",
-              "commissionValue": 2.5,
-              "accountNumber": "1234567811",
-              "accountType": 1,
-              "settings": {
-                "retailCode": "011211406",
-                "terminalLocation": "Medellín",
-                "terminalNumber": "00031431",
-                "username": "UserExample",
-                "password": "passwordExample",
-                "pfxID": 1,
-                "entityCode": "9002992280",
-                "serviceCode": "001",
-                "merchantCode": "1269189",
-                "isEcommerce": true,
-                "agreement": 12,
-                "agreementName": "Placetopay",
-                "iacCode": "33456564",
-                "acceptChecks": true,
-                "disableBlocks": "ath_cajas_exito, ath_efecty",
-                "hash": "456445646asdf52fd"
-              },
-              "threeDS": true
-            }
-          ]
-        ]
+        }
       },
       "creditRules": {
         "title": "creditRules",
