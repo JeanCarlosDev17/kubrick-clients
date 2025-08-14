@@ -3007,7 +3007,7 @@
                           "null"
                         ],
                         "maxLength": 42,
-                        "pattern": "^([0-9a-f])",
+                        "pattern": "^[0-9a-f]{1,42}$",
                         "description": "Autorización delegada."
                       },
                       "minAmount": {
