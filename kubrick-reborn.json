@@ -3099,7 +3099,7 @@
                     "description": "Contiene las configuraciones de motores de riesgo"
                   },
                   "securityFilters": {
-                    "$ref": "#/components/schemas/site-riskEngine",
+                    "$ref": "#/components/schemas/site-securityFilters",
                     "description": "Contiene la información de filtros de seguridad"
                   },
                   "operation": {
