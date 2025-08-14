@@ -3012,12 +3012,12 @@
                       },
                       "minAmount": {
                         "type": "string",
-                        "pattern": "^[\\d]{0,10}(\\.[\\d]{1,2})?$/",
+                        "pattern": "^[\\d]{0,10}(\\.[\\d]{1,2})?$",
                         "description": "Mínimo valor permitido por transacción. Este campo es requerido si el campo maxAmount está presente"
                       },
                       "maxAmount": {
                         "type": "string",
-                        "pattern": "^[\\d]{0,10}(\\.[\\d]{1,2})?$/",
+                        "pattern": "^[\\d]{0,10}(\\.[\\d]{1,2})?$",
                         "description": "Máximo valor permitido por transacción. Este campo es requerido si el campo minAmount está presente."
                       },
                       "filterPse": {
