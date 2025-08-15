@@ -2999,7 +2999,13 @@
                         ],
                         "description": "Paises permitidos para bancos emisores. Es nulo cuando todos los paises sean permitidos.",
                         "minItems": 1,
-                        "items": {}
+                        "items": {
+                          "x-stoplight": {
+                            "id": "nv87akrjqhpdf"
+                          },
+                          "type": "string",
+                          "maxLength": 3
+                        }
                       },
                       "delegatedAuthorization": {
                         "type": [
@@ -3091,6 +3097,122 @@
                   "operation": {
                     "$ref": "#/components/schemas/site-operation",
                     "description": "Contiene la información del funcionamiento de consola."
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "id": 99999999999999,
+                    "login": "89as7d978a67",
+                    "secretKey": "kp777899f6544",
+                    "md5Hash": "abcd1234abcd1234abcd1234abcd12",
+                    "name": "string",
+                    "displayName": "string",
+                    "type": "INT",
+                    "category": "ECOMMERCE",
+                    "email": "admin@email.com",
+                    "currency": "ARS",
+                    "language": "EN",
+                    "isActive": true,
+                    "onTest": true,
+                    "expiration": "2023-06-30 00:00:00",
+                    "productionDate": "2023-06-30",
+                    "customBatch": 2345,
+                    "integration": {
+                      "allowPartial": true,
+                      "connectionMethod": "REDIRECT",
+                      "notificationUrl": "https://site-webhook.com",
+                      "sourceRestriction": "microsites",
+                      "checkoutVersion": "v3",
+                      "analyticsCode": "UA-171313251-4, GTM-123812",
+                      "allowWallet": true,
+                      "returnAdditional": true,
+                      "payerFieldsType": 0
+                    },
+                    "control": {
+                      "allowedDays": 127,
+                      "allowedHours": "string",
+                      "allowedBankCountries": [
+                        "DZ",
+                        "BH"
+                      ],
+                      "delegatedAuthorization": "string",
+                      "minAmount": "string",
+                      "maxAmount": "string",
+                      "filterPse": true,
+                      "filterTuya": true,
+                      "filterSafetypay": true,
+                      "prechargerFilter": 0,
+                      "filterByBin": true,
+                      "exceptionBinsList": [
+                        "127.0.0.1"
+                      ]
+                    },
+                    "threeDS": {
+                      "setting": "string",
+                      "minAmount": 1.5
+                    },
+                    "historic": {
+                      "behaviour": "IGNORE",
+                      "lowerScore": 100,
+                      "rejectionScore": 300
+                    },
+                    "creditBureau": {
+                      "behaviours": {
+                        "onFailed": "REJECTED",
+                        "onNoMatch": "REJECTED",
+                        "onMatch": "PROCESS"
+                      },
+                      "paymentGroups": [
+                        "CASH"
+                      ],
+                      "minAmount": 200
+                    },
+                    "riskEngine": {
+                      "behaviours": {
+                        "onFailed": "REJECTED",
+                        "onLowRisk": "MANUAL",
+                        "onMediumRisk": "MANUAL",
+                        "onHighRisk": "REJECTED"
+                      },
+                      "paymentGroups": [
+                        "CASH"
+                      ],
+                      "minAmount": 30,
+                      "approvalScore": 200,
+                      "rejectionScore": 250,
+                      "onCaibration": true
+                    },
+                    "securityFilters": {
+                      "allowedIssuerCountries": [
+                        "CO"
+                      ],
+                      "forceIPMatch": true,
+                      "excludeIPCountry": [
+                        "CL"
+                      ],
+                      "onlyWhitelisted": true,
+                      "allowedIPCountries": [
+                        "EC"
+                      ],
+                      "allowedCardsDay": 4,
+                      "allowedCardsByIP": 10,
+                      "allowedCardsMonth": 4,
+                      "allowedCardsYear": 2,
+                      "dayMax": 3,
+                      "dayMaxAmount": 30000,
+                      "monthMax": 3,
+                      "monthMaxAmount": 2000
+                    },
+                    "operation": {
+                      "disableTax": true,
+                      "calculateTax": true,
+                      "taxPercentage": 12,
+                      "patternReference": null,
+                      "mailCustomer": true,
+                      "mailMerchant": true
+                    }
                   }
                 }
               }
