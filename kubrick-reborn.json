@@ -7,10 +7,7 @@
     "title": "Kubrick",
     "version": "1.0",
     "summary": "",
-    "description": "",
-    "license": {
-      "url": ""
-    }
+    "description": ""
   },
   "servers": [
     {
@@ -1477,7 +1474,7 @@
                     "isicClass": 111,
                     "allyName": "Edward Elric",
                     "document": {
-                      "type": "string",
+                      "type": "RUT",
                       "number": "900299823-1"
                     },
                     "requireEnrollment": true,
@@ -1806,7 +1803,7 @@
                             "name": "site display name - Test",
                             "login": "93f3ed619d946ae3fb3c39981fa9d1ef",
                             "secretKey": "E27gywYoAm6H28Xt",
-                            "isActive": 1,
+                            "isActive": true,
                             "details": null
                           },
                           "threeDs": {
@@ -1867,7 +1864,7 @@
                             "name": "site display name",
                             "login": "0195e33e3e3002cb120699abd503ed47",
                             "secretKey": "X7xKn2aypQOD0GBj",
-                            "isActive": 1,
+                            "isActive": true,
                             "details": null
                           },
                           "threeDs": {
@@ -2999,7 +2996,13 @@
                         ],
                         "description": "Paises permitidos para bancos emisores. Es nulo cuando todos los paises sean permitidos.",
                         "minItems": 1,
-                        "items": {}
+                        "items": {
+                          "x-stoplight": {
+                            "id": "nv87akrjqhpdf"
+                          },
+                          "type": "string",
+                          "maxLength": 3
+                        }
                       },
                       "delegatedAuthorization": {
                         "type": [
@@ -3073,22 +3076,8 @@
                     }
                   },
                   "historic": {
-                    "type": "object",
-                    "description": "Contiene la información de Histórico transaccional",
-                    "properties": {
-                      "behaviour": {
-                        "type": "string",
-                        "description": "Comportamiento a seguir cuando el puntaje obtenido por la transacción sea igual o menor al establecido, es requerido si historic esta definido en la petición."
-                      },
-                      "lowerScore": {
-                        "type": "integer",
-                        "description": "Puntaje de apetito al riesgo, indica el puntaje máximo para categorizar las operaciones como operaciones de bajo riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'."
-                      },
-                      "rejectionScore": {
-                        "type": "integer",
-                        "description": "Puntaje de tolerancia al riesgo, indica el puntaje a partir del cual se declinarán transacciones debido al riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'."
-                      }
-                    }
+                    "$ref": "#/components/schemas/site-historic",
+                    "description": "Contiene la información de Histórico transaccional"
                   },
                   "creditBureau": {
                     "$ref": "#/components/schemas/site-creditBureau",
@@ -3105,6 +3094,933 @@
                   "operation": {
                     "$ref": "#/components/schemas/site-operation",
                     "description": "Contiene la información del funcionamiento de consola."
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "id": 99999999999999,
+                    "login": "89as7d978a67",
+                    "secretKey": "kp777899f6544",
+                    "md5Hash": "abcd1234abcd1234abcd1234abcd12",
+                    "name": "string",
+                    "displayName": "string",
+                    "type": "INT",
+                    "category": "ECOMMERCE",
+                    "email": "admin@email.com",
+                    "currency": "ARS",
+                    "language": "EN",
+                    "isActive": true,
+                    "onTest": true,
+                    "expiration": "2023-06-30 00:00:00",
+                    "productionDate": "2023-06-30",
+                    "customBatch": 2345,
+                    "integration": {
+                      "allowPartial": true,
+                      "connectionMethod": "REDIRECT",
+                      "notificationUrl": "https://site-webhook.com",
+                      "sourceRestriction": "microsites",
+                      "checkoutVersion": "v3",
+                      "analyticsCode": "UA-171313251-4, GTM-123812",
+                      "allowWallet": true,
+                      "returnAdditional": true,
+                      "payerFieldsType": 0
+                    },
+                    "control": {
+                      "allowedDays": 127,
+                      "allowedHours": "string",
+                      "allowedBankCountries": [
+                        "DZ",
+                        "BH"
+                      ],
+                      "delegatedAuthorization": "string",
+                      "minAmount": "string",
+                      "maxAmount": "string",
+                      "filterPse": true,
+                      "filterTuya": true,
+                      "filterSafetypay": true,
+                      "prechargerFilter": 0,
+                      "filterByBin": true,
+                      "exceptionBinsList": [
+                        "127.0.0.1"
+                      ]
+                    },
+                    "threeDS": {
+                      "setting": "string",
+                      "minAmount": 1.5
+                    },
+                    "historic": {
+                      "behaviour": "IGNORE",
+                      "lowerScore": 100,
+                      "rejectionScore": 300
+                    },
+                    "creditBureau": {
+                      "behaviours": {
+                        "onFailed": "REJECTED",
+                        "onNoMatch": "REJECTED",
+                        "onMatch": "PROCESS"
+                      },
+                      "paymentGroups": [
+                        "CASH"
+                      ],
+                      "minAmount": 200
+                    },
+                    "riskEngine": {
+                      "behaviours": {
+                        "onFailed": "REJECTED",
+                        "onLowRisk": "MANUAL",
+                        "onMediumRisk": "MANUAL",
+                        "onHighRisk": "REJECTED"
+                      },
+                      "paymentGroups": [
+                        "CASH"
+                      ],
+                      "minAmount": 30,
+                      "approvalScore": 200,
+                      "rejectionScore": 250,
+                      "onCaibration": true
+                    },
+                    "securityFilters": {
+                      "allowedIssuerCountries": [
+                        "CO"
+                      ],
+                      "forceIPMatch": true,
+                      "excludeIPCountry": [
+                        "CL"
+                      ],
+                      "onlyWhitelisted": true,
+                      "allowedIPCountries": [
+                        "EC"
+                      ],
+                      "allowedCardsDay": 4,
+                      "allowedCardsByIP": 10,
+                      "allowedCardsMonth": 4,
+                      "allowedCardsYear": 2,
+                      "dayMax": 3,
+                      "dayMaxAmount": 30000,
+                      "monthMax": 3,
+                      "monthMaxAmount": 2000
+                    },
+                    "operation": {
+                      "disableTax": true,
+                      "calculateTax": true,
+                      "taxPercentage": 12,
+                      "patternReference": null,
+                      "mailCustomer": true,
+                      "mailMerchant": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/merchant/update": {
+      "post": {
+        "summary": "Update Merchant",
+        "responses": {},
+        "operationId": "post-api-merchant-update",
+        "x-stoplight": {
+          "id": "bikhz9k5383zo"
+        },
+        "tags": [
+          "Merchant"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "id": 4172,
+                    "name": "Customer updated 3",
+                    "brand": "Customer updated two",
+                    "mcc": "0742",
+                    "active": true,
+                    "timezone": "America/Bogota",
+                    "size": "M",
+                    "incrementType": "IPC",
+                    "url": "https://merchant.example.com",
+                    "document": {
+                      "type": "NIT",
+                      "number": "32145632"
+                    },
+                    "address": {
+                      "street": "Merchant address",
+                      "city": "Medellin",
+                      "state": 1,
+                      "country": "CO",
+                      "postalCode": 110011,
+                      "phone": 3001234567
+                    },
+                    "languages": [
+                      "ES"
+                    ],
+                    "currencies": [
+                      "CLP"
+                    ],
+                    "legalRepresentative": {
+                      "name": "Juan",
+                      "surname": "Perez",
+                      "documentType": "NIT",
+                      "document": "900123456"
+                    },
+                    "billing": {
+                      "ciiu": 4791,
+                      "contact": 3001234567,
+                      "mail": "billing@merchant.com",
+                      "registrationNumber": 1234567890,
+                      "taxType": 1,
+                      "taxRegime": 2,
+                      "organizationType": 3
+                    },
+                    "travelAgency": {
+                      "dispersion": false,
+                      "iata": "IATAA"
+                    },
+                    "control": {
+                      "seller": 123,
+                      "reseller": 456,
+                      "paymentFacilitator": 1
+                    }
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Identificador del comercio a editar."
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Nombre del comercio.",
+                    "example": "EVERTEC PLACETOPAY S.A.S",
+                    "maxLength": 80
+                  },
+                  "brand": {
+                    "type": "string",
+                    "description": "Marca del comercio.",
+                    "example": "Placetopay",
+                    "maxLength": 80
+                  },
+                  "mcc": {
+                    "type": "string",
+                    "description": "Código de categoría mercantil acorde ISO 18245.",
+                    "example": "7929",
+                    "pattern": "^\\d+$/",
+                    "minLength": 1,
+                    "maxLength": 4
+                  },
+                  "active": {
+                    "type": "boolean",
+                    "description": "Estado del comercio"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "url del comercio",
+                    "example": "https://dnetix.co/",
+                    "maxLength": 255,
+                    "format": "uri"
+                  },
+                  "timezone": {
+                    "description": "Zona horaria de la ubicación del comercio",
+                    "enum": [
+                      "Europe/Andorra",
+                      "Asia/Dubai",
+                      "Asia/Kabul",
+                      "America/Antigua",
+                      "America/Anguilla",
+                      "Europe/Tirane",
+                      "Asia/Yerevan",
+                      "Africa/Luanda",
+                      "Antarctica/Casey",
+                      "Antarctica/Davis",
+                      "Antarctica/DumontDUrville",
+                      "Antarctica/Mawson",
+                      "Antarctica/McMurdo",
+                      "Antarctica/Palmer",
+                      "Antarctica/Rothera",
+                      "Antarctica/Syowa",
+                      "Antarctica/Troll",
+                      "Antarctica/Vostok",
+                      "America/Argentina/Buenos_Aires",
+                      "America/Argentina/Catamarca",
+                      "America/Argentina/Cordoba",
+                      "America/Argentina/Jujuy",
+                      "America/Argentina/La_Rioja",
+                      "America/Argentina/Mendoza",
+                      "America/Argentina/Rio_Gallegos",
+                      "America/Argentina/Salta",
+                      "America/Argentina/San_Juan",
+                      "America/Argentina/San_Luis",
+                      "America/Argentina/Tucuman",
+                      "America/Argentina/Ushuaia",
+                      "Pacific/Pago_Pago",
+                      "Europe/Vienna",
+                      "Antarctica/Macquarie",
+                      "Australia/Adelaide",
+                      "Australia/Brisbane",
+                      "Australia/Broken_Hill",
+                      "Australia/Currie",
+                      "Australia/Darwin",
+                      "Australia/Eucla",
+                      "Australia/Hobart",
+                      "Australia/Lindeman",
+                      "Australia/Lord_Howe",
+                      "Australia/Melbourne",
+                      "Australia/Perth",
+                      "Australia/Sydney",
+                      "America/Aruba",
+                      "Asia/Baku",
+                      "Europe/Sarajevo",
+                      "America/Barbados",
+                      "Asia/Dhaka",
+                      "Europe/Brussels",
+                      "Africa/Ouagadougou",
+                      "Europe/Sofia",
+                      "Asia/Bahrain",
+                      "Africa/Bujumbura",
+                      "Africa/Porto-Novo",
+                      "America/St_Barthelemy",
+                      "Atlantic/Bermuda",
+                      "Asia/Brunei",
+                      "America/La_Paz",
+                      "America/Araguaina",
+                      "America/Bahia",
+                      "America/Belem",
+                      "America/Boa_Vista",
+                      "America/Campo_Grande",
+                      "America/Cuiaba",
+                      "America/Eirunepe",
+                      "America/Fortaleza",
+                      "America/Maceio",
+                      "America/Manaus",
+                      "America/Noronha",
+                      "America/Porto_Velho",
+                      "America/Recife",
+                      "America/Rio_Branco",
+                      "America/Santarem",
+                      "America/Sao_Paulo",
+                      "America/Nassau",
+                      "Asia/Thimphu",
+                      "Africa/Gaborone",
+                      "Europe/Minsk",
+                      "America/Belize",
+                      "America/Atikokan",
+                      "America/Blanc-Sablon",
+                      "America/Cambridge_Bay",
+                      "America/Creston",
+                      "America/Dawson",
+                      "America/Dawson_Creek",
+                      "America/Edmonton",
+                      "America/Fort_Nelson",
+                      "America/Glace_Bay",
+                      "America/Goose_Bay",
+                      "America/Halifax",
+                      "America/Inuvik",
+                      "America/Iqaluit",
+                      "America/Moncton",
+                      "America/Nipigon",
+                      "America/Pangnirtung",
+                      "America/Rainy_River",
+                      "America/Rankin_Inlet",
+                      "America/Regina",
+                      "America/Resolute",
+                      "America/St_Johns",
+                      "America/Swift_Current",
+                      "America/Thunder_Bay",
+                      "America/Toronto",
+                      "America/Vancouver",
+                      "America/Whitehorse",
+                      "America/Winnipeg",
+                      "America/Yellowknife",
+                      "Indian/Cocos",
+                      "Africa/Kinshasa",
+                      "Africa/Lubumbashi",
+                      "Africa/Bangui",
+                      "Africa/Brazzaville",
+                      "Europe/Zurich",
+                      "Africa/Abidjan",
+                      "Pacific/Rarotonga",
+                      "America/Punta_Arenas",
+                      "America/Santiago",
+                      "Pacific/Easter",
+                      "Africa/Douala",
+                      "Asia/Shanghai",
+                      "Asia/Urumqi",
+                      "America/Bogota",
+                      "America/Costa_Rica",
+                      "America/Havana",
+                      "Atlantic/Cape_Verde",
+                      "America/Curacao",
+                      "Indian/Christmas",
+                      "Asia/Famagusta",
+                      "Asia/Nicosia",
+                      "Europe/Prague",
+                      "Europe/Berlin",
+                      "Europe/Busingen",
+                      "Africa/Djibouti",
+                      "Europe/Copenhagen",
+                      "America/Dominica",
+                      "America/Santo_Domingo",
+                      "Africa/Algiers",
+                      "America/Guayaquil",
+                      "Pacific/Galapagos",
+                      "Europe/Tallinn",
+                      "Africa/Cairo",
+                      "Africa/El_Aaiun",
+                      "Africa/Asmara",
+                      "Africa/Ceuta",
+                      "Atlantic/Canary",
+                      "Europe/Madrid",
+                      "Africa/Addis_Ababa",
+                      "Europe/Helsinki",
+                      "Pacific/Fiji",
+                      "Atlantic/Stanley",
+                      "Pacific/Chuuk",
+                      "Pacific/Kosrae",
+                      "Pacific/Pohnpei",
+                      "Atlantic/Faroe",
+                      "Europe/Paris",
+                      "Africa/Libreville",
+                      "Europe/London",
+                      "America/Grenada",
+                      "Asia/Tbilisi",
+                      "Africa/Accra",
+                      "Europe/Gibraltar",
+                      "America/Danmarkshavn",
+                      "America/Nuuk",
+                      "America/Scoresbysund",
+                      "America/Thule",
+                      "Africa/Banjul",
+                      "Africa/Conakry",
+                      "Africa/Malabo",
+                      "Europe/Athens",
+                      "America/Guatemala",
+                      "Pacific/Guam",
+                      "Africa/Bissau",
+                      "America/Guyana",
+                      "Asia/Hong_Kong",
+                      "America/Tegucigalpa",
+                      "Europe/Zagreb",
+                      "America/Port-au-Prince",
+                      "Europe/Budapest",
+                      "Asia/Jakarta",
+                      "Asia/Jayapura",
+                      "Asia/Makassar",
+                      "Asia/Pontianak",
+                      "Europe/Dublin",
+                      "Asia/Jerusalem",
+                      "Europe/Isle_of_Man",
+                      "Asia/Kolkata",
+                      "Indian/Chagos",
+                      "Asia/Baghdad",
+                      "Asia/Tehran",
+                      "Atlantic/Reykjavik",
+                      "Europe/Rome",
+                      "Europe/Jersey",
+                      "America/Jamaica",
+                      "Asia/Amman",
+                      "Asia/Tokyo",
+                      "Africa/Nairobi",
+                      "Asia/Bishkek",
+                      "Asia/Phnom_Penh",
+                      "Pacific/Enderbury",
+                      "Pacific/Kiritimati",
+                      "Pacific/Tarawa",
+                      "Indian/Comoro",
+                      "America/St_Kitts",
+                      "Asia/Pyongyang",
+                      "Asia/Seoul",
+                      "Asia/Kuwait",
+                      "America/Cayman",
+                      "Asia/Almaty",
+                      "Asia/Aqtau",
+                      "Asia/Aqtobe",
+                      "Asia/Atyrau",
+                      "Asia/Oral",
+                      "Asia/Qostanay",
+                      "Asia/Qyzylorda",
+                      "Asia/Vientiane",
+                      "Asia/Beirut",
+                      "America/St_Lucia",
+                      "Europe/Vaduz",
+                      "Asia/Colombo",
+                      "Africa/Monrovia",
+                      "Africa/Maseru",
+                      "Europe/Vilnius",
+                      "Europe/Luxembourg",
+                      "Europe/Riga",
+                      "Africa/Tripoli",
+                      "Africa/Casablanca",
+                      "Europe/Monaco",
+                      "Europe/Chisinau",
+                      "Europe/Podgorica",
+                      "America/Marigot",
+                      "Indian/Antananarivo",
+                      "Pacific/Kwajalein",
+                      "Pacific/Majuro",
+                      "Europe/Skopje",
+                      "Africa/Bamako",
+                      "Asia/Yangon",
+                      "Asia/Choibalsan",
+                      "Asia/Hovd",
+                      "Asia/Ulaanbaatar",
+                      "Asia/Macau",
+                      "Pacific/Saipan",
+                      "Africa/Nouakchott",
+                      "America/Montserrat",
+                      "Europe/Malta",
+                      "Indian/Mauritius",
+                      "Indian/Maldives",
+                      "Africa/Blantyre",
+                      "America/Bahia_Banderas",
+                      "America/Cancun",
+                      "America/Chihuahua",
+                      "America/Hermosillo",
+                      "America/Matamoros",
+                      "America/Mazatlan",
+                      "America/Merida",
+                      "America/Mexico_City",
+                      "America/Monterrey",
+                      "America/Ojinaga",
+                      "America/Tijuana",
+                      "Asia/Kuala_Lumpur",
+                      "Asia/Kuching",
+                      "Africa/Maputo",
+                      "Africa/Windhoek",
+                      "Pacific/Noumea",
+                      "Africa/Niamey",
+                      "Africa/Lagos",
+                      "America/Managua",
+                      "Europe/Amsterdam",
+                      "Europe/Oslo",
+                      "Asia/Kathmandu",
+                      "Pacific/Nauru",
+                      "Pacific/Niue",
+                      "Pacific/Auckland",
+                      "Pacific/Chatham",
+                      "Asia/Muscat",
+                      "America/Panama",
+                      "America/Lima",
+                      "Pacific/Gambier",
+                      "Pacific/Marquesas",
+                      "Pacific/Tahiti",
+                      "Pacific/Bougainville",
+                      "Pacific/Port_Moresby",
+                      "Asia/Manila",
+                      "Asia/Karachi",
+                      "Europe/Warsaw",
+                      "America/Miquelon",
+                      "Pacific/Pitcairn",
+                      "America/Puerto_Rico",
+                      "Asia/Gaza",
+                      "Asia/Hebron",
+                      "Atlantic/Azores",
+                      "Atlantic/Madeira",
+                      "Europe/Lisbon",
+                      "Pacific/Palau",
+                      "America/Asuncion",
+                      "Asia/Qatar",
+                      "Indian/Reunion",
+                      "Europe/Bucharest",
+                      "Europe/Belgrade",
+                      "Asia/Anadyr",
+                      "Asia/Barnaul",
+                      "Asia/Chita",
+                      "Asia/Irkutsk",
+                      "Asia/Kamchatka",
+                      "Asia/Khandyga",
+                      "Asia/Krasnoyarsk",
+                      "Asia/Magadan",
+                      "Asia/Novokuznetsk",
+                      "Asia/Novosibirsk",
+                      "Asia/Omsk",
+                      "Asia/Sakhalin",
+                      "Asia/Srednekolymsk",
+                      "Asia/Tomsk",
+                      "Asia/Ust-Nera",
+                      "Asia/Vladivostok",
+                      "Asia/Yakutsk",
+                      "Asia/Yekaterinburg",
+                      "Europe/Astrakhan",
+                      "Europe/Kaliningrad",
+                      "Europe/Kirov",
+                      "Europe/Moscow",
+                      "Europe/Samara",
+                      "Europe/Saratov",
+                      "Europe/Ulyanovsk",
+                      "Europe/Volgograd",
+                      "Africa/Kigali",
+                      "Asia/Riyadh",
+                      "Pacific/Guadalcanal",
+                      "Indian/Mahe",
+                      "Africa/Khartoum",
+                      "Europe/Stockholm",
+                      "Asia/Singapore",
+                      "Atlantic/St_Helena",
+                      "Europe/Ljubljana",
+                      "Arctic/Longyearbyen",
+                      "Europe/Bratislava",
+                      "Africa/Freetown",
+                      "Europe/San_Marino",
+                      "Africa/Dakar",
+                      "Africa/Mogadishu",
+                      "America/Paramaribo",
+                      "Africa/Juba",
+                      "Africa/Sao_Tome",
+                      "America/El_Salvador",
+                      "America/Lower_Princes",
+                      "Asia/Damascus",
+                      "Africa/Mbabane",
+                      "America/Grand_Turk",
+                      "Africa/Ndjamena",
+                      "Africa/Lome",
+                      "Asia/Bangkok",
+                      "Asia/Dushanbe",
+                      "Pacific/Fakaofo",
+                      "Asia/Dili",
+                      "Asia/Ashgabat",
+                      "Africa/Tunis",
+                      "Pacific/Tongatapu",
+                      "Europe/Istanbul",
+                      "America/Port_of_Spain",
+                      "Pacific/Funafuti",
+                      "Asia/Taipei",
+                      "Africa/Dar_es_Salaam",
+                      "Europe/Kiev",
+                      "Europe/Simferopol",
+                      "Europe/Uzhgorod",
+                      "Europe/Zaporozhye",
+                      "Africa/Kampala",
+                      "America/Adak",
+                      "America/Anchorage",
+                      "America/Boise",
+                      "America/Chicago",
+                      "America/Denver",
+                      "America/Detroit",
+                      "America/Indiana/Indianapolis",
+                      "America/Indiana/Knox",
+                      "America/Indiana/Marengo",
+                      "America/Indiana/Petersburg",
+                      "America/Indiana/Tell_City",
+                      "America/Indiana/Vevay",
+                      "America/Indiana/Vincennes",
+                      "America/Indiana/Winamac",
+                      "America/Juneau",
+                      "America/Kentucky/Louisville",
+                      "America/Kentucky/Monticello",
+                      "America/Los_Angeles",
+                      "America/Menominee",
+                      "America/Metlakatla",
+                      "America/New_York",
+                      "America/Nome",
+                      "America/North_Dakota/Beulah",
+                      "America/North_Dakota/Center",
+                      "America/North_Dakota/New_Salem",
+                      "America/Phoenix",
+                      "America/Sitka",
+                      "America/Yakutat",
+                      "Pacific/Honolulu",
+                      "America/Montevideo",
+                      "Asia/Samarkand",
+                      "Asia/Tashkent",
+                      "Europe/Vatican",
+                      "America/St_Vincent",
+                      "America/Caracas",
+                      "America/Tortola",
+                      "America/St_Thomas",
+                      "Asia/Ho_Chi_Minh",
+                      "Pacific/Efate",
+                      "Pacific/Wallis",
+                      "Pacific/Apia",
+                      "Asia/Aden",
+                      "Indian/Mayotte",
+                      "Africa/Johannesburg",
+                      "Africa/Lusaka",
+                      "Africa/Harare"
+                    ]
+                  },
+                  "size": {
+                    "enum": [
+                      "XS",
+                      "S",
+                      "M",
+                      "L"
+                    ],
+                    "description": "Tamaño de la empresa basado en los empleados [XS<10, S<50, M<250, L>250]."
+                  },
+                  "incrementType": {
+                    "description": "Tipo incremento en plan",
+                    "enum": [
+                      "SMLMV",
+                      "IPC"
+                    ]
+                  },
+                  "languages": {
+                    "type": "array",
+                    "description": "Idioma de acuerdo a ISO 631-1.",
+                    "items": {
+                      "$ref": "#/components/schemas/language"
+                    }
+                  },
+                  "currencies": {
+                    "type": "array",
+                    "description": "Monedas de acuerdo a ISO 4217.",
+                    "items": {
+                      "$ref": "#/components/schemas/currency"
+                    }
+                  },
+                  "document": {
+                    "type": "object",
+                    "description": "Estructura que contiene la información de un documento",
+                    "properties": {
+                      "type": {
+                        "description": "Tipo de documento del comercio.",
+                        "enum": [
+                          "CC",
+                          "TI",
+                          "NIT",
+                          "RUT",
+                          "CE",
+                          "CLRUT",
+                          "BZSSN",
+                          "BRN",
+                          "CPF",
+                          "DIDI",
+                          "DIMEX",
+                          "CPJ",
+                          "CRCPF",
+                          "CI",
+                          "RUC",
+                          "LIC",
+                          "TAX",
+                          "PPN",
+                          "RTN",
+                          "HNDNI",
+                          "HNDR",
+                          "EIN",
+                          "PERUC",
+                          "DNI",
+                          "PARUC",
+                          "CIP",
+                          "UYCI",
+                          "UYRUT"
+                        ]
+                      },
+                      "number": {
+                        "type": "string",
+                        "description": "Documento del comercio.",
+                        "maxLength": 20,
+                        "example": "900299823-1"
+                      }
+                    }
+                  },
+                  "address": {
+                    "type": "object",
+                    "description": "Estructura que contiene la información sobre una dirección física.",
+                    "properties": {
+                      "city": {
+                        "type": "string",
+                        "example": "medellin",
+                        "description": "Ciudad del comercio.",
+                        "maxLength": 30
+                      },
+                      "state": {
+                        "type": "integer",
+                        "example": 1,
+                        "description": "Estado / departamento / provincia del comercio (ISO).",
+                        "maximum": 999999999
+                      },
+                      "country": {
+                        "$ref": "#/components/schemas/country-alpha-two",
+                        "x-stoplight": {
+                          "id": "duk54nqr65n21"
+                        },
+                        "description": "País del comercio (ISO 3166-1 alfa-2)."
+                      },
+                      "street": {
+                        "type": "string",
+                        "maxLength": 128,
+                        "example": "Transversal 123 # 12 a",
+                        "description": "Dirección del comercio"
+                      },
+                      "postalCode": {
+                        "type": "integer",
+                        "description": "Código postal",
+                        "example": 2000074,
+                        "maximum": 9999999999
+                      },
+                      "phone": {
+                        "type": "string",
+                        "description": "Contacto del comercio.\n",
+                        "maxLength": 20,
+                        "example": "+58556422366"
+                      }
+                    }
+                  },
+                  "legalRepresentative": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "maxLength": 30,
+                        "description": "Nombres del representante legal.",
+                        "example": "Ricardo"
+                      },
+                      "surname": {
+                        "type": "string",
+                        "maxLength": 30,
+                        "example": "García",
+                        "description": "Apellidos del representante legal."
+                      },
+                      "documentType": {
+                        "$ref": "#/components/schemas/documentTypeEnum",
+                        "description": "Tipo de documento del representante legal."
+                      },
+                      "document": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "description": "Documento de identificación del representante legal.",
+                        "example": "1037854200"
+                      }
+                    }
+                  },
+                  "billing": {
+                    "type": "object",
+                    "properties": {
+                      "ciiu": {
+                        "type": "integer",
+                        "example": "5852",
+                        "minLength": 4,
+                        "maxLength": 4,
+                        "description": "Código que representa la actividad económica acorde a CIIU Rev4.",
+                        "maximum": 9999
+                      },
+                      "contact": {
+                        "type": "string",
+                        "maxLength": 128,
+                        "description": "Nombre de la persona que recibe la factura electrónica."
+                      },
+                      "mail": {
+                        "type": "string",
+                        "maxLength": 128,
+                        "format": "email",
+                        "description": "Correo electrónico al cual será remitida la factura electrónica."
+                      },
+                      "registrationNumber": {
+                        "type": "integer",
+                        "description": "Número de la matrícula mercantil."
+                      },
+                      "taxType": {
+                        "type": "integer",
+                        "description": "Tipo del régimen del comercio (depende del país)."
+                      },
+                      "taxRegime": {
+                        "type": "integer",
+                        "description": "Régimen fiscal del comercio (depende del país)."
+                      },
+                      "organizationType": {
+                        "type": "integer",
+                        "description": "Tipo de organización (depende del país)."
+                      }
+                    }
+                  },
+                  "travelAgency": {
+                    "type": "object",
+                    "properties": {
+                      "dispersion": {
+                        "type": "boolean",
+                        "description": "Indicador de aceptación de venta de tiquetes y venta propia (dispersión de fondos con aerolíneas)"
+                      },
+                      "iata": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z]+$",
+                        "minLength": 4,
+                        "maxLength": 10,
+                        "description": "Indicador de aceptación de venta de tiquetes y venta propia (dispersión de fondos con aerolíneas)"
+                      }
+                    }
+                  },
+                  "control": {
+                    "type": "object",
+                    "properties": {
+                      "seller": {
+                        "type": "integer",
+                        "description": "Nombre del consultor comercial asignado en Placetopay."
+                      },
+                      "reseller": {
+                        "type": "integer",
+                        "description": "Banco adquirente"
+                      },
+                      "paymentFacilitator": {
+                        "type": "integer",
+                        "description": "Id del facilitador de pago."
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "id": 0,
+                    "name": "EVERTEC PLACETOPAY S.A.S",
+                    "brand": "Placetopay",
+                    "mcc": "7929",
+                    "active": true,
+                    "url": "https://dnetix.co/",
+                    "timezone": "Europe/Andorra",
+                    "size": "XS",
+                    "incrementType": "SMLMV",
+                    "languages": [
+                      "EN"
+                    ],
+                    "currencies": [
+                      "ARS"
+                    ],
+                    "document": {
+                      "type": "CC",
+                      "number": "900299823"
+                    },
+                    "address": {
+                      "city": "medellin",
+                      "state": 1,
+                      "country": "CO",
+                      "street": "Transversal 123 # 12 a",
+                      "postalCode": 2000074,
+                      "phone": "+58556422366"
+                    },
+                    "legalRepresentative": {
+                      "name": "Ricardo",
+                      "surname": "García",
+                      "documentType": "CC",
+                      "document": "1037854200"
+                    },
+                    "billing": {
+                      "ciiu": "5852",
+                      "contact": "string",
+                      "mail": "user@example.com",
+                      "registrationNumber": 0,
+                      "taxType": 0,
+                      "taxRegime": 0,
+                      "organizationType": 0
+                    },
+                    "travelAgency": {
+                      "dispersion": true,
+                      "iata": "iatacode"
+                    },
+                    "control": {
+                      "seller": 0,
+                      "reseller": 0,
+                      "paymentFacilitator": 0
+                    }
                   }
                 }
               }
@@ -3160,67 +4076,938 @@
           "id": "041qu5l0edejw"
         }
       },
-      "status-ok": {
-        "title": "status",
+      "address": {
+        "title": "address",
         "x-stoplight": {
-          "id": "k8uyyv49n7zl9"
+          "id": "52ud4rb8f2jgn"
         },
         "type": "object",
-        "description": "Estructura que contiene la información sobre una solicitud o pago, informa al estado actual de la misma",
+        "required": [
+          "city",
+          "state",
+          "country"
+        ],
+        "properties": {
+          "city": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ds0u6o8hrtvr8"
+            },
+            "example": "medellin",
+            "description": "Ciudad del comercio."
+          },
+          "state": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "art2gm7oushe6"
+            },
+            "example": 1,
+            "description": "Estado / departamento / provincia del comercio (ISO)."
+          },
+          "country": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "duk54nqr65n21"
+            },
+            "description": "País del comercio (ISO 3166-1 alfa-2).",
+            "example": "CO"
+          },
+          "street": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ezjz5nhd38n1s"
+            },
+            "maxLength": 128,
+            "example": "Transversal 123 # 12 a",
+            "description": "Dirección del comercio"
+          }
+        }
+      },
+      "branch": {
+        "title": "branch",
+        "x-stoplight": {
+          "id": "n8bsvb4e9vr02"
+        },
+        "type": "object",
         "examples": [
           {
-            "status": "OK",
-            "reason": "RC",
-            "message": "The request has been processed successfully",
-            "date": "2024-02-08T23:15:08+00:00"
+            "name": "ThreeDS Branch Name",
+            "brand": "branch brand example",
+            "country": "COL",
+            "currency": "COP",
+            "url": "https://www.branch-url.com",
+            "subscriptions": [
+              {
+                "franchise": "visa",
+                "acquirerBIN": 400900,
+                "merchantCode": 45455
+              }
+            ]
+          }
+        ],
+        "required": [
+          "name",
+          "brand",
+          "country",
+          "currency",
+          "subscriptions"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "rac9i6hapl1r2"
+            },
+            "example": "ThreeDS Branch Name",
+            "description": "Nombre a asignar a la rama de ThreeDS."
           },
+          "brand": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "6ty0xwxf2v5kz"
+            },
+            "example": "branch brand example",
+            "description": "Marca de la rama."
+          },
+          "country": {
+            "$ref": "#/components/schemas/country-alpha-three",
+            "x-stoplight": {
+              "id": "my8f67uajzolj"
+            },
+            "description": "Codigo País de origen de la rama, ISO 3166-1 alpha-3."
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currency",
+            "x-stoplight": {
+              "id": "yvb1ugxl721l1"
+            },
+            "description": "Moneda predeterminada de la rama, ISO 4217."
+          },
+          "requireEnrollment": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "r8wtqmavw6go3"
+            },
+            "default": true,
+            "description": "Define si va ser solicitado enrolamiento ante mastercard."
+          },
+          "url": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "zrui4trpkk78j"
+            },
+            "description": "URL del comercio.",
+            "example": "https://www.branch-url.com",
+            "maxLength": 200
+          },
+          "subscriptions": {
+            "x-stoplight": {
+              "id": "jwv88l9gh0d7p"
+            },
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/subscription",
+              "x-stoplight": {
+                "id": "ssz71y2l0f4p2"
+              }
+            }
+          }
+        }
+      },
+      "branches": {
+        "type": "array",
+        "x-examples": {
+          "Example 1": [
+            {
+              "name": "First branch example name",
+              "brand": "First branch brand",
+              "country": "CHL",
+              "currency": "CLP",
+              "url": "https://www.first-branch-url.com",
+              "subscriptions": [
+                {
+                  "franchise": "SubscriptionFranchises::VISA",
+                  "acquirerBIN": 400900,
+                  "version": 2,
+                  "merchantCode": "2222"
+                }
+              ]
+            }
+          ]
+        },
+        "title": "branches",
+        "items": {
+          "type": "object",
+          "required": [
+            "name",
+            "brand",
+            "country",
+            "currency",
+            "url"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "ThreeDS Branch Name",
+              "description": "Nombre a asignar a la rama de ThreeDS."
+            },
+            "brand": {
+              "type": "string",
+              "example": "branch brand example",
+              "description": "Marca de la rama."
+            },
+            "country": {
+              "$ref": "#/components/schemas/country-alpha-three",
+              "description": "Codigo País de origen de la rama, ISO 3166-1 alpha-3."
+            },
+            "currency": {
+              "$ref": "#/components/schemas/currency",
+              "description": "Moneda predeterminada de la rama, ISO 4217."
+            },
+            "url": {
+              "type": "string",
+              "example": "https://www.branch-url.com",
+              "description": "Url del comercio."
+            },
+            "requireEnrollment": {
+              "type": "boolean",
+              "x-stoplight": {
+                "id": "6p54i7i3fm6g5"
+              },
+              "default": true,
+              "description": "Define si va ser solicitado enrolamiento ante mastercard"
+            },
+            "subscriptions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "franchise": {
+                    "type": "string",
+                    "example": "visa"
+                  },
+                  "acquirerBIN": {
+                    "type": "integer",
+                    "example": 499999
+                  },
+                  "merchantCode": {
+                    "type": "string",
+                    "example": "4646456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "examples": [
+          [
+            {
+              "name": "ThreeDS Branch Name",
+              "brand": "branch brand example",
+              "country": "COL",
+              "currency": "COP",
+              "url": "https://www.branch-url.com",
+              "requireEnrollment": true,
+              "subscriptions": [
+                {
+                  "franchise": "visa",
+                  "acquirerBIN": 499999,
+                  "merchantCode": "125899"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "branches-Info": {
+        "title": "branches-Info",
+        "x-stoplight": {
+          "id": "tmn8f2pt4aygu"
+        },
+        "type": "object",
+        "properties": {
+          "panelId": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "zzm76eoddgbda"
+            },
+            "example": 187,
+            "description": "Identificador de la sucursal creada en el sistema del panel MPI"
+          },
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ywhc3g8wd4n6k"
+            },
+            "example": "branch name",
+            "description": "Nombre de la sucursal creada en el panel de mpi "
+          },
+          "brand": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "35irk2f5ogszy"
+            },
+            "example": "branch brach example",
+            "description": "Marca de la sucursal creada en el panel de mpi"
+          },
+          "token": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "lcruweva5ig3k"
+            },
+            "example": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
+            "description": "token de la sucursal "
+          },
+          "tokenExpiresAt": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "mz38uh7cuo9vr"
+            },
+            "example": "2025-09-25 00:15:48",
+            "description": "fecha de expiracion del token de la sucursal"
+          },
+          "enrollment": {
+            "$ref": "#/components/schemas/enrollment",
+            "x-stoplight": {
+              "id": "0uslswtxkm46p"
+            },
+            "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
+          }
+        }
+      },
+      "billing": {
+        "title": "billing",
+        "x-stoplight": {
+          "id": "q7ha52pxvq5ad"
+        },
+        "type": "object",
+        "properties": {
+          "ciiu": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "7nxtey0ifwqaf"
+            },
+            "example": "5852",
+            "minLength": 4,
+            "maxLength": 4,
+            "description": "Código que representa la actividad económica acorde a CIIU Rev4."
+          }
+        },
+        "description": ""
+      },
+      "control": {
+        "title": "control",
+        "x-stoplight": {
+          "id": "vbtovsf4fqem8"
+        },
+        "type": "object",
+        "required": [
+          "minAmount",
+          "maxAmount",
+          "filterByBin"
+        ],
+        "properties": {
+          "minAmount": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "r63y6t4ou8eya"
+            },
+            "example": "1000",
+            "description": "Monto mínimo permitido por transacción."
+          },
+          "maxAmount": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "2h6nsklc8n4bg"
+            },
+            "example": "1000000",
+            "description": "Monto máximo permitido por transacción."
+          },
+          "filterPse": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "vq5dndklerncn"
+            },
+            "description": "Filtros de seguridad en PSE.",
+            "default": false
+          },
+          "filterTuya": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "tpexw2qqe5s87"
+            },
+            "description": "Filtros de seguridad en TUYA.",
+            "default": false
+          },
+          "filterSafetyPay": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "2zg05jnf06002"
+            },
+            "description": "Filtros de seguridad en Safetypay.",
+            "default": false
+          },
+          "prechargerFilter": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "nv69wxx5y0bgt"
+            },
+            "description": "Filtros de precobro.",
+            "example": 2
+          },
+          "filterByBin": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "1gdnxw2kz46ym"
+            },
+            "description": "Determina si se va a tener una lista de bines a excluir.",
+            "default": false,
+            "example": false
+          },
+          "exceptionBinsList": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "qujqvfday00fo"
+            },
+            "description": "Lista de bines a excluir, esta llave solo es obligatoria si el filterByBin es enviado en \"true\".",
+            "items": {
+              "x-stoplight": {
+                "id": "i2ghikpniip0g"
+              },
+              "type": "string",
+              "example": "123456"
+            }
+          },
+          "allowedBankCountries": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "2jg565h2nhrob"
+            },
+            "items": {
+              "x-stoplight": {
+                "id": "eccamicsor42f"
+              },
+              "type": "string",
+              "example": "CO"
+            }
+          },
+          "delegatedAuthorization": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "6cg5alep63p4o"
+            },
+            "minLength": 42,
+            "maxLength": 42,
+            "pattern": "^([0-9a-f])"
+          }
+        },
+        "examples": [
           {
-            "status": "FAILED",
-            "reason": "FA",
-            "message": "Failed authentication check your credentials",
-            "date": "2024-02-08T23:15:08+00:00"
+            "minAmount": "1000",
+            "maxAmount": "1000000",
+            "filterPse": false,
+            "filterTuya": false,
+            "filterSafetyPay": false,
+            "prechargerFilter": 2,
+            "filterByBin": false,
+            "exceptionBinsList": [
+              "123456"
+            ],
+            "allowedBankCountries": [
+              "CO"
+            ],
+            "delegatedAuthorization": "stringstringstringstringstringstringstring"
+          }
+        ]
+      },
+      "control-merchant": {
+        "title": "control-merchant",
+        "x-stoplight": {
+          "id": "8zzjfsasck07v"
+        },
+        "type": "object",
+        "examples": [
+          {
+            "seller": 2,
+            "reseller": 2,
+            "paymentFacilitator": 23
           }
         ],
         "properties": {
+          "seller": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "uu6ma5u796x4g"
+            },
+            "description": "Código del consultor comercial asignado en Placetopay.",
+            "minimum": 1,
+            "example": 2
+          },
+          "reseller": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "ijghafoqni2m6"
+            },
+            "minimum": 1,
+            "example": 2,
+            "description": "Código del banco adquirente."
+          },
+          "paymentFacilitator": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "a0zvl1rpqw1v0"
+            },
+            "description": "Id del facilitador de pago.",
+            "example": 23
+          }
+        }
+      },
+      "country-alpha-two": {
+        "title": "country-alpha-two",
+        "x-stoplight": {
+          "id": "sxa0mofxu6g3n"
+        },
+        "enum": [
+          "CO",
+          "BZ",
+          "BR",
+          "CL",
+          "CR",
+          "EC",
+          "HN",
+          "PR",
+          "PE",
+          "PA",
+          "UY"
+        ],
+        "description": ""
+      },
+      "country-alpha-three": {
+        "title": "country-alpha-three",
+        "x-stoplight": {
+          "id": "mecc8ckqfjguc"
+        },
+        "enum": [
+          "COL",
+          "PRI",
+          "CRI",
+          "BLZ",
+          "PAN",
+          "CHL",
+          "MEX",
+          "HND",
+          "URY",
+          "ECU"
+        ]
+      },
+      "creditRules": {
+        "title": "creditRules",
+        "x-stoplight": {
+          "id": "lixsrwizzez2p"
+        },
+        "type": "object",
+        "examples": [
+          {
+            "include": [
+              {
+                "max": 60,
+                "min": 1,
+                "active": true,
+                "region": [
+                  "on_us",
+                  "local"
+                ],
+                "subType": "02",
+                "cardType": [
+                  "credit"
+                ],
+                "currency": [
+                  "CLP"
+                ],
+                "interest": 0,
+                "salePlan": "02"
+              }
+            ]
+          }
+        ]
+      },
+      "currency": {
+        "title": "currency-alpha-three",
+        "x-stoplight": {
+          "id": "rzl72fj2oxfst"
+        },
+        "enum": [
+          "ARS",
+          "AUD",
+          "BRL",
+          "BZD",
+          "CAD",
+          "CLP",
+          "CNY",
+          "COP",
+          "CRC",
+          "EUR",
+          "GBP",
+          "HLN",
+          "JPY",
+          "MXN",
+          "PEN",
+          "SGD",
+          "THB",
+          "USD",
+          "UYU",
+          "VEB",
+          "ZAR"
+        ]
+      },
+      "document": {
+        "title": "document",
+        "x-stoplight": {
+          "id": "41vpftz4eettm"
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "number"
+        ],
+        "properties": {
+          "type": {
+            "x-stoplight": {
+              "id": "uecer4gd1emcb"
+            },
+            "description": "Tipo de documento del comercio.",
+            "enum": [
+              "CC",
+              "TI",
+              "NIT",
+              "RUT",
+              "CE",
+              "CLRUT",
+              "BZSSN",
+              "BRN",
+              "CPF",
+              "DIDI",
+              "DIMEX",
+              "CPJ",
+              "CRCPF",
+              "CI",
+              "RUC",
+              "LIC",
+              "TAX",
+              "PPN",
+              "RTN",
+              "HNDNI",
+              "HNDR",
+              "EIN",
+              "PERUC",
+              "DNI",
+              "PARUC",
+              "CIP",
+              "UYCI",
+              "UYRUT"
+            ]
+          },
+          "number": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "yntddwcvkl2b8"
+            },
+            "description": "Documento del comercio.",
+            "maxLength": 20,
+            "example": "900299823-1"
+          }
+        }
+      },
+      "documentTypeEnum": {
+        "title": "documentTypeEnum",
+        "x-stoplight": {
+          "id": "xidobc4waf5lm"
+        },
+        "enum": [
+          "CC",
+          "TI",
+          "NIT",
+          "RUT",
+          "CE",
+          "CLRUT",
+          "BZSSN",
+          "BRN",
+          "CPF",
+          "DIDI",
+          "DIMEX",
+          "CPJ",
+          "CRCPF",
+          "CI",
+          "RUC",
+          "LIC",
+          "TAX",
+          "PPN",
+          "RTN",
+          "HNDNI",
+          "HNDR",
+          "EIN",
+          "PERUC",
+          "DNI",
+          "PARUC",
+          "CIP",
+          "UYCI",
+          "UYRUT"
+        ]
+      },
+      "enrollment": {
+        "title": "enrollment",
+        "x-stoplight": {
+          "id": "vkmj7aeb93on4"
+        },
+        "type": "object",
+        "required": [
+          "franchise",
+          "status",
+          "reason"
+        ],
+        "properties": {
+          "franchise": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "yg7kfkua5187g"
+            },
+            "example": "mastercard",
+            "description": "Representa la franquicia con la cual se realizó el enrolamiento en Mastercard."
+          },
+          "uuid": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "scq4o67y2zdlt"
+            },
+            "example": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
+            "description": "Identificador único que identifica el merchant en Mastercard."
+          },
           "status": {
             "x-stoplight": {
-              "id": "u5kzqry70rxo3"
+              "id": "rjycpefm0itqq"
             },
-            "example": "OK",
-            "type": "string",
             "enum": [
-              "OK",
-              "FAILED",
-              "PARTIAL",
-              "PENDING"
+              "SUCCESS",
+              "FAILED"
             ],
-            "description": "Estado de la petición."
+            "description": "Estado final del enrolamiento en Mastercard"
           },
           "reason": {
             "type": "string",
             "x-stoplight": {
-              "id": "84zz2rncmyq4n"
+              "id": "1evo6otxfop9y"
             },
-            "example": "RC",
-            "description": "Motivo del estado."
+            "example": "request completed",
+            "description": "Contiene observaciones sobre el proceso solicitado."
           },
-          "message": {
+          "subscriptionId": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "8zmi4fksxwece"
+            },
+            "example": 77,
+            "description": "Identificador de la suscripción en el servicio interno de 3DS."
+          }
+        },
+        "examples": [
+          {
+            "franchise": "mastercard",
+            "uuid": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
+            "status": "SUCCESS",
+            "reason": "request completed",
+            "subscriptionId": 77
+          }
+        ],
+        "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
+      },
+      "integration": {
+        "title": "integration",
+        "x-stoplight": {
+          "id": "l3nvabqo75a4u"
+        },
+        "type": "object",
+        "required": [
+          "connectionMethod"
+        ],
+        "properties": {
+          "allowPartial": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "go8gwmvqwzzst"
+            },
+            "default": false,
+            "description": "Indica si se permite el pago parcial (Mixto) en el sitio, en caso de no enviarse se toma como “false”."
+          },
+          "connectionMethod": {
             "type": "string",
             "x-stoplight": {
-              "id": "buew8hzg7ikpm"
+              "id": "3jtxs3ffr7544"
             },
-            "example": "The request has been processed successfully",
-            "description": "Descripción del reason."
+            "example": "REDIRECT",
+            "description": "Especifica el tipo de producto que se adquirió en el sitio."
           },
-          "date": {
+          "notificationUrl": {
             "type": "string",
             "x-stoplight": {
-              "id": "q7y3vhkahg6rj"
+              "id": "hst74ngqdj1f8"
             },
-            "example": "2024-02-08T23:15:08+00:00",
-            "description": "Fecha en que se realizó la petición."
+            "description": "En caso de que el tipo de conexión sea “REDIRECT”, a esta URL llegará el resultado de las transacciones.",
+            "example": "https://site-webhook.com"
+          },
+          "sourceRestriction": {
+            "x-stoplight": {
+              "id": "8kpv8x5s0jibu"
+            },
+            "description": "Restriccion de origen",
+            "enum": [
+              "microsites",
+              "ivr",
+              "checkout",
+              "panel",
+              "api",
+              "plugins"
+            ]
+          },
+          "analyticsCode": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "gh3fx4trn3ypc"
+            },
+            "description": "Permite añadir el código de google analytics.",
+            "example": "UA-171313251-4, GTM-123812"
+          },
+          "allowWallet": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "ayaqjt1mezbyc"
+            },
+            "description": "Indicador de si que permite pago con billetera Placetopay.\n\n"
+          },
+          "returnAdditional": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "ykrusrvseduka"
+            },
+            "description": "Permite devolver o no los datos adicionales"
+          },
+          "payerFieldsType": {
+            "x-stoplight": {
+              "id": "c116k9hzyxhpr"
+            },
+            "description": "Tipos del campo de pagador:\n\n0 = Con documento\n\n1 = Sin documento\n\n2 = Solo email",
+            "enum": [
+              0,
+              1,
+              2
+            ]
+          }
+        },
+        "examples": [
+          {
+            "allowPartial": false,
+            "connectionMethod": "REDIRECT",
+            "notificationUrl": "https://site-webhook.com",
+            "sourceRestriction": "microsites",
+            "analyticsCode": "UA-171313251-4, GTM-123812"
+          }
+        ]
+      },
+      "legalRepresentative": {
+        "title": "legalRepresentative",
+        "x-stoplight": {
+          "id": "nesfzy39vxipd"
+        },
+        "type": "object",
+        "required": [
+          "documentType",
+          "document",
+          "name",
+          "surname"
+        ],
+        "properties": {
+          "documentType": {
+            "x-stoplight": {
+              "id": "y400bqhmbsn6v"
+            },
+            "example": "CC",
+            "description": "Tipo de documento del representante legal.",
+            "enum": [
+              "CC",
+              "TI",
+              "NIT",
+              "RUT",
+              "CE",
+              "CLRUT",
+              "BZSSN",
+              "BRN",
+              "CPF",
+              "DIDI",
+              "DIMEX",
+              "CPJ",
+              "CRCPF",
+              "CI",
+              "RUC",
+              "LIC",
+              "TAX",
+              "PPN",
+              "RTN",
+              "HNDNI",
+              "HNDR",
+              "EIN",
+              "PERUC",
+              "DNI",
+              "PARUC",
+              "CIP",
+              "UYCI",
+              "UYRUT"
+            ]
+          },
+          "document": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "9gnblb6chopcy"
+            },
+            "description": "Documento de identificación del representante legal.",
+            "example": "1037854200"
+          },
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "8en3dwzxcx4xz"
+            },
+            "description": "Nombres del representante legal.",
+            "example": "Ricardo"
+          },
+          "surname": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "jezuvzc3i6707"
+            },
+            "example": "García",
+            "description": "Apellidos del representante legal."
           }
         }
+      },
+      "language": {
+        "title": "language",
+        "x-stoplight": {
+          "id": "if9h2ltoey6jo"
+        },
+        "enum": [
+          "EN",
+          "EN_CL",
+          "EN_HN",
+          "EN_PA",
+          "EN_PR",
+          "ES",
+          "ES_CL",
+          "ES_HN",
+          "ES_PA",
+          "ES_PR",
+          "FR",
+          "IT",
+          "PT"
+        ]
       },
       "merchant": {
         "title": "merchant",
@@ -3788,988 +5575,47 @@
           }
         }
       },
-      "document": {
-        "title": "document",
+      "merchant-info": {
+        "title": "merchant-info",
         "x-stoplight": {
-          "id": "41vpftz4eettm"
+          "id": "t9rtyr5cmr9on"
         },
         "type": "object",
-        "required": [
-          "type",
-          "number"
-        ],
+        "description": "Contiene la información del merchant creado.",
         "properties": {
-          "type": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "uecer4gd1emcb"
-            },
-            "description": "Tipo de documento del comercio."
-          },
-          "number": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "yntddwcvkl2b8"
-            },
-            "description": "Documento del comercio.",
-            "maxLength": 20,
-            "example": "900299823-1"
-          }
-        }
-      },
-      "address": {
-        "title": "address",
-        "x-stoplight": {
-          "id": "52ud4rb8f2jgn"
-        },
-        "type": "object",
-        "required": [
-          "city",
-          "state",
-          "country"
-        ],
-        "properties": {
-          "city": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "ds0u6o8hrtvr8"
-            },
-            "example": "medellin",
-            "description": "Ciudad del comercio."
-          },
-          "state": {
+          "panelId": {
             "type": "integer",
             "x-stoplight": {
-              "id": "art2gm7oushe6"
+              "id": "ntx0lshsr7ib9"
             },
-            "example": 1,
-            "description": "Estado / departamento / provincia del comercio (ISO)."
+            "description": "ID del recurso en panel.",
+            "example": 4123
           },
-          "country": {
+          "status": {
             "type": "string",
             "x-stoplight": {
-              "id": "duk54nqr65n21"
+              "id": "1vdbfmq4ls8of"
             },
-            "description": "País del comercio (ISO 3166-1 alfa-2).",
-            "example": "CO"
-          },
-          "street": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "ezjz5nhd38n1s"
-            },
-            "maxLength": 128,
-            "example": "Transversal 123 # 12 a",
-            "description": "Dirección del comercio"
-          }
-        }
-      },
-      "legalRepresentative": {
-        "title": "legalRepresentative",
-        "x-stoplight": {
-          "id": "nesfzy39vxipd"
-        },
-        "type": "object",
-        "required": [
-          "documentType",
-          "document",
-          "name",
-          "surname"
-        ],
-        "properties": {
-          "documentType": {
-            "x-stoplight": {
-              "id": "y400bqhmbsn6v"
-            },
-            "example": "CC",
-            "description": "Tipo de documento del representante legal.",
-            "enum": [
-              "CC",
-              "TI",
-              "NIT",
-              "RUT",
-              "CE",
-              "CLRUT",
-              "BZSSN",
-              "BRN",
-              "CPF",
-              "DIDI",
-              "DIMEX",
-              "CPJ",
-              "CRCPF",
-              "CI",
-              "RUC",
-              "LIC",
-              "TAX",
-              "PPN",
-              "RTN",
-              "HNDNI",
-              "HNDR",
-              "EIN",
-              "PERUC",
-              "DNI",
-              "PARUC",
-              "CIP",
-              "UYCI",
-              "UYRUT"
-            ]
-          },
-          "document": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "9gnblb6chopcy"
-            },
-            "description": "Documento de identificación del representante legal.",
-            "example": "1037854200"
+            "description": "Estado del recurso.",
+            "example": "PENDING"
           },
           "name": {
             "type": "string",
             "x-stoplight": {
-              "id": "8en3dwzxcx4xz"
+              "id": "rkovi8urrfbam"
             },
-            "description": "Nombres del representante legal.",
-            "example": "Ricardo"
+            "description": "Nombre con el cual fue creado el recurso.",
+            "example": "Merchant name"
           },
-          "surname": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "jezuvzc3i6707"
-            },
-            "example": "García",
-            "description": "Apellidos del representante legal."
-          }
-        }
-      },
-      "paymentMethods": {
-        "type": "array",
-        "x-stoplight": {
-          "id": "hsvwdp1gr7mbn"
-        },
-        "x-examples": {
-          "Example 1": [
-            {
-              "code": "PS_AM",
-              "commissionModel": "F",
-              "commissionValue": 0,
-              "accountNumber": "1234567811",
-              "financialEntity": 16,
-              "accountType": 1,
-              "settings": {
-                "terminalNumber": "1234568",
-                "terminalLocation": "Medellin",
-                "merchantCode": "2002",
-                "serviceCode": "123654",
-                "isEcommerce": true
-              },
-              "creditRules": {
-                "include": [
-                  {
-                    "max": 60,
-                    "min": 1,
-                    "active": true,
-                    "region": [
-                      "on_us",
-                      "local"
-                    ],
-                    "subType": "02",
-                    "cardType": [
-                      "credit"
-                    ],
-                    "currency": [
-                      "CLP"
-                    ],
-                    "interest": 0,
-                    "salePlan": "02"
-                  }
-                ]
-              },
-              "threeDS": true
-            },
-            {
-              "code": "PS_DN",
-              "commissionModel": "F",
-              "commissionValue": 0,
-              "accountNumber": "1234567811",
-              "financialEntity": 16,
-              "accountType": 1,
-              "settings": {
-                "terminalNumber": "1234585",
-                "terminalLocation": "Medellin",
-                "merchantCode": "2001",
-                "serviceCode": "123654",
-                "isEcommerce": true
-              },
-              "creditRules": {
-                "include": [
-                  {
-                    "max": 60,
-                    "min": 1,
-                    "active": true,
-                    "region": [
-                      "on_us",
-                      "local"
-                    ],
-                    "subType": "02",
-                    "cardType": [
-                      "credit"
-                    ],
-                    "currency": [
-                      "CLP"
-                    ],
-                    "interest": 0,
-                    "salePlan": "02"
-                  }
-                ]
-              },
-              "threeDS": true
-            }
-          ]
-        },
-        "title": "paymentMethods",
-        "examples": [
-          [
-            {
-              "code": "MC",
-              "order": 1,
-              "financialEntity": 16,
-              "commissionModel": "string",
-              "commissionValue": 2.5,
-              "accountNumber": "1234567811",
-              "accountType": 1,
-              "settings": {
-                "retailCode": "011211406",
-                "terminalLocation": "Medellín",
-                "terminalNumber": "00031431",
-                "username": "UserExample",
-                "password": "passwordExample",
-                "pfxID": 1,
-                "entityCode": "9002992280",
-                "serviceCode": "001",
-                "merchantCode": "1269189",
-                "isEcommerce": true,
-                "agreement": 12,
-                "agreementName": "Placetopay",
-                "iacCode": "33456564",
-                "acceptChecks": true,
-                "disableBlocks": "ath_cajas_exito, ath_efecty",
-                "hash": "456445646asdf52fd"
-              },
-              "threeDS": true
-            }
-          ]
-        ],
-        "items": {
-          "type": "object",
-          "required": [
-            "code",
-            "financialEntity",
-            "threeDS"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "Código del medio de pago.",
-              "example": "MC"
-            },
-            "order": {
-              "type": "integer",
-              "x-stoplight": {
-                "id": "d7re82khrb7r8"
-              },
-              "minimum": 1,
-              "description": "Indica la prioridad que se tiene el medio de pago, en caso de que exita la misma franquicia pero de diferentes redes procesadoras",
-              "example": 1
-            },
-            "financialEntity": {
-              "type": "integer",
-              "example": 16,
-              "description": "Entidad financiera recaudadora."
-            },
-            "commissionModel": {
-              "description": "Modelo de comisión.\n\nF = Valor fijo.\nP = Valor porcentual.",
-              "type": "string"
-            },
-            "commissionValue": {
-              "type": "number",
-              "description": "Valor de la comisión.",
-              "example": 2.5
-            },
-            "accountNumber": {
-              "type": "string",
-              "example": "1234567811",
-              "description": "Número de cuenta de recaudo."
-            },
-            "accountType": {
-              "enum": [
-                1,
-                2,
-                3
-              ],
-              "type": "integer",
-              "example": 1,
-              "description": "Tipo de cuenta de recaudo. 1 = Ahorros, 2 = Corriente y 3 = Credit"
-            },
-            "settings": {
-              "$ref": "#/components/schemas/paymentMethods-settings"
-            },
-            "creditRules": {
-              "type": "array",
-              "x-stoplight": {
-                "id": "hfbbg7qiopqau"
-              },
-              "items": {}
-            },
-            "threeDS": {
-              "type": "boolean",
-              "description": "Indica si el medio de pago debe tener token de 3DS."
-            }
-          }
-        }
-      },
-      "creditRules": {
-        "title": "creditRules",
-        "x-stoplight": {
-          "id": "lixsrwizzez2p"
-        },
-        "type": "object",
-        "examples": [
-          {
-            "include": [
-              {
-                "max": 60,
-                "min": 1,
-                "active": true,
-                "region": [
-                  "on_us",
-                  "local"
-                ],
-                "subType": "02",
-                "cardType": [
-                  "credit"
-                ],
-                "currency": [
-                  "CLP"
-                ],
-                "interest": 0,
-                "salePlan": "02"
-              }
-            ]
-          }
-        ]
-      },
-      "site": {
-        "title": "site",
-        "x-stoplight": {
-          "id": "boc3j3wz5bfku"
-        },
-        "type": "object",
-        "examples": [
-          {
-            "site": {
-              "type": "INT",
-              "email": "admin@email.com",
-              "control": {
-                "filterPse": false,
-                "maxAmount": "1000000",
-                "minAmount": "1000",
-                "filterTuya": false,
-                "filterByBin": false,
-                "filterSafetyPay": false,
-                "prechargerFilter": 2,
-                "exceptionBinsList": [
-                  "123456"
-                ]
-              },
-              "threeDS": {
-                "setting": "VERY_LOW",
-                "minAmount": 40
-              },
-              "category": "ECOMMERCE",
-              "currency": "COP",
-              "historic": {
-                "behaviour": "IGNORE",
-                "lowerScore": "100",
-                "rejectionScore": 300
-              },
-              "language": "ES",
-              "operation": {
-                "disableTax": true,
-                "calculateTax": true,
-                "mailCustomer": true,
-                "mailMerchant": true,
-                "taxPercentage": 12,
-                "patternReference": null
-              },
-              "expiration": "2023-06-30 00:00:00",
-              "productionDate": "2023-06-30 ",
-              "riskEngine": {
-                "minAmount": 30,
-                "behaviours": {
-                  "onFailed": "REJECTED",
-                  "onLowRisk": "MANUAL",
-                  "onHighRisk": "REJECTED",
-                  "onMediumRisk": null
-                },
-                "onCaibration": true,
-                "approvalScore": 200,
-                "paymentGroups": [
-                  "CASH"
-                ],
-                "rejectionScore": 250
-              },
-              "customBatch": 2345,
-              "displayName": "Site name example",
-              "integration": {
-                "allowPartial": false,
-                "connectionMethod": "REDIRECT",
-                "notificationUrl": "https://site-webhook.com",
-                "sourceRestriction": "api",
-                "analyticsCode": "UA-171313251-4, GTM-123812"
-              },
-              "creditBureau": {
-                "minAmount": 200,
-                "behaviours": {
-                  "onMatch": "PROCESS",
-                  "onFailed": "REJECTED",
-                  "onNoMatch": "REJECTED"
-                },
-                "paymentGroups": [
-                  "CASH"
-                ]
-              },
-              "analyticsCode": "UA-171313251-4, GTM-123812",
-              "securityFilters": {
-                "dayMax": 3,
-                "monthMax": 3,
-                "dayMaxAmount": 30000,
-                "forceIPMatch": true,
-                "monthMaxAmount": 2000,
-                "allowedCardsDay": 4,
-                "onlyWhitelisted": true,
-                "allowedCardsByIP": 10,
-                "allowedCardsYear": 2,
-                "excludeIPCountry": [
-                  "CL"
-                ],
-                "allowedCardsMonth": 4,
-                "allowedIPCountries": [
-                  "EC"
-                ],
-                "allowedIssuerCountries": [
-                  "CO"
-                ]
-              }
-            }
-          }
-        ],
-        "required": [
-          "displayName",
-          "type",
-          "category",
-          "email",
-          "currency",
-          "language",
-          "integration",
-          "control"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "2kaa4wb6yy70r"
-            },
-            "description": "nombre del sitio",
-            "example": "site company name",
-            "maxLength": 128
-          },
-          "displayName": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "hwyt462f70cc7"
-            },
-            "example": "Site name example",
-            "description": "Nombre del sitio a mostrar en panel."
-          },
-          "type": {
-            "x-stoplight": {
-              "id": "3w13em1rfjrbw"
-            },
-            "example": "INT",
-            "description": "Punto de origen de las transacciones que se realizarán por el sitio.\n\nINT = Internet <br>\nPOS = Punto de venta <br>\nIVR = IVR <br>\nONE = Pago a un clic <br>\nREC = Recurrencia <br>",
-            "enum": [
-              "INT",
-              "POS",
-              "IVR",
-              "ONE",
-              "REC"
-            ]
-          },
-          "category": {
-            "x-stoplight": {
-              "id": "nam9o378lyqpb"
-            },
-            "example": "ECOMMERCE",
-            "description": "Define la categoría del sitio.\n\nECOMMERCE = Comercio electrónico <br>\nCOLLECT = Recaudos <br>",
-            "enum": [
-              "ECOMMERCE",
-              "COLLECT"
-            ]
-          },
-          "email": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "3ptzp3ktromwh"
-            },
-            "example": "admin@email.com",
-            "description": "Correo al cual llegarán los comprobantes de pago de las transacciones relizadas en el sitio."
-          },
-          "currency": {
-            "$ref": "#/components/schemas/currency",
-            "x-stoplight": {
-              "id": "bmucvdu9g4owo"
-            },
-            "description": "Moneda que se usará para las transacciones, la moneda que se envíe en este campo la debe tener el comercio."
-          },
-          "language": {
-            "$ref": "#/components/schemas/language",
-            "x-stoplight": {
-              "id": "waf6en84oo0tt"
-            },
-            "description": "Lenguaje que se usará para las transacciones, el lenguaje que se envíe en este campo lo debe tener el comercio."
-          },
-          "customBatch": {
-            "type": "number",
-            "x-stoplight": {
-              "id": "wvdjri1lw8flr"
-            },
-            "example": 2345,
-            "description": "Código servicio recaudo"
-          },
-          "expiration": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "6d702v94t9q31"
-            },
-            "description": "Fecha de expiración el sitio, si no es definido o su valor es null la fecha de expiración sera ilimitada.",
-            "example": "2023-06-30 00:00:00",
-            "default": null
-          },
-          "productionDate": {
+          "details": {
             "type": [
               "string",
               "null"
             ],
             "x-stoplight": {
-              "id": "xzq1qstc7ovsa"
+              "id": "xe590i94ej4tk"
             },
-            "format": "date",
-            "description": "fecha de salida a produccion formato Y-m-d",
-            "example": "2023-06-30"
-          },
-          "integration": {
-            "$ref": "#/components/schemas/integration",
-            "x-stoplight": {
-              "id": "qehwu80sfqd1h"
-            }
-          },
-          "control": {
-            "$ref": "#/components/schemas/control",
-            "x-stoplight": {
-              "id": "3itrmxog8dnwi"
-            }
-          },
-          "creditBureau": {
-            "$ref": "#/components/schemas/site-creditBureau",
-            "x-stoplight": {
-              "id": "vm8z96q62tv82"
-            }
-          },
-          "historic": {
-            "$ref": "#/components/schemas/site-historic",
-            "x-stoplight": {
-              "id": "jb67jeuvmxtb8"
-            }
-          },
-          "threeDS": {
-            "$ref": "#/components/schemas/site-threeDS",
-            "x-stoplight": {
-              "id": "26jgyubwm70wm"
-            }
-          },
-          "riskEngine": {
-            "$ref": "#/components/schemas/site-riskEngine",
-            "x-stoplight": {
-              "id": "hthx0ssh61iu0"
-            }
-          },
-          "securityFilters": {
-            "$ref": "#/components/schemas/site-securityFilters",
-            "x-stoplight": {
-              "id": "rpkzuvdfyl31o"
-            }
-          },
-          "operation": {
-            "$ref": "#/components/schemas/site-operation",
-            "x-stoplight": {
-              "id": "8so4vk19sor6y"
-            }
-          }
-        }
-      },
-      "integration": {
-        "title": "integration",
-        "x-stoplight": {
-          "id": "l3nvabqo75a4u"
-        },
-        "type": "object",
-        "required": [
-          "connectionMethod"
-        ],
-        "properties": {
-          "allowPartial": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "go8gwmvqwzzst"
-            },
-            "default": false,
-            "description": "Indica si se permite el pago parcial (Mixto) en el sitio, en caso de no enviarse se toma como “false”."
-          },
-          "connectionMethod": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "3jtxs3ffr7544"
-            },
-            "example": "REDIRECT",
-            "description": "Especifica el tipo de producto que se adquirió en el sitio."
-          },
-          "notificationUrl": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "hst74ngqdj1f8"
-            },
-            "description": "En caso de que el tipo de conexión sea “REDIRECT”, a esta URL llegará el resultado de las transacciones.",
-            "example": "https://site-webhook.com"
-          },
-          "sourceRestriction": {
-            "x-stoplight": {
-              "id": "8kpv8x5s0jibu"
-            },
-            "description": "Restriccion de origen",
-            "enum": [
-              "microsites",
-              "ivr",
-              "checkout",
-              "panel",
-              "api",
-              "plugins"
-            ]
-          },
-          "analyticsCode": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "gh3fx4trn3ypc"
-            },
-            "description": "Permite añadir el código de google analytics.",
-            "example": "UA-171313251-4, GTM-123812"
-          },
-          "allowWallet": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "ayaqjt1mezbyc"
-            },
-            "description": "Indicador de si que permite pago con billetera Placetopay.\n\n"
-          },
-          "returnAdditional": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "ykrusrvseduka"
-            },
-            "description": "Permite devolver o no los datos adicionales"
-          },
-          "payerFieldsType": {
-            "x-stoplight": {
-              "id": "c116k9hzyxhpr"
-            },
-            "description": "Tipos del campo de pagador:\n\n0 = Con documento\n\n1 = Sin documento\n\n2 = Solo email",
-            "enum": [
-              0,
-              1,
-              2
-            ]
-          }
-        },
-        "examples": [
-          {
-            "allowPartial": false,
-            "connectionMethod": "REDIRECT",
-            "notificationUrl": "https://site-webhook.com",
-            "sourceRestriction": "microsites",
-            "analyticsCode": "UA-171313251-4, GTM-123812"
-          }
-        ]
-      },
-      "control": {
-        "title": "control",
-        "x-stoplight": {
-          "id": "vbtovsf4fqem8"
-        },
-        "type": "object",
-        "required": [
-          "minAmount",
-          "maxAmount",
-          "filterByBin"
-        ],
-        "properties": {
-          "minAmount": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "r63y6t4ou8eya"
-            },
-            "example": "1000",
-            "description": "Monto mínimo permitido por transacción."
-          },
-          "maxAmount": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "2h6nsklc8n4bg"
-            },
-            "example": "1000000",
-            "description": "Monto máximo permitido por transacción."
-          },
-          "filterPse": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "vq5dndklerncn"
-            },
-            "description": "Filtros de seguridad en PSE.",
-            "default": false
-          },
-          "filterTuya": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "tpexw2qqe5s87"
-            },
-            "description": "Filtros de seguridad en TUYA.",
-            "default": false
-          },
-          "filterSafetyPay": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "2zg05jnf06002"
-            },
-            "description": "Filtros de seguridad en Safetypay.",
-            "default": false
-          },
-          "prechargerFilter": {
-            "type": "number",
-            "x-stoplight": {
-              "id": "nv69wxx5y0bgt"
-            },
-            "description": "Filtros de precobro.",
-            "example": 2
-          },
-          "filterByBin": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "1gdnxw2kz46ym"
-            },
-            "description": "Determina si se va a tener una lista de bines a excluir.",
-            "default": false,
-            "example": false
-          },
-          "exceptionBinsList": {
-            "type": "array",
-            "x-stoplight": {
-              "id": "qujqvfday00fo"
-            },
-            "description": "Lista de bines a excluir, esta llave solo es obligatoria si el filterByBin es enviado en \"true\".",
-            "items": {
-              "x-stoplight": {
-                "id": "i2ghikpniip0g"
-              },
-              "type": "string",
-              "example": "123456"
-            }
-          },
-          "allowedBankCountries": {
-            "type": "array",
-            "x-stoplight": {
-              "id": "2jg565h2nhrob"
-            },
-            "items": {
-              "x-stoplight": {
-                "id": "eccamicsor42f"
-              },
-              "type": "string",
-              "example": "CO"
-            }
-          },
-          "delegatedAuthorization": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "6cg5alep63p4o"
-            },
-            "minLength": 42,
-            "maxLength": 42,
-            "pattern": "^([0-9a-f])"
-          }
-        },
-        "examples": [
-          {
-            "minAmount": "1000",
-            "maxAmount": "1000000",
-            "filterPse": false,
-            "filterTuya": false,
-            "filterSafetyPay": false,
-            "prechargerFilter": 2,
-            "filterByBin": false,
-            "exceptionBinsList": [
-              "123456"
-            ],
-            "allowedBankCountries": [
-              "CO"
-            ],
-            "delegatedAuthorization": "stringstringstringstringstringstringstring"
-          }
-        ]
-      },
-      "threeDS": {
-        "title": "threeDS ",
-        "x-stoplight": {
-          "id": "koadh4own8ew2"
-        },
-        "type": "object",
-        "examples": [
-          {
-            "brand": "ThreeDS brand example",
-            "country": "COL",
-            "currency": "COP",
-            "url": "https://example.com",
-            "mcc": "0742",
-            "isicClass": 111,
-            "document": {
-              "type": "string",
-              "number": "900299823-1"
-            },
-            "subscriptions": [
-              {
-                "franchise": "visa",
-                "acquirerBIN": 400900,
-                "merchantCode": "5240"
-              }
-            ],
-            "branch": {
-              "name": "ThreeDS Branch Name",
-              "brand": "branch brand example",
-              "country": "COL",
-              "currency": "COP",
-              "url": "https://www.branch-url.com",
-              "subscriptions": {
-                "subscriptions": [
-                  {
-                    "franchise": 1,
-                    "acquirerBIN": 400900,
-                    "merchantCode": "\"5240\""
-                  }
-                ]
-              }
-            }
-          }
-        ],
-        "required": [
-          "brand",
-          "country",
-          "currency",
-          "url",
-          "mcc",
-          "isicClass",
-          "branch"
-        ],
-        "properties": {
-          "brand": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "pq8c4lqdz3iov"
-            },
-            "description": "Marca del comercio de 3DS.",
-            "example": "ThreeDS brand example"
-          },
-          "country": {
-            "$ref": "#/components/schemas/country-alpha-three",
-            "x-stoplight": {
-              "id": "f5de5knebu19i"
-            },
-            "description": "Codigo País de origen del comercio ISO 3166-1 alpha-3."
-          },
-          "currency": {
-            "$ref": "#/components/schemas/currency",
-            "x-stoplight": {
-              "id": "y13xmav751diz"
-            },
-            "description": "Moneda predeterminada codigo ISO 4217."
-          },
-          "url": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "n7ndbwkls8bqw"
-            },
-            "example": "https://example.com",
-            "description": "URL del comercio."
-          },
-          "mcc": {
-            "type": "number",
-            "x-stoplight": {
-              "id": "ka9krdx2qr0un"
-            },
-            "example": 742,
-            "description": "Código de actividad económica."
-          },
-          "isicClass": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "6h7ym3onol65g"
-            },
-            "description": "Código clase CIIU.",
-            "example": 111
-          },
-          "requireEnrollment": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "y1nnfip4xvec3"
-            },
-            "default": true,
-            "description": "Define si va ser solicitado enrolamiento ante mastercard."
-          },
-          "document": {
-            "$ref": "#/components/schemas/document",
-            "x-stoplight": {
-              "id": "tw05yrlhs1262"
-            }
-          },
-          "subscriptions": {
-            "x-stoplight": {
-              "id": "2iyq4ulrr5qsz"
-            },
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "x-stoplight": {
-                "id": "spivxbp5ya7jc"
-              },
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/subscription",
-                "x-stoplight": {
-                  "id": "3axhe574y42ts"
-                }
-              }
-            }
-          },
-          "branch": {
-            "$ref": "#/components/schemas/branch",
-            "x-stoplight": {
-              "id": "11flmjjgzh88y"
-            }
+            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
           }
         }
       },
@@ -5085,201 +5931,65 @@
           }
         }
       },
-      "branch": {
-        "title": "branch",
+      "microsite-info": {
+        "title": "microsite-info",
         "x-stoplight": {
-          "id": "n8bsvb4e9vr02"
+          "id": "ynts9614xvi3l"
         },
         "type": "object",
         "examples": [
           {
-            "name": "ThreeDS Branch Name",
-            "brand": "branch brand example",
-            "country": "COL",
-            "currency": "COP",
-            "url": "https://www.branch-url.com",
-            "subscriptions": [
-              {
-                "franchise": "visa",
-                "acquirerBIN": 400900,
-                "merchantCode": 45455
-              }
-            ]
+            "panelId": 4521,
+            "status": "SUCESS",
+            "name": "Test Microsite",
+            "micrositeUrl": "https://dev.placetopay.com/microsites/microsite-example-doc",
+            "details": "string"
           }
         ],
-        "required": [
-          "name",
-          "brand",
-          "country",
-          "currency",
-          "subscriptions"
-        ],
         "properties": {
+          "panelId": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "y9lzdwhb0w3dn"
+            },
+            "description": "ID del recurso en panel.",
+            "example": 4521
+          },
+          "status": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "u62d65x4il5wj"
+            },
+            "description": "Estado del recurso.",
+            "example": "FAILED"
+          },
           "name": {
             "type": "string",
             "x-stoplight": {
-              "id": "rac9i6hapl1r2"
+              "id": "s0kvqub5zi7gz"
             },
-            "example": "ThreeDS Branch Name",
-            "description": "Nombre a asignar a la rama de ThreeDS."
+            "description": "Nombre con el cual fue creado el recurso.",
+            "example": "Test Microsite"
           },
-          "brand": {
+          "micrositeUrl": {
             "type": "string",
             "x-stoplight": {
-              "id": "6ty0xwxf2v5kz"
+              "id": "f3ognbnrp03ol"
             },
-            "example": "branch brand example",
-            "description": "Marca de la rama."
+            "description": "URL del micrositio creado.",
+            "example": "https://dev.placetopay.com/microsites/microsite-example-doc"
           },
-          "country": {
-            "$ref": "#/components/schemas/country-alpha-three",
+          "details": {
+            "type": [
+              "string",
+              "null"
+            ],
             "x-stoplight": {
-              "id": "my8f67uajzolj"
+              "id": "30oewdg1lesyp"
             },
-            "description": "Codigo País de origen de la rama, ISO 3166-1 alpha-3."
-          },
-          "currency": {
-            "$ref": "#/components/schemas/currency",
-            "x-stoplight": {
-              "id": "yvb1ugxl721l1"
-            },
-            "description": "Moneda predeterminada de la rama, ISO 4217."
-          },
-          "requireEnrollment": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "r8wtqmavw6go3"
-            },
-            "default": true,
-            "description": "Define si va ser solicitado enrolamiento ante mastercard."
-          },
-          "url": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "zrui4trpkk78j"
-            },
-            "description": "URL del comercio.",
-            "example": "https://www.branch-url.com",
-            "maxLength": 200
-          },
-          "subscriptions": {
-            "x-stoplight": {
-              "id": "jwv88l9gh0d7p"
-            },
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/subscription",
-              "x-stoplight": {
-                "id": "ssz71y2l0f4p2"
-              }
-            }
+            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
           }
         }
-      },
-      "branches": {
-        "type": "array",
-        "x-examples": {
-          "Example 1": [
-            {
-              "name": "First branch example name",
-              "brand": "First branch brand",
-              "country": "CHL",
-              "currency": "CLP",
-              "url": "https://www.first-branch-url.com",
-              "subscriptions": [
-                {
-                  "franchise": "SubscriptionFranchises::VISA",
-                  "acquirerBIN": 400900,
-                  "version": 2,
-                  "merchantCode": "2222"
-                }
-              ]
-            }
-          ]
-        },
-        "title": "branches",
-        "items": {
-          "type": "object",
-          "required": [
-            "name",
-            "brand",
-            "country",
-            "currency",
-            "url"
-          ],
-          "properties": {
-            "name": {
-              "type": "string",
-              "example": "ThreeDS Branch Name",
-              "description": "Nombre a asignar a la rama de ThreeDS."
-            },
-            "brand": {
-              "type": "string",
-              "example": "branch brand example",
-              "description": "Marca de la rama."
-            },
-            "country": {
-              "$ref": "#/components/schemas/country-alpha-three",
-              "description": "Codigo País de origen de la rama, ISO 3166-1 alpha-3."
-            },
-            "currency": {
-              "$ref": "#/components/schemas/currency",
-              "description": "Moneda predeterminada de la rama, ISO 4217."
-            },
-            "url": {
-              "type": "string",
-              "example": "https://www.branch-url.com",
-              "description": "Url del comercio."
-            },
-            "requireEnrollment": {
-              "type": "boolean",
-              "x-stoplight": {
-                "id": "6p54i7i3fm6g5"
-              },
-              "default": true,
-              "description": "Define si va ser solicitado enrolamiento ante mastercard"
-            },
-            "subscriptions": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "franchise": {
-                    "type": "string",
-                    "example": "visa"
-                  },
-                  "acquirerBIN": {
-                    "type": "integer",
-                    "example": 499999
-                  },
-                  "merchantCode": {
-                    "type": "string",
-                    "example": "4646456"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "examples": [
-          [
-            {
-              "name": "ThreeDS Branch Name",
-              "brand": "branch brand example",
-              "country": "COL",
-              "currency": "COP",
-              "url": "https://www.branch-url.com",
-              "requireEnrollment": true,
-              "subscriptions": [
-                {
-                  "franchise": "visa",
-                  "acquirerBIN": 499999,
-                  "merchantCode": "125899"
-                }
-              ]
-            }
-          ]
-        ]
       },
       "notification": {
         "type": "object",
@@ -5495,222 +6205,189 @@
           "id": "2x3tsddvwn29j"
         }
       },
-      "merchant-info": {
-        "title": "merchant-info",
+      "paymentMethods": {
+        "type": "array",
         "x-stoplight": {
-          "id": "t9rtyr5cmr9on"
+          "id": "hsvwdp1gr7mbn"
         },
-        "type": "object",
-        "description": "Contiene la información del merchant creado.",
-        "properties": {
-          "panelId": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "ntx0lshsr7ib9"
+        "x-examples": {
+          "Example 1": [
+            {
+              "code": "PS_AM",
+              "commissionModel": "F",
+              "commissionValue": 0,
+              "accountNumber": "1234567811",
+              "financialEntity": 16,
+              "accountType": 1,
+              "settings": {
+                "terminalNumber": "1234568",
+                "terminalLocation": "Medellin",
+                "merchantCode": "2002",
+                "serviceCode": "123654",
+                "isEcommerce": true
+              },
+              "creditRules": {
+                "include": [
+                  {
+                    "max": 60,
+                    "min": 1,
+                    "active": true,
+                    "region": [
+                      "on_us",
+                      "local"
+                    ],
+                    "subType": "02",
+                    "cardType": [
+                      "credit"
+                    ],
+                    "currency": [
+                      "CLP"
+                    ],
+                    "interest": 0,
+                    "salePlan": "02"
+                  }
+                ]
+              },
+              "threeDS": true
             },
-            "description": "ID del recurso en panel.",
-            "example": 4123
-          },
-          "status": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "1vdbfmq4ls8of"
-            },
-            "description": "Estado del recurso.",
-            "example": "PENDING"
-          },
-          "name": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "rkovi8urrfbam"
-            },
-            "description": "Nombre con el cual fue creado el recurso.",
-            "example": "Merchant name"
-          },
-          "details": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "x-stoplight": {
-              "id": "xe590i94ej4tk"
-            },
-            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
-          }
-        }
-      },
-      "site-info": {
-        "title": "site-info",
-        "x-stoplight": {
-          "id": "b5ushofs4a9ok"
-        },
-        "type": "object",
-        "description": "Contiene la información del site creado.",
-        "properties": {
-          "panelId": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "5bpyukmipke88"
-            },
-            "description": "ID del recurso en panel.",
-            "example": 8532
-          },
-          "status": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "ilezprf1re1di"
-            },
-            "description": "Estado del recurso.",
-            "example": "FINISHED"
-          },
-          "name": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "qj5u80f1rl6jy"
-            },
-            "description": "Nombre con el cual fue creado el recurso.",
-            "example": "Site Name"
-          },
-          "login": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "qd8ze0xlsswgx"
-            },
-            "description": "Identifcador usado para la autenticación con los servicios de la pasarela.",
-            "example": "ji09u1j3jkb2k3kb1z102z"
-          },
-          "secretKey": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "38jk8hvmxwbw5"
-            },
-            "description": "Llave secreta usada para la autenticación con los servicios de la pasarela.",
-            "example": "mffdcx558w"
-          },
-          "details": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "x-stoplight": {
-              "id": "qppic5jqy6peb"
-            },
-            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
-          },
-          "isActive": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "digztu4p2qg4h"
+            {
+              "code": "PS_DN",
+              "commissionModel": "F",
+              "commissionValue": 0,
+              "accountNumber": "1234567811",
+              "financialEntity": 16,
+              "accountType": 1,
+              "settings": {
+                "terminalNumber": "1234585",
+                "terminalLocation": "Medellin",
+                "merchantCode": "2001",
+                "serviceCode": "123654",
+                "isEcommerce": true
+              },
+              "creditRules": {
+                "include": [
+                  {
+                    "max": 60,
+                    "min": 1,
+                    "active": true,
+                    "region": [
+                      "on_us",
+                      "local"
+                    ],
+                    "subType": "02",
+                    "cardType": [
+                      "credit"
+                    ],
+                    "currency": [
+                      "CLP"
+                    ],
+                    "interest": 0,
+                    "salePlan": "02"
+                  }
+                ]
+              },
+              "threeDS": true
             }
-          }
-        }
-      },
-      "threeDS-info": {
-        "title": "threeDS-info",
-        "x-stoplight": {
-          "id": "s0dtzqb64v0gq"
+          ]
         },
-        "type": "object",
-        "description": "Contiene la información del threeDS creado.",
+        "title": "paymentMethods",
         "examples": [
-          {
-            "panelId": 9361,
-            "name": "merchant threeDS name",
-            "brand": "marca example",
-            "token": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2",
-            "tokenExpiresAt": "2025-09-25 00:15:48",
-            "status": "FINISHED",
-            "branches": [
-              {
-                "panelId": 187,
-                "name": "branch name",
-                "brand": "branch brach example",
-                "token": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
-                "tokenExpiresAt": "2025-09-25 00:15:48"
-              }
-            ],
-            "details": null
-          }
-        ],
-        "properties": {
-          "panelId": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "8qy4izgebnu5o"
-            },
-            "default": 9361,
-            "description": "ID del recurso en panel de mpi."
-          },
-          "name": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "dhitam5ars9dq"
-            },
-            "example": "merchant threeDS name",
-            "description": "Nombre con el cual fue creado el comercio en el panel mpi  "
-          },
-          "brand": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "rizw7tdxwgrq6"
-            },
-            "description": "Marca con la cual fue creado el comercio en el panel de mpi.",
-            "example": "marca example"
-          },
-          "token": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "5j6v6cwlgj8vn"
-            },
-            "description": "token del comercio creado\n",
-            "example": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2"
-          },
-          "tokenExpiresAt": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "6z64mfxyi2k90"
-            },
-            "description": "fecha de expiracion del token",
-            "example": "2025-09-25 00:15:48"
-          },
-          "status": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "sr8aibmijtvng"
-            },
-            "description": "Estado del recurso.",
-            "example": "FINISHED"
-          },
-          "enrollment": {
-            "$ref": "#/components/schemas/enrollment",
-            "x-stoplight": {
-              "id": "x6as3uxf1tjkz"
-            },
-            "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
-          },
-          "branches": {
-            "type": "array",
-            "x-stoplight": {
-              "id": "yfb49mda76g1l"
-            },
-            "description": "Sucursales del comercio solicitadas a crear",
-            "items": {
-              "$ref": "#/components/schemas/branches-Info",
-              "x-stoplight": {
-                "id": "o96gc29ii7bbf"
-              }
+          [
+            {
+              "code": "MC",
+              "order": 1,
+              "financialEntity": 16,
+              "commissionModel": "string",
+              "commissionValue": 2.5,
+              "accountNumber": "1234567811",
+              "accountType": 1,
+              "settings": {
+                "retailCode": "011211406",
+                "terminalLocation": "Medellín",
+                "terminalNumber": "00031431",
+                "username": "UserExample",
+                "password": "passwordExample",
+                "pfxID": 1,
+                "entityCode": "9002992280",
+                "serviceCode": "001",
+                "merchantCode": "1269189",
+                "isEcommerce": true,
+                "agreement": 12,
+                "agreementName": "Placetopay",
+                "iacCode": "33456564",
+                "acceptChecks": true,
+                "disableBlocks": "ath_cajas_exito, ath_efecty",
+                "hash": "456445646asdf52fd"
+              },
+              "threeDS": true
             }
-          },
-          "details": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "x-stoplight": {
-              "id": "1ivc8myaj1gls"
+          ]
+        ],
+        "items": {
+          "type": "object",
+          "required": [
+            "code",
+            "financialEntity",
+            "threeDS"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Código del medio de pago.",
+              "example": "MC"
             },
-            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error.",
-            "example": "null"
+            "order": {
+              "type": "integer",
+              "x-stoplight": {
+                "id": "d7re82khrb7r8"
+              },
+              "minimum": 1,
+              "description": "Indica la prioridad que se tiene el medio de pago, en caso de que exita la misma franquicia pero de diferentes redes procesadoras",
+              "example": 1
+            },
+            "financialEntity": {
+              "type": "integer",
+              "example": 16,
+              "description": "Entidad financiera recaudadora."
+            },
+            "commissionModel": {
+              "description": "Modelo de comisión.\n\nF = Valor fijo.\nP = Valor porcentual.",
+              "type": "string"
+            },
+            "commissionValue": {
+              "type": "number",
+              "description": "Valor de la comisión.",
+              "example": 2.5
+            },
+            "accountNumber": {
+              "type": "string",
+              "example": "1234567811",
+              "description": "Número de cuenta de recaudo."
+            },
+            "accountType": {
+              "enum": [
+                1,
+                2,
+                3
+              ],
+              "type": "integer",
+              "example": 1,
+              "description": "Tipo de cuenta de recaudo. 1 = Ahorros, 2 = Corriente y 3 = Credit"
+            },
+            "settings": {
+              "$ref": "#/components/schemas/paymentMethods-settings"
+            },
+            "creditRules": {
+              "type": "array",
+              "x-stoplight": {
+                "id": "hfbbg7qiopqau"
+              },
+              "items": {}
+            },
+            "threeDS": {
+              "type": "boolean",
+              "description": "Indica si el medio de pago debe tener token de 3DS."
+            }
           }
         }
       },
@@ -5769,66 +6446,6 @@
               },
               "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
             }
-          }
-        }
-      },
-      "microsite-info": {
-        "title": "microsite-info",
-        "x-stoplight": {
-          "id": "ynts9614xvi3l"
-        },
-        "type": "object",
-        "examples": [
-          {
-            "panelId": 4521,
-            "status": "SUCESS",
-            "name": "Test Microsite",
-            "micrositeUrl": "https://dev.placetopay.com/microsites/microsite-example-doc",
-            "details": "string"
-          }
-        ],
-        "properties": {
-          "panelId": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "y9lzdwhb0w3dn"
-            },
-            "description": "ID del recurso en panel.",
-            "example": 4521
-          },
-          "status": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "u62d65x4il5wj"
-            },
-            "description": "Estado del recurso.",
-            "example": "FAILED"
-          },
-          "name": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "s0kvqub5zi7gz"
-            },
-            "description": "Nombre con el cual fue creado el recurso.",
-            "example": "Test Microsite"
-          },
-          "micrositeUrl": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "f3ognbnrp03ol"
-            },
-            "description": "URL del micrositio creado.",
-            "example": "https://dev.placetopay.com/microsites/microsite-example-doc"
-          },
-          "details": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "x-stoplight": {
-              "id": "30oewdg1lesyp"
-            },
-            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
           }
         }
       },
@@ -6024,6 +6641,265 @@
           }
         ]
       },
+      "site": {
+        "title": "site",
+        "x-stoplight": {
+          "id": "boc3j3wz5bfku"
+        },
+        "type": "object",
+        "examples": [
+          {
+            "site": {
+              "type": "INT",
+              "email": "admin@email.com",
+              "control": {
+                "filterPse": false,
+                "maxAmount": "1000000",
+                "minAmount": "1000",
+                "filterTuya": false,
+                "filterByBin": false,
+                "filterSafetyPay": false,
+                "prechargerFilter": 2,
+                "exceptionBinsList": [
+                  "123456"
+                ]
+              },
+              "threeDS": {
+                "setting": "VERY_LOW",
+                "minAmount": 40
+              },
+              "category": "ECOMMERCE",
+              "currency": "COP",
+              "historic": {
+                "behaviour": "IGNORE",
+                "lowerScore": "100",
+                "rejectionScore": 300
+              },
+              "language": "ES",
+              "operation": {
+                "disableTax": true,
+                "calculateTax": true,
+                "mailCustomer": true,
+                "mailMerchant": true,
+                "taxPercentage": 12,
+                "patternReference": null
+              },
+              "expiration": "2023-06-30 00:00:00",
+              "productionDate": "2023-06-30 ",
+              "riskEngine": {
+                "minAmount": 30,
+                "behaviours": {
+                  "onFailed": "REJECTED",
+                  "onLowRisk": "MANUAL",
+                  "onHighRisk": "REJECTED",
+                  "onMediumRisk": null
+                },
+                "onCaibration": true,
+                "approvalScore": 200,
+                "paymentGroups": [
+                  "CASH"
+                ],
+                "rejectionScore": 250
+              },
+              "customBatch": 2345,
+              "displayName": "Site name example",
+              "integration": {
+                "allowPartial": false,
+                "connectionMethod": "REDIRECT",
+                "notificationUrl": "https://site-webhook.com",
+                "sourceRestriction": "api",
+                "analyticsCode": "UA-171313251-4, GTM-123812"
+              },
+              "creditBureau": {
+                "minAmount": 200,
+                "behaviours": {
+                  "onMatch": "PROCESS",
+                  "onFailed": "REJECTED",
+                  "onNoMatch": "REJECTED"
+                },
+                "paymentGroups": [
+                  "CASH"
+                ]
+              },
+              "analyticsCode": "UA-171313251-4, GTM-123812",
+              "securityFilters": {
+                "dayMax": 3,
+                "monthMax": 3,
+                "dayMaxAmount": 30000,
+                "forceIPMatch": true,
+                "monthMaxAmount": 2000,
+                "allowedCardsDay": 4,
+                "onlyWhitelisted": true,
+                "allowedCardsByIP": 10,
+                "allowedCardsYear": 2,
+                "excludeIPCountry": [
+                  "CL"
+                ],
+                "allowedCardsMonth": 4,
+                "allowedIPCountries": [
+                  "EC"
+                ],
+                "allowedIssuerCountries": [
+                  "CO"
+                ]
+              }
+            }
+          }
+        ],
+        "required": [
+          "displayName",
+          "type",
+          "category",
+          "email",
+          "currency",
+          "language",
+          "integration",
+          "control"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "2kaa4wb6yy70r"
+            },
+            "description": "nombre del sitio",
+            "example": "site company name",
+            "maxLength": 128
+          },
+          "displayName": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "hwyt462f70cc7"
+            },
+            "example": "Site name example",
+            "description": "Nombre del sitio a mostrar en panel."
+          },
+          "type": {
+            "x-stoplight": {
+              "id": "3w13em1rfjrbw"
+            },
+            "example": "INT",
+            "description": "Punto de origen de las transacciones que se realizarán por el sitio.\n\nINT = Internet <br>\nPOS = Punto de venta <br>\nIVR = IVR <br>\nONE = Pago a un clic <br>\nREC = Recurrencia <br>",
+            "enum": [
+              "INT",
+              "POS",
+              "IVR",
+              "ONE",
+              "REC"
+            ]
+          },
+          "category": {
+            "x-stoplight": {
+              "id": "nam9o378lyqpb"
+            },
+            "example": "ECOMMERCE",
+            "description": "Define la categoría del sitio.\n\nECOMMERCE = Comercio electrónico <br>\nCOLLECT = Recaudos <br>",
+            "enum": [
+              "ECOMMERCE",
+              "COLLECT"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "3ptzp3ktromwh"
+            },
+            "example": "admin@email.com",
+            "description": "Correo al cual llegarán los comprobantes de pago de las transacciones relizadas en el sitio."
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currency",
+            "x-stoplight": {
+              "id": "bmucvdu9g4owo"
+            },
+            "description": "Moneda que se usará para las transacciones, la moneda que se envíe en este campo la debe tener el comercio."
+          },
+          "language": {
+            "$ref": "#/components/schemas/language",
+            "x-stoplight": {
+              "id": "waf6en84oo0tt"
+            },
+            "description": "Lenguaje que se usará para las transacciones, el lenguaje que se envíe en este campo lo debe tener el comercio."
+          },
+          "customBatch": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "wvdjri1lw8flr"
+            },
+            "example": 2345,
+            "description": "Código servicio recaudo"
+          },
+          "expiration": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "6d702v94t9q31"
+            },
+            "description": "Fecha de expiración el sitio, si no es definido o su valor es null la fecha de expiración sera ilimitada.",
+            "example": "2023-06-30 00:00:00",
+            "default": null
+          },
+          "productionDate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-stoplight": {
+              "id": "xzq1qstc7ovsa"
+            },
+            "format": "date",
+            "description": "fecha de salida a produccion formato Y-m-d",
+            "example": "2023-06-30"
+          },
+          "integration": {
+            "$ref": "#/components/schemas/integration",
+            "x-stoplight": {
+              "id": "qehwu80sfqd1h"
+            }
+          },
+          "control": {
+            "$ref": "#/components/schemas/control",
+            "x-stoplight": {
+              "id": "3itrmxog8dnwi"
+            }
+          },
+          "creditBureau": {
+            "$ref": "#/components/schemas/site-creditBureau",
+            "x-stoplight": {
+              "id": "vm8z96q62tv82"
+            }
+          },
+          "historic": {
+            "$ref": "#/components/schemas/site-historic",
+            "x-stoplight": {
+              "id": "jb67jeuvmxtb8"
+            }
+          },
+          "threeDS": {
+            "$ref": "#/components/schemas/site-threeDS",
+            "x-stoplight": {
+              "id": "26jgyubwm70wm"
+            }
+          },
+          "riskEngine": {
+            "$ref": "#/components/schemas/site-riskEngine",
+            "x-stoplight": {
+              "id": "hthx0ssh61iu0"
+            }
+          },
+          "securityFilters": {
+            "$ref": "#/components/schemas/site-securityFilters",
+            "x-stoplight": {
+              "id": "rpkzuvdfyl31o"
+            }
+          },
+          "operation": {
+            "$ref": "#/components/schemas/site-operation",
+            "x-stoplight": {
+              "id": "8so4vk19sor6y"
+            }
+          }
+        }
+      },
       "site-threeDS": {
         "title": "site-threeDS",
         "x-stoplight": {
@@ -6052,6 +6928,72 @@
             "maximum": 99999999999999,
             "default": 0,
             "example": 40
+          }
+        }
+      },
+      "site-info": {
+        "title": "site-info",
+        "x-stoplight": {
+          "id": "b5ushofs4a9ok"
+        },
+        "type": "object",
+        "description": "Contiene la información del site creado.",
+        "properties": {
+          "panelId": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "5bpyukmipke88"
+            },
+            "description": "ID del recurso en panel.",
+            "example": 8532
+          },
+          "status": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ilezprf1re1di"
+            },
+            "description": "Estado del recurso.",
+            "example": "FINISHED"
+          },
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "qj5u80f1rl6jy"
+            },
+            "description": "Nombre con el cual fue creado el recurso.",
+            "example": "Site Name"
+          },
+          "login": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "qd8ze0xlsswgx"
+            },
+            "description": "Identifcador usado para la autenticación con los servicios de la pasarela.",
+            "example": "ji09u1j3jkb2k3kb1z102z"
+          },
+          "secretKey": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "38jk8hvmxwbw5"
+            },
+            "description": "Llave secreta usada para la autenticación con los servicios de la pasarela.",
+            "example": "mffdcx558w"
+          },
+          "details": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-stoplight": {
+              "id": "qppic5jqy6peb"
+            },
+            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
+          },
+          "isActive": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "digztu4p2qg4h"
+            }
           }
         }
       },
@@ -6504,93 +7446,358 @@
           }
         }
       },
-      "country-alpha-two": {
-        "title": "country-alpha-two",
+      "status-ok": {
+        "title": "status",
         "x-stoplight": {
-          "id": "sxa0mofxu6g3n"
+          "id": "k8uyyv49n7zl9"
         },
-        "enum": [
-          "CO",
-          "BZ",
-          "BR",
-          "CL",
-          "CR",
-          "EC",
-          "HN",
-          "PR",
-          "PE",
-          "PA",
-          "UY"
+        "type": "object",
+        "description": "Estructura que contiene la información sobre una solicitud o pago, informa al estado actual de la misma",
+        "examples": [
+          {
+            "status": "OK",
+            "reason": "RC",
+            "message": "The request has been processed successfully",
+            "date": "2024-02-08T23:15:08+00:00"
+          },
+          {
+            "status": "FAILED",
+            "reason": "FA",
+            "message": "Failed authentication check your credentials",
+            "date": "2024-02-08T23:15:08+00:00"
+          }
         ],
-        "description": ""
+        "properties": {
+          "status": {
+            "x-stoplight": {
+              "id": "u5kzqry70rxo3"
+            },
+            "example": "OK",
+            "type": "string",
+            "enum": [
+              "OK",
+              "FAILED",
+              "PARTIAL",
+              "PENDING"
+            ],
+            "description": "Estado de la petición."
+          },
+          "reason": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "84zz2rncmyq4n"
+            },
+            "example": "RC",
+            "description": "Motivo del estado."
+          },
+          "message": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "buew8hzg7ikpm"
+            },
+            "example": "The request has been processed successfully",
+            "description": "Descripción del reason."
+          },
+          "date": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "q7y3vhkahg6rj"
+            },
+            "example": "2024-02-08T23:15:08+00:00",
+            "description": "Fecha en que se realizó la petición."
+          }
+        }
       },
-      "language": {
-        "title": "language",
+      "subscription": {
+        "title": "subscriptions",
         "x-stoplight": {
-          "id": "if9h2ltoey6jo"
+          "id": "rs4sctscjne0x"
         },
-        "enum": [
-          "EN",
-          "EN_CL",
-          "EN_HN",
-          "EN_PA",
-          "EN_PR",
-          "ES",
-          "ES_CL",
-          "ES_HN",
-          "ES_PA",
-          "ES_PR",
-          "FR",
-          "IT",
-          "PT"
-        ]
+        "type": "object",
+        "examples": [
+          {
+            "franchise": "visa",
+            "acquirerBIN": 400111,
+            "merchantCode": 46416456
+          }
+        ],
+        "properties": {
+          "franchise": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "540rt1aeggajf"
+            },
+            "example": "visa",
+            "maxLength": 30,
+            "pattern": "^[a-zA-Z]+$",
+            "description": "Nombre de la franquicia en ThreDS MPI."
+          },
+          "acquirerBIN": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "80intxv8z9tcm"
+            },
+            "description": "Bin del adquirente",
+            "example": 400111
+          },
+          "merchantCode": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "ju68mk8lam8qa"
+            },
+            "example": 46416456,
+            "description": "Codigo alphanumerico del comercio"
+          }
+        }
       },
-      "currency": {
-        "title": "currency-alpha-three",
+      "threeDS": {
+        "title": "threeDS ",
         "x-stoplight": {
-          "id": "rzl72fj2oxfst"
+          "id": "koadh4own8ew2"
         },
-        "enum": [
-          "ARS",
-          "AUD",
-          "BRL",
-          "BZD",
-          "CAD",
-          "CLP",
-          "CNY",
-          "COP",
-          "CRC",
-          "EUR",
-          "GBP",
-          "HLN",
-          "JPY",
-          "MXN",
-          "PEN",
-          "SGD",
-          "THB",
-          "USD",
-          "UYU",
-          "VEB",
-          "ZAR"
-        ]
+        "type": "object",
+        "examples": [
+          {
+            "brand": "ThreeDS brand example",
+            "country": "COL",
+            "currency": "COP",
+            "url": "https://example.com",
+            "mcc": "0742",
+            "isicClass": 111,
+            "document": {
+              "type": "string",
+              "number": "900299823-1"
+            },
+            "subscriptions": [
+              {
+                "franchise": "visa",
+                "acquirerBIN": 400900,
+                "merchantCode": "5240"
+              }
+            ],
+            "branch": {
+              "name": "ThreeDS Branch Name",
+              "brand": "branch brand example",
+              "country": "COL",
+              "currency": "COP",
+              "url": "https://www.branch-url.com",
+              "subscriptions": {
+                "subscriptions": [
+                  {
+                    "franchise": 1,
+                    "acquirerBIN": 400900,
+                    "merchantCode": "\"5240\""
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "required": [
+          "brand",
+          "country",
+          "currency",
+          "url",
+          "mcc",
+          "isicClass",
+          "branch"
+        ],
+        "properties": {
+          "brand": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "pq8c4lqdz3iov"
+            },
+            "description": "Marca del comercio de 3DS.",
+            "example": "ThreeDS brand example"
+          },
+          "country": {
+            "$ref": "#/components/schemas/country-alpha-three",
+            "x-stoplight": {
+              "id": "f5de5knebu19i"
+            },
+            "description": "Codigo País de origen del comercio ISO 3166-1 alpha-3."
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currency",
+            "x-stoplight": {
+              "id": "y13xmav751diz"
+            },
+            "description": "Moneda predeterminada codigo ISO 4217."
+          },
+          "url": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "n7ndbwkls8bqw"
+            },
+            "example": "https://example.com",
+            "description": "URL del comercio."
+          },
+          "mcc": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "ka9krdx2qr0un"
+            },
+            "example": 742,
+            "description": "Código de actividad económica."
+          },
+          "isicClass": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "6h7ym3onol65g"
+            },
+            "description": "Código clase CIIU.",
+            "example": 111
+          },
+          "requireEnrollment": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "y1nnfip4xvec3"
+            },
+            "default": true,
+            "description": "Define si va ser solicitado enrolamiento ante mastercard."
+          },
+          "document": {
+            "$ref": "#/components/schemas/document",
+            "x-stoplight": {
+              "id": "tw05yrlhs1262"
+            }
+          },
+          "subscriptions": {
+            "x-stoplight": {
+              "id": "2iyq4ulrr5qsz"
+            },
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "x-stoplight": {
+                "id": "spivxbp5ya7jc"
+              },
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/subscription",
+                "x-stoplight": {
+                  "id": "3axhe574y42ts"
+                }
+              }
+            }
+          },
+          "branch": {
+            "$ref": "#/components/schemas/branch",
+            "x-stoplight": {
+              "id": "11flmjjgzh88y"
+            }
+          }
+        }
       },
-      "country-alpha-three": {
-        "title": "country-alpha-three",
+      "threeDS-info": {
+        "title": "threeDS-info",
         "x-stoplight": {
-          "id": "mecc8ckqfjguc"
+          "id": "s0dtzqb64v0gq"
         },
-        "enum": [
-          "COL",
-          "PRI",
-          "CRI",
-          "BLZ",
-          "PAN",
-          "CHL",
-          "MEX",
-          "HND",
-          "URY",
-          "ECU"
-        ]
+        "type": "object",
+        "description": "Contiene la información del threeDS creado.",
+        "examples": [
+          {
+            "panelId": 9361,
+            "name": "merchant threeDS name",
+            "brand": "marca example",
+            "token": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2",
+            "tokenExpiresAt": "2025-09-25 00:15:48",
+            "status": "FINISHED",
+            "branches": [
+              {
+                "panelId": 187,
+                "name": "branch name",
+                "brand": "branch brach example",
+                "token": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
+                "tokenExpiresAt": "2025-09-25 00:15:48"
+              }
+            ],
+            "details": null
+          }
+        ],
+        "properties": {
+          "panelId": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "8qy4izgebnu5o"
+            },
+            "default": 9361,
+            "description": "ID del recurso en panel de mpi."
+          },
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "dhitam5ars9dq"
+            },
+            "example": "merchant threeDS name",
+            "description": "Nombre con el cual fue creado el comercio en el panel mpi  "
+          },
+          "brand": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "rizw7tdxwgrq6"
+            },
+            "description": "Marca con la cual fue creado el comercio en el panel de mpi.",
+            "example": "marca example"
+          },
+          "token": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "5j6v6cwlgj8vn"
+            },
+            "description": "token del comercio creado\n",
+            "example": "hNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMjUzYTY1ODIyY2"
+          },
+          "tokenExpiresAt": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "6z64mfxyi2k90"
+            },
+            "description": "fecha de expiracion del token",
+            "example": "2025-09-25 00:15:48"
+          },
+          "status": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "sr8aibmijtvng"
+            },
+            "description": "Estado del recurso.",
+            "example": "FINISHED"
+          },
+          "enrollment": {
+            "$ref": "#/components/schemas/enrollment",
+            "x-stoplight": {
+              "id": "x6as3uxf1tjkz"
+            },
+            "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
+          },
+          "branches": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "yfb49mda76g1l"
+            },
+            "description": "Sucursales del comercio solicitadas a crear",
+            "items": {
+              "$ref": "#/components/schemas/branches-Info",
+              "x-stoplight": {
+                "id": "o96gc29ii7bbf"
+              }
+            }
+          },
+          "details": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-stoplight": {
+              "id": "1ivc8myaj1gls"
+            },
+            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error.",
+            "example": "null"
+          }
+        }
       },
       "UserRestRequest": {
         "title": "UserRest",
@@ -7100,62 +8307,6 @@
           }
         ]
       },
-      "branches-Info": {
-        "title": "branches-Info",
-        "x-stoplight": {
-          "id": "tmn8f2pt4aygu"
-        },
-        "type": "object",
-        "properties": {
-          "panelId": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "zzm76eoddgbda"
-            },
-            "example": 187,
-            "description": "Identificador de la sucursal creada en el sistema del panel MPI"
-          },
-          "name": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "ywhc3g8wd4n6k"
-            },
-            "example": "branch name",
-            "description": "Nombre de la sucursal creada en el panel de mpi "
-          },
-          "brand": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "35irk2f5ogszy"
-            },
-            "example": "branch brach example",
-            "description": "Marca de la sucursal creada en el panel de mpi"
-          },
-          "token": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "lcruweva5ig3k"
-            },
-            "example": "NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzJlZjUwYTBkYjU5YWI4ZmUwNmFhNzA4MDQ3ZDdhNWNhZjU2YmYwNjI3NjA5YmIxMj",
-            "description": "token de la sucursal "
-          },
-          "tokenExpiresAt": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "mz38uh7cuo9vr"
-            },
-            "example": "2025-09-25 00:15:48",
-            "description": "fecha de expiracion del token de la sucursal"
-          },
-          "enrollment": {
-            "$ref": "#/components/schemas/enrollment",
-            "x-stoplight": {
-              "id": "0uslswtxkm46p"
-            },
-            "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
-          }
-        }
-      },
       "user-info": {
         "title": "user-info",
         "x-stoplight": {
@@ -7224,176 +8375,6 @@
             "details": "el usuario ya se encuentra registrado"
           }
         ]
-      },
-      "enrollment": {
-        "title": "enrollment",
-        "x-stoplight": {
-          "id": "vkmj7aeb93on4"
-        },
-        "type": "object",
-        "required": [
-          "franchise",
-          "status",
-          "reason"
-        ],
-        "properties": {
-          "franchise": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "yg7kfkua5187g"
-            },
-            "example": "mastercard",
-            "description": "Representa la franquicia con la cual se realizó el enrolamiento en Mastercard."
-          },
-          "uuid": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "scq4o67y2zdlt"
-            },
-            "example": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
-            "description": "Identificador único que identifica el merchant en Mastercard."
-          },
-          "status": {
-            "x-stoplight": {
-              "id": "rjycpefm0itqq"
-            },
-            "enum": [
-              "SUCCESS",
-              "FAILED"
-            ],
-            "description": "Estado final del enrolamiento en Mastercard"
-          },
-          "reason": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "1evo6otxfop9y"
-            },
-            "example": "request completed",
-            "description": "Contiene observaciones sobre el proceso solicitado."
-          },
-          "subscriptionId": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "8zmi4fksxwece"
-            },
-            "example": 77,
-            "description": "Identificador de la suscripción en el servicio interno de 3DS."
-          }
-        },
-        "examples": [
-          {
-            "franchise": "mastercard",
-            "uuid": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
-            "status": "SUCCESS",
-            "reason": "request completed",
-            "subscriptionId": 77
-          }
-        ],
-        "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
-      },
-      "billing": {
-        "title": "billing",
-        "x-stoplight": {
-          "id": "q7ha52pxvq5ad"
-        },
-        "type": "object",
-        "properties": {
-          "ciiu": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "7nxtey0ifwqaf"
-            },
-            "example": "5852",
-            "minLength": 4,
-            "maxLength": 4,
-            "description": "Código que representa la actividad económica acorde a CIIU Rev4."
-          }
-        },
-        "description": ""
-      },
-      "control-merchant": {
-        "title": "control-merchant",
-        "x-stoplight": {
-          "id": "8zzjfsasck07v"
-        },
-        "type": "object",
-        "examples": [
-          {
-            "seller": 2,
-            "reseller": 2,
-            "paymentFacilitator": 23
-          }
-        ],
-        "properties": {
-          "seller": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "uu6ma5u796x4g"
-            },
-            "description": "Código del consultor comercial asignado en Placetopay.",
-            "minimum": 1,
-            "example": 2
-          },
-          "reseller": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "ijghafoqni2m6"
-            },
-            "minimum": 1,
-            "example": 2,
-            "description": "Código del banco adquirente."
-          },
-          "paymentFacilitator": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "a0zvl1rpqw1v0"
-            },
-            "description": "Id del facilitador de pago.",
-            "example": 23
-          }
-        }
-      },
-      "subscription": {
-        "title": "subscriptions",
-        "x-stoplight": {
-          "id": "rs4sctscjne0x"
-        },
-        "type": "object",
-        "examples": [
-          {
-            "franchise": "visa",
-            "acquirerBIN": 400111,
-            "merchantCode": 46416456
-          }
-        ],
-        "properties": {
-          "franchise": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "540rt1aeggajf"
-            },
-            "example": "visa",
-            "maxLength": 30,
-            "pattern": "^[a-zA-Z]+$",
-            "description": "Nombre de la franquicia en ThreDS MPI."
-          },
-          "acquirerBIN": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "80intxv8z9tcm"
-            },
-            "description": "Bin del adquirente",
-            "example": 400111
-          },
-          "merchantCode": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "ju68mk8lam8qa"
-            },
-            "example": 46416456,
-            "description": "Codigo alphanumerico del comercio"
-          }
-        }
       }
     },
     "requestBodies": {},
