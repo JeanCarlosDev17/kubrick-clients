@@ -3882,7 +3882,6 @@
                       },
                       "documentType": {
                         "$ref": "#/components/schemas/documentTypeEnum",
-                        "example": "CC",
                         "description": "Tipo de documento del representante legal."
                       },
                       "document": {
@@ -3897,25 +3896,39 @@
                     "type": "object",
                     "properties": {
                       "ciiu": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "5852",
+                        "minLength": 4,
+                        "maxLength": 4,
+                        "description": "Código que representa la actividad económica acorde a CIIU Rev4.",
+                        "maximum": 9999
                       },
                       "contact": {
-                        "type": "integer"
+                        "type": "string",
+                        "maxLength": 128,
+                        "description": "Nombre de la persona que recibe la factura electrónica."
                       },
                       "mail": {
-                        "type": "string"
+                        "type": "string",
+                        "maxLength": 128,
+                        "format": "email",
+                        "description": "Correo electrónico al cual será remitida la factura electrónica."
                       },
                       "registrationNumber": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Número de la matrícula mercantil."
                       },
                       "taxType": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Tipo del régimen del comercio (depende del país)."
                       },
                       "taxRegime": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Régimen fiscal del comercio (depende del país)."
                       },
                       "organizationType": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Tipo de organización (depende del país)."
                       }
                     }
                   },
@@ -3923,10 +3936,15 @@
                     "type": "object",
                     "properties": {
                       "dispersion": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Indicador de aceptación de venta de tiquetes y venta propia (dispersión de fondos con aerolíneas)"
                       },
                       "iata": {
-                        "type": "string"
+                        "type": "string",
+                        "pattern": "^[A-Za-z]+$",
+                        "minLength": 4,
+                        "maxLength": 10,
+                        "description": "Indicador de aceptación de venta de tiquetes y venta propia (dispersión de fondos con aerolíneas)"
                       }
                     }
                   },
@@ -3934,14 +3952,74 @@
                     "type": "object",
                     "properties": {
                       "seller": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Nombre del consultor comercial asignado en Placetopay."
                       },
                       "reseller": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Banco adquirente"
                       },
                       "paymentFacilitator": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Id del facilitador de pago."
                       }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "id": 0,
+                    "name": "EVERTEC PLACETOPAY S.A.S",
+                    "brand": "Placetopay",
+                    "mcc": "7929",
+                    "active": true,
+                    "url": "https://dnetix.co/",
+                    "timezone": "Europe/Andorra",
+                    "size": "XS",
+                    "incrementType": "SMLMV",
+                    "languages": [
+                      "EN"
+                    ],
+                    "currencies": [
+                      "ARS"
+                    ],
+                    "document": {
+                      "type": "CC",
+                      "number": "900299823"
+                    },
+                    "address": {
+                      "city": "medellin",
+                      "state": 1,
+                      "country": "CO",
+                      "street": "Transversal 123 # 12 a",
+                      "postalCode": 2000074,
+                      "phone": "+58556422366"
+                    },
+                    "legalRepresentative": {
+                      "name": "Ricardo",
+                      "surname": "García",
+                      "documentType": "CC",
+                      "document": "1037854200"
+                    },
+                    "billing": {
+                      "ciiu": "5852",
+                      "contact": "string",
+                      "mail": "user@example.com",
+                      "registrationNumber": 0,
+                      "taxType": 0,
+                      "taxRegime": 0,
+                      "organizationType": 0
+                    },
+                    "travelAgency": {
+                      "dispersion": true,
+                      "iata": "iatacode"
+                    },
+                    "control": {
+                      "seller": 0,
+                      "reseller": 0,
+                      "paymentFacilitator": 0
                     }
                   }
                 }
