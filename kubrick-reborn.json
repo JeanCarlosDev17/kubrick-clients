@@ -3073,22 +3073,8 @@
                     }
                   },
                   "historic": {
-                    "type": "object",
-                    "description": "Contiene la información de Histórico transaccional",
-                    "properties": {
-                      "behaviour": {
-                        "type": "string",
-                        "description": "Comportamiento a seguir cuando el puntaje obtenido por la transacción sea igual o menor al establecido, es requerido si historic esta definido en la petición."
-                      },
-                      "lowerScore": {
-                        "type": "integer",
-                        "description": "Puntaje de apetito al riesgo, indica el puntaje máximo para categorizar las operaciones como operaciones de bajo riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'."
-                      },
-                      "rejectionScore": {
-                        "type": "integer",
-                        "description": "Puntaje de tolerancia al riesgo, indica el puntaje a partir del cual se declinarán transacciones debido al riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'."
-                      }
-                    }
+                    "$ref": "#/components/schemas/site-historic",
+                    "description": "Contiene la información de Histórico transaccional"
                   },
                   "creditBureau": {
                     "$ref": "#/components/schemas/site-creditBureau",
