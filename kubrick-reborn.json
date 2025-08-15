@@ -2550,7 +2550,9 @@
     "/api/site/update": {
       "post": {
         "summary": "Update site",
-        "tags": [],
+        "tags": [
+          "Site"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -2806,7 +2808,8 @@
                 "properties": {
                   "id": {
                     "type": "integer",
-                    "description": "Identificador del sitio."
+                    "description": "Identificador del sitio.",
+                    "maximum": 99999999999999
                   },
                   "login": {
                     "type": "string",
@@ -2879,17 +2882,26 @@
                     "description": "Indicador de sitio en pruebas."
                   },
                   "expiration": {
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "example": "2023-06-30 00:00:00",
                     "description": "Fecha de expiración el sitio, si no es definido o su valor es null la fecha de expiración sera ilimitada."
                   },
                   "productionDate": {
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "example": "2023-06-30",
                     "description": "fecha de salida a produccion formato Y-m-d"
                   },
                   "customBatch": {
-                    "type": "number",
+                    "type": [
+                      "number",
+                      "null"
+                    ],
                     "example": 2345,
                     "description": "Código servicio recaudo"
                   },
@@ -2901,7 +2913,7 @@
                         "description": "Indica si se permite el pago parcial (Mixto) en el sitio, en caso de no enviarse se toma como “false”."
                       },
                       "connectionMethod": {
-                        "example": "REDIRECT",
+                        "example": "SERVICES",
                         "description": "Especifica el tipo de producto que se adquirió en el sitio.",
                         "enum": [
                           "REDIRECT",
@@ -2916,20 +2928,11 @@
                           "RECURRENCE"
                         ]
                       },
-                      "checkoutVersion": {
-                        "type": "string",
-                        "description": "Versión de redirección."
-                      },
                       "notificationUrl": {
                         "type": "string",
                         "description": "En caso de que el tipo de conexión sea “REDIRECT”, a esta URL llegará el resultado de las transacciones.",
                         "example": "https://site-webhook.com",
                         "maxLength": 128
-                      },
-                      "analyticsCode": {
-                        "type": "string",
-                        "description": "Permite añadir el código de google analytics.",
-                        "example": "UA-171313251-4, GTM-123812"
                       },
                       "sourceRestriction": {
                         "type": "string",
@@ -2942,6 +2945,20 @@
                           "api",
                           "plugins"
                         ]
+                      },
+                      "checkoutVersion": {
+                        "description": "Versión de redirección.",
+                        "example": "v4",
+                        "enum": [
+                          "v3",
+                          "v4"
+                        ]
+                      },
+                      "analyticsCode": {
+                        "type": "string",
+                        "description": "Permite añadir el código de google analytics.",
+                        "example": "UA-171313251-4, GTM-123812",
+                        "maxLength": 255
                       },
                       "allowWallet": {
                         "type": "boolean",
@@ -2956,7 +2973,8 @@
                         "enum": [
                           0,
                           1,
-                          2
+                          2,
+                          null
                         ]
                       }
                     }
@@ -2965,43 +2983,70 @@
                     "type": "object",
                     "properties": {
                       "allowedDays": {
-                        "type": "integer"
+                        "type": "integer",
+                        "maximum": 127,
+                        "description": "Días de operación."
                       },
                       "allowedHours": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Horas de operación.",
+                        "pattern": "^([0-9a-f])"
                       },
                       "allowedBankCountries": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "description": "Paises permitidos para bancos emisores. Es nulo cuando todos los paises sean permitidos.",
+                        "minItems": 1,
+                        "items": {}
                       },
                       "delegatedAuthorization": {
-                        "type": "string"
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "maxLength": 42,
+                        "pattern": "^[0-9a-f]{1,42}$",
+                        "description": "Autorización delegada."
                       },
                       "minAmount": {
-                        "type": "string"
+                        "type": "string",
+                        "pattern": "^[\\d]{0,10}(\\.[\\d]{1,2})?$",
+                        "description": "Mínimo valor permitido por transacción. Este campo es requerido si el campo maxAmount está presente"
                       },
                       "maxAmount": {
-                        "type": "string"
+                        "type": "string",
+                        "pattern": "^[\\d]{0,10}(\\.[\\d]{1,2})?$",
+                        "description": "Máximo valor permitido por transacción. Este campo es requerido si el campo minAmount está presente."
                       },
                       "filterPse": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Filtros de seguridad en PSE."
                       },
                       "filterTuya": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Filtros de seguridad en TUYA."
                       },
                       "filterSafetypay": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Filtros de seguridad en Safetypay."
                       },
                       "prechargerFilter": {
-                        "type": "string"
+                        "description": "Filtros de precobro.",
+                        "enum": [
+                          0,
+                          1,
+                          2
+                        ]
                       },
                       "filterByBin": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Determina si se va a tener una lista de bines a excluir."
                       },
                       "exceptionBinsList": {
                         "type": "array",
+                        "description": "Lista de bines a excluir, esta llave solo es obligatoria si el filterByBin es enviado en \"true\".",
                         "items": {
                           "type": "string"
                         }
@@ -3009,176 +3054,57 @@
                     }
                   },
                   "threeDS": {
-                    "type": "object",
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "description": "Contiene la información de las configuraciones de threeDS",
                     "properties": {
                       "setting": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Nivel máximo de riesgo aceptado con threeDS."
                       },
                       "minAmount": {
-                        "type": "string"
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 99999999999999,
+                        "description": "Monto mínimo para aplicar threeDS a la transacción."
                       }
                     }
                   },
                   "historic": {
                     "type": "object",
+                    "description": "Contiene la información de Histórico transaccional",
                     "properties": {
                       "behaviour": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Comportamiento a seguir cuando el puntaje obtenido por la transacción sea igual o menor al establecido, es requerido si historic esta definido en la petición."
                       },
                       "lowerScore": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Puntaje de apetito al riesgo, indica el puntaje máximo para categorizar las operaciones como operaciones de bajo riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'."
                       },
                       "rejectionScore": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Puntaje de tolerancia al riesgo, indica el puntaje a partir del cual se declinarán transacciones debido al riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'."
                       }
                     }
                   },
                   "creditBureau": {
-                    "type": "object",
-                    "properties": {
-                      "behaviours": {
-                        "type": "object",
-                        "properties": {
-                          "onFailed": {
-                            "type": "string"
-                          },
-                          "onNoMatch": {
-                            "type": "string"
-                          },
-                          "onMatch": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "minAmount": {
-                        "type": "integer"
-                      },
-                      "paymentGroups": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    }
+                    "$ref": "#/components/schemas/site-creditBureau",
+                    "description": "Contiene los parámetros de configuración de información financiera. Para habilitar este módulo, debe enviarlo dentro de la solicitud, de lo contrario enviar como campo nulo o no enviarlo."
                   },
                   "riskEngine": {
-                    "type": "object",
-                    "properties": {
-                      "behaviours": {
-                        "type": "object",
-                        "properties": {
-                          "onFailed": {
-                            "type": "string"
-                          },
-                          "onLowRisk": {
-                            "type": "string"
-                          },
-                          "onMediumRisk": {
-                            "type": "string"
-                          },
-                          "onHighRisk": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "paymentGroups": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "minAmount": {
-                        "type": "integer"
-                      },
-                      "approvalScore": {
-                        "type": "integer"
-                      },
-                      "rejectionScore": {
-                        "type": "integer"
-                      },
-                      "onCalibration": {
-                        "type": "boolean"
-                      }
-                    }
+                    "$ref": "#/components/schemas/site-riskEngine",
+                    "description": "Contiene las configuraciones de motores de riesgo"
                   },
                   "securityFilters": {
-                    "type": "object",
-                    "properties": {
-                      "filterLockedByTries": {
-                        "type": "boolean"
-                      },
-                      "allowedIssuerCountries": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "forceIPMatch": {
-                        "type": "boolean"
-                      },
-                      "excludeIPCountry": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "onlyWhitelisted": {
-                        "type": "boolean"
-                      },
-                      "allowedIPCountries": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "allowedCardsDay": {
-                        "type": "integer"
-                      },
-                      "allowedCardsByIP": {
-                        "type": "integer"
-                      },
-                      "allowedCardsMonth": {
-                        "type": "integer"
-                      },
-                      "allowedCardsYear": {
-                        "type": "integer"
-                      },
-                      "dayMax": {
-                        "type": "integer"
-                      },
-                      "dayMaxAmount": {
-                        "type": "integer"
-                      },
-                      "monthMax": {
-                        "type": "integer"
-                      },
-                      "monthMaxAmount": {
-                        "type": "integer"
-                      }
-                    }
+                    "$ref": "#/components/schemas/site-securityFilters",
+                    "description": "Contiene la información de filtros de seguridad"
                   },
                   "operation": {
-                    "type": "object",
-                    "properties": {
-                      "disableTax": {
-                        "type": "boolean"
-                      },
-                      "calculateTax": {
-                        "type": "boolean"
-                      },
-                      "taxPercentage": {
-                        "type": "integer"
-                      },
-                      "patternReference": {
-                        "type": "string"
-                      },
-                      "mailCustomer": {
-                        "type": "boolean"
-                      },
-                      "mailMerchant": {
-                        "type": "boolean"
-                      }
-                    }
+                    "$ref": "#/components/schemas/site-operation",
+                    "description": "Contiene la información del funcionamiento de consola."
                   }
                 }
               }
@@ -6604,8 +6530,16 @@
           "id": "if9h2ltoey6jo"
         },
         "enum": [
-          "ES",
           "EN",
+          "EN_CL",
+          "EN_HN",
+          "EN_PA",
+          "EN_PR",
+          "ES",
+          "ES_CL",
+          "ES_HN",
+          "ES_PA",
+          "ES_PR",
           "FR",
           "IT",
           "PT"
