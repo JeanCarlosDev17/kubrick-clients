@@ -7371,6 +7371,20 @@
             "description": "fecha de salida a produccion formato Y-m-d",
             "example": "2023-06-30"
           },
+          "onTest": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "xuayuaicsyaj9"
+            },
+            "description": "Indicador de sitio en pruebas."
+          },
+          "IsActive": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "kqvjismswvusb"
+            },
+            "description": "Indicador del estado del sitio."
+          },
           "integration": {
             "$ref": "#/components/schemas/integration",
             "x-stoplight": {
