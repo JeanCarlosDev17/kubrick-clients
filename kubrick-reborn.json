@@ -2870,9 +2870,12 @@
                     "$ref": "#/components/schemas/language",
                     "description": "Lenguaje que se usará para las transacciones"
                   },
-                  "isActive": {
+                  "active": {
                     "type": "boolean",
-                    "description": "Indicador del estado del sitio."
+                    "description": "Indicador del estado del sitio.",
+                    "x-stoplight": {
+                      "id": "hq3pk351i4kcs"
+                    }
                   },
                   "onTest": {
                     "type": "boolean",
@@ -3111,7 +3114,7 @@
                     "email": "admin@email.com",
                     "currency": "ARS",
                     "language": "EN",
-                    "isActive": true,
+                    "active": true,
                     "onTest": true,
                     "expiration": "2023-06-30 00:00:00",
                     "productionDate": "2023-06-30",
