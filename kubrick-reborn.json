@@ -5605,15 +5605,19 @@
               "id": "aaifl1t87eu8l"
             },
             "description": "Marca del comercio.",
-            "example": "Placetopay"
+            "example": "Placetopay",
+            "maxLength": 50
           },
           "mcc": {
-            "type": "number",
+            "type": "string",
             "x-stoplight": {
               "id": "gozgx56ga7t1f"
             },
             "description": "Código de categoría mercantil acorde ISO 18245.",
-            "example": 7929
+            "example": "0792",
+            "pattern": "^\\d+$/",
+            "minLength": 4,
+            "maxLength": 4
           },
           "languages": {
             "x-stoplight": {
