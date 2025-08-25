@@ -4162,7 +4162,8 @@
               "id": "ds0u6o8hrtvr8"
             },
             "example": "medellin",
-            "description": "Ciudad del comercio."
+            "description": "Ciudad del comercio.",
+            "maxLength": 30
           },
           "state": {
             "type": "integer",
@@ -4173,12 +4174,11 @@
             "description": "Estado / departamento / provincia del comercio (ISO)."
           },
           "country": {
-            "type": "string",
+            "$ref": "#/components/schemas/country-alpha-two",
             "x-stoplight": {
               "id": "duk54nqr65n21"
             },
-            "description": "País del comercio (ISO 3166-1 alfa-2).",
-            "example": "CO"
+            "description": "País del comercio (ISO 3166-1 alfa-2)."
           },
           "street": {
             "type": "string",
@@ -5495,7 +5495,8 @@
               "id": "9gnblb6chopcy"
             },
             "description": "Documento de identificación del representante legal.",
-            "example": "1037854200"
+            "example": "1037854200",
+            "maxLength": 20
           },
           "name": {
             "type": "string",
@@ -5503,7 +5504,8 @@
               "id": "8en3dwzxcx4xz"
             },
             "description": "Nombres del representante legal.",
-            "example": "Ricardo"
+            "example": "Ricardo",
+            "maxLength": 30
           },
           "surname": {
             "type": "string",
@@ -5511,7 +5513,8 @@
               "id": "jezuvzc3i6707"
             },
             "example": "García",
-            "description": "Apellidos del representante legal."
+            "description": "Apellidos del representante legal.",
+            "maxLength": 30
           }
         }
       },
@@ -5669,7 +5672,9 @@
               "id": "x4fg0p7f8kknn"
             },
             "description": "url del comercio",
-            "example": "https://dnetix.co/"
+            "example": "https://dnetix.co/",
+            "format": "uri",
+            "maxLength": 255
           },
           "billing": {
             "$ref": "#/components/schemas/billing",
