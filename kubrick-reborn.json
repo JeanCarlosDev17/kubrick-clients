@@ -5596,7 +5596,8 @@
               "id": "oky83etoi4962"
             },
             "description": "Nombre del comercio.",
-            "example": "EVERTEC PLACETOPAY S.A.S"
+            "example": "EVERTEC PLACETOPAY S.A.S",
+            "maxLength": 75
           },
           "brand": {
             "type": "string",
