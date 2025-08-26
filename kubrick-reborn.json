@@ -2873,7 +2873,7 @@
                     "$ref": "#/components/schemas/language",
                     "description": "Lenguaje que se usará para las transacciones"
                   },
-                  "active": {
+                  "isActive": {
                     "type": "boolean",
                     "description": "Indicador del estado del sitio.",
                     "x-stoplight": {
@@ -3384,9 +3384,12 @@
                     "minLength": 1,
                     "maxLength": 4
                   },
-                  "active": {
+                  "isActive": {
                     "type": "boolean",
-                    "description": "Estado del comercio"
+                    "description": "Indicador del estado del comercio.",
+                    "x-stoplight": {
+                      "id": "7quu4jmqer0pt"
+                    }
                   },
                   "url": {
                     "type": "string",
@@ -6109,6 +6112,13 @@
               "Africa/Lusaka",
               "Africa/Harare"
             ]
+          },
+          "isActive": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "n2hea284yzyyt"
+            },
+            "description": "Indicador del estado del comercio."
           }
         }
       },
