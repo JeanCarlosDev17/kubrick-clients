@@ -1436,14 +1436,6 @@
                     "example": "Edward Elric",
                     "maxLength": 30
                   },
-                  "requireEnrollment": {
-                    "type": "boolean",
-                    "x-stoplight": {
-                      "id": "25i03j0mx1t8v"
-                    },
-                    "default": true,
-                    "description": "Define si va ser solicitado enrolamiento ante mastercard"
-                  },
                   "document": {
                     "$ref": "#/components/schemas/document",
                     "x-stoplight": {
@@ -4254,14 +4246,6 @@
             },
             "description": "Moneda predeterminada de la rama, ISO 4217."
           },
-          "requireEnrollment": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "r8wtqmavw6go3"
-            },
-            "default": true,
-            "description": "Define si va ser solicitado enrolamiento ante mastercard."
-          },
           "url": {
             "type": "string",
             "x-stoplight": {
@@ -4307,6 +4291,24 @@
           ]
         },
         "title": "branches",
+        "examples": [
+          [
+            {
+              "name": "ThreeDS Branch Name",
+              "brand": "branch brand example",
+              "country": "COL",
+              "currency": "COP",
+              "url": "https://www.branch-url.com",
+              "subscriptions": [
+                {
+                  "franchise": "visa",
+                  "acquirerBIN": 499999,
+                  "merchantCode": "125899"
+                }
+              ]
+            }
+          ]
+        ],
         "items": {
           "type": "object",
           "required": [
@@ -4340,14 +4342,6 @@
               "example": "https://www.branch-url.com",
               "description": "Url del comercio."
             },
-            "requireEnrollment": {
-              "type": "boolean",
-              "x-stoplight": {
-                "id": "6p54i7i3fm6g5"
-              },
-              "default": true,
-              "description": "Define si va ser solicitado enrolamiento ante mastercard"
-            },
             "subscriptions": {
               "type": "array",
               "items": {
@@ -4369,26 +4363,7 @@
               }
             }
           }
-        },
-        "examples": [
-          [
-            {
-              "name": "ThreeDS Branch Name",
-              "brand": "branch brand example",
-              "country": "COL",
-              "currency": "COP",
-              "url": "https://www.branch-url.com",
-              "requireEnrollment": true,
-              "subscriptions": [
-                {
-                  "franchise": "visa",
-                  "acquirerBIN": 499999,
-                  "merchantCode": "125899"
-                }
-              ]
-            }
-          ]
-        ]
+        }
       },
       "branches-Info": {
         "title": "branches-Info",
