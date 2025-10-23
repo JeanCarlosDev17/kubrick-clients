@@ -8185,14 +8185,6 @@
             "description": "Código clase CIIU.",
             "example": 111
           },
-          "requireEnrollment": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "y1nnfip4xvec3"
-            },
-            "default": true,
-            "description": "Define si va ser solicitado enrolamiento ante mastercard."
-          },
           "document": {
             "$ref": "#/components/schemas/document",
             "x-stoplight": {
