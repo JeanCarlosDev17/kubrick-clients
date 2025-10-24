@@ -1191,20 +1191,12 @@
                       "name": "ThreeDS Name Example",
                       "token": "eyJ0eXAiO.bOPVKIKsaC92asw6sTNiqvOKDfjL2OeSBl1v9UgutI4I-IgyAnh9vxQ65lFudm321BXDYtwqDz9qiN6qxu7nV",
                       "tokenExpiresAt": "2025-09-25 00:15:48",
-                      "enrrollment": null,
                       "branches": [
                         {
                           "panelId": 1686,
                           "name": "ThreeDS Branch Name Example",
                           "token": "koskdopksakdaokdsas4d6asd6a451c56a4d8w782",
-                          "tokenExpiresAt": "2025-09-25 00:15:13",
-                          "enrollment": {
-                            "franchise": "mastercard",
-                            "uuid": "692b1ce4-7979-4b62-9bab-bda8ad8aa64b",
-                            "status": "SUCCESS",
-                            "reason": "request completed",
-                            "subscriptionId": 77
-                          }
+                          "tokenExpiresAt": "2025-09-25 00:15:13"
                         }
                       ]
                     }
