@@ -1451,7 +1451,6 @@
                       "type": "RUT",
                       "number": "900299823-1"
                     },
-                    "requireEnrollment": true,
                     "branches": [
                       {
                         "name": "ThreeDS Branch Name",
@@ -1459,7 +1458,6 @@
                         "country": "COL",
                         "currency": "COP",
                         "url": "https://www.branch-url.com",
-                        "requireEnrollment": true,
                         "subscriptions": [
                           {
                             "franchise": "mastercard",
