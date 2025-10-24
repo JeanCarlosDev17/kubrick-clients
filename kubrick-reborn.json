@@ -7356,7 +7356,7 @@
             },
             "description": "Indicador de sitio en pruebas."
           },
-          "IsActive": {
+          "isActive": {
             "type": "boolean",
             "x-stoplight": {
               "id": "kqvjismswvusb"
