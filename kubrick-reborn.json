@@ -1129,13 +1129,6 @@
                       },
                       "example": "2025-09-25 00:15:48"
                     },
-                    "enrrollment": {
-                      "$ref": "#/components/schemas/enrollment",
-                      "x-stoplight": {
-                        "id": "z1euo3314pt19"
-                      },
-                      "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento o no tener subscripciones de Mastercard, el campo tendrá un valor de null."
-                    },
                     "branches": {
                       "type": "array",
                       "x-stoplight": {
@@ -1178,12 +1171,6 @@
                               "id": "22nn0od8ufy6s"
                             },
                             "example": "2025-09-25 00:15:13"
-                          },
-                          "enrollment": {
-                            "$ref": "#/components/schemas/enrollment",
-                            "x-stoplight": {
-                              "id": "gd78yryar4sue"
-                            }
                           }
                         }
                       }
