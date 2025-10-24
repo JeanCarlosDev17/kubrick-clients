@@ -455,7 +455,12 @@
                       "email": "user@mail.com",
                       "mobile": "string",
                       "language": "312588921",
-                      "timezone": "Asia/Kabul"
+                      "timezone": "Asia/Kabul",
+                      "restUserGroupsSettings": [
+                        [
+                          "GROUP_INVITATIONS"
+                        ]
+                      ]
                     }
                   }
                 },
@@ -8316,7 +8321,8 @@
           "username",
           "email",
           "language",
-          "timezone"
+          "timezone",
+          "restUserGroupsSettings"
         ],
         "properties": {
           "fullName": {
@@ -8799,6 +8805,27 @@
               "Africa/Lusaka",
               "Africa/Harare"
             ]
+          },
+          "restUserGroupsSettings": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "7n501r99as5za"
+            },
+            "description": "Grupos de roles que controlan el acceso del usuario.",
+            "items": {
+              "x-stoplight": {
+                "id": "511x3ng7uard3"
+              },
+              "type": "string",
+              "example": "[\"GROUP_INVITATIONS\"]"
+            }
+          },
+          "isActive": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "5vwopxatp3rmd"
+            },
+            "description": "Estado del usuario."
           }
         },
         "examples": [
@@ -8807,8 +8834,14 @@
             "username": "myUserName",
             "email": "user@mail.com",
             "mobile": "string",
-            "language": "312588921",
-            "timezone": "Asia/Kabul"
+            "language": "en",
+            "timezone": "Europe/Andorra",
+            "restUserGroupsSettings": [
+              [
+                "GROUP_INVITATIONS"
+              ]
+            ],
+            "isActive": true
           }
         ]
       },
