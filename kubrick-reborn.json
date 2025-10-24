@@ -828,7 +828,7 @@
                     }
                   }
                 },
-                "eticion desde cero con micrositio cerrado": {
+                "Petición desde cero con micrositio cerrado": {
                   "value": {
                     "statusWebhook": "https://test.webhook.com/",
                     "merchantId": 0,
