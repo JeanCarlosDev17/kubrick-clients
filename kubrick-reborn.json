@@ -4737,15 +4737,18 @@
                 "properties": {
                   "franchise": {
                     "type": "string",
-                    "example": "visa"
+                    "example": "visa",
+                    "description": "Nombre de la franquicia en ThreDS MPI."
                   },
                   "acquirerBIN": {
                     "type": "integer",
-                    "example": 499999
+                    "example": 499999,
+                    "description": "Bin del adquirente"
                   },
                   "merchantCode": {
-                    "type": "string",
-                    "example": "4646456"
+                    "type": "integer",
+                    "example": "4646456",
+                    "description": "Codigo alphanumerico del comercio"
                   }
                 }
               }
