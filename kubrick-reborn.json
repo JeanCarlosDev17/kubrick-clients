@@ -1750,7 +1750,7 @@
                   }
                 },
                 "examples": {
-                  "Example 1": {
+                  "Old integration": {
                     "value": {
                       "status": {
                         "status": "OK",
@@ -1987,6 +1987,17 @@
                 }
               }
             }
+          },
+          "2XX": {
+            "description": "OLD",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
           }
         },
         "operationId": "post-api-integration-get-information-integrationId",
@@ -2015,7 +2026,7 @@
             "description": "application/json"
           }
         ],
-        "description": "Este endpoint permite la consulta de información de una integración, permitiendo ver el estado de la creación de los recursos separado por environment. Este endpoint es utilizado para el procedimiento de sonda mencionado en el apartado de [notificatción](reference/Kubrick.json/components/schemas/notification)."
+        "description": "    Este     end    poin    t pe    rmit    e la     con    sult    a de     inf    orma    ción     de     una     inte    grac    ión,     per    miti    endo     ver     el     esta    do d    e la     cre    ació    n de     los     rec    urso    s se    para    do p    or e    nvir    onment. Este endpoint es utilizado para el procedimiento de sonda mencionado en el apartado de [notificación](reference/Kubrick.json/components/schemas/notification)."
       }
     },
     "/api/merchant/search": {
