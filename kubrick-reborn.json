@@ -1089,7 +1089,7 @@
                     },
                     "paymentMethods": {
                       "code": "MC",
-                      "oder": 3,
+                      "order": 3,
                       "commissionModel": "F",
                       "commissionValue": 2.5,
                       "accountNumber": "1234567811",
