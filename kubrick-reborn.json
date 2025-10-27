@@ -1630,6 +1630,18 @@
                     },
                     "paymentMethods": {
                       "$ref": "#/components/schemas/paymentMethods-info"
+                    },
+                    "microsite": {
+                      "$ref": "#/components/schemas/microsite-info",
+                      "x-stoplight": {
+                        "id": "jv90ykzvk1m2c"
+                      }
+                    },
+                    "user": {
+                      "$ref": "#/components/schemas/user-info",
+                      "x-stoplight": {
+                        "id": "1d51koaihf6rq"
+                      }
                     }
                   }
                 },
@@ -1694,7 +1706,22 @@
                           "type": "sitePaymentMethod",
                           "details": null
                         }
-                      ]
+                      ],
+                      "microsite": {
+                        "panelId": 1255,
+                        "status": "FINISHED",
+                        "name": "microsite test",
+                        "micrositeUrl": "https://microsites.fake.com/microsite-test",
+                        "details": null
+                      },
+                      "user": {
+                        "panelId": 2562,
+                        "status": "FINISHED",
+                        "fullName": "Alan Turing",
+                        "username": "aturing01",
+                        "email": "alan-turing@fake.com",
+                        "details": null
+                      }
                     }
                   }
                 }
