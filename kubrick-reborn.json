@@ -4838,24 +4838,6 @@
           "id": "vbtovsf4fqem8"
         },
         "type": "object",
-        "examples": [
-          {
-            "minAmount": "1000",
-            "maxAmount": "1000000",
-            "filterPse": false,
-            "filterTuya": false,
-            "filterSafetyPay": false,
-            "prechargerFilter": 2,
-            "filterByBin": false,
-            "exceptionBinsList": [
-              "123456"
-            ],
-            "allowedBankCountries": [
-              "CO"
-            ],
-            "delegatedAuthorization": "stringstringstringstringstringstringstring"
-          }
-        ],
         "required": [
           "minAmount",
           "maxAmount",
@@ -4980,7 +4962,27 @@
               }
             }
           }
-        }
+        },
+        "examples": [
+          {
+            "minAmount": "1000",
+            "maxAmount": "1000000",
+            "allowedDays": 127,
+            "allowedHours": "ffffffffffffffffffffffffffffffffffffffffff",
+            "delegatedAuthorization": "ffffffffffffffffffffffffffffffffffffffffff",
+            "filterPse": false,
+            "filterTuya": false,
+            "filterSafetyPay": false,
+            "prechargerFilter": 2,
+            "filterByBin": false,
+            "exceptionBinsList": [
+              "123456"
+            ],
+            "allowedBankCountries": [
+              "AF"
+            ]
+          }
+        ]
       },
       "control-merchant": {
         "title": "control-merchant",
