@@ -1816,7 +1816,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "description": "El server error representa una intermitencia en el sistema, en este caso se debe comnunicar con un administrador."
+                      "description": "El server error representa una intermitencia en el sistema, en este caso se debe comunicar con un administrador."
                     }
                   }
                 },
