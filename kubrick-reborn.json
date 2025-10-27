@@ -1539,7 +1539,393 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success (New integration)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string"
+                        },
+                        "reason": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "date": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "integrationId": {
+                      "type": "integer"
+                    },
+                    "environment": {
+                      "type": "string"
+                    },
+                    "merchant": {
+                      "type": "object",
+                      "properties": {
+                        "panelId": {
+                          "type": "integer"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "null"
+                        }
+                      }
+                    },
+                    "site": {
+                      "type": "object",
+                      "properties": {
+                        "panelId": {
+                          "type": "integer"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "login": {
+                          "type": "string"
+                        },
+                        "secretKey": {
+                          "type": "string"
+                        },
+                        "isActive": {
+                          "type": "integer"
+                        },
+                        "details": {
+                          "type": "null"
+                        }
+                      }
+                    },
+                    "threeDs": {
+                      "type": "object",
+                      "properties": {
+                        "panelId": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "brand": {
+                          "type": "string"
+                        },
+                        "token": {
+                          "type": "string"
+                        },
+                        "tokenExpiresAt": {
+                          "type": "string"
+                        },
+                        "enrollment": {
+                          "type": "null"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "branches": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "panelId": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "brand": {
+                                "type": "string"
+                              },
+                              "token": {
+                                "type": "string"
+                              },
+                              "tokenExpiresAt": {
+                                "type": "string"
+                              },
+                              "enrollment": {
+                                "type": "null"
+                              }
+                            }
+                          }
+                        },
+                        "details": {
+                          "type": "null"
+                        }
+                      }
+                    },
+                    "paymentMethods": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "panelId": {
+                            "type": "integer"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "code": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "details": {
+                            "type": "null"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "Successful integration creation",
+                        "date": "2025-07-04T22:37:37+00:00"
+                      },
+                      "integrationId": 638,
+                      "environment": "local",
+                      "merchant": {
+                        "panelId": 4728,
+                        "status": "FINISHED",
+                        "name": "Merchant name - Test",
+                        "details": null
+                      },
+                      "site": {
+                        "panelId": 14373,
+                        "status": "FINISHED",
+                        "name": "site display name - Test",
+                        "login": "ac06f776dc51cbdd0f8b9bc09bac1aec",
+                        "secretKey": "R0OFWPUzZ34v5F8f",
+                        "isActive": 1,
+                        "details": null
+                      },
+                      "threeDs": {
+                        "panelId": 2359,
+                        "name": "Merchant name - Test",
+                        "brand": "threeDs merchant test 5",
+                        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwiuuRpIjoiNTNmMjlei2dhYmQ2N2JhNjRmMmQ0YTE3Yjk4NzZiYTc3NDdmMTA3ZmViODNhZjhlMGJlMDViY2JhN2JkM2RlMmJiYzI2NDM4ZjEyZWExMzEiLCJpYXQiOjE3NTE2Njg2NTMuNTIyOTk5LCJuYmYiOjE3NTE2Njg2NTMuNTIzMDAyLCJleHAiOjE4NDYzNjMwNTMuNDk2MTE0L22dsWIiOiI0NiIsInNjb3BlcyI6W119.FbVCCVE7Y7x6rcDseZhDwZ7e5XlGWQcAQ7XDm4R2vgg_tZUz_8MLtc022ei9kywxfafxvMKxWMtqo2ADff9U4bNq5AG3-O6SDVffVsPa_rfSfBbyo5MirLQc3J2buO8wn6jW3KEIOiju6bKh0dBjmhFfydA7ZiJuek2s0jyahM",
+                        "tokenExpiresAt": "2028-07-04 22:37:33",
+                        "enrollment": null,
+                        "status": "FINISHED",
+                        "branches": [
+                          {
+                            "panelId": 2554,
+                            "name": "Test branch name - Test",
+                            "brand": "Test brand 483",
+                            "token": "eyJ0eXCsoiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjFlNDM5N2M3OT8wdFZiOWUzMDIyMzE5OTU2ZDIyYzljMGVkOWZhNThkOTQyODA0MTYzMDkxNDhlY2E3ODFkZWI0N2Q4M2UzMjVkMzg0OWIiLCJpYXQiOjE3NTE2Njg2NTMuMzQxMzkyLCJuYmYiOjE3NTE2Njg2NTMuMzQxMzk1LCJleHAiOjE4NDYzNjMwNTMuMzA2MDM4LCJzdWIiOiI0NiIsInNjb3BlcyI6W119.rpcDfLxoZQ2Ux5sjhsoNCAe8XoteSEX6dLtH5A0CZt0-HsX6_KL820FpCYOuUtLg7_TkXJ3pJPT1Af1wV5XYIW2N_CegJYYU_dh-Hrr8m0kYYTZOJUjZlH-Js_guVktv789Eo6XGA308vN8q57UBIb-GyS4VPs5Whz1JxDzQ41t8",
+                            "tokenExpiresAt": "2028-07-04 22:37:33",
+                            "enrollment": null
+                          }
+                        ],
+                        "details": null
+                      },
+                      "paymentMethods": [
+                        {
+                          "panelId": 105880,
+                          "status": "FINISHED",
+                          "code": "PS_MC",
+                          "type": "sitePaymentMethod",
+                          "details": null
+                        },
+                        {
+                          "panelId": 107960,
+                          "status": "FINISHED",
+                          "code": "PS_VS",
+                          "type": "sitePaymentMethod",
+                          "details": null
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "New integration": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "Successful integration creation",
+                        "date": "2025-07-04T22:37:37+00:00"
+                      },
+                      "integrationId": 638,
+                      "environment": "local",
+                      "merchant": {
+                        "panelId": 4728,
+                        "status": "FINISHED",
+                        "name": "Merchant name - Test",
+                        "details": null
+                      },
+                      "site": {
+                        "panelId": 14373,
+                        "status": "FINISHED",
+                        "name": "site display name - Test",
+                        "login": "ac06f776dc51cbdd0f8b9bc09bac1aec",
+                        "secretKey": "R0OFWPUzZ34v5F8f",
+                        "isActive": 1,
+                        "details": null
+                      },
+                      "threeDs": {
+                        "panelId": 2359,
+                        "name": "Merchant name - Test",
+                        "brand": "threeDs merchant test 5",
+                        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwiuuRpIjoiNTNmMjlei2dhYmQ2N2JhNjRmMmQ0YTE3Yjk4NzZiYTc3NDdmMTA3ZmViODNhZjhlMGJlMDViY2JhN2JkM2RlMmJiYzI2NDM4ZjEyZWExMzEiLCJpYXQiOjE3NTE2Njg2NTMuNTIyOTk5LCJuYmYiOjE3NTE2Njg2NTMuNTIzMDAyLCJleHAiOjE4NDYzNjMwNTMuNDk2MTE0L22dsWIiOiI0NiIsInNjb3BlcyI6W119.FbVCCVE7Y7x6rcDseZhDwZ7e5XlGWQcAQ7XDm4R2vgg_tZUz_8MLtc022ei9kywxfafxvMKxWMtqo2ADff9U4bNq5AG3-O6SDVffVsPa_rfSfBbyo5MirLQc3J2buO8wn6jW3KEIOiju6bKh0dBjmhFfydA7ZiJuek2s0jyahM",
+                        "tokenExpiresAt": "2028-07-04 22:37:33",
+                        "enrollment": null,
+                        "status": "FINISHED",
+                        "branches": [
+                          {
+                            "panelId": 2554,
+                            "name": "Test branch name - Test",
+                            "brand": "Test brand 483",
+                            "token": "eyJ0eXCsoiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjFlNDM5N2M3OT8wdFZiOWUzMDIyMzE5OTU2ZDIyYzljMGVkOWZhNThkOTQyODA0MTYzMDkxNDhlY2E3ODFkZWI0N2Q4M2UzMjVkMzg0OWIiLCJpYXQiOjE3NTE2Njg2NTMuMzQxMzkyLCJuYmYiOjE3NTE2Njg2NTMuMzQxMzk1LCJleHAiOjE4NDYzNjMwNTMuMzA2MDM4LCJzdWIiOiI0NiIsInNjb3BlcyI6W119.rpcDfLxoZQ2Ux5sjhsoNCAe8XoteSEX6dLtH5A0CZt0-HsX6_KL820FpCYOuUtLg7_TkXJ3pJPT1Af1wV5XYIW2N_CegJYYU_dh-Hrr8m0kYYTZOJUjZlH-Js_guVktv789Eo6XGA308vN8q57UBIb-GyS4VPs5Whz1JxDzQ41t8",
+                            "tokenExpiresAt": "2028-07-04 22:37:33",
+                            "enrollment": null
+                          }
+                        ],
+                        "details": null
+                      },
+                      "paymentMethods": [
+                        {
+                          "panelId": 105880,
+                          "status": "FINISHED",
+                          "code": "PS_MC",
+                          "type": "sitePaymentMethod",
+                          "details": null
+                        },
+                        {
+                          "panelId": 107960,
+                          "status": "FINISHED",
+                          "code": "PS_VS",
+                          "type": "sitePaymentMethod",
+                          "details": null
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2024-02-16T13:47:46+00:00"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2024-02-16T13:47:46+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "RNF",
+                        "message": "The integration does not exist",
+                        "date": "2024-02-16T13:46:45+00:00"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "RNF",
+                        "message": "The integration does not exist",
+                        "date": "2024-02-16T13:46:45+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "message": "Server Error"
+                    }
+                  },
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "El server error representa una intermitencia en el sistema, en este caso se debe comnunicar con un administrador."
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "message": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "2XX": {
+            "description": "Success (Old integration)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1882,119 +2268,6 @@
                       ]
                     }
                   }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "x-examples": {
-                    "Example 1": {
-                      "status": {
-                        "status": "FAILED",
-                        "reason": "FA",
-                        "message": "Failed authentication check your credentials",
-                        "date": "2024-02-16T13:47:46+00:00"
-                      }
-                    }
-                  },
-                  "properties": {
-                    "status": {
-                      "$ref": "#/components/schemas/status-ok"
-                    }
-                  }
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "status": {
-                        "status": "FAILED",
-                        "reason": "FA",
-                        "message": "Failed authentication check your credentials",
-                        "date": "2024-02-16T13:47:46+00:00"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "x-examples": {
-                    "Example 1": {
-                      "status": {
-                        "status": "FAILED",
-                        "reason": "RNF",
-                        "message": "The integration does not exist",
-                        "date": "2024-02-16T13:46:45+00:00"
-                      }
-                    }
-                  },
-                  "properties": {
-                    "status": {
-                      "$ref": "#/components/schemas/status-ok"
-                    }
-                  }
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "status": {
-                        "status": "FAILED",
-                        "reason": "RNF",
-                        "message": "The integration does not exist",
-                        "date": "2024-02-16T13:46:45+00:00"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "x-examples": {
-                    "Example 1": {
-                      "message": "Server Error"
-                    }
-                  },
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "El server error representa una intermitencia en el sistema, en este caso se debe comnunicar con un administrador."
-                    }
-                  }
-                },
-                "examples": {
-                  "Example 1": {
-                    "value": {
-                      "message": "Server Error"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "2XX": {
-            "description": "OLD",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
                 }
               }
             }
