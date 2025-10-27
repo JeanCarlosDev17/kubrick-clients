@@ -2826,6 +2826,7 @@
                     ]
                   },
                   "category": {
+                    "type": "string",
                     "example": "ECOMMERCE",
                     "description": "Define la categoría del sitio.\n\nECOMMERCE = Comercio electrónico <br>\nCOLLECT = Recaudos <br>",
                     "enum": [
@@ -2890,6 +2891,7 @@
                         "description": "Indica si se permite el pago parcial (Mixto) en el sitio, en caso de no enviarse se toma como “false”."
                       },
                       "connectionMethod": {
+                        "type": "string",
                         "example": "SERVICES",
                         "description": "Especifica el tipo de producto que se adquirió en el sitio.",
                         "enum": [
@@ -2924,6 +2926,7 @@
                         ]
                       },
                       "checkoutVersion": {
+                        "type": "string",
                         "description": "Versión de redirección.",
                         "example": "v4",
                         "enum": [
@@ -2946,6 +2949,7 @@
                         "description": "Permite devolver o no los datos adicionales"
                       },
                       "payerFieldsType": {
+                        "type": "integer",
                         "description": "Tipos del campo de pagador:\n\n0 = Con documento\n\n1 = Sin documento\n\n2 = Solo email",
                         "enum": [
                           0,
@@ -3016,6 +3020,7 @@
                         "description": "Filtros de seguridad en Safetypay."
                       },
                       "prechargerFilter": {
+                        "type": "integer",
                         "description": "Filtros de precobro.",
                         "enum": [
                           0,
@@ -3373,6 +3378,7 @@
                     "format": "uri"
                   },
                   "timezone": {
+                    "type": "string",
                     "description": "Zona horaria de la ubicación del comercio",
                     "enum": [
                       "Europe/Andorra",
@@ -3792,6 +3798,7 @@
                     ]
                   },
                   "size": {
+                    "type": "string",
                     "enum": [
                       "XS",
                       "S",
@@ -3801,6 +3808,7 @@
                     "description": "Tamaño de la empresa basado en los empleados [XS<10, S<50, M<250, L>250]."
                   },
                   "incrementType": {
+                    "type": "string",
                     "description": "Tipo incremento en plan",
                     "enum": [
                       "SMLMV",
@@ -3826,6 +3834,7 @@
                     "description": "Estructura que contiene la información de un documento",
                     "properties": {
                       "type": {
+                        "type": "string",
                         "description": "Tipo de documento del comercio.",
                         "enum": [
                           "CC",
@@ -4429,6 +4438,24 @@
           "id": "vbtovsf4fqem8"
         },
         "type": "object",
+        "examples": [
+          {
+            "minAmount": "1000",
+            "maxAmount": "1000000",
+            "filterPse": false,
+            "filterTuya": false,
+            "filterSafetyPay": false,
+            "prechargerFilter": 2,
+            "filterByBin": false,
+            "exceptionBinsList": [
+              "123456"
+            ],
+            "allowedBankCountries": [
+              "CO"
+            ],
+            "delegatedAuthorization": "stringstringstringstringstringstringstring"
+          }
+        ],
         "required": [
           "minAmount",
           "maxAmount",
@@ -4441,7 +4468,8 @@
               "id": "r63y6t4ou8eya"
             },
             "example": "1000",
-            "description": "Monto mínimo permitido por transacción."
+            "description": "Monto mínimo permitido por transacción.",
+            "pattern": "^[\\d]{0,10}(\\.[\\d]{1,2})?$"
           },
           "maxAmount": {
             "type": "string",
@@ -4449,7 +4477,22 @@
               "id": "2h6nsklc8n4bg"
             },
             "example": "1000000",
-            "description": "Monto máximo permitido por transacción."
+            "description": "Monto máximo permitido por transacción.",
+            "pattern": "^[\\d]{0,10}(\\.[\\d]{1,2})?$/"
+          },
+          "allowedDays": {
+            "type": "integer",
+            "maximum": 127,
+            "description": "Días de operación.",
+            "example": 127
+          },
+          "allowedHours": {
+            "type": "string",
+            "description": "Horas de operación.",
+            "pattern": "^([0-9a-f])",
+            "example": "ffffffffffffffffffffffffffffffffffffffffff",
+            "maxLength": 42,
+            "minLength": 42
           },
           "filterPse": {
             "type": "boolean",
@@ -4480,7 +4523,7 @@
             "x-stoplight": {
               "id": "nv69wxx5y0bgt"
             },
-            "description": "Filtros de precobro.",
+            "description": "Filtros de precobro.\n0 = Disabled\n",
             "example": 2
           },
           "filterByBin": {
@@ -4528,25 +4571,7 @@
             "maxLength": 42,
             "pattern": "^([0-9a-f])"
           }
-        },
-        "examples": [
-          {
-            "minAmount": "1000",
-            "maxAmount": "1000000",
-            "filterPse": false,
-            "filterTuya": false,
-            "filterSafetyPay": false,
-            "prechargerFilter": 2,
-            "filterByBin": false,
-            "exceptionBinsList": [
-              "123456"
-            ],
-            "allowedBankCountries": [
-              "CO"
-            ],
-            "delegatedAuthorization": "stringstringstringstringstringstringstring"
-          }
-        ]
+        }
       },
       "control-merchant": {
         "title": "control-merchant",
@@ -4595,6 +4620,7 @@
         "x-stoplight": {
           "id": "sxa0mofxu6g3n"
         },
+        "type": "string",
         "enum": [
           "AF",
           "AL",
@@ -4844,6 +4870,7 @@
         "x-stoplight": {
           "id": "mecc8ckqfjguc"
         },
+        "type": "string",
         "enum": [
           "AND",
           "ARE",
@@ -5123,6 +5150,7 @@
         "x-stoplight": {
           "id": "rzl72fj2oxfst"
         },
+        "type": "string",
         "enum": [
           "ARS",
           "AUD",
@@ -5145,7 +5173,8 @@
           "UYU",
           "VEB",
           "ZAR"
-        ]
+        ],
+        "description": ""
       },
       "document": {
         "title": "document",
@@ -5162,6 +5191,7 @@
             "x-stoplight": {
               "id": "uecer4gd1emcb"
             },
+            "type": "string",
             "description": "Tipo de documento del comercio.",
             "enum": [
               "CC",
@@ -5210,6 +5240,7 @@
         "x-stoplight": {
           "id": "xidobc4waf5lm"
         },
+        "type": "string",
         "enum": [
           "CC",
           "TI",
@@ -5247,6 +5278,15 @@
           "id": "l3nvabqo75a4u"
         },
         "type": "object",
+        "examples": [
+          {
+            "allowPartial": false,
+            "connectionMethod": "REDIRECT",
+            "notificationUrl": "https://site-webhook.com",
+            "sourceRestriction": "microsites",
+            "analyticsCode": "UA-171313251-4, GTM-123812"
+          }
+        ],
         "required": [
           "connectionMethod"
         ],
@@ -5259,13 +5299,32 @@
             "default": false,
             "description": "Indica si se permite el pago parcial (Mixto) en el sitio, en caso de no enviarse se toma como “false”."
           },
+          "allowWallet": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "ayaqjt1mezbyc"
+            },
+            "description": "Indicador de si que permite pago con billetera Placetopay.\n\n"
+          },
           "connectionMethod": {
-            "type": "string",
             "x-stoplight": {
               "id": "3jtxs3ffr7544"
             },
+            "type": "string",
             "example": "REDIRECT",
-            "description": "Especifica el tipo de producto que se adquirió en el sitio."
+            "description": "Especifica el tipo de producto que se adquirió en el sitio.",
+            "enum": [
+              "REDIRECT",
+              "SERVICES",
+              "LINK",
+              "QR",
+              "MS_OPEN",
+              "MS_CLOSED",
+              "MS_CUSTOM",
+              "IVR",
+              "INVOICE_API",
+              "RECURRENCE"
+            ]
           },
           "notificationUrl": {
             "type": "string",
@@ -5273,12 +5332,14 @@
               "id": "hst74ngqdj1f8"
             },
             "description": "En caso de que el tipo de conexión sea “REDIRECT”, a esta URL llegará el resultado de las transacciones.",
-            "example": "https://site-webhook.com"
+            "example": "https://site-webhook.com",
+            "maxLength": 200
           },
           "sourceRestriction": {
             "x-stoplight": {
               "id": "8kpv8x5s0jibu"
             },
+            "type": "string",
             "description": "Restriccion de origen",
             "enum": [
               "microsites",
@@ -5295,26 +5356,22 @@
               "id": "gh3fx4trn3ypc"
             },
             "description": "Permite añadir el código de google analytics.",
-            "example": "UA-171313251-4, GTM-123812"
-          },
-          "allowWallet": {
-            "type": "boolean",
-            "x-stoplight": {
-              "id": "ayaqjt1mezbyc"
-            },
-            "description": "Indicador de si que permite pago con billetera Placetopay.\n\n"
+            "example": "UA-171313251-4, GTM-123812",
+            "maxLength": 255
           },
           "returnAdditional": {
             "type": "boolean",
             "x-stoplight": {
               "id": "ykrusrvseduka"
             },
-            "description": "Permite devolver o no los datos adicionales"
+            "description": "Permite devolver o no los datos adicionales",
+            "default": false
           },
           "payerFieldsType": {
             "x-stoplight": {
               "id": "c116k9hzyxhpr"
             },
+            "type": "integer",
             "description": "Tipos del campo de pagador:\n\n0 = Con documento\n\n1 = Sin documento\n\n2 = Solo email",
             "enum": [
               0,
@@ -5322,16 +5379,7 @@
               2
             ]
           }
-        },
-        "examples": [
-          {
-            "allowPartial": false,
-            "connectionMethod": "REDIRECT",
-            "notificationUrl": "https://site-webhook.com",
-            "sourceRestriction": "microsites",
-            "analyticsCode": "UA-171313251-4, GTM-123812"
-          }
-        ]
+        }
       },
       "legalRepresentative": {
         "title": "legalRepresentative",
@@ -5350,6 +5398,7 @@
             "x-stoplight": {
               "id": "y400bqhmbsn6v"
             },
+            "type": "string",
             "example": "CC",
             "description": "Tipo de documento del representante legal.",
             "enum": [
@@ -5417,6 +5466,7 @@
         "x-stoplight": {
           "id": "if9h2ltoey6jo"
         },
+        "type": "string",
         "enum": [
           "EN",
           "EN_CL",
@@ -5586,6 +5636,7 @@
             "x-stoplight": {
               "id": "080nukf24zrz2"
             },
+            "type": "string",
             "description": "Zona horaria de la ubicación del comercio",
             "enum": [
               "Europe/Andorra",
@@ -6145,6 +6196,7 @@
             "x-stoplight": {
               "id": "kspomyn34nb5g"
             },
+            "type": "string",
             "example": "OPEN",
             "description": "Determina el tipo de micrositio (OPEN, CLOSED).",
             "enum": [
@@ -6192,6 +6244,7 @@
               "x-stoplight": {
                 "id": "k2tnl1e88w36p"
               },
+              "type": "string",
               "enum": [
                 "reference",
                 "document",
@@ -6802,6 +6855,7 @@
               "example": "1234567811",
               "description": "Número de cuenta de recaudo."
             },
+            "type": "integer",
             "accountType": {
               "enum": [
                 1,
@@ -7210,13 +7264,15 @@
               "id": "hwyt462f70cc7"
             },
             "example": "Site name example",
-            "description": "Nombre del sitio a mostrar en panel."
+            "description": "Nombre del sitio a mostrar en panel.",
+            "maxLength": 75
           },
           "type": {
             "x-stoplight": {
               "id": "3w13em1rfjrbw"
             },
             "example": "INT",
+            "type": "string",
             "description": "Punto de origen de las transacciones que se realizarán por el sitio.\n\nINT = Internet <br>\nPOS = Punto de venta <br>\nIVR = IVR <br>\nONE = Pago a un clic <br>\nREC = Recurrencia <br>",
             "enum": [
               "INT",
@@ -7230,6 +7286,7 @@
             "x-stoplight": {
               "id": "nam9o378lyqpb"
             },
+            "type": "string",
             "example": "ECOMMERCE",
             "description": "Define la categoría del sitio.\n\nECOMMERCE = Comercio electrónico <br>\nCOLLECT = Recaudos <br>",
             "enum": [
@@ -7260,7 +7317,10 @@
             "description": "Lenguaje que se usará para las transacciones, el lenguaje que se envíe en este campo lo debe tener el comercio."
           },
           "customBatch": {
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "x-stoplight": {
               "id": "wvdjri1lw8flr"
             },
@@ -7268,7 +7328,10 @@
             "description": "Código servicio recaudo"
           },
           "expiration": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "x-stoplight": {
               "id": "6d702v94t9q31"
             },
@@ -7300,7 +7363,8 @@
             "x-stoplight": {
               "id": "kqvjismswvusb"
             },
-            "description": "Indicador del estado del sitio."
+            "description": "Indicador del estado del sitio.",
+            "default": true
           },
           "integration": {
             "$ref": "#/components/schemas/integration",
@@ -7363,6 +7427,7 @@
             "x-stoplight": {
               "id": "vttx1vko6wf6v"
             },
+            "type": "string",
             "description": "Nivel máximo de riesgo aceptado con threeDS. Por defecto, su valor es LOW.",
             "enum": [
               "VERY_LOW",
@@ -7460,6 +7525,7 @@
             "x-stoplight": {
               "id": "vvabn5tdz50uu"
             },
+            "type": "string",
             "enum": [
               "IGNORE",
               "PROCESS",
@@ -7506,6 +7572,7 @@
                 "x-stoplight": {
                   "id": "gv0abee61rp5c"
                 },
+                "type": "string",
                 "description": "Comportamiento a seguir cuando hay fallo.",
                 "enum": [
                   "REJECTED",
@@ -7517,6 +7584,7 @@
                 "x-stoplight": {
                   "id": "s380xg3zz2ujd"
                 },
+                "type": "string",
                 "description": "Comportamiento a seguir en caso de no concordar.",
                 "enum": [
                   "REJECTED",
@@ -7528,6 +7596,7 @@
                 "x-stoplight": {
                   "id": "94cwn3vna9qqo"
                 },
+                "type": "string",
                 "description": "Comportamiento del modulo cuando hay concordancia.",
                 "enum": [
                   "PROCESS",
@@ -7548,6 +7617,7 @@
               "x-stoplight": {
                 "id": "ahug58an6zcrf"
               },
+              "type": "string",
               "enum": [
                 "CASH",
                 "PRIVATECARD",
@@ -7588,6 +7658,7 @@
                 "x-stoplight": {
                   "id": "0nqjeu596j3va"
                 },
+                "type": "string",
                 "description": "Comportamiento a seguir en caso de fallo. Este campo es requerido siempre que riskEngine behaviours sea enviado.",
                 "enum": [
                   "REJECTED",
@@ -7610,13 +7681,19 @@
                 "x-stoplight": {
                   "id": "jtj0h2gub0mwd"
                 },
-                "enum": [],
+                "enum": [
+                  "REJECTED",
+                  "MANUAL",
+                  "IGNORE",
+                  "PROCESS"
+                ],
                 "description": "Comportamiento a seguir ante nivel de riesgo medio. Este campo es requerido siempre que riskEngine  behaviours sea enviado."
               },
               "onHighRisk": {
                 "x-stoplight": {
                   "id": "h3vjeeik1ivgt"
                 },
+                "type": "string",
                 "enum": [
                   "REJECTED",
                   "MANUAL",
@@ -7636,6 +7713,7 @@
               "x-stoplight": {
                 "id": "uupdq15gfpc0q"
               },
+              "type": "string",
               "enum": [
                 "CASH",
                 "CREDITCARD",
@@ -8303,6 +8381,7 @@
             "x-stoplight": {
               "id": "zu559k8t7z438"
             },
+            "type": "string",
             "description": "Idioma",
             "example": "en",
             "enum": [
@@ -8322,6 +8401,7 @@
             "x-stoplight": {
               "id": "yj6tdenb79r5v"
             },
+            "type": "string",
             "description": "Zona horaria de la ubicación del usuario",
             "enum": [
               "Europe/Andorra",
