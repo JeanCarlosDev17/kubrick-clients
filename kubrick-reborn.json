@@ -1048,6 +1048,207 @@
                       "flushInvoices": true
                     }
                   }
+                },
+                "Petición desde cero con comercio de 3DS existente": {
+                  "value": {
+                    "statusWebhook": "https://test.webhook.com/",
+                    "merchant": {
+                      "name": "EVERTEC PLACETOPAY S.A.S",
+                      "brand": "Placetopay",
+                      "mcc": "7929",
+                      "languages": [
+                        "ES"
+                      ],
+                      "currencies": [
+                        "COP"
+                      ],
+                      "document": {
+                        "type": "string",
+                        "number": "900299823-1"
+                      },
+                      "address": {
+                        "city": "medellin",
+                        "state": 1,
+                        "country": "CO"
+                      },
+                      "legalRepresentative": {
+                        "documentType": "CC",
+                        "document": "1037854200",
+                        "name": "Ricardo",
+                        "surname": "García"
+                      },
+                      "url": "https://dnetix.co/",
+                      "billing": {
+                        "ciiu": "3214"
+                      },
+                      "control": {
+                        "seller": 1,
+                        "reseller": 2,
+                        "paymentFacilitator": 1
+                      }
+                    },
+                    "paymentMethods": {
+                      "code": "MC",
+                      "oder": 3,
+                      "commissionModel": "F",
+                      "commissionValue": 2.5,
+                      "accountNumber": "1234567811",
+                      "financialEntity": 16,
+                      "accountType": 1,
+                      "threeDS": true,
+                      "settings": {
+                        "retailCode": "011211406",
+                        "terminalLocation": "Medellín",
+                        "terminalNumber": "00031431",
+                        "username": "FIDUCOLDEX01",
+                        "password": "FIDUCOLDEX01",
+                        "pfxID": 1,
+                        "entityCode": "9002992280",
+                        "serviceCode": "001",
+                        "isEcommerce": true,
+                        "merchantCode": "1269189"
+                      }
+                    },
+                    "site": {
+                      "displayName": "Site name example",
+                      "type": "INT",
+                      "category": "ECOMMERCE",
+                      "email": "admin@email.com",
+                      "currency": "COP",
+                      "language": "ES",
+                      "customBatch": 2345,
+                      "expiration": "2023-06-30 00:00:00",
+                      "analyticsCode": "UA-171313251-4, GTM-123812",
+                      "integration": {
+                        "allowPartial": false,
+                        "connectionMethod": "REDIRECT",
+                        "notificationUrl": "https://site-webhook.com"
+                      },
+                      "control": {
+                        "minAmount": "1000",
+                        "maxAmount": "1000000",
+                        "filterPse": false,
+                        "filterTuya": false,
+                        "filterSafetyPay": false,
+                        "prechargerFilter": 2,
+                        "filterByBin": false,
+                        "exceptionBinsList": [
+                          "123456"
+                        ]
+                      },
+                      "threeDS": {
+                        "setting": "VERY_LOW",
+                        "minAmount": 40
+                      },
+                      "historic": {
+                        "behaviour": "IGNORE",
+                        "lowerScore": "100",
+                        "rejectionScore": 300
+                      },
+                      "creditBureau": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onNoMatch": "REJECTED",
+                          "onMatch": "PROCESS"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 200
+                      },
+                      "riskEngine": {
+                        "behaviours": {
+                          "onFailed": "REJECTED",
+                          "onLowRisk": "MANUAL",
+                          "onMediumRisk": null,
+                          "onHighRisk": "REJECTED"
+                        },
+                        "paymentGroups": [
+                          "CASH"
+                        ],
+                        "minAmount": 30,
+                        "approvalScore": 200,
+                        "rejectionScore": 250,
+                        "onCaibration": true
+                      },
+                      "securityFilters": {
+                        "allowedIssuerCountries": [
+                          "CO"
+                        ],
+                        "forceIPMatch": true,
+                        "excludeIPCountry": [
+                          "CL"
+                        ],
+                        "onlyWhitelisted": true,
+                        "allowedIPCountries": [
+                          "EC"
+                        ],
+                        "allowedCardsDay": 4,
+                        "allowedCardsByIP": 10,
+                        "allowedCardsMonth": 4,
+                        "allowedCardsYear": 2,
+                        "dayMax": 3,
+                        "dayMaxAmount": 30000,
+                        "monthMax": 3,
+                        "monthMaxAmount": 2000
+                      },
+                      "operation": {
+                        "disableTax": true,
+                        "calculateTax": true,
+                        "taxPercentage": 12,
+                        "patternReference": null,
+                        "mailCustomer": true,
+                        "mailMerchant": true
+                      }
+                    },
+                    "threeDS": {
+                      "merchantPanelId": 3250,
+                      "merchantPanelName": "Existing Merchant Example Name",
+                      "branch": {
+                        "name": "ThreeDS Branch Name",
+                        "brand": "branch brand example",
+                        "country": "COL",
+                        "currency": "COP",
+                        "url": "https://www.branch-url.com",
+                        "subscriptions": [
+                          {
+                            "franchise": "visa",
+                            "acquirerBIN": 400900,
+                            "merchantCode": "5240"
+                          }
+                        ]
+                      }
+                    },
+                    "microsite": {
+                      "name": "Microsite OPEN name example",
+                      "alias": "example-slug",
+                      "type": "OPEN",
+                      "categories": [
+                        "test_tecnologia"
+                      ],
+                      "disabled": false,
+                      "useWcLightbox": false,
+                      "hide": false,
+                      "allowPayWithDuplicateReference": false,
+                      "autoReferenced": false,
+                      "allowRecurrence": false,
+                      "notSendBuyerAsPayer": false,
+                      "onlyPaymentLink": false
+                    },
+                    "user": {
+                      "fullName": "Mercatodo SaS",
+                      "username": "myUserName",
+                      "email": "user@mail.com",
+                      "mobile": "string",
+                      "language": "312588921",
+                      "timezone": "Asia/Kabul",
+                      "restUserGroupsSettings": [
+                        [
+                          "GROUP_INVITATIONS"
+                        ]
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -8278,6 +8479,7 @@
         "type": "object",
         "examples": [
           {
+            "name": "ThreeDS Name Example",
             "brand": "ThreeDS brand example",
             "country": "COL",
             "currency": "COP",
@@ -8311,6 +8513,26 @@
                 ]
               }
             }
+          },
+          {
+            "merchantPanelId": 3250,
+            "merchantPanelName": "Existing Merchant Example Name",
+            "branch": {
+              "name": "ThreeDS Branch Name",
+              "brand": "branch brand example",
+              "country": "COL",
+              "currency": "COP",
+              "url": "https://www.branch-url.com",
+              "subscriptions": {
+                "subscriptions": [
+                  {
+                    "franchise": 1,
+                    "acquirerBIN": 400900,
+                    "merchantCode": "\"5240\""
+                  }
+                ]
+              }
+            }
           }
         ],
         "required": [
@@ -8323,6 +8545,33 @@
           "branch"
         ],
         "properties": {
+          "merchantPanelId": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "s6hvogcj3gkwo"
+            },
+            "description": "Este campo se utiliza para crear y relacionar una \"branch\" a un merchant existente de 3DS, este valor representa el ID del merchant en panel de 3DS, solo es requerido si el campo \"merchantPanelName\" está presente.",
+            "minimum": 1,
+            "maximum": 999999999
+          },
+          "merchantPanelName": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "0aqrf8ttd007m"
+            },
+            "description": "Este campo se utiliza para crear y relacionar una \"branch\" a un merchant existente de 3DS, este valor representa el nombre del merchant en panel de 3DS, solo es requerido si el campo \"merchantPanelId\" está presente.",
+            "minLength": 3,
+            "maxLength": 90
+          },
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "erkukbvedfmtj"
+            },
+            "description": "Campo que determina el nombre del comercio a crear en el panel de 3DS.",
+            "minLength": 3,
+            "maxLength": 90
+          },
           "brand": {
             "type": "string",
             "x-stoplight": {
@@ -8400,7 +8649,8 @@
               "id": "11flmjjgzh88y"
             }
           }
-        }
+        },
+        "description": "Este objeto se utiliza para crear un comercio de ThreeDS (Comercio nuevo) con su respectiva branch asociada, adicional a esto, es posible crear una branch y asociarla a un comercio ya existente, enviando los atributos de \"merchantPanelId\" y \"merchantPanelName\" para indicar el comercio al cual se desea asociar la brancb.\n"
       },
       "threeDS-info": {
         "title": "threeDS-info",
