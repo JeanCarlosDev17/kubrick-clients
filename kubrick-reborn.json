@@ -8010,7 +8010,7 @@
             "x-stoplight": {
               "id": "as3m6cd19wcaq"
             },
-            "description": "Contiene la información de comportamiento del módulo. Es requerido siempre que creditBureau se envíe. Es requerido cuando creditBureau este presente",
+            "description": "Contiene la información de comportamiento del módulo. Es requerido siempre que creditBureau se envíe.",
             "properties": {
               "onFailed": {
                 "x-stoplight": {
