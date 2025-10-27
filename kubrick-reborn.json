@@ -8227,7 +8227,7 @@
             "minimum": 1,
             "maximum": 999
           },
-          "onCaibration": {
+          "onCalibration": {
             "type": "boolean",
             "x-stoplight": {
               "id": "q3k0lwq60w5uy"
