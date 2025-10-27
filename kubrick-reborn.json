@@ -5585,7 +5585,10 @@
           "VEB",
           "ZAR"
         ],
-        "description": ""
+        "description": "",
+        "examples": [
+          "ARS"
+        ]
       },
       "document": {
         "title": "document",
@@ -5644,7 +5647,13 @@
             "maxLength": 20,
             "example": "900299823-1"
           }
-        }
+        },
+        "examples": [
+          {
+            "type": "CC",
+            "number": "900299823"
+          }
+        ]
       },
       "documentTypeEnum": {
         "title": "documentTypeEnum",
@@ -5681,6 +5690,9 @@
           "CIP",
           "UYCI",
           "UYRUT"
+        ],
+        "examples": [
+          "CC"
         ]
       },
       "integration": {
@@ -5870,7 +5882,15 @@
             "description": "Apellidos del representante legal.",
             "maxLength": 30
           }
-        }
+        },
+        "examples": [
+          {
+            "documentType": "CC",
+            "document": "1037854200",
+            "name": "Ricardo",
+            "surname": "García"
+          }
+        ]
       },
       "language": {
         "title": "language",
@@ -7971,13 +7991,26 @@
         },
         "type": "object",
         "description": "Contiene los parámetros de configuración de información financiera. Para habilitar este módulo, debe enviarlo dentro de la solicitud, de lo contrario enviar como campo nulo o no enviarlo.",
+        "examples": [
+          {
+            "behaviours": {
+              "onFailed": "REJECTED",
+              "onNoMatch": "REJECTED",
+              "onMatch": "PROCESS"
+            },
+            "paymentGroups": [
+              "CASH"
+            ],
+            "minAmount": 200
+          }
+        ],
         "properties": {
           "behaviours": {
             "type": "object",
             "x-stoplight": {
               "id": "as3m6cd19wcaq"
             },
-            "description": "Contiene la información de comportamiento del módulo. Es requerido siempre que creditBureau se envíe.",
+            "description": "Contiene la información de comportamiento del módulo. Es requerido siempre que creditBureau se envíe. Es requerido cuando creditBureau este presente",
             "properties": {
               "onFailed": {
                 "x-stoplight": {
@@ -8046,7 +8079,8 @@
             "description": "Monto mínimo para activar. Es requerido cuando se envie el objeto de CreditBureau.",
             "default": 0,
             "example": 200,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "minimum": 0
           }
         }
       },
@@ -8057,6 +8091,26 @@
         },
         "type": "object",
         "description": "Contiene las configuraciones de motores de riesgo.",
+        "examples": [
+          {
+            "behaviours": {
+              "onFailed": "REJECTED",
+              "onLowRisk": "MANUAL",
+              "onMediumRisk": "REJECTED",
+              "onHighRisk": "REJECTED"
+            },
+            "paymentGroups": [
+              "CASH"
+            ],
+            "minAmount": 30,
+            "approvalScore": 200,
+            "rejectionScore": 250,
+            "onCaibration": true
+          }
+        ],
+        "required": [
+          "behaviours"
+        ],
         "properties": {
           "behaviours": {
             "type": "object",
@@ -8064,6 +8118,12 @@
               "id": "s9qplr9bc8ln6"
             },
             "description": "Contiene la información de comportamiento del módulo. Es requerido siempre que RiskEngine sea enviado.",
+            "required": [
+              "onFailed",
+              "onLowRisk",
+              "onMediumRisk",
+              "onHighRisk"
+            ],
             "properties": {
               "onFailed": {
                 "x-stoplight": {
@@ -8141,9 +8201,9 @@
             },
             "default": 0,
             "example": 30,
-            "minimum": 1,
             "maximum": 999999999,
-            "description": "Monto mínimo para activar. Este campo es requerido siempre que riskEngine sea enviado."
+            "description": "Monto mínimo para activar. Este campo es requerido siempre que riskEngine sea enviado.",
+            "minimum": 0
           },
           "approvalScore": {
             "type": "integer",
@@ -8152,7 +8212,9 @@
             },
             "description": "Puntaje de apetito al riesgo. Este campo es requerido siempre que riskEngine sea enviado.",
             "default": 0,
-            "example": 200
+            "example": 200,
+            "minimum": 1,
+            "maximum": 999
           },
           "rejectionScore": {
             "type": "integer",
@@ -8161,7 +8223,9 @@
             },
             "default": null,
             "example": 250,
-            "description": "Puntaje de tolerancia al riesgo. Este campo es requerido siempre que riskEngine sea enviado."
+            "description": "Puntaje de tolerancia al riesgo. Este campo es requerido siempre que riskEngine sea enviado.",
+            "minimum": 1,
+            "maximum": 999
           },
           "onCaibration": {
             "type": "boolean",
@@ -8180,6 +8244,14 @@
         "type": "object",
         "description": "Contiene la información de filtros de seguridad.",
         "properties": {
+          "filterLockedByTries": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "as9ua7irpu04v"
+            },
+            "default": true,
+            "description": "Habilita o deshabilita los filtros de seguridad por intentos"
+          },
           "allowedIssuerCountries": {
             "type": "array",
             "x-stoplight": {
@@ -8187,12 +8259,10 @@
             },
             "description": "Paises permitidos para bancos emisores. Si no se envía, no se asignarán limitaciones.",
             "items": {
+              "$ref": "#/components/schemas/country-alpha-two",
               "x-stoplight": {
                 "id": "33eyetc5fj21n"
-              },
-              "type": "string",
-              "minLength": 1,
-              "example": "CO"
+              }
             }
           },
           "forceIPMatch": {
@@ -8200,7 +8270,8 @@
             "x-stoplight": {
               "id": "qmrdvdb2wsosx"
             },
-            "description": "Indica si se debe verificar que el país asociado a la IP del comprador coincida con la IP del banco emisor. Por defecto, su valor es FALSE."
+            "description": "Indica si se debe verificar que el país asociado a la IP del comprador coincida con la IP del banco emisor. Por defecto, su valor es FALSE.",
+            "default": false
           },
           "excludeIPCountry": {
             "type": "array",
@@ -8221,7 +8292,8 @@
             "x-stoplight": {
               "id": "24gcr9kyssi1w"
             },
-            "description": "Indica si se debe procesar solo lista de preferidos. Por defecto su valor es FALSE."
+            "description": "Indica si se debe procesar solo lista de preferidos. Por defecto su valor es FALSE.",
+            "default": false
           },
           "allowedIPCountries": {
             "type": "array",
@@ -8230,11 +8302,10 @@
             },
             "description": "Paises permitidos para compradores. Si no se envía, no se asignarán limitaciones.",
             "items": {
+              "$ref": "#/components/schemas/country-alpha-two",
               "x-stoplight": {
                 "id": "t064fcs6bz7e5"
-              },
-              "type": "string",
-              "example": "EC"
+              }
             }
           },
           "allowedCardsDay": {
@@ -8243,10 +8314,10 @@
               "id": "gj3itmimlq4za"
             },
             "description": "Indica el número de tarjetas diferentes que un cliente puede utilizar al día. 0 indica tarjetas ilimitadas.",
-            "minimum": 1,
             "maximum": 999,
             "default": 2,
-            "example": 4
+            "example": 4,
+            "minimum": 0
           },
           "allowedCardsByIP": {
             "type": "integer",
@@ -8256,8 +8327,8 @@
             "description": "Número de minutos para realizar la correlación de cliente con IP. Si se establece en cero, se obvia el parámetro.",
             "default": 30,
             "example": 10,
-            "minimum": 1,
-            "maximum": 999
+            "maximum": 999,
+            "minimum": 0
           },
           "allowedCardsMonth": {
             "type": "integer",
@@ -8266,9 +8337,9 @@
             },
             "default": 2,
             "example": 4,
-            "minimum": 1,
             "maximum": 999,
-            "description": "Indica el número de tarjetas diferentes que un cliente puede usar al mes. 0 indica ilimitadas."
+            "description": "Indica el número de tarjetas diferentes que un cliente puede usar al mes. 0 indica ilimitadas.",
+            "minimum": 0
           },
           "allowedCardsYear": {
             "type": "integer",
@@ -8277,9 +8348,9 @@
             },
             "default": 5,
             "example": 2,
-            "minimum": 1,
             "maximum": 999,
-            "description": "Indica el número de tarjetas diferentes que un cliente puede usar al año. 0 indica ilimitadas."
+            "description": "Indica el número de tarjetas diferentes que un cliente puede usar al año. 0 indica ilimitadas.",
+            "minimum": 0
           },
           "dayMax": {
             "type": "integer",
@@ -8289,8 +8360,8 @@
             "description": "Número de transacciones permitidas por cliente al día. 0 indica ilimitado.",
             "default": 2,
             "example": 3,
-            "minimum": 1,
-            "maximum": 999
+            "maximum": 999,
+            "minimum": 0
           },
           "dayMaxAmount": {
             "type": "number",
@@ -8311,7 +8382,8 @@
             "default": 5,
             "example": 3,
             "maximum": 999,
-            "description": "Número de transacciones permitidas por cliente al mes. 0 indica ilimitado."
+            "description": "Número de transacciones permitidas por cliente al mes. 0 indica ilimitado.",
+            "minimum": 0
           },
           "monthMaxAmount": {
             "type": "number",
@@ -8321,7 +8393,8 @@
             "description": "Monto máximo por cliente al mes. 0 indica ilimitado.",
             "maximum": 99999999999999,
             "default": 100000000,
-            "example": 2000
+            "example": 2000,
+            "minimum": 0
           }
         }
       },
