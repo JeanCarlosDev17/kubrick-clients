@@ -1169,7 +1169,7 @@
                         "minAmount": 30,
                         "approvalScore": 200,
                         "rejectionScore": 250,
-                        "onCaibration": true
+                        "onCalibration": true
                       },
                       "securityFilters": {
                         "allowedIssuerCountries": [
