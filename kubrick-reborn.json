@@ -4894,6 +4894,17 @@
             "maxLength": 42,
             "minLength": 42
           },
+          "delegatedAuthorization": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "6cg5alep63p4o"
+            },
+            "minLength": 42,
+            "maxLength": 42,
+            "pattern": "^([0-9a-f])",
+            "example": "ffffffffffffffffffffffffffffffffffffffffff",
+            "description": "Autorización delegada."
+          },
           "filterPse": {
             "type": "boolean",
             "x-stoplight": {
@@ -4923,7 +4934,12 @@
             "x-stoplight": {
               "id": "nv69wxx5y0bgt"
             },
-            "description": "Filtros de precobro.\n0 = Disabled\n",
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "description": "Filtros de precobro.\n0 = Disabled\n1 = Habilitado si la validación pasa\n2 = Haabilitado si la validación falla\n",
             "example": 2
           },
           "filterByBin": {
@@ -4946,7 +4962,9 @@
                 "id": "i2ghikpniip0g"
               },
               "type": "string",
-              "example": "123456"
+              "example": "123456",
+              "minLength": 6,
+              "maxLength": 6
             }
           },
           "allowedBankCountries": {
@@ -4954,22 +4972,13 @@
             "x-stoplight": {
               "id": "2jg565h2nhrob"
             },
+            "description": "Paises permitidos para bancos emisores. Es nulo cuando todos los paises sean permitidos.",
             "items": {
+              "$ref": "#/components/schemas/country-alpha-two",
               "x-stoplight": {
                 "id": "eccamicsor42f"
-              },
-              "type": "string",
-              "example": "CO"
+              }
             }
-          },
-          "delegatedAuthorization": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "6cg5alep63p4o"
-            },
-            "minLength": 42,
-            "maxLength": 42,
-            "pattern": "^([0-9a-f])"
           }
         }
       },
