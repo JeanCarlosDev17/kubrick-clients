@@ -1621,6 +1621,19 @@
                     "example": "Edward Elric",
                     "maxLength": 30
                   },
+                  "subscriptions": {
+                    "x-stoplight": {
+                      "id": "xzmvqinp0jw4a"
+                    },
+                    "description": "Objeto que contiene la información de los bines para los cuales va a ser creado el token de ThreeDS, para dichos bines su uso esta limitados a los que se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario).",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/subscription",
+                      "x-stoplight": {
+                        "id": "ghtoepru8kqt7"
+                      }
+                    }
+                  },
                   "document": {
                     "$ref": "#/components/schemas/document",
                     "x-stoplight": {
@@ -1632,13 +1645,6 @@
                     "x-stoplight": {
                       "id": "5c3xl0joedi4l"
                     }
-                  },
-                  "subscriptions": {
-                    "$ref": "#/components/schemas/subscription",
-                    "x-stoplight": {
-                      "id": "xzmvqinp0jw4a"
-                    },
-                    "description": "Objeto que contiene la información de los bines para los cuales va a ser creado el token de ThreeDS, para dichos bines su uso esta limitados a los que se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario)."
                   }
                 }
               },
@@ -8531,6 +8537,7 @@
             }
           }
         ],
+        "description": "Este objeto se utiliza para crear un comercio de ThreeDS (Comercio nuevo) con su respectiva branch asociada, adicional a esto, es posible crear una branch y asociarla a un comercio ya existente, enviando los atributos de \"merchantPanelId\" y \"merchantPanelName\" para indicar el comercio al cual se desea asociar la branch.\n",
         "required": [
           "brand",
           "country",
@@ -8625,17 +8632,10 @@
               "id": "2iyq4ulrr5qsz"
             },
             "type": "array",
-            "minItems": 1,
             "items": {
+              "$ref": "#/components/schemas/subscription",
               "x-stoplight": {
                 "id": "spivxbp5ya7jc"
-              },
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/subscription",
-                "x-stoplight": {
-                  "id": "3axhe574y42ts"
-                }
               }
             }
           },
@@ -8645,8 +8645,7 @@
               "id": "11flmjjgzh88y"
             }
           }
-        },
-        "description": "Este objeto se utiliza para crear un comercio de ThreeDS (Comercio nuevo) con su respectiva branch asociada, adicional a esto, es posible crear una branch y asociarla a un comercio ya existente, enviando los atributos de \"merchantPanelId\" y \"merchantPanelName\" para indicar el comercio al cual se desea asociar la branch.\n"
+        }
       },
       "threeDS-info": {
         "title": "threeDS-info",
