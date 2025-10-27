@@ -4669,7 +4669,7 @@
               "url": "https://www.first-branch-url.com",
               "subscriptions": [
                 {
-                  "franchise": "SubscriptionFranchises::VISA",
+                  "franchise": "visa",
                   "acquirerBIN": 400900,
                   "version": 2,
                   "merchantCode": "2222"
@@ -8511,7 +8511,7 @@
               "url": "https://www.branch-url.com",
               "subscriptions": [
                 {
-                  "franchise": 1,
+                  "franchise": "mastercard",
                   "acquirerBIN": 400900,
                   "merchantCode": "5240"
                 }
@@ -8529,7 +8529,7 @@
               "url": "https://www.branch-url.com",
               "subscriptions": [
                 {
-                  "franchise": 1,
+                  "franchise": "visa",
                   "acquirerBIN": 400900,
                   "merchantCode": "5240"
                 }
