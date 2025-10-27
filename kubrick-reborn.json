@@ -1544,152 +1544,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "string"
-                        },
-                        "reason": {
-                          "type": "string"
-                        },
-                        "message": {
-                          "type": "string"
-                        },
-                        "date": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "integrationId": {
-                      "type": "integer"
-                    },
-                    "environment": {
-                      "type": "string"
-                    },
-                    "merchant": {
-                      "type": "object",
-                      "properties": {
-                        "panelId": {
-                          "type": "integer"
-                        },
-                        "status": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "details": {
-                          "type": "null"
-                        }
-                      }
-                    },
-                    "site": {
-                      "type": "object",
-                      "properties": {
-                        "panelId": {
-                          "type": "integer"
-                        },
-                        "status": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "login": {
-                          "type": "string"
-                        },
-                        "secretKey": {
-                          "type": "string"
-                        },
-                        "isActive": {
-                          "type": "integer"
-                        },
-                        "details": {
-                          "type": "null"
-                        }
-                      }
-                    },
-                    "threeDs": {
-                      "type": "object",
-                      "properties": {
-                        "panelId": {
-                          "type": "integer"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "brand": {
-                          "type": "string"
-                        },
-                        "token": {
-                          "type": "string"
-                        },
-                        "tokenExpiresAt": {
-                          "type": "string"
-                        },
-                        "enrollment": {
-                          "type": "null"
-                        },
-                        "status": {
-                          "type": "string"
-                        },
-                        "branches": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "panelId": {
-                                "type": "integer"
-                              },
-                              "name": {
-                                "type": "string"
-                              },
-                              "brand": {
-                                "type": "string"
-                              },
-                              "token": {
-                                "type": "string"
-                              },
-                              "tokenExpiresAt": {
-                                "type": "string"
-                              },
-                              "enrollment": {
-                                "type": "null"
-                              }
-                            }
-                          }
-                        },
-                        "details": {
-                          "type": "null"
-                        }
-                      }
-                    },
-                    "paymentMethods": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "panelId": {
-                            "type": "integer"
-                          },
-                          "status": {
-                            "type": "string"
-                          },
-                          "code": {
-                            "type": "string"
-                          },
-                          "type": {
-                            "type": "string"
-                          },
-                          "details": {
-                            "type": "null"
-                          }
-                        }
-                      }
-                    }
-                  },
                   "x-examples": {
                     "Example 1": {
                       "status": {
@@ -1751,6 +1605,31 @@
                           "details": null
                         }
                       ]
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "integrationId": {
+                      "type": "integer",
+                      "description": "ID de la integración, puede usarse para consultar el estado de la misma."
+                    },
+                    "environment": {
+                      "type": "string",
+                      "description": "Indica el entorno al que pertenece la integración."
+                    },
+                    "merchant": {
+                      "$ref": "#/components/schemas/merchant-info"
+                    },
+                    "site": {
+                      "$ref": "#/components/schemas/site-info"
+                    },
+                    "threeDs": {
+                      "$ref": "#/components/schemas/threeDS-info"
+                    },
+                    "paymentMethods": {
+                      "$ref": "#/components/schemas/paymentMethods-info"
                     }
                   }
                 },
