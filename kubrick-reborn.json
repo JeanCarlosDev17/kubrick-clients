@@ -8503,15 +8503,13 @@
               "country": "COL",
               "currency": "COP",
               "url": "https://www.branch-url.com",
-              "subscriptions": {
-                "subscriptions": [
-                  {
-                    "franchise": 1,
-                    "acquirerBIN": 400900,
-                    "merchantCode": "\"5240\""
-                  }
-                ]
-              }
+              "subscriptions": [
+                {
+                  "franchise": 1,
+                  "acquirerBIN": 400900,
+                  "merchantCode": "5240"
+                }
+              ]
             }
           },
           {
@@ -8523,15 +8521,13 @@
               "country": "COL",
               "currency": "COP",
               "url": "https://www.branch-url.com",
-              "subscriptions": {
-                "subscriptions": [
-                  {
-                    "franchise": 1,
-                    "acquirerBIN": 400900,
-                    "merchantCode": "\"5240\""
-                  }
-                ]
-              }
+              "subscriptions": [
+                {
+                  "franchise": 1,
+                  "acquirerBIN": 400900,
+                  "merchantCode": "5240"
+                }
+              ]
             }
           }
         ],
@@ -8650,7 +8646,7 @@
             }
           }
         },
-        "description": "Este objeto se utiliza para crear un comercio de ThreeDS (Comercio nuevo) con su respectiva branch asociada, adicional a esto, es posible crear una branch y asociarla a un comercio ya existente, enviando los atributos de \"merchantPanelId\" y \"merchantPanelName\" para indicar el comercio al cual se desea asociar la brancb.\n"
+        "description": "Este objeto se utiliza para crear un comercio de ThreeDS (Comercio nuevo) con su respectiva branch asociada, adicional a esto, es posible crear una branch y asociarla a un comercio ya existente, enviando los atributos de \"merchantPanelId\" y \"merchantPanelName\" para indicar el comercio al cual se desea asociar la branch.\n"
       },
       "threeDS-info": {
         "title": "threeDS-info",
