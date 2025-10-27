@@ -2205,7 +2205,7 @@
             "description": "application/json"
           }
         ],
-        "description": "    Este     end    poin    t pe    rmit    e la     con    sult    a de     inf    orma    ción     de     una     inte    grac    ión,     per    miti    endo     ver     el     esta    do d    e la     cre    ació    n de     los     rec    urso    s se    para    do p    or e    nvir    onment. Este endpoint es utilizado para el procedimiento de sonda mencionado en el apartado de [notificación](reference/Kubrick.json/components/schemas/notification)."
+        "description": "    Este endpoint permite la consulta de información de una integración, permitiendo ver el estado de la creación de los recursos separado por environment. Este endpoint es utilizado para el procedimiento de sonda mencionado en el apartado de [notificación](reference/Kubrick.json/components/schemas/notification)."
       }
     },
     "/api/merchant/search": {
