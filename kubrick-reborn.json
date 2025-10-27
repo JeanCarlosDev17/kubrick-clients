@@ -1831,7 +1831,7 @@
             }
           },
           "2XX": {
-            "description": "Success (Old integration)",
+            "description": "Success (Old integration) \n\nEsta estructura de respuesta solo es obtenida cuando se consultan integraciones anteriores al año 2024.",
             "content": {
               "application/json": {
                 "schema": {
