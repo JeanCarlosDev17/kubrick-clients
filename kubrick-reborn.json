@@ -7300,7 +7300,8 @@
               "description": "Indica si el medio de pago debe tener token de 3DS."
             }
           }
-        }
+        },
+        "description": "Para ver la especificación de cada uno de los medios de pago dirigete al apartado de [Medios de pago](https://kubrick.stoplight.io/docs/kubrick-clients/9adw6nxtbggg7-medios-de-pago)"
       },
       "paymentMethods-info": {
         "title": "paymentMethods-info",
