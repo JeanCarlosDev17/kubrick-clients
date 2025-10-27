@@ -4546,7 +4546,8 @@
             },
             "example": "medellin",
             "description": "Ciudad del comercio.",
-            "maxLength": 30
+            "maxLength": 30,
+            "minLength": 1
           },
           "state": {
             "type": "integer",
@@ -4570,7 +4571,8 @@
             },
             "maxLength": 128,
             "example": "Transversal 123 # 12 a",
-            "description": "Dirección del comercio"
+            "description": "Dirección del comercio",
+            "minLength": 1
           }
         }
       },
@@ -5642,7 +5644,8 @@
             },
             "description": "Documento del comercio.",
             "maxLength": 20,
-            "example": "900299823-1"
+            "example": "900299823-1",
+            "minLength": 1
           }
         }
       },
@@ -5850,7 +5853,8 @@
             },
             "description": "Documento de identificación del representante legal.",
             "example": "1037854200",
-            "maxLength": 20
+            "maxLength": 20,
+            "minLength": 1
           },
           "name": {
             "type": "string",
@@ -5859,7 +5863,8 @@
             },
             "description": "Nombres del representante legal.",
             "example": "Ricardo",
-            "maxLength": 30
+            "maxLength": 30,
+            "minLength": 1
           },
           "surname": {
             "type": "string",
@@ -5868,7 +5873,8 @@
             },
             "example": "García",
             "description": "Apellidos del representante legal.",
-            "maxLength": 30
+            "maxLength": 30,
+            "minLength": 1
           }
         }
       },
@@ -5955,7 +5961,8 @@
             },
             "description": "Nombre del comercio.",
             "example": "EVERTEC PLACETOPAY S.A.S",
-            "maxLength": 75
+            "maxLength": 75,
+            "minLength": 1
           },
           "brand": {
             "type": "string",
@@ -5964,7 +5971,8 @@
             },
             "description": "Marca del comercio.",
             "example": "Placetopay",
-            "maxLength": 50
+            "maxLength": 50,
+            "minLength": 1
           },
           "mcc": {
             "type": "string",
