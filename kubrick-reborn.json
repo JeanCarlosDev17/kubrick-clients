@@ -3235,7 +3235,8 @@
                     "type": "string",
                     "example": "admin@email.com",
                     "description": "Correo al cual llegarán los comprobantes de pago de las transacciones relizadas en el sitio.",
-                    "maxLength": 256
+                    "maxLength": 80,
+                    "format": "email"
                   },
                   "currency": {
                     "$ref": "#/components/schemas/currency",
@@ -7740,7 +7741,9 @@
               "id": "3ptzp3ktromwh"
             },
             "example": "admin@email.com",
-            "description": "Correo al cual llegarán los comprobantes de pago de las transacciones relizadas en el sitio."
+            "description": "Correo al cual llegarán los comprobantes de pago de las transacciones relizadas en el sitio.",
+            "maxLength": 80,
+            "format": "email"
           },
           "currency": {
             "$ref": "#/components/schemas/currency",
