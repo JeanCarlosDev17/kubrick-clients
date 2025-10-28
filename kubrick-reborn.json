@@ -7301,7 +7301,7 @@
             }
           }
         },
-        "description": "Para ver la especificación de cada uno de los medios de pago dirigete al apartado de [Medios de pago](https://kubrick.stoplight.io/docs/kubrick-clients/9adw6nxtbggg7-medios-de-pago)"
+        "description": "Para ver la especificación de cada uno de los medios de pago dirígete al apartado de [Medios de pago](https://kubrick.stoplight.io/docs/kubrick-clients/9adw6nxtbggg7-medios-de-pago)"
       },
       "paymentMethods-info": {
         "title": "paymentMethods-info",
