@@ -7137,7 +7137,9 @@
         }
       },
       "paymentMethods": {
+        "title": "paymentMethods",
         "type": "array",
+        "description": "Para ver la especificación de cada uno de los medios de pago dirígete al apartado de [Medios de pago](https://kubrick.stoplight.io/docs/kubrick-clients/9adw6nxtbggg7-medios-de-pago)",
         "x-stoplight": {
           "id": "hsvwdp1gr7mbn"
         },
@@ -7221,7 +7223,6 @@
             }
           ]
         },
-        "title": "paymentMethods",
         "examples": [
           [
             {
@@ -7295,7 +7296,6 @@
               "example": "1234567811",
               "description": "Número de cuenta de recaudo."
             },
-            "type": "integer",
             "accountType": {
               "enum": [
                 1,
@@ -7321,8 +7321,8 @@
               "description": "Indica si el medio de pago debe tener token de 3DS."
             }
           }
-        },
-        "description": "Para ver la especificación de cada uno de los medios de pago dirígete al apartado de [Medios de pago](https://kubrick.stoplight.io/docs/kubrick-clients/9adw6nxtbggg7-medios-de-pago)"
+        }
+        
       },
       "paymentMethods-info": {
         "title": "paymentMethods-info",
