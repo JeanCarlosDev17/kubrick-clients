@@ -7868,7 +7868,7 @@
                     "azure_notification",
                     "open_finance"
                   ],
-                  "description": "Tipo de integración externa. Según su valor se determinan las reglas y los campos requeridos dentro de `settings`." 
+                  "description": "Tipo de integración externa. Según su valor se determinan las reglas y los campos requeridos dentro de `settings`."
                 },
                 "settings": {
                   "type": "string",
@@ -9568,7 +9568,8 @@
           },
           "handler": {
             "type": "string",
-            "maxLength": 200
+            "maxLength": 200,
+            "description": "Aplica solo cuando `type` = \"notifier`. Valores válidos para `handler` cuando `type` = \"notifier\": [\"raw\", \"session\", \"unisabana\", \"clicktopay\"]."
           },
           "url": {
             "type": "string",
@@ -9707,39 +9708,6 @@
           },
           "enable": {
             "type": "boolean"
-          }
-        }
-      },
-      "externalIntegrations": {
-        "title": "externalIntegrations",
-        "x-stoplight": {
-          "id": "hewwmihb8xyap"
-        },
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "paygate",
-              "invoice_settle",
-              "kount",
-              "account_validator",
-              "push_notification",
-              "brand_tokenization",
-              "notifier",
-              "clicktopay",
-              "azure_notification",
-              "open_finance"
-            ],
-            "x-stoplight": {
-              "id": "8ga8loz5ielp2"
-            }
-          },
-          "settings": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "veyoi7qqwx3d4"
-            }
           }
         }
       }
