@@ -7875,7 +7875,7 @@
                   "x-stoplight": {
                     "id": "5etdsc0wg5mkw"
                   },
-                  "description": "\"description\": \"Contiene las configuraciones específicas de la integración según el campo 'type'.\\n\\nREGLAS ESPECIALES SEGÚN TYPE:\\n- type = paygate:\\n  * returnUrl, md5Hash, soapUsername, soapPassword son obligatorios.\\n\\n- type = invoice_settle:\\n  * handler, url, username y password son obligatorios.\\n\\n- type = kount:\\n  * sandbox, website y merchant son obligatorios.\\n\\n- type = account_validator:\\n  * onTest y expiration son obligatorios.\\n\\n- type = push_notification:\\n  * enabled es obligatorio.\\n\\n- type = brand_tokenization:\\n  * enabled, validateBrandStatusGlobal y allowProcessOldTokens son obligatorios.\\n\\n- type = notifier:\\n  * handler, retryUntil, retryAfter, enabled y additional.uri son obligatorios.\\n  * allowedStatuses debe contener valores de estados permitidos.\\n  * Si handler = 'unisabana', los campos additional.user y additional.password son obligatorios.\\n\\n- type = clicktopay:\\n  * id es obligatorio.\\n\\n- type = azure_notification:\\n  * provider, balanceResourceIdRef y paymentReason son obligatorios.\\n\\n- type = open_finance:\\n  * uIdAgreement y enable son obligatorios.\","
+                  "description": "Configuración específica asociada al tipo de integración definido en `type`. Los campos y reglas varían según el tipo. Para ver la estructura detallada de cada configuración consulte la documentación: [Integraciones del sitio](docs/integraciones%20del%20sitio/1.-Integraciones-del-sitio.md)."
                 }
               }
             }
