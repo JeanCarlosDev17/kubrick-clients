@@ -7322,7 +7322,6 @@
             }
           }
         }
-        
       },
       "paymentMethods-info": {
         "title": "paymentMethods-info",
@@ -7681,7 +7680,6 @@
         ],
         "required": [
           "displayName",
-          "type",
           "category",
           "email",
           "currency",
@@ -7707,21 +7705,6 @@
             "example": "Site name example",
             "description": "Nombre del sitio a mostrar en panel.",
             "maxLength": 75
-          },
-          "type": {
-            "x-stoplight": {
-              "id": "3w13em1rfjrbw"
-            },
-            "example": "INT",
-            "type": "string",
-            "description": "Punto de origen de las transacciones que se realizarán por el sitio.\n\nINT = Internet <br>\nPOS = Punto de venta <br>\nIVR = IVR <br>\nONE = Pago a un clic <br>\nREC = Recurrencia <br>",
-            "enum": [
-              "INT",
-              "POS",
-              "IVR",
-              "ONE",
-              "REC"
-            ]
           },
           "category": {
             "x-stoplight": {
@@ -7855,6 +7838,46 @@
             "$ref": "#/components/schemas/site-operation",
             "x-stoplight": {
               "id": "8so4vk19sor6y"
+            }
+          },
+          "externalIntegrations": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "0gft0nqxcdich"
+            },
+            "items": {
+              "x-stoplight": {
+                "id": "cgd480rip4ksl"
+              },
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "ovfccsdrfvp55"
+                  },
+                  "enum": [
+                    "paygate",
+                    "invoice_settle",
+                    "kount",
+                    "account_validator",
+                    "push_notification",
+                    "brand_tokenization",
+                    "notifier",
+                    "clicktopay",
+                    "azure_notification",
+                    "open_finance"
+                  ],
+                  "description": "      \"description\": \"Tipo de integración externa. Segun su tipo Determina las reglas y campos requeridos dentro de 'settings'.\" "
+                },
+                "settings": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "5etdsc0wg5mkw"
+                  },
+                  "description": "\"description\": \"Contiene las configuraciones específicas de la integración según el campo 'type'.\\n\\nREGLAS ESPECIALES SEGÚN TYPE:\\n- type = paygate:\\n  * returnUrl, md5Hash, soapUsername, soapPassword son obligatorios.\\n\\n- type = invoice_settle:\\n  * handler, url, username y password son obligatorios.\\n\\n- type = kount:\\n  * sandbox, website y merchant son obligatorios.\\n\\n- type = account_validator:\\n  * onTest y expiration son obligatorios.\\n\\n- type = push_notification:\\n  * enabled es obligatorio.\\n\\n- type = brand_tokenization:\\n  * enabled, validateBrandStatusGlobal y allowProcessOldTokens son obligatorios.\\n\\n- type = notifier:\\n  * handler, retryUntil, retryAfter, enabled y additional.uri son obligatorios.\\n  * allowedStatuses debe contener valores de estados permitidos.\\n  * Si handler = 'unisabana', los campos additional.user y additional.password son obligatorios.\\n\\n- type = clicktopay:\\n  * id es obligatorio.\\n\\n- type = azure_notification:\\n  * provider, balanceResourceIdRef y paymentReason son obligatorios.\\n\\n- type = open_finance:\\n  * uIdAgreement y enable son obligatorios.\","
+                }
+              }
             }
           }
         }
@@ -9461,6 +9484,264 @@
             "details": "el usuario ya se encuentra registrado"
           }
         ]
+      },
+      "externalIntegrationSettings": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "returnUrl": "https://example.com/return",
+            "md5Hash": "d41d8cd98f00b204e9800998ecf8427e",
+            "soapUsername": "soap_user",
+            "soapPassword": "soap_password",
+            "handler": "invoice_handler",
+            "url": "https://example.com/api",
+            "username": "user123",
+            "password": "pass123",
+            "sandbox": true,
+            "website": "https://merchant.example.com",
+            "merchant": "merchant_123",
+            "apiKey": "api-key-xyz",
+            "onTest": false,
+            "expiration": 30,
+            "retries": 3,
+            "notificationURL": "https://example.com/notify",
+            "enabled": true,
+            "validateBrandStatusGlobal": false,
+            "allowProcessOldTokens": true,
+            "allowedStatuses": [
+              "PENDING",
+              "COMPLETED"
+            ],
+            "retryUntil": 5,
+            "retryAfter": 60,
+            "urlForward": "https://example.com/forward",
+            "additional": {
+              "uri": "https://additional.example.com/endpoint",
+              "user": "additional_user",
+              "password": "additional_pass",
+              "auth": [
+                "Bearer token-example"
+              ],
+              "headers": [
+                {
+                  "X-Custom-Header": "value"
+                },
+                {
+                  "X-Another-Header": "value2"
+                }
+              ],
+              "paymentStatus": [
+                "COMPLETED"
+              ],
+              "emails": [
+                "notify@example.com"
+              ]
+            },
+            "id": "clickto_pay_123",
+            "registerDefault": true,
+            "instrumentType": "VISA",
+            "provider": "azure_provider",
+            "balanceResourceIdRef": 123,
+            "paymentReason": "Subscription fee",
+            "uIdAgreement": "AGREEMENT1234567",
+            "enable": true
+          }
+        },
+        "properties": {
+          "returnUrl": {
+            "type": "string",
+            "format": "uri",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "md5Hash": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "soapUsername": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "soapPassword": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "handler": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 255
+          },
+          "username": {
+            "type": "string",
+            "maxLength": 60
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 60
+          },
+          "sandbox": {
+            "type": "boolean"
+          },
+          "website": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "merchant": {
+            "type": "string",
+            "maxLength": 30
+          },
+          "apiKey": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "onTest": {
+            "type": "boolean"
+          },
+          "expiration": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "retries": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "notificationURL": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 255
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "validateBrandStatusGlobal": {
+            "type": "boolean"
+          },
+          "allowProcessOldTokens": {
+            "type": "boolean"
+          },
+          "allowedStatuses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "retryUntil": {
+            "type": "integer"
+          },
+          "retryAfter": {
+            "type": "integer"
+          },
+          "urlForward": {
+            "type": "string"
+          },
+          "additional": {
+            "type": "object",
+            "properties": {
+              "uri": {
+                "type": "string"
+              },
+              "user": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "auth": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "headers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "X-Custom-Header": {
+                      "type": "string"
+                    },
+                    "X-Another-Header": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "paymentStatus": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "emails": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "registerDefault": {
+            "type": "boolean"
+          },
+          "instrumentType": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "balanceResourceIdRef": {
+            "type": "integer"
+          },
+          "paymentReason": {
+            "type": "string"
+          },
+          "uIdAgreement": {
+            "type": "string"
+          },
+          "enable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "externalIntegrations": {
+        "title": "externalIntegrations",
+        "x-stoplight": {
+          "id": "hewwmihb8xyap"
+        },
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "paygate",
+              "invoice_settle",
+              "kount",
+              "account_validator",
+              "push_notification",
+              "brand_tokenization",
+              "notifier",
+              "clicktopay",
+              "azure_notification",
+              "open_finance"
+            ],
+            "x-stoplight": {
+              "id": "8ga8loz5ielp2"
+            }
+          },
+          "settings": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "veyoi7qqwx3d4"
+            }
+          }
+        }
       }
     },
     "requestBodies": {},
