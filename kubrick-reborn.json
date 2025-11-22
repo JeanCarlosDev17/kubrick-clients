@@ -7871,7 +7871,7 @@
                   "description": "Tipo de integración externa. Según su valor se determinan las reglas y los campos requeridos dentro de `settings`."
                 },
                 "settings": {
-                  "type": "string",
+                  "$ref": "#/components/schemas/externalIntegrationSettings",
                   "x-stoplight": {
                     "id": "5etdsc0wg5mkw"
                   },
@@ -9663,7 +9663,7 @@
               "user": {
                 "type": "string",
                 "maxLength": 255,
-                 "description": "Campo requerido si el `handler` del tipo `notifier` es `unisabana`."
+                "description": "Campo requerido si el `handler` del tipo `notifier` es `unisabana`."
               },
               "password": {
                 "type": "string",
