@@ -9627,87 +9627,120 @@
           "allowedStatuses": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "enum": [
+                "APPROVED",
+                "REJECTED",
+                "PENDING",
+                "FAILED"
+              ]
+            },
+            "minItems": 1,
+            "uniqueItems": true
           },
           "retryUntil": {
-            "type": "integer"
+            "type": "integer",
+            "minimum": 1
           },
           "retryAfter": {
-            "type": "integer"
+            "type": "integer",
+            "minimum": 1
           },
           "urlForward": {
-            "type": "string"
+            "type": "string",
+            "format": "uri",
+            "maxLength": 255
           },
           "additional": {
             "type": "object",
+            "description": "Aplica únicamente cuando `type` = \"notifier`. Si `handler` = \"unisabana`, este objeto debe incluir los campos `user` y `password`. Consulte la documentación para más detalles.",
             "properties": {
               "uri": {
-                "type": "string"
+                "type": "string",
+                "format": "uri",
+                "maxLength": 255
               },
               "user": {
-                "type": "string"
+                "type": "string",
+                "maxLength": 255,
+                 "description": "Campo requerido si el `handler` del tipo `notifier` es `unisabana`."
               },
               "password": {
-                "type": "string"
+                "type": "string",
+                "maxLength": 255,
+                "description": "Campo requerido si el `handler` del tipo `notifier` es `unisabana`."
               },
               "auth": {
                 "type": "array",
                 "items": {
                   "type": "string"
-                }
+                },
+                "minItems": 1
               },
               "headers": {
                 "type": "array",
                 "items": {
-                  "type": "object",
-                  "properties": {
-                    "X-Custom-Header": {
-                      "type": "string"
-                    },
-                    "X-Another-Header": {
-                      "type": "string"
-                    }
-                  }
-                }
+                  "type": "string"
+                },
+                "minItems": 1
               },
               "paymentStatus": {
                 "type": "array",
                 "items": {
-                  "type": "string"
-                }
+                  "type": "string",
+                  "enum": [
+                    "APPROVED",
+                    "REJECTED",
+                    "PENDING",
+                    "FAILED"
+                  ]
+                },
+                "minItems": 1,
+                "uniqueItems": true
               },
               "emails": {
                 "type": "array",
                 "items": {
-                  "type": "string"
-                }
+                  "type": "string",
+                  "format": "email"
+                },
+                "minItems": 1
               }
             }
           },
           "id": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 255
           },
           "registerDefault": {
             "type": "boolean"
           },
           "instrumentType": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "CARD",
+              "TOKEN"
+            ]
           },
           "provider": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 255
           },
           "balanceResourceIdRef": {
-            "type": "integer"
+            "type": "integer",
+            "minimum": 1
           },
           "paymentReason": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 255
           },
           "uIdAgreement": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 17
           },
           "enable": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Campo exclusivo de la integración Open Finance. No es el mismo que 'enabled'."
           }
         }
       }
