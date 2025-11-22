@@ -7868,7 +7868,7 @@
                     "azure_notification",
                     "open_finance"
                   ],
-                  "description": "      \"description\": \"Tipo de integración externa. Segun su tipo Determina las reglas y campos requeridos dentro de 'settings'.\" "
+                  "description": "Tipo de integración externa. Según su valor se determinan las reglas y los campos requeridos dentro de `settings`." 
                 },
                 "settings": {
                   "type": "string",
