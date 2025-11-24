@@ -398,7 +398,18 @@
                         "patternReference": null,
                         "mailCustomer": true,
                         "mailMerchant": true
-                      }
+                      },
+                      "externalIntegrations": [
+                        {
+                          "type": "kount",
+                          "settings": {
+                            "sandbox": false,
+                            "website": "mysite.com",
+                            "merchant": "Merchant123",
+                            "apiKey": "abcd-1234-xyz"
+                          }
+                        }
+                      ]
                     },
                     "threeDS": {
                       "brand": "ThreeDS brand example",
@@ -2280,7 +2291,8 @@
                             "login": "93f3ed619d946ae3fb3c39981fa9d1ef",
                             "secretKey": "E27gywYoAm6H28Xt",
                             "isActive": true,
-                            "details": null
+                            "details": null,
+                            "externalIntegrations": []
                           },
                           "threeDs": {
                             "panelId": 9361,
@@ -2341,7 +2353,15 @@
                             "login": "0195e33e3e3002cb120699abd503ed47",
                             "secretKey": "X7xKn2aypQOD0GBj",
                             "isActive": true,
-                            "details": null
+                            "details": null,
+                            "externalIntegrations": [
+                              {
+                                "panelId": 1439,
+                                "status": "FINISHED",
+                                "type": "kount",
+                                "details": null
+                              }
+                            ]
                           },
                           "threeDs": {
                             "panelId": 9361,
@@ -7055,7 +7075,15 @@
               "login": "ji09u1j3jkb2k3kb1z102z",
               "secretKey": "mffdcx558w",
               "isActive": 1,
-              "details": "string"
+              "details": "string",
+              "externalIntegrations": [
+                {
+                  "panelId": 1439,
+                  "status": "FINISHED",
+                  "type": "kount",
+                  "details": null
+                }
+              ]
             },
             "threeDs": {
               "panelId": 9361,
@@ -7977,8 +8005,35 @@
             "x-stoplight": {
               "id": "digztu4p2qg4h"
             }
+          },
+          "externalIntegrations": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "moe80c8x05r0t"
+            },
+            "description": "contiene los resultados de las solcitudes de externalIntegrations solicitadas para este sitio en caso de no haber solicitado sera un array vacio.",
+            "items": {}
           }
-        }
+        },
+        "examples": [
+          {
+            "panelId": 8532,
+            "status": "FINISHED",
+            "name": "Site Name",
+            "login": "ji09u1j3jkb2k3kb1z102z",
+            "secretKey": "mffdcx558w",
+            "details": "string",
+            "isActive": true,
+            "externalIntegrations": [
+              {
+                "panelId": 1439,
+                "status": "FINISHED",
+                "type": "kount",
+                "details": null
+              }
+            ]
+          }
+        ]
       },
       "site-historic": {
         "title": "site-historic",
@@ -9422,13 +9477,24 @@
           "id": "5io3x4yx7eca5"
         },
         "type": "object",
+        "examples": [
+          {
+            "panelId": "1",
+            "status": "failed",
+            "fullName": "pepito perez",
+            "userName": "pepitouser03",
+            "email": "pepitoperez@mail.com",
+            "details": "el usuario ya se encuentra registrado"
+          }
+        ],
         "properties": {
           "panelId": {
             "type": "string",
             "x-stoplight": {
               "id": "jq6gfl7xx7vkh"
             },
-            "example": "1"
+            "example": "1",
+            "description": "ID del recurso en panel de ."
           },
           "status": {
             "type": "string",
@@ -9473,17 +9539,7 @@
             "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error.",
             "example": "el usuario ya se encuentra registrado"
           }
-        },
-        "examples": [
-          {
-            "panelId": "1",
-            "status": "failed",
-            "fullName": "pepito perez",
-            "userName": "pepitouser03",
-            "email": "pepitoperez@mail.com",
-            "details": "el usuario ya se encuentra registrado"
-          }
-        ]
+        }
       },
       "externalIntegrationSettings": {
         "type": "object",
@@ -9741,6 +9797,35 @@
           "enable": {
             "type": "boolean",
             "description": "Campo exclusivo de la integración Open Finance. No es el mismo que 'enabled'."
+          }
+        }
+      },
+      "externalIntegrations-info": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "panelId": 1439,
+            "status": "FINISHED",
+            "type": "kount",
+            "details": null
+          }
+        },
+        "properties": {
+          "panelId": {
+            "type": "integer",
+            "description": "ID del recurso en panel."
+          },
+          "status": {
+            "type": "string",
+            "description": "Estado del recurso."
+          },
+          "type": {
+            "type": "string",
+            "description": "Tipo de integración externa."
+          },
+          "details": {
+            "type": "null",
+            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
           }
         }
       }
