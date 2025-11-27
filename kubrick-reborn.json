@@ -4445,7 +4445,7 @@
                     "name": "EVERTEC PLACETOPAY S.A.S",
                     "brand": "Placetopay",
                     "mcc": "7929",
-                    "active": true,
+                    "isActive": true,
                     "url": "https://dnetix.co/",
                     "timezone": "Europe/Andorra",
                     "size": "XS",
