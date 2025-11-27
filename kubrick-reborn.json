@@ -3514,7 +3514,7 @@
                     "email": "admin@email.com",
                     "currency": "ARS",
                     "language": "EN",
-                    "active": true,
+                    "isActive": true,
                     "onTest": true,
                     "expiration": "2023-06-30 00:00:00",
                     "productionDate": "2023-06-30",
