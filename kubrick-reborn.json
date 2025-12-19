@@ -7322,7 +7322,6 @@
             }
           }
         }
-        
       },
       "paymentMethods-info": {
         "title": "paymentMethods-info",
@@ -7706,7 +7705,7 @@
             },
             "example": "Site name example",
             "description": "Nombre del sitio a mostrar en panel.",
-            "maxLength": 75
+            "maxLength": 110
           },
           "type": {
             "x-stoplight": {
