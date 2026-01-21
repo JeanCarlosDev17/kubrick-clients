@@ -457,10 +457,14 @@
                       "language": "312588921",
                       "timezone": "Asia/Kabul",
                       "restUserGroupsSettings": [
-                        [
-                          "GROUP_INVITATIONS"
-                        ]
-                      ]
+                        "GROUP_INVITATIONS"
+                      ],
+                      "restUserFilterRoles": [
+                        1,
+                        2,
+                        3
+                      ],
+                      "isActive": true
                     }
                   }
                 },
@@ -1243,9 +1247,7 @@
                       "language": "312588921",
                       "timezone": "Asia/Kabul",
                       "restUserGroupsSettings": [
-                        [
-                          "GROUP_INVITATIONS"
-                        ]
+                        "GROUP_INVITATIONS"
                       ]
                     }
                   }
@@ -8861,6 +8863,25 @@
         },
         "type": "object",
         "description": "Conjunto de datos que permite crear un usuario con la información suministrada.",
+        "examples": [
+          {
+            "fullName": "Mercatodo SaS",
+            "username": "myUserName",
+            "email": "user@mail.com",
+            "mobile": "string",
+            "language": "en",
+            "timezone": "Europe/Andorra",
+            "restUserGroupsSettings": [
+              "GROUP_INVITATIONS"
+            ],
+            "restUserFilterRoles": [
+              1,
+              17,
+              3
+            ],
+            "isActive": true
+          }
+        ],
         "required": [
           "fullName",
           "username",
@@ -9364,7 +9385,23 @@
                 "id": "511x3ng7uard3"
               },
               "type": "string",
-              "example": "[\"GROUP_INVITATIONS\"]"
+              "example": [
+                "GROUP_INVITATIONS"
+              ]
+            }
+          },
+          "restUserFilterRoles": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "uj2xue2cb25gl"
+            },
+            "description": "conjunto de roles especificados individualmente por sus id, que permiten controlar los accesos del usuario dentro del panel.",
+            "items": {
+              "x-stoplight": {
+                "id": "p06b5fh3hphqf"
+              },
+              "type": "integer",
+              "minimum": 1
             }
           },
           "isActive": {
@@ -9374,23 +9411,7 @@
             },
             "description": "Estado del usuario."
           }
-        },
-        "examples": [
-          {
-            "fullName": "Mercatodo SaS",
-            "username": "myUserName",
-            "email": "user@mail.com",
-            "mobile": "string",
-            "language": "en",
-            "timezone": "Europe/Andorra",
-            "restUserGroupsSettings": [
-              [
-                "GROUP_INVITATIONS"
-              ]
-            ],
-            "isActive": true
-          }
-        ]
+        }
       },
       "user-info": {
         "title": "user-info",
