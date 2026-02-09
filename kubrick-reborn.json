@@ -457,10 +457,15 @@
                       "language": "312588921",
                       "timezone": "Asia/Kabul",
                       "restUserGroupsSettings": [
-                        [
-                          "GROUP_INVITATIONS"
+                        "GROUP_INVITATIONS"
+                      ],
+                      "filters":{
+                        "roles": [
+                          1,
+                          17
                         ]
-                      ]
+                      },
+                      "isActive": true
                     }
                   }
                 },
@@ -1243,10 +1248,14 @@
                       "language": "312588921",
                       "timezone": "Asia/Kabul",
                       "restUserGroupsSettings": [
-                        [
-                          "GROUP_INVITATIONS"
+                        "GROUP_INVITATIONS"
+                      ],
+                      "filters": {
+                        "roles": [
+                          1,
+                          17
                         ]
-                      ]
+                      }
                     }
                   }
                 }
@@ -8861,6 +8870,26 @@
         },
         "type": "object",
         "description": "Conjunto de datos que permite crear un usuario con la información suministrada.",
+        "examples": [
+          {
+            "fullName": "Mercatodo SaS",
+            "username": "myUserName",
+            "email": "user@mail.com",
+            "mobile": "string",
+            "language": "en",
+            "timezone": "Europe/Andorra",
+            "restUserGroupsSettings": [
+              "GROUP_INVITATIONS"
+            ],
+            "filters": {
+              "roles": [
+                1,
+                17
+              ]
+            },
+            "isActive": true
+          }
+        ],
         "required": [
           "fullName",
           "username",
@@ -9358,13 +9387,37 @@
             "x-stoplight": {
               "id": "7n501r99as5za"
             },
-            "description": "Grupos de roles que controlan el acceso del usuario.",
+            "description": "Lista de permisos acl de tipo roles los cuales el usuario puede tener acceso ",
             "items": {
               "x-stoplight": {
                 "id": "511x3ng7uard3"
               },
               "type": "string",
-              "example": "[\"GROUP_INVITATIONS\"]"
+              "example": [
+                "GROUP_INVITATIONS"
+              ]
+            }
+          },
+          "filters": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "uj2xue2cb25gl"
+            },
+            "description": "Contiene filtros acl soportados para modificar el acceso a recursos de los usuarios creados",
+            "properties": {
+              "roles": {
+                "type": "array",
+                "x-stoplight": {
+                  "id": "g904k04r723fi"
+                },
+                "description": "Lista de permisos acl de tipo roles los cuales el usuario puede tener acceso ",
+                "items": {
+                  "x-stoplight": {
+                    "id": "mlkfdsf2yz9o5"
+                  },
+                  "type": "integer"
+                }
+              }
             }
           },
           "isActive": {
@@ -9374,23 +9427,7 @@
             },
             "description": "Estado del usuario."
           }
-        },
-        "examples": [
-          {
-            "fullName": "Mercatodo SaS",
-            "username": "myUserName",
-            "email": "user@mail.com",
-            "mobile": "string",
-            "language": "en",
-            "timezone": "Europe/Andorra",
-            "restUserGroupsSettings": [
-              [
-                "GROUP_INVITATIONS"
-              ]
-            ],
-            "isActive": true
-          }
-        ]
+        }
       },
       "user-info": {
         "title": "user-info",
