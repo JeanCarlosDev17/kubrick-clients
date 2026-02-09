@@ -1250,7 +1250,7 @@
                       "restUserGroupsSettings": [
                         "GROUP_INVITATIONS"
                       ],
-                      "filters":{
+                      "filters": {
                         "roles": [
                           1,
                           17
