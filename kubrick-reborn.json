@@ -9387,7 +9387,7 @@
             "x-stoplight": {
               "id": "7n501r99as5za"
             },
-            "description": "Lista de permisos acl de tipo roles los cuales el usuario puede tener acceso ",
+            "description": "Lista de grupos de roles a los cuales determinan las funcionalidades a las cuales el usuario puede tener acceso ",
             "items": {
               "x-stoplight": {
                 "id": "511x3ng7uard3"
