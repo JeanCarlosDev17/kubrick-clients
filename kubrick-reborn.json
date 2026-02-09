@@ -9403,7 +9403,7 @@
             "x-stoplight": {
               "id": "uj2xue2cb25gl"
             },
-            "description": "Contiene filtros acl soportados para modficiar el acceso a recursos de los usuarios creados",
+            "description": "Contiene filtros acl soportados para modificar el acceso a recursos de los usuarios creados",
             "properties": {
               "roles": {
                 "type": "array",
