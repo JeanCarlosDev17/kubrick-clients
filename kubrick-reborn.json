@@ -398,7 +398,18 @@
                         "patternReference": null,
                         "mailCustomer": true,
                         "mailMerchant": true
-                      }
+                      },
+                      "externalIntegrations": [
+                        {
+                          "type": "kount",
+                          "settings": {
+                            "sandbox": false,
+                            "website": "mysite.com",
+                            "merchant": "Merchant123",
+                            "apiKey": "abcd-1234-xyz"
+                          }
+                        }
+                      ]
                     },
                     "threeDS": {
                       "brand": "ThreeDS brand example",
@@ -2290,7 +2301,8 @@
                             "login": "93f3ed619d946ae3fb3c39981fa9d1ef",
                             "secretKey": "E27gywYoAm6H28Xt",
                             "isActive": true,
-                            "details": null
+                            "details": null,
+                            "externalIntegrations": []
                           },
                           "threeDs": {
                             "panelId": 9361,
@@ -2351,7 +2363,15 @@
                             "login": "0195e33e3e3002cb120699abd503ed47",
                             "secretKey": "X7xKn2aypQOD0GBj",
                             "isActive": true,
-                            "details": null
+                            "details": null,
+                            "externalIntegrations": [
+                              {
+                                "panelId": 1439,
+                                "status": "FINISHED",
+                                "type": "kount",
+                                "details": null
+                              }
+                            ]
                           },
                           "threeDs": {
                             "panelId": 9361,
@@ -3504,7 +3524,7 @@
                     "email": "admin@email.com",
                     "currency": "ARS",
                     "language": "EN",
-                    "active": true,
+                    "isActive": true,
                     "onTest": true,
                     "expiration": "2023-06-30 00:00:00",
                     "productionDate": "2023-06-30",
@@ -4435,7 +4455,7 @@
                     "name": "EVERTEC PLACETOPAY S.A.S",
                     "brand": "Placetopay",
                     "mcc": "7929",
-                    "active": true,
+                    "isActive": true,
                     "url": "https://dnetix.co/",
                     "timezone": "Europe/Andorra",
                     "size": "XS",
@@ -7065,7 +7085,15 @@
               "login": "ji09u1j3jkb2k3kb1z102z",
               "secretKey": "mffdcx558w",
               "isActive": 1,
-              "details": "string"
+              "details": "string",
+              "externalIntegrations": [
+                {
+                  "panelId": 1439,
+                  "status": "FINISHED",
+                  "type": "kount",
+                  "details": null
+                }
+              ]
             },
             "threeDs": {
               "panelId": 9361,
@@ -7690,7 +7718,6 @@
         ],
         "required": [
           "displayName",
-          "type",
           "category",
           "email",
           "currency",
@@ -7716,21 +7743,6 @@
             "example": "Site name example",
             "description": "Nombre del sitio a mostrar en panel.",
             "maxLength": 110
-          },
-          "type": {
-            "x-stoplight": {
-              "id": "3w13em1rfjrbw"
-            },
-            "example": "INT",
-            "type": "string",
-            "description": "Punto de origen de las transacciones que se realizarán por el sitio.\n\nINT = Internet <br>\nPOS = Punto de venta <br>\nIVR = IVR <br>\nONE = Pago a un clic <br>\nREC = Recurrencia <br>",
-            "enum": [
-              "INT",
-              "POS",
-              "IVR",
-              "ONE",
-              "REC"
-            ]
           },
           "category": {
             "x-stoplight": {
@@ -7865,6 +7877,46 @@
             "x-stoplight": {
               "id": "8so4vk19sor6y"
             }
+          },
+          "externalIntegrations": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "0gft0nqxcdich"
+            },
+            "items": {
+              "x-stoplight": {
+                "id": "cgd480rip4ksl"
+              },
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "ovfccsdrfvp55"
+                  },
+                  "enum": [
+                    "paygate",
+                    "invoice_settle",
+                    "kount",
+                    "account_validator",
+                    "push_notification",
+                    "brand_tokenization",
+                    "notifier",
+                    "clicktopay",
+                    "azure_notification",
+                    "open_finance"
+                  ],
+                  "description": "Tipo de integración externa. Según su valor se determinan las reglas y los campos requeridos dentro de `settings`."
+                },
+                "settings": {
+                  "$ref": "#/components/schemas/externalIntegrationSettings",
+                  "x-stoplight": {
+                    "id": "5etdsc0wg5mkw"
+                  },
+                  "description": "Configuración específica asociada al tipo de integración definido en `type`. Los campos y reglas varían según el tipo. Para ver la estructura detallada de cada configuración consulte la documentación: [Integraciones del sitio](docs/integraciones%20del%20sitio/1.-Integraciones-del-sitio.md)."
+                }
+              }
+            }
           }
         }
       },
@@ -7963,8 +8015,35 @@
             "x-stoplight": {
               "id": "digztu4p2qg4h"
             }
+          },
+          "externalIntegrations": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "moe80c8x05r0t"
+            },
+            "description": "contiene los resultados de las solcitudes de externalIntegrations solicitadas para este sitio en caso de no haber solicitado sera un array vacio.",
+            "items": {}
           }
-        }
+        },
+        "examples": [
+          {
+            "panelId": 8532,
+            "status": "FINISHED",
+            "name": "Site Name",
+            "login": "ji09u1j3jkb2k3kb1z102z",
+            "secretKey": "mffdcx558w",
+            "details": "string",
+            "isActive": true,
+            "externalIntegrations": [
+              {
+                "panelId": 1439,
+                "status": "FINISHED",
+                "type": "kount",
+                "details": null
+              }
+            ]
+          }
+        ]
       },
       "site-historic": {
         "title": "site-historic",
@@ -9436,13 +9515,24 @@
           "id": "5io3x4yx7eca5"
         },
         "type": "object",
+        "examples": [
+          {
+            "panelId": "1",
+            "status": "failed",
+            "fullName": "pepito perez",
+            "userName": "pepitouser03",
+            "email": "pepitoperez@mail.com",
+            "details": "el usuario ya se encuentra registrado"
+          }
+        ],
         "properties": {
           "panelId": {
             "type": "string",
             "x-stoplight": {
               "id": "jq6gfl7xx7vkh"
             },
-            "example": "1"
+            "example": "1",
+            "description": "ID del recurso en panel de ."
           },
           "status": {
             "type": "string",
@@ -9487,17 +9577,295 @@
             "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error.",
             "example": "el usuario ya se encuentra registrado"
           }
-        },
-        "examples": [
-          {
-            "panelId": "1",
-            "status": "failed",
-            "fullName": "pepito perez",
-            "userName": "pepitouser03",
-            "email": "pepitoperez@mail.com",
-            "details": "el usuario ya se encuentra registrado"
+        }
+      },
+      "externalIntegrationSettings": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "returnUrl": "https://example.com/return",
+            "md5Hash": "d41d8cd98f00b204e9800998ecf8427e",
+            "soapUsername": "soap_user",
+            "soapPassword": "soap_password",
+            "handler": "invoice_handler",
+            "url": "https://example.com/api",
+            "username": "user123",
+            "password": "pass123",
+            "sandbox": true,
+            "website": "https://merchant.example.com",
+            "merchant": "merchant_123",
+            "apiKey": "api-key-xyz",
+            "onTest": false,
+            "expiration": 30,
+            "retries": 3,
+            "notificationURL": "https://example.com/notify",
+            "enabled": true,
+            "validateBrandStatusGlobal": false,
+            "allowProcessOldTokens": true,
+            "allowedStatuses": [
+              "PENDING",
+              "COMPLETED"
+            ],
+            "retryUntil": 5,
+            "retryAfter": 60,
+            "urlForward": "https://example.com/forward",
+            "additional": {
+              "uri": "https://additional.example.com/endpoint",
+              "user": "additional_user",
+              "password": "additional_pass",
+              "auth": [
+                "Bearer token-example"
+              ],
+              "headers": [
+                {
+                  "X-Custom-Header": "value"
+                },
+                {
+                  "X-Another-Header": "value2"
+                }
+              ],
+              "paymentStatus": [
+                "COMPLETED"
+              ],
+              "emails": [
+                "notify@example.com"
+              ]
+            },
+            "id": "clickto_pay_123",
+            "registerDefault": true,
+            "instrumentType": "VISA",
+            "provider": "azure_provider",
+            "balanceResourceIdRef": 123,
+            "paymentReason": "Subscription fee",
+            "uIdAgreement": "AGREEMENT1234567",
+            "enable": true
           }
-        ]
+        },
+        "properties": {
+          "returnUrl": {
+            "type": "string",
+            "format": "uri",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "md5Hash": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "soapUsername": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "soapPassword": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "handler": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Aplica solo cuando `type` = \"notifier`. Valores válidos para `handler` cuando `type` = \"notifier\": [\"raw\", \"session\", \"unisabana\", \"clicktopay\"]."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 255
+          },
+          "username": {
+            "type": "string",
+            "maxLength": 60
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 60
+          },
+          "sandbox": {
+            "type": "boolean"
+          },
+          "website": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "merchant": {
+            "type": "string",
+            "maxLength": 30
+          },
+          "apiKey": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "onTest": {
+            "type": "boolean"
+          },
+          "expiration": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "retries": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "notificationURL": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 255
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "validateBrandStatusGlobal": {
+            "type": "boolean"
+          },
+          "allowProcessOldTokens": {
+            "type": "boolean"
+          },
+          "allowedStatuses": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "APPROVED",
+                "REJECTED",
+                "PENDING",
+                "FAILED"
+              ]
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "retryUntil": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "retryAfter": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "urlForward": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 255
+          },
+          "additional": {
+            "type": "object",
+            "description": "Aplica únicamente cuando `type` = \"notifier`. Si `handler` = \"unisabana`, este objeto debe incluir los campos `user` y `password`. Consulte la documentación para más detalles.",
+            "properties": {
+              "uri": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 255
+              },
+              "user": {
+                "type": "string",
+                "maxLength": 255,
+                "description": "Campo requerido si el `handler` del tipo `notifier` es `unisabana`."
+              },
+              "password": {
+                "type": "string",
+                "maxLength": 255,
+                "description": "Campo requerido si el `handler` del tipo `notifier` es `unisabana`."
+              },
+              "auth": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "headers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "paymentStatus": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "APPROVED",
+                    "REJECTED",
+                    "PENDING",
+                    "FAILED"
+                  ]
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "emails": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "email"
+                },
+                "minItems": 1
+              }
+            }
+          },
+          "id": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "registerDefault": {
+            "type": "boolean"
+          },
+          "instrumentType": {
+            "type": "string",
+            "enum": [
+              "CARD",
+              "TOKEN"
+            ]
+          },
+          "provider": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "balanceResourceIdRef": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "paymentReason": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "uIdAgreement": {
+            "type": "string",
+            "maxLength": 17
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "Campo exclusivo de la integración Open Finance. No es el mismo que 'enabled'."
+          }
+        }
+      },
+      "externalIntegrations-info": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "panelId": 1439,
+            "status": "FINISHED",
+            "type": "kount",
+            "details": null
+          }
+        },
+        "properties": {
+          "panelId": {
+            "type": "integer",
+            "description": "ID del recurso en panel."
+          },
+          "status": {
+            "type": "string",
+            "description": "Estado del recurso."
+          },
+          "type": {
+            "type": "string",
+            "description": "Tipo de integración externa."
+          },
+          "details": {
+            "type": "null",
+            "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
+          }
+        }
       }
     },
     "requestBodies": {},
