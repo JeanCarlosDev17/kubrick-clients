@@ -4572,6 +4572,98 @@
         },
         "description": "Este servicio permite actualizar los datos de un comercio existente. "
       }
+    },
+    "/api/site/payment-methods/add-three-ds-token": {
+      "post": {
+        "summary": "add three ds token to site payment method",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RU",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-02-23T16:57:55+00:00"
+                      },
+                      "requestId": 533
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "requestId": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RU",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-02-23T16:57:55+00:00"
+                      },
+                      "requestId": 533
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-api-site-payment-methods-add-three-ds-token",
+        "x-stoplight": {
+          "id": "q5vwe3bsjjsqw"
+        },
+        "description": "A través de este endpoint se puede configurar un token de ThreeDS en un medio de pago de Rest.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "paymentMethodId": {
+                    "type": "integer",
+                    "x-stoplight": {
+                      "id": "m4opsbc1uv0wo"
+                    },
+                    "minimum": 1,
+                    "maximum": 100000000000000000000,
+                    "description": "ID del medio de pago del sitio en rest al cual se le quiere ligar el token de ThreeDS."
+                  },
+                  "threeDsToken": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "fdrj5qfqlf0jj"
+                    },
+                    "minLength": 100,
+                    "maxLength": 1500,
+                    "description": "Token de la sucursal (Branch) de ThreeDS que se desea configurar en el medio de pago del sitio."
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "paymentMethodId": 112526,
+                    "threeDsToken": "fake-token-prueba-000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
