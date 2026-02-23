@@ -1673,19 +1673,25 @@
                     "x-stoplight": {
                       "id": "y2c7j18u95f3j"
                     },
-                    "description": "Este campo indica el ID del merchant existente al cual se le desea ligar la sucursal (branch), este campo solo se debe enviar en caso de que el comercio ya exista."
+                    "description": "Este campo indica el ID del merchant existente al cual se le desea ligar la sucursal (branch), este campo solo se debe enviar en caso de que el comercio ya exista.",
+                    "minimum": 1,
+                    "maximum": 999999999,
+                    "example": 5246
                   },
                   "merchantName": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "0excczjv18g3r"
                     },
-                    "description": "Este campo indica el nombre del merchant existente al cual se le desea ligar la sucursal (branch), este campo solo se debe enviar en caso de que el comercio ya exista."
+                    "description": "Este campo indica el nombre del merchant existente al cual se le desea ligar la sucursal (branch), este campo solo se debe enviar en caso de que el comercio ya exista.",
+                    "minLength": 3,
+                    "maxLength": 90,
+                    "example": "Existing Merchant Demo"
                   }
                 }
               },
               "examples": {
-                "Example 1": {
+                "Creación de comercio nuevo con sucursales": {
                   "value": {
                     "name": "Merchant Example Name",
                     "brand": "ThreeDS brand example",
@@ -1722,6 +1728,47 @@
                         "merchantCode": "5240"
                       }
                     ]
+                  }
+                },
+                "Creación de sucursales para un comercio existente": {
+                  "value": {
+                    "name": "Merchant Example Name",
+                    "brand": "ThreeDS brand example",
+                    "country": "COL",
+                    "currency": "COP",
+                    "url": "https://example.com",
+                    "mcc": 742,
+                    "isicClass": 111,
+                    "allyName": "Edward Elric",
+                    "subscriptions": [
+                      {
+                        "franchise": "visa",
+                        "acquirerBIN": 400111,
+                        "merchantCode": 46416456
+                      }
+                    ],
+                    "document": {
+                      "type": "CC",
+                      "number": "900299823"
+                    },
+                    "branches": [
+                      {
+                        "name": "ThreeDS Branch Name",
+                        "brand": "branch brand example",
+                        "country": "COL",
+                        "currency": "COP",
+                        "url": "https://www.branch-url.com",
+                        "subscriptions": [
+                          {
+                            "franchise": "visa",
+                            "acquirerBIN": 499999,
+                            "merchantCode": "125899"
+                          }
+                        ]
+                      }
+                    ],
+                    "merchantId": 0,
+                    "merchantName": "string"
                   }
                 }
               }
