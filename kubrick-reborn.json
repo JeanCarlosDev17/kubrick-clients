@@ -1778,7 +1778,7 @@
         "tags": [
           "ThreeDS"
         ],
-        "description": "Este endpoint tiene como finalidad la creación del token de ThreeDS de manera individual, se debe tener en cuenta que solo se permite la creación de tokens para subscriptions que hayan sido previamente registrados en la creación del usuario para conusmir la API.\n\nEn caso de que el comercio (merchant) de ThreeDS ya exista y solo se desee asociar una o mas sucursales (branches) a dicho comercio, se pueden enviar los campos de \"merchantId\", \"merchantName\" y \"branches\"."
+        "description": "Este endpoint tiene como finalidad la creación del token de ThreeDS de manera individual, se debe tener en cuenta que solo se permite la creación de tokens para subscriptions que hayan sido previamente registrados en la creación del usuario para consumir la API.\n\nEn caso de que el comercio (merchant) de ThreeDS ya exista y solo se desee asociar una o mas sucursales (branches) a dicho comercio, se pueden enviar los campos de \"merchantId\", \"merchantName\" y \"branches\"."
       },
       "parameters": [
         {
