@@ -4617,7 +4617,9 @@
                     "x-stoplight": {
                       "id": "m4opsbc1uv0wo"
                     },
-                    "description": "ID del medio de pago del sitio en rest al cual se le quiere ligar el token de ThreeDS."
+                    "description": "ID del medio de pago del sitio en rest al cual se le quiere ligar el token de ThreeDS.",
+                    "example": 11238,
+                    "maximum": 999999999999999
                   },
                   "threeDsToken": {
                     "type": "string",
