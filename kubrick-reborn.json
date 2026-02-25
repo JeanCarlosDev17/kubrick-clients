@@ -4557,7 +4557,6 @@
     "/api/site/payment-methods/add-three-ds-token": {
       "post": {
         "summary": "add three ds token to site payment method",
-        "tags": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -4643,7 +4642,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "SitePaymentMethods"
+        ]
       }
     }
   },
