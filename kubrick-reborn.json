@@ -470,7 +470,7 @@
                       "restUserGroupsSettings": [
                         "GROUP_INVITATIONS"
                       ],
-                      "filters":{
+                      "filters": {
                         "roles": [
                           1,
                           17
@@ -1579,7 +1579,7 @@
                     "x-stoplight": {
                       "id": "vag1rf8eq84jz"
                     },
-                    "description": "Nombre del comercio en ThreeDS.",
+                    "description": "Nombre del comercio en ThreeDS. (Este campo no se envía cuando se trata de una creación de sucursal (branch) para un merchant existente)",
                     "example": "Merchant Example Name",
                     "maxLength": 80
                   },
@@ -1589,7 +1589,7 @@
                       "id": "110x3ndbec7y2"
                     },
                     "example": "ThreeDS brand example",
-                    "description": "Marca del comercio de 3DS."
+                    "description": "Marca del comercio de 3DS. (Este campo no se envía cuando se trata de una creación de sucursal (branch) para un merchant existente)"
                   },
                   "country": {
                     "type": "string",
@@ -1597,7 +1597,7 @@
                       "id": "qj8ki55kxgy4u"
                     },
                     "example": "COL",
-                    "description": "Codigo País de origen del comercio ISO 3166-1 alpha-3.",
+                    "description": "Codigo País de origen del comercio ISO 3166-1 alpha-3. (Este campo no se envía cuando se trata de una creación de sucursal (branch) para un merchant existente)",
                     "minLength": 3,
                     "maxLength": 3
                   },
@@ -1607,7 +1607,7 @@
                       "id": "ew35dzm8q64yi"
                     },
                     "example": "COP",
-                    "description": "Moneda predeterminada codigo ISO 4217."
+                    "description": "Moneda predeterminada codigo ISO 4217. (Este campo no se envía cuando se trata de una creación de sucursal (branch) para un merchant existente)"
                   },
                   "url": {
                     "type": "string",
@@ -1615,7 +1615,7 @@
                       "id": "l5aolynpyzuhb"
                     },
                     "example": "https://example.com",
-                    "description": "URL del comercio."
+                    "description": "URL del comercio. (Este campo no se envía cuando se trata de una creación de sucursal (branch) para un merchant existente)"
                   },
                   "mcc": {
                     "type": "integer",
@@ -1623,7 +1623,7 @@
                       "id": "mgq1u3uhjva5h"
                     },
                     "example": 742,
-                    "description": "Código de actividad económica."
+                    "description": "Código de actividad económica. (Este campo no se envía cuando se trata de una creación de sucursal (branch) para un merchant existente)"
                   },
                   "isicClass": {
                     "type": "integer",
@@ -1631,14 +1631,14 @@
                       "id": "k57ehmso0qhid"
                     },
                     "example": 111,
-                    "description": "Código clase CIIU."
+                    "description": "Código clase CIIU. (Este campo no se envía cuando se trata de una creación de sucursal (branch) para un merchant existente)"
                   },
                   "allyName": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "hoc7o2axmr21q"
                     },
-                    "description": "Nombre del aliado comercial registrado en MPI.",
+                    "description": "Nombre del aliado comercial registrado en MPI. (Este campo no se envía cuando se trata de una creación de sucursal (branch) para un merchant existente)",
                     "example": "Edward Elric",
                     "maxLength": 30
                   },
@@ -1646,7 +1646,7 @@
                     "x-stoplight": {
                       "id": "xzmvqinp0jw4a"
                     },
-                    "description": "Objeto que contiene la información de los bines para los cuales va a ser creado el token de ThreeDS, para dichos bines su uso esta limitados a los que se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario).",
+                    "description": "Objeto que contiene la información de los bines para los cuales va a ser creado el token de ThreeDS, para dichos bines su uso esta limitados a los que se registran y se asocian al momento de crear el usuario (En caso de no enviarse este objeto, el token se creará para todos los bines que tiene relacionado el usuario). (Este campo no se envía cuando se trata de una creación de sucursal (branch) para un merchant existente)",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/subscription",
@@ -1659,18 +1659,39 @@
                     "$ref": "#/components/schemas/document",
                     "x-stoplight": {
                       "id": "4rpdz4bsjwbt4"
-                    }
+                    },
+                    "description": "(Este campo no se envía cuando se trata de una creación de sucursal (branch) para un merchant existente)"
                   },
                   "branches": {
                     "$ref": "#/components/schemas/branches",
                     "x-stoplight": {
                       "id": "5c3xl0joedi4l"
                     }
+                  },
+                  "merchantId": {
+                    "type": "integer",
+                    "x-stoplight": {
+                      "id": "y2c7j18u95f3j"
+                    },
+                    "description": "Este campo indica el ID del merchant existente al cual se le desea ligar la sucursal (branch), este campo solo se debe enviar en caso de que el comercio ya exista.",
+                    "minimum": 1,
+                    "maximum": 999999999,
+                    "example": 5246
+                  },
+                  "merchantName": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "0excczjv18g3r"
+                    },
+                    "description": "Este campo indica el nombre del merchant existente al cual se le desea ligar la sucursal (branch), este campo solo se debe enviar en caso de que el comercio ya exista.",
+                    "minLength": 3,
+                    "maxLength": 90,
+                    "example": "Existing Merchant Demo"
                   }
                 }
               },
               "examples": {
-                "Example 1": {
+                "Creación de comercio nuevo con sucursales": {
                   "value": {
                     "name": "Merchant Example Name",
                     "brand": "ThreeDS brand example",
@@ -1708,6 +1729,28 @@
                       }
                     ]
                   }
+                },
+                "Creación de sucursales para un comercio existente": {
+                  "value": {
+                    "branches": [
+                      {
+                        "name": "ThreeDS Branch Name",
+                        "brand": "branch brand example",
+                        "country": "COL",
+                        "currency": "COP",
+                        "url": "https://www.branch-url.com",
+                        "subscriptions": [
+                          {
+                            "franchise": "visa",
+                            "acquirerBIN": 499999,
+                            "merchantCode": "125899"
+                          }
+                        ]
+                      }
+                    ],
+                    "merchantId": 5246,
+                    "merchantName": "Existing Merchant Demo"
+                  }
                 }
               }
             }
@@ -1716,7 +1759,7 @@
         "tags": [
           "ThreeDS"
         ],
-        "description": "Este endpoint tiene como finalidad la creación del token de ThreeDS de manera individual, se debe tener en cuenta que solo se permite la creación de tokens para subscriptions que hayan sido previamente registrados en la creación del usuario para conusmir la API."
+        "description": "Este endpoint tiene como finalidad la creación del token de ThreeDS de manera individual, se debe tener en cuenta que solo se permite la creación de tokens para subscriptions que hayan sido previamente registrados en la creación del usuario para consumir la API.\n\nEn caso de que el comercio (merchant) de ThreeDS ya exista y solo se desee asociar una o mas sucursales (branches) a dicho comercio, se pueden enviar los campos de \"merchantId\", \"merchantName\" y \"branches\"."
       },
       "parameters": [
         {
@@ -4509,6 +4552,100 @@
           }
         },
         "description": "Este servicio permite actualizar los datos de un comercio existente. "
+      }
+    },
+    "/api/site/payment-methods/add-three-ds-token": {
+      "post": {
+        "summary": "add three ds token to site payment method",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RU",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-02-23T16:57:55+00:00"
+                      },
+                      "requestId": 533
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "requestId": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RU",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-02-23T16:57:55+00:00"
+                      },
+                      "requestId": 533
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-api-site-payment-methods-add-three-ds-token",
+        "x-stoplight": {
+          "id": "q5vwe3bsjjsqw"
+        },
+        "description": "A través de este endpoint se puede configurar un token de ThreeDS en un medio de pago de Rest.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "paymentMethodId": {
+                    "type": "integer",
+                    "x-stoplight": {
+                      "id": "m4opsbc1uv0wo"
+                    },
+                    "description": "ID del medio de pago del sitio en rest al cual se le quiere ligar el token de ThreeDS.",
+                    "example": 11238,
+                    "maximum": 999999999999999
+                  },
+                  "threeDsToken": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "fdrj5qfqlf0jj"
+                    },
+                    "minLength": 100,
+                    "maxLength": 1500,
+                    "description": "Token de la sucursal (Branch) de ThreeDS que se desea configurar en el medio de pago del sitio."
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "paymentMethodId": 112526,
+                    "threeDsToken": "fake-token-prueba-000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "SitePaymentMethods"
+        ]
       }
     }
   },
