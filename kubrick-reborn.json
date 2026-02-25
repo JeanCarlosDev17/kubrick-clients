@@ -1732,25 +1732,6 @@
                 },
                 "Creación de sucursales para un comercio existente": {
                   "value": {
-                    "name": "Merchant Example Name",
-                    "brand": "ThreeDS brand example",
-                    "country": "COL",
-                    "currency": "COP",
-                    "url": "https://example.com",
-                    "mcc": 742,
-                    "isicClass": 111,
-                    "allyName": "Edward Elric",
-                    "subscriptions": [
-                      {
-                        "franchise": "visa",
-                        "acquirerBIN": 400111,
-                        "merchantCode": 46416456
-                      }
-                    ],
-                    "document": {
-                      "type": "CC",
-                      "number": "900299823"
-                    },
                     "branches": [
                       {
                         "name": "ThreeDS Branch Name",
