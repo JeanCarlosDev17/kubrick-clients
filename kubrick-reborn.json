@@ -4614,13 +4614,13 @@
                 "type": "object",
                 "properties": {
                   "paymentMethodId": {
-                    "type": "integer",
+                    "type": "string",
                     "x-stoplight": {
                       "id": "m4opsbc1uv0wo"
                     },
-                    "minimum": 1,
-                    "maximum": 100000000000000000000,
-                    "description": "ID del medio de pago del sitio en rest al cual se le quiere ligar el token de ThreeDS."
+                    "description": "ID del medio de pago del sitio en rest al cual se le quiere ligar el token de ThreeDS.",
+                    "minLength": 1,
+                    "maxLength": 20
                   },
                   "threeDsToken": {
                     "type": "string",
