@@ -4684,7 +4684,7 @@
                     },
                     "requestId": {
                       "type": "integer",
-                      "description": "Estado de la petición en Kubrick."
+                      "description": "Identificador de la petición."
                     },
                     "token": {
                       "type": "string",
