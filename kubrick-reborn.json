@@ -4647,6 +4647,224 @@
           "SitePaymentMethods"
         ]
       }
+    },
+    "/api/three-ds/create-token": {
+      "post": {
+        "summary": "create token",
+        "tags": [
+          "ThreeDS"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RS",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-02-26T15:44:19+00:00"
+                      },
+                      "requestId": 545,
+                      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMjE3ZDc3N2Q1NjdiMWI0ZDQyMzllZTBkMGUxNDM2NTA3MzcwNDNjNjEyMWE5YTUzYjU0MjgxYjJhY2FiNTY1NzM1Njk1MjcwODViZTJhM2EiLCJpYXQiOjE3NzIxMjA2NTkuODI1NTAxLCJuYmYiOjE3NzIxMjA2NTkuODI1NTA0LCJleHAiOjE4NjY3Mjg2NTkuNzcxNzQ3LCJzdWIiOiI0NiIsInNjb3BlcyI6W119.YPnSVOnSK_S1j4gNbUc3_JjZS4dNuMtuLukPlvBP4gCPb7HEjDwSOLZsnnODManj4JRpRXS-rz4W-xnwb-aG8NNSBMbqnyaex5jvS1zE_eRkNHkZLRC3Uwt4JZ9ZUxUT5OmsTv9VimoEp9TPGIDW185M_vacJrpbj5xTFmgNEZiD-Cx5YoONi8YC40_geJbory8Ze1234AhKxo_wgdFqDpEkk4FySc3uWTMmJIUufj693h72zic23PiJTFb3Q5HVBCSXLFGTEO89-Zkmrn51Fw0AyyS9xWQWJkmeI8Xe1YEnj2X2G--BsIvOswMrrxAR0W6V1XZJLhABld4VSv9_-A",
+                      "expiresAt": "2029-02-25T15:44:19+00:00"
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok",
+                      "x-stoplight": {
+                        "id": "9obdwe2ryisvk"
+                      }
+                    },
+                    "requestId": {
+                      "type": "integer",
+                      "description": "Estado de la petición en Kubrick."
+                    },
+                    "token": {
+                      "type": "string",
+                      "description": "Token creado."
+                    },
+                    "expiresAt": {
+                      "type": "string",
+                      "description": "Fecha de expiración del token. (3 años)"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2024-02-08T23:15:08+00:00"
+                      },
+                      "requestId": 0,
+                      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOidwdwIxIiwianRpIjoiMjE3ZDc3N2Q1NjdiMWI0ZDQyMzllZTBkMGUxNDM2NTA3MzcwNDNjNjEyMWE5YTUzYjU0MjgxYjJhY2FiNTY1NzM1Njk1MjcwODViZTJhM2EiLCJpYXQiOjE3NzIxMjA2NTkuODI1NTAxLCJuYmYiOjE3NzIxMjA2NTkuODI1NTA0LCJleHAiOjE4NjY3Mjg2NTkuNzcxNzQ3LCJzdWIiOiI0NiIsInNjb3BlcyI6W119.YPnSVOnSK_S1j4gNbUc3_JjZS4dNuMtuLukPlvBP4gCPb7HEjDwSOLZsnnODManj4JRpRXS-rz4W-xnwb-aG8NNSBMbqnyaexRC3Uwt4JZ9ZUxUT5OmsTv9VimoEp9TPGIDW185M_vacJrpbj5xTFmgNEZiD-Cx5YoONi8YC40_geJbory8Ze1234AhKxo_wgdFqDpEkk4FySc3uWTMmJIUufj693h72zic23PiJTFb3Q5HVBCSXLFGTEO89-Zkmrn51Fw0AyyS9xWQWJkmeI8Xe1YEnj2X2G--BsIvOswMrrxAR0W6V1XZJLhABld4VSv9_-A",
+                      "expiresAt": "2029-02-25T15:44:19+00:00"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-api-three-ds-create-token",
+        "x-stoplight": {
+          "id": "ry6ihtt58ixgm"
+        },
+        "description": "Este endpoint permite crear un token asociado a una sucursal de ThreeDS (Branch).",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "threeDsBranchId": "3745",
+                    "threeDsTokenName": "Kubrick Test Token"
+                  }
+                },
+                "required": [
+                  "threeDsBranchId",
+                  "threeDsTokenName"
+                ],
+                "properties": {
+                  "threeDsBranchId": {
+                    "type": "string",
+                    "description": "ID de la sucursal a la cual se le va a asginar el nuevo token.",
+                    "minLength": 1,
+                    "maxLength": 255,
+                    "pattern": "/^\\d+$/"
+                  },
+                  "threeDsTokenName": {
+                    "type": "string",
+                    "description": "Nombre del nuevo token.",
+                    "minLength": 1,
+                    "maxLength": 255
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "threeDsBranchId": "6859",
+                    "threeDsTokenName": "Kubrick Test Token"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/three-ds/revoke-token": {
+      "post": {
+        "summary": "Revoke token",
+        "tags": [
+          "ThreeDS"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RS",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-02-26T15:51:22+00:00"
+                      },
+                      "requestId": 547
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok",
+                      "x-stoplight": {
+                        "id": "smy96i47fa7do"
+                      }
+                    },
+                    "requestId": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2024-02-08T23:15:08+00:00"
+                      },
+                      "requestId": 231
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-api-three-ds-revoke-token",
+        "x-stoplight": {
+          "id": "y5qyzbllhnfv7"
+        },
+        "description": "Este endpoint permite revocar un token asociado a una sucursal de ThreeDS (Branch).",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "threeDsBranchId": "3745",
+                    "threeDsToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMjE3ZDc3N2Q1NjdiMWI0ZDQyMzllZTBkMGUxNDM2NTA3MzcwNDNjNjEyMWE5YTUzYjU0MjgxYjJhY2FiNTY1NzM1Njk1MjcwODViZTJhM2EiLCJpYXQiOjE3NzIxMjA2NTkuODI1NTAxLCJuYmYiOjE3NzIxMjA2NTkuODI1NTA0LCJleHAiOjE4NjY3Mjg2NTkuNzcxNzQ3LCJzdWIiOiI0NiIsInNjb3BlcyI6W119.YPnSVOnSK_S1j4gNbUc3_JjZS4dNuMtuLukPlvBP4gCPb7HEjDwSOLZsnnODManj4JRpRXS-rz4W-xnwb-aG8NNSBMbqnyaex5jvS1zE_eRkNHkZLRC3Uwt4JZ9ZUxUT5OmsTv9VimoEp9TPGIDW185M_vacJrpbj5xTFmgNEZiD-Cx5YoONi8YC40_geJbory8Ze1234AhKxo_wgdFqDpEkk4FySc3uWTMmJIUufj693h72zic23PiJTFb3Q5HVBCSXLFGTEO89-Zkmrn51Fw0AyyS9xWQWJkmeI8Xe1YEnj2X2G--BsIvOswMrrxAR0W6V1XZJLhABld4VSv9_-A"
+                  }
+                },
+                "required": [
+                  "threeDsBranchId",
+                  "threeDsToken"
+                ],
+                "properties": {
+                  "threeDsBranchId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255,
+                    "pattern": "/^\\d+$/",
+                    "description": "ID de la sucursal a la cual se le va a revocar el token."
+                  },
+                  "threeDsToken": {
+                    "type": "string",
+                    "minLength": 100,
+                    "maxLength": 1500,
+                    "description": "Token que se va a revocar."
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "threeDsBranchId": "9988",
+                    "threeDsToken": "eyJ0eXAiOiJKV1QwdwdwssszwkowkdiJ9.eyJhdWQiOiIxIiwianRpIjoiMjE3ZDc3N2Q1NjdiMWI0ZDQyMzllZTBkMGUxNDM2NTA3MzcwNDNjNjEyMWE5YTUzYjU0MjgxYjJhY2FiNTY1NzM1Njk1MjcwODViZTJhM2EiLCJpYXQiOjE3NzIxMjA2NTkuODI1NTAxLCJuYmYiOjE3NzIxMjA2NTkuODI1NTA0LCJleHAiOjE4NjY3Mjg2NTkuNzcxNzQ3LCJzdWIiOiI0NiIsInNjb3BlcyI6W119.YPnSVOnSK_S1j4gNbUc3_JjZS4dNuMtuLukPlvBP4gCPb7HEjDwSOLZsnnODManj4JRpRXS-rz4W-xnwb-aG8NNSBM3Uwt4JZ9ZUxUT5OmsTv9VimoEp9TPGIDW185M_vacJrpbj5xTFmgNEZiD-Cx5YoONi8YC40_geJbory8Ze1234AhKxo_wgdFqDpEkk4FySc3uWTMmJIUufj693h72zic23PiJTFb3Q5HVBCSXLFGTEO89-Zkmrn51Fw0AyyS9xWQWJkmeI8Xe1YEnj2X2G--BsIvOswMrrxAR0W6V1XZJLhABld4VSv9_-A"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
