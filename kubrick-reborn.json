@@ -4830,7 +4830,7 @@
                 "x-examples": {
                   "Example 1": {
                     "threeDsBranchId": "3745",
-                    "threeDsToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMjE3ZDc3N2Q1NjdiMWI0ZDQyMzllZTBkMGUxNDM2NTA3MzcwNDNjNjEyMWE5YTUzYjU0MjgxYjJhY2FiNTY1NzM1Njk1MjcwODViZTJhM2EiLCJpYXQiOjE3NzIxMjA2NTkuODI1NTAxLCJuYmYiOjE3NzIxMjA2NTkuODI1NTA0LCJleHAiOjE4NjY3Mjg2NTkuNzcxNzQ3LCJzdWIiOiI0NiIsInNjb3BlcyI6W119.YPnSVOnSK_S1j4gNbUc3_JjZS4dNuMtuLukPlvBP4gCPb7HEjDwSOLZsnnODManj4JRpRXS-rz4W-xnwb-aG8NNSBMbqnyaex5jvS1zE_eRkNHkZLRC3Uwt4JZ9ZUxUT5OmsTv9VimoEp9TPGIDW185M_vacJrpbj5xTFmgNEZiD-Cx5YoONi8YC40_geJbory8Ze1234AhKxo_wgdFqDpEkk4FySc3uWTMmJIUufj693h72zic23PiJTFb3Q5HVBCSXLFGTEO89-Zkmrn51Fw0AyyS9xWQWJkmeI8Xe1YEnj2X2G--BsIvOswMrrxAR0W6V1XZJLhABld4VSv9_-A"
+                    "threeDsToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6InBsYWNlaG9sZGVyIn0.fake-signature"
                   }
                 },
                 "required": [
