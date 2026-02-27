@@ -1597,7 +1597,7 @@
                       "id": "qj8ki55kxgy4u"
                     },
                     "example": "COL",
-                    "description": "Codigo País de origen del comercio ISO 3166-1 alpha-3. (Este campo no se envía cuando se trata de una creación de sucursal (branch) para un merchant existente)",
+                    "description": "Código País de origen del comercio ISO 3166-1 alpha-3. (Este campo no se envía cuando se trata de una creación de sucursal (branch) para un merchant existente)",
                     "minLength": 3,
                     "maxLength": 3
                   },
