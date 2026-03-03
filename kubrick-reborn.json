@@ -5190,7 +5190,7 @@
             },
             "example": "2025-09-25 00:15:48",
             "description": "fecha de expiracion del token de la sucursal"
-          },
+          }
         }
       },
       "billing": {
