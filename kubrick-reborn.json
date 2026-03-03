@@ -5191,13 +5191,6 @@
             "example": "2025-09-25 00:15:48",
             "description": "fecha de expiracion del token de la sucursal"
           },
-          "enrollment": {
-            "$ref": "#/components/schemas/enrollment",
-            "x-stoplight": {
-              "id": "0uslswtxkm46p"
-            },
-            "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
-          }
         }
       },
       "billing": {
@@ -9264,13 +9257,6 @@
             },
             "description": "Estado del recurso.",
             "example": "FINISHED"
-          },
-          "enrollment": {
-            "$ref": "#/components/schemas/enrollment",
-            "x-stoplight": {
-              "id": "x6as3uxf1tjkz"
-            },
-            "description": "Este objeto contiene la información del enrolamiento de Mastercard, en caso de no haberse solicitado enrolamiento, el campo tendrá un valor de null."
           },
           "branches": {
             "type": "array",
