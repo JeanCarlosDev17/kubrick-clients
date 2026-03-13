@@ -3824,7 +3824,7 @@
                     "type": "string",
                     "description": "Marca del comercio.",
                     "example": "Placetopay",
-                    "maxLength": 80
+                    "maxLength": 60
                   },
                   "mcc": {
                     "type": "string",
@@ -6370,7 +6370,7 @@
             },
             "description": "Marca del comercio.",
             "example": "Placetopay",
-            "maxLength": 50,
+            "maxLength": 60,
             "minLength": 1
           },
           "mcc": {
