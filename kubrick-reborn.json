@@ -6192,9 +6192,15 @@
           "id": "nesfzy39vxipd"
         },
         "type": "object",
+        "examples": [
+          {
+            "documentType": "CC",
+            "document": "1037854200",
+            "name": "Ricardo",
+            "surname": "García"
+          }
+        ],
         "required": [
-          "documentType",
-          "document",
           "name",
           "surname"
         ],
@@ -6267,15 +6273,7 @@
             "maxLength": 30,
             "minLength": 1
           }
-        },
-        "examples": [
-          {
-            "documentType": "CC",
-            "document": "1037854200",
-            "name": "Ricardo",
-            "surname": "García"
-          }
-        ]
+        }
       },
       "language": {
         "title": "language",
