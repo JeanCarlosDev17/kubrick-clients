@@ -7793,7 +7793,13 @@
             "forceConversionCurrency": "ARS",
             "pseAggregatorModel": false,
             "collectionId": "5645648",
-            "accountVerification": true
+            "accountVerification": true,
+            "merchantid": "12345678",
+            "terminalId": "1234568",
+            "RUC": "MyRUC77",
+            "MID": "myMID77",
+            "apiKey": "api-key-xyz",
+            "apiSecret": "api-secret-xyz"
           }
         ],
         "properties": {
@@ -7961,14 +7967,17 @@
               "id": "umm0pmb2lrfnd"
             },
             "maxLength": 36,
-            "description": "Identificador del comercio. Es un dato que comparten varios medios de pago, pero su longitud cambia según cuál uses: para DeUna son exactamente 8 dígitos numéricos; para Alia, Datafast, Medianet y Austro son hasta 36 caracteres entre letras y números."
+            "description": "Identificador del comercio. Es un dato que comparten varios medios de pago, pero su longitud cambia según cuál uses: para DeUna son exactamente 8 dígitos numéricos; para Alia, Datafast, Medianet y Austro son hasta 36 caracteres entre letras y números.",
+            "example": "12345678"
           },
           "terminalId": {
             "type": "string",
             "x-stoplight": {
               "id": "zblq5qov89r47"
             },
-            "description": "identificador de la terminal del comercio donde se procesan los pagos. "
+            "description": "identificador de la terminal del comercio donde se procesan los pagos. ",
+            "maxLength": 40,
+            "example": "1234568"
           },
           "RUC": {
             "type": "string",
@@ -7976,7 +7985,8 @@
               "id": "iuahjljp2fmxl"
             },
             "description": "número de RUC (Registro Único de Contribuyentes) del comercio en Ecuador.",
-            "maxLength": 20
+            "maxLength": 20,
+            "example": "MyRUC77"
           },
           "MID": {
             "type": "string",
@@ -7984,7 +7994,8 @@
               "id": "9f50f0qe4vqks"
             },
             "description": "identificador del comercio (Merchant ID) que le asigna la red de pagos.",
-            "maxLength": 20
+            "maxLength": 20,
+            "example": "myMID77"
           },
           "apiKey": {
             "type": "string",
@@ -7992,7 +8003,8 @@
               "id": "3mwhrcxoilz90"
             },
             "description": "llave de acceso que entrega el proveedor para conectarse con el medio de pago.",
-            "maxLength": 36
+            "maxLength": 36,
+            "example": "api-key-xyz"
           },
           "apiSecret": {
             "type": "string",
@@ -8000,7 +8012,8 @@
               "id": "ln6przsbefo8a"
             },
             "description": "llave secreta que acompaña a la llave de acceso y permite validar la conexión de forma segura.",
-            "maxLength": 36
+            "maxLength": 36,
+            "example": "api-secret-xyz"
           }
         }
       },
