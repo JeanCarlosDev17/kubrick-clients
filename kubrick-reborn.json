@@ -4865,6 +4865,2175 @@
           }
         }
       }
+    },
+    "/api/rest-tools/airline/search": {
+      "post": {
+        "summary": "airline search",
+        "operationId": "post-api-rest-tools-airline-search",
+        "description": "Este endpoint permite consultar las aerolíneas disponibles en PlacetoPay, filtrando por id o name; la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "tags": [
+          "Rest Tools"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Identificador de la aerolínea a buscar.",
+                    "example": 1
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Nombre de la aerolínea a buscar.",
+                    "example": "AIR CANADA Nacional"
+                  },
+                  "pagination": {
+                    "$ref": "#/components/schemas/pagination"
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "id": 1,
+                    "name": "AIR CANADA Nacional",
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "id": 1,
+                    "name": "AIR CANADA Nacional",
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "airlines": {
+                      "type": "array",
+                      "description": "Este array contiene los resultados de la busqueda con los parametros enviados en la petición, en caso de que no se encuentren coincidencias, este array estará vacío.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "Identificador de la aerolínea."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Nombre de la aerolínea."
+                          }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/pagination-response"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "airlines": [
+                        {
+                          "id": 1,
+                          "name": "AIR CANADA Nacional"
+                        },
+                        {
+                          "id": 2,
+                          "name": "AVIANCA Nacional"
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "airlines": [
+                        {
+                          "id": 1,
+                          "name": "AIR CANADA Nacional"
+                        },
+                        {
+                          "id": 2,
+                          "name": "AVIANCA Nacional"
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The id field must be an integer.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The id field must be an integer.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "ASE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "ASE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest-tools/conglomerate/search": {
+      "post": {
+        "summary": "conglomerate search",
+        "operationId": "post-api-rest-tools-conglomerate-search",
+        "description": "Este endpoint permite consultar los conglomerados disponibles en PlacetoPay, filtrando por id, name o brand; la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "tags": [
+          "Rest Tools"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Identificador del conglomerado a buscar.",
+                    "example": 1
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Nombre del conglomerado a buscar.",
+                    "example": "EGM CO"
+                  },
+                  "brand": {
+                    "type": "string",
+                    "description": "Marca del conglomerado a buscar.",
+                    "example": "EGM"
+                  },
+                  "pagination": {
+                    "$ref": "#/components/schemas/pagination"
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "id": 1,
+                    "name": "EGM CO",
+                    "brand": "EGM",
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "id": 1,
+                    "name": "EGM CO",
+                    "brand": "EGM",
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "conglomerates": {
+                      "type": "array",
+                      "description": "Este array contiene los resultados de la busqueda con los parametros enviados en la petición, en caso de que no se encuentren coincidencias, este array estará vacío.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "Identificador del conglomerado."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Nombre del conglomerado."
+                          },
+                          "brand": {
+                            "type": "string",
+                            "description": "Marca del conglomerado."
+                          }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/pagination-response"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "conglomerates": [
+                        {
+                          "id": 1,
+                          "name": "EGM CO",
+                          "brand": "EGM"
+                        },
+                        {
+                          "id": 2,
+                          "name": "EGM PR",
+                          "brand": "EGM"
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "conglomerates": [
+                        {
+                          "id": 1,
+                          "name": "EGM CO",
+                          "brand": "EGM"
+                        },
+                        {
+                          "id": 2,
+                          "name": "EGM PR",
+                          "brand": "EGM"
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The id field must be an integer.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The id field must be an integer.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "CSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "CSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest-tools/financial-entity/search": {
+      "post": {
+        "summary": "financial entity search",
+        "operationId": "post-api-rest-tools-financial-entity-search",
+        "description": "Este endpoint permite consultar las entidades financieras disponibles en PlacetoPay; la información se devuelve paginada. Este endpoint no dispone de filtros. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "tags": [
+          "Rest Tools"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pagination": {
+                    "$ref": "#/components/schemas/pagination"
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "financialEntities": {
+                      "type": "array",
+                      "description": "Este array contiene los resultados de la busqueda con los parametros enviados en la petición, en caso de que no se encuentren coincidencias, este array estará vacío.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "Identificador de la entidad financiera."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Nombre de la entidad financiera."
+                          },
+                          "disabled": {
+                            "type": "boolean",
+                            "description": "Indica si la entidad financiera se encuentra deshabilitada."
+                          }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/pagination-response"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "financialEntities": [
+                        {
+                          "id": 1,
+                          "name": "BANCOLOMBIA",
+                          "disabled": false
+                        },
+                        {
+                          "id": 2,
+                          "name": "BANCO DE BOGOTA",
+                          "disabled": false
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "financialEntities": [
+                        {
+                          "id": 1,
+                          "name": "BANCOLOMBIA",
+                          "disabled": false
+                        },
+                        {
+                          "id": 2,
+                          "name": "BANCO DE BOGOTA",
+                          "disabled": false
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The pagination.per page field is required when pagination is present.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The pagination.per page field is required when pagination is present.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FESE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FESE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest-tools/group/search": {
+      "post": {
+        "summary": "group search",
+        "operationId": "post-api-rest-tools-group-search",
+        "description": "Este endpoint permite consultar los grupos de usuario disponibles en PlacetoPay, filtrando por id o code; la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "tags": [
+          "Rest Tools"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Identificador del grupo a buscar.",
+                    "example": 1
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "Código del grupo a buscar.",
+                    "example": "GROUP_ROOT"
+                  },
+                  "pagination": {
+                    "$ref": "#/components/schemas/pagination"
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "id": 1,
+                    "code": "GROUP_ROOT",
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "id": 1,
+                    "code": "GROUP_ROOT",
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "Este array contiene los resultados de la busqueda con los parametros enviados en la petición, en caso de que no se encuentren coincidencias, este array estará vacío.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "Identificador del grupo."
+                          },
+                          "code": {
+                            "type": "string",
+                            "description": "Código del grupo."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Nombre del grupo."
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "Descripción del grupo."
+                          }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/pagination-response"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "groups": [
+                        {
+                          "id": 1,
+                          "code": "GROUP_ROOT",
+                          "name": "Superusuario",
+                          "description": "Usuario con todos los privilegios sobre la aplicación, incluyendo seguridad."
+                        },
+                        {
+                          "id": 2,
+                          "code": "GROUP_ADMIN",
+                          "name": "Administrador",
+                          "description": "Usuario con privilegios administrativos sobre la aplicación."
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "groups": [
+                        {
+                          "id": 1,
+                          "code": "GROUP_ROOT",
+                          "name": "Superusuario",
+                          "description": "Usuario con todos los privilegios sobre la aplicación, incluyendo seguridad."
+                        },
+                        {
+                          "id": 2,
+                          "code": "GROUP_ADMIN",
+                          "name": "Administrador",
+                          "description": "Usuario con privilegios administrativos sobre la aplicación."
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The id field must be an integer.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The id field must be an integer.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "GSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "GSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest-tools/payment-facilitator/search": {
+      "post": {
+        "summary": "payment facilitator search",
+        "operationId": "post-api-rest-tools-payment-facilitator-search",
+        "description": "Este endpoint permite consultar los facilitadores de pago disponibles en PlacetoPay, filtrando por id, name o active; la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "tags": [
+          "Rest Tools"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Identificador del facilitador de pago a buscar.",
+                    "example": 1
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Nombre del facilitador de pago a buscar.",
+                    "example": "Keeling-Bernier"
+                  },
+                  "active": {
+                    "type": "boolean",
+                    "description": "Indica si el facilitador de pago se encuentra activo o inactivo."
+                  },
+                  "pagination": {
+                    "$ref": "#/components/schemas/pagination"
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "id": 1,
+                    "name": "Keeling-Bernier",
+                    "active": true,
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "id": 1,
+                    "name": "Keeling-Bernier",
+                    "active": true,
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "paymentFacilitators": {
+                      "type": "array",
+                      "description": "Este array contiene los resultados de la busqueda con los parametros enviados en la petición, en caso de que no se encuentren coincidencias, este array estará vacío.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "Identificador del facilitador de pago."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Nombre del facilitador de pago."
+                          },
+                          "active": {
+                            "type": "boolean",
+                            "description": "Indica si el facilitador de pago se encuentra activo."
+                          },
+                          "country": {
+                            "type": "string",
+                            "description": "Código ISO 3166-1 alfa-2 del país del facilitador de pago."
+                          },
+                          "visa": {
+                            "type": "integer",
+                            "description": "Identificador del facilitador de pago ante Visa."
+                          },
+                          "mastercard": {
+                            "type": "integer",
+                            "description": "Identificador del facilitador de pago ante Mastercard."
+                          }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/pagination-response"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "paymentFacilitators": [
+                        {
+                          "id": 1,
+                          "name": "Keeling-Bernier",
+                          "active": true,
+                          "country": "CL",
+                          "visa": 1973076210,
+                          "mastercard": 963389732
+                        },
+                        {
+                          "id": 2,
+                          "name": "Kyle Walker",
+                          "active": true,
+                          "country": "CO",
+                          "visa": 1973076211,
+                          "mastercard": 963389733
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "paymentFacilitators": [
+                        {
+                          "id": 1,
+                          "name": "Keeling-Bernier",
+                          "active": true,
+                          "country": "CL",
+                          "visa": 1973076210,
+                          "mastercard": 963389732
+                        },
+                        {
+                          "id": 2,
+                          "name": "Kyle Walker",
+                          "active": true,
+                          "country": "CO",
+                          "visa": 1973076211,
+                          "mastercard": 963389733
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The active field must be true or false.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The active field must be true or false.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "PFSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "PFSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest-tools/province/search": {
+      "post": {
+        "summary": "province search",
+        "operationId": "post-api-rest-tools-province-search",
+        "description": "Este endpoint permite consultar las provincias disponibles en PlacetoPay, filtrando por el código del país (country); la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "tags": [
+          "Rest Tools"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "country": {
+                    "type": "string",
+                    "description": "Código ISO 3166-1 alfa-2 del país cuyas provincias se desean consultar (2 caracteres).",
+                    "example": "CO",
+                    "minLength": 2,
+                    "maxLength": 2
+                  },
+                  "pagination": {
+                    "$ref": "#/components/schemas/pagination"
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "country": "CO",
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "country": "CO",
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "provinces": {
+                      "type": "array",
+                      "description": "Este array contiene los resultados de la busqueda con los parametros enviados en la petición, en caso de que no se encuentren coincidencias, este array estará vacío.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "Identificador de la provincia."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Nombre de la provincia."
+                          },
+                          "short": {
+                            "type": "string",
+                            "description": "Nombre corto de la provincia."
+                          },
+                          "iso3166": {
+                            "type": "string",
+                            "description": "Código ISO 3166-2 de la provincia."
+                          },
+                          "country": {
+                            "type": "string",
+                            "description": "Código ISO 3166-1 alfa-2 del país al que pertenece la provincia."
+                          },
+                          "alias": {
+                            "type": "string",
+                            "description": "Alias o código local de la provincia."
+                          }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/pagination-response"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "provinces": [
+                        {
+                          "id": 1,
+                          "name": "Antioquia",
+                          "short": "ANT",
+                          "iso3166": "ANT",
+                          "country": "CO",
+                          "alias": "05"
+                        },
+                        {
+                          "id": 2,
+                          "name": "Cundinamarca",
+                          "short": "CUN",
+                          "iso3166": "CUN",
+                          "country": "CO",
+                          "alias": "25"
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "provinces": [
+                        {
+                          "id": 1,
+                          "name": "Antioquia",
+                          "short": "ANT",
+                          "iso3166": "ANT",
+                          "country": "CO",
+                          "alias": "05"
+                        },
+                        {
+                          "id": 2,
+                          "name": "Cundinamarca",
+                          "short": "CUN",
+                          "iso3166": "CUN",
+                          "country": "CO",
+                          "alias": "25"
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The country field must be 2 characters.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The country field must be 2 characters.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "PSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "PSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest-tools/reseller/search": {
+      "post": {
+        "summary": "reseller search",
+        "operationId": "post-api-rest-tools-reseller-search",
+        "description": "Este endpoint permite consultar los resellers disponibles en PlacetoPay; la información se devuelve paginada. Este endpoint no dispone de filtros. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "tags": [
+          "Rest Tools"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pagination": {
+                    "$ref": "#/components/schemas/pagination"
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "resellers": {
+                      "type": "array",
+                      "description": "Este array contiene los resultados de la busqueda con los parametros enviados en la petición, en caso de que no se encuentren coincidencias, este array estará vacío.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "Identificador del reseller."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Nombre del reseller."
+                          },
+                          "conditions": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Condiciones asociadas al reseller."
+                          },
+                          "enabled": {
+                            "type": "boolean",
+                            "description": "Indica si el reseller se encuentra habilitado."
+                          }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/pagination-response"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "resellers": [
+                        {
+                          "id": 1,
+                          "name": "PLACETOPAY",
+                          "conditions": null,
+                          "enabled": true
+                        },
+                        {
+                          "id": 2,
+                          "name": "EGM INGENIERIA",
+                          "conditions": null,
+                          "enabled": true
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "resellers": [
+                        {
+                          "id": 1,
+                          "name": "PLACETOPAY",
+                          "conditions": null,
+                          "enabled": true
+                        },
+                        {
+                          "id": 2,
+                          "name": "EGM INGENIERIA",
+                          "conditions": null,
+                          "enabled": true
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The pagination.per page field is required when pagination is present.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The pagination.per page field is required when pagination is present.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "RSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "RSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest-tools/seller/search": {
+      "post": {
+        "summary": "seller search",
+        "operationId": "post-api-rest-tools-seller-search",
+        "description": "Este endpoint permite consultar los sellers disponibles en PlacetoPay; la información se devuelve paginada. Este endpoint no dispone de filtros. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "tags": [
+          "Rest Tools"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pagination": {
+                    "$ref": "#/components/schemas/pagination"
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "sellers": {
+                      "type": "array",
+                      "description": "Este array contiene los resultados de la busqueda con los parametros enviados en la petición, en caso de que no se encuentren coincidencias, este array estará vacío.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "Identificador del seller."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Nombre del seller."
+                          },
+                          "alias": {
+                            "type": "string",
+                            "description": "Alias del seller."
+                          },
+                          "disabled": {
+                            "type": "boolean",
+                            "description": "Indica si el seller se encuentra deshabilitado."
+                          }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/pagination-response"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "sellers": [
+                        {
+                          "id": 1,
+                          "name": "John Doe",
+                          "alias": "EGM",
+                          "disabled": false
+                        },
+                        {
+                          "id": 2,
+                          "name": "Jane Doe",
+                          "alias": "PTP",
+                          "disabled": false
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      },
+                      "sellers": [
+                        {
+                          "id": 1,
+                          "name": "John Doe",
+                          "alias": "EGM",
+                          "disabled": false
+                        },
+                        {
+                          "id": 2,
+                          "name": "Jane Doe",
+                          "alias": "PTP",
+                          "disabled": false
+                        }
+                      ],
+                      "pagination": {
+                        "total": 2,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The pagination.per page field is required when pagination is present.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The pagination.per page field is required when pagination is present.",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "SSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "SSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-07-15T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -10203,6 +12372,41 @@
           "details": {
             "type": "null",
             "description": "En caso de que falle la creación del recurso, en este campo se podrá ver el detalle del error."
+          }
+        }
+      },
+      "pagination-response": {
+        "title": "pagination-response",
+        "type": "object",
+        "description": "Estructura de paginación que acompaña los resultados de las búsquedas paginadas.",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "example": 30,
+            "description": "Cantidad total de registros disponibles."
+          },
+          "perPage": {
+            "type": "integer",
+            "example": 15,
+            "description": "Cantidad de registros por página."
+          },
+          "currentPage": {
+            "type": "integer",
+            "example": 1,
+            "description": "Página actual."
+          },
+          "lastPage": {
+            "type": "integer",
+            "example": 2,
+            "description": "Última página disponible."
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "total": 30,
+            "perPage": 15,
+            "currentPage": 1,
+            "lastPage": 2
           }
         }
       }
