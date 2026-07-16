@@ -4870,7 +4870,7 @@
       "post": {
         "summary": "airline search",
         "operationId": "post-api-rest-tools-airline-search",
-        "description": "Este endpoint permite consultar las aerolíneas disponibles en PlacetoPay, filtrando por id o name; la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "description": "Este endpoint permite consultar las aerolíneas disponibles en Placetopay, filtrando por id o name; la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
         "tags": [
           "Rest Tools"
         ],
@@ -5129,7 +5129,7 @@
       "post": {
         "summary": "conglomerate search",
         "operationId": "post-api-rest-tools-conglomerate-search",
-        "description": "Este endpoint permite consultar los conglomerados disponibles en PlacetoPay, filtrando por id, name o brand; la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "description": "Este endpoint permite consultar los conglomerados disponibles en Placetopay, filtrando por id, name o brand; la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
         "tags": [
           "Rest Tools"
         ],
@@ -5403,7 +5403,7 @@
       "post": {
         "summary": "financial entity search",
         "operationId": "post-api-rest-tools-financial-entity-search",
-        "description": "Este endpoint permite consultar las entidades financieras disponibles en PlacetoPay; la información se devuelve paginada. Este endpoint no dispone de filtros. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "description": "Este endpoint permite consultar las entidades financieras disponibles en Placetopay; la información se devuelve paginada. Este endpoint no dispone de filtros. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
         "tags": [
           "Rest Tools"
         ],
@@ -5656,7 +5656,7 @@
       "post": {
         "summary": "group search",
         "operationId": "post-api-rest-tools-group-search",
-        "description": "Este endpoint permite consultar los grupos de usuario disponibles en PlacetoPay, filtrando por id o code; la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "description": "Este endpoint permite consultar los grupos de usuario disponibles en Placetopay, filtrando por id o code; la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
         "tags": [
           "Rest Tools"
         ],
@@ -5931,7 +5931,7 @@
       "post": {
         "summary": "payment facilitator search",
         "operationId": "post-api-rest-tools-payment-facilitator-search",
-        "description": "Este endpoint permite consultar los facilitadores de pago disponibles en PlacetoPay, filtrando por id, name o active; la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "description": "Este endpoint permite consultar los facilitadores de pago disponibles en Placetopay, filtrando por id, name o active; la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
         "tags": [
           "Rest Tools"
         ],
@@ -6228,7 +6228,7 @@
       "post": {
         "summary": "province search",
         "operationId": "post-api-rest-tools-province-search",
-        "description": "Este endpoint permite consultar las provincias disponibles en PlacetoPay, filtrando por el código del país (country); la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "description": "Este endpoint permite consultar las provincias disponibles en Placetopay, filtrando por el código del país (country); la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
         "tags": [
           "Rest Tools"
         ],
@@ -6514,7 +6514,7 @@
       "post": {
         "summary": "reseller search",
         "operationId": "post-api-rest-tools-reseller-search",
-        "description": "Este endpoint permite consultar los resellers disponibles en PlacetoPay; la información se devuelve paginada. Este endpoint no dispone de filtros. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "description": "Este endpoint permite consultar los resellers disponibles en Placetopay; la información se devuelve paginada. Este endpoint no dispone de filtros. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
         "tags": [
           "Rest Tools"
         ],
@@ -6778,7 +6778,7 @@
       "post": {
         "summary": "seller search",
         "operationId": "post-api-rest-tools-seller-search",
-        "description": "Este endpoint permite consultar los sellers disponibles en PlacetoPay; la información se devuelve paginada. Este endpoint no dispone de filtros. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
+        "description": "Este endpoint permite consultar los sellers disponibles en Placetopay; la información se devuelve paginada. Este endpoint no dispone de filtros. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos.",
         "tags": [
           "Rest Tools"
         ],
