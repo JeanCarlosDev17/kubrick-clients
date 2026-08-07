@@ -9941,6 +9941,36 @@
         },
         "type": "object",
         "description": "Objeto que contiene los parametros adicionales para la creación del certificado de Credibanco y la configuración de medio de pago PSE.",
+        "examples": [
+          {
+            "retailCode": "011211406",
+            "terminalLocation": "Medellín",
+            "terminalNumber": "00031431",
+            "username": "UserExample",
+            "password": "passwordExample",
+            "pfxID": 1,
+            "entityCode": "9002992280",
+            "serviceCode": "001",
+            "merchantCode": "1269189",
+            "isEcommerce": true,
+            "agreement": 12,
+            "agreementName": "Placetopay",
+            "iacCode": "33456564",
+            "acceptChecks": true,
+            "disableBlocks": "ath_cajas_exito, ath_efecty",
+            "hash": "456445646asdf52fd",
+            "forceConversionCurrency": "ARS",
+            "pseAggregatorModel": false,
+            "collectionId": "5645648",
+            "accountVerification": true,
+            "merchantid": "12345678",
+            "terminalId": "1234568",
+            "RUC": "MyRUC77",
+            "MID": "myMID77",
+            "apiKey": "api-key-xyz",
+            "apiSecret": "api-secret-xyz"
+          }
+        ],
         "properties": {
           "retailCode": {
             "type": "string",
@@ -10099,32 +10129,62 @@
               "id": "coke359km76y2"
             },
             "default": true
+          },
+          "merchantid": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "umm0pmb2lrfnd"
+            },
+            "maxLength": 36,
+            "description": "Identificador del comercio. Es un dato que comparten varios medios de pago, pero su longitud cambia según cuál uses: para DeUna son exactamente 8 dígitos numéricos; para Alia, Datafast, Medianet y Austro son hasta 36 caracteres entre letras y números.",
+            "example": "12345678"
+          },
+          "terminalId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "zblq5qov89r47"
+            },
+            "description": "identificador de la terminal del comercio donde se procesan los pagos. ",
+            "maxLength": 40,
+            "example": "1234568"
+          },
+          "RUC": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "iuahjljp2fmxl"
+            },
+            "description": "número de RUC (Registro Único de Contribuyentes) del comercio en Ecuador.",
+            "maxLength": 20,
+            "example": "MyRUC77"
+          },
+          "MID": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "9f50f0qe4vqks"
+            },
+            "description": "identificador del comercio (Merchant ID) que le asigna la red de pagos.",
+            "maxLength": 20,
+            "example": "myMID77"
+          },
+          "apiKey": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "3mwhrcxoilz90"
+            },
+            "description": "llave de acceso que entrega el proveedor para conectarse con el medio de pago.",
+            "maxLength": 36,
+            "example": "api-key-xyz"
+          },
+          "apiSecret": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ln6przsbefo8a"
+            },
+            "description": "llave secreta que acompaña a la llave de acceso y permite validar la conexión de forma segura.",
+            "maxLength": 36,
+            "example": "api-secret-xyz"
           }
-        },
-        "examples": [
-          {
-            "retailCode": "011211406",
-            "terminalLocation": "Medellín",
-            "terminalNumber": "00031431",
-            "username": "UserExample",
-            "password": "passwordExample",
-            "pfxID": 1,
-            "entityCode": "9002992280",
-            "serviceCode": "001",
-            "merchantCode": "1269189",
-            "isEcommerce": true,
-            "agreement": 12,
-            "agreementName": "Placetopay",
-            "iacCode": "33456564",
-            "acceptChecks": true,
-            "disableBlocks": "ath_cajas_exito, ath_efecty",
-            "hash": "456445646asdf52fd",
-            "forceConversionCurrency": "ARS",
-            "pseAggregatorModel": false,
-            "collectionId": "5645648",
-            "accountVerification": true
-          }
-        ]
+        }
       },
       "site": {
         "title": "site",
