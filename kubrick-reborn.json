@@ -7167,7 +7167,8 @@
               "id": "rac9i6hapl1r2"
             },
             "example": "ThreeDS Branch Name",
-            "description": "Nombre a asignar a la rama de ThreeDS."
+            "description": "Nombre a asignar a la rama de ThreeDS.",
+            "maxLength": 80
           },
           "brand": {
             "type": "string",
@@ -7175,7 +7176,8 @@
               "id": "6ty0xwxf2v5kz"
             },
             "example": "branch brand example",
-            "description": "Marca de la rama."
+            "description": "Marca de la rama.",
+            "maxLength": 25
           },
           "country": {
             "$ref": "#/components/schemas/country-alpha-three",
@@ -11283,7 +11285,8 @@
               "id": "pq8c4lqdz3iov"
             },
             "description": "Marca del comercio de 3DS.",
-            "example": "ThreeDS brand example"
+            "example": "ThreeDS brand example",
+            "maxLength": 25
           },
           "country": {
             "$ref": "#/components/schemas/country-alpha-three",
