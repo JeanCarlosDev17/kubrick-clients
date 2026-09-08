@@ -9191,6 +9191,31 @@
               "CLOSED"
             ]
           },
+          "discountCode": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "prd2029disc1"
+            },
+            "description": "Código de descuento de ley aplicable al micrositio. Valores permitidos: 0 (No devuelve impuestos), 17934 (Servicios Gastronómicos), 18083 (IMESI Brasil-Argentina), 19210 (Inclusión Financiera), 18910 (Asignaciones Familiares), 18999 (Reintegro Inmobiliarias).",
+            "enum": [
+              0,
+              17934,
+              18083,
+              19210,
+              18910,
+              18999
+            ],
+            "example": 17934
+          },
+          "invoice": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "prd2029inv01"
+            },
+            "description": "Número de factura asociado al micrositio.",
+            "maxLength": 10,
+            "example": "FAC-123456"
+          },
           "allowPartial": {
             "type": "boolean",
             "x-stoplight": {
