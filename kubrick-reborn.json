@@ -4648,6 +4648,400 @@
         ]
       }
     },
+    "/api/site/payment-methods/search": {
+      "post": {
+        "summary": "site payment methods search",
+        "operationId": "post-api-site-payment-methods-search",
+        "description": "Este endpoint permite consultar los medios de pago de los sitios en Placetopay, filtrando por siteId, id, name, code o franchise; todos los filtros son opcionales y la información se devuelve paginada. Si no se envía el objeto pagination, se aplica la paginación por defecto (perPage: 15, currentPage: 1); si se envía, los campos perPage y currentPage son requeridos. Cada consulta genera un requestId que se devuelve en la respuesta; la petición solo queda en estado FAILED cuando ocurre un error interno (respuestas 500).",
+        "tags": [
+          "SitePaymentMethods"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "siteId": {
+                    "type": "integer",
+                    "description": "Identificador del sitio del que se quieren consultar los medios de pago.",
+                    "example": 17
+                  },
+                  "id": {
+                    "type": "integer",
+                    "description": "Identificador del medio de pago a buscar.",
+                    "example": 1717
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Nombre del medio de pago a buscar.",
+                    "example": "MasterCard",
+                    "minLength": 3,
+                    "maxLength": 50
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "Código identificador del medio de pago a buscar.",
+                    "example": "RM_MC",
+                    "maxLength": 5
+                  },
+                  "franchise": {
+                    "type": "string",
+                    "description": "Franquicia del medio de pago a buscar.",
+                    "example": "MASTERCARD"
+                  },
+                  "pagination": {
+                    "$ref": "#/components/schemas/pagination"
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "siteId": 17,
+                    "id": 1717,
+                    "name": "MasterCard",
+                    "code": "RM_MC",
+                    "franchise": "MASTERCARD",
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "siteId": 17,
+                    "id": 1717,
+                    "name": "MasterCard",
+                    "code": "RM_MC",
+                    "franchise": "MASTERCARD",
+                    "pagination": {
+                      "perPage": 15,
+                      "currentPage": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "paymentMethods": {
+                      "type": "array",
+                      "description": "Este array contiene los resultados de la busqueda con los parametros enviados en la petición, en caso de que no se encuentren coincidencias, este array estará vacío.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "Identificador del medio de pago del sitio."
+                          },
+                          "customerPaymentId": {
+                            "type": "integer",
+                            "description": "Identificador del medio de pago del comercio al que pertenece."
+                          },
+                          "siteId": {
+                            "type": "integer",
+                            "description": "Identificador del sitio."
+                          },
+                          "code": {
+                            "type": "string",
+                            "description": "Código identificador del medio de pago."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Nombre del medio de pago."
+                          },
+                          "minAmount": {
+                            "type": "number",
+                            "description": "Monto mínimo permitido."
+                          },
+                          "maxAmount": {
+                            "type": "number",
+                            "description": "Monto máximo permitido."
+                          },
+                          "commissionModel": {
+                            "type": "string",
+                            "description": "Modelo de comisión."
+                          },
+                          "commissionValue": {
+                            "type": "number",
+                            "description": "Valor de la comisión."
+                          },
+                          "accountNumber": {
+                            "type": "string",
+                            "description": "Número de cuenta."
+                          },
+                          "accountType": {
+                            "type": "integer",
+                            "description": "Tipo de cuenta."
+                          },
+                          "franchise": {
+                            "type": "string",
+                            "description": "Franquicia del medio de pago."
+                          },
+                          "financialEntity": {
+                            "type": "integer",
+                            "description": "Identificador de la entidad financiera."
+                          },
+                          "order": {
+                            "type": "integer",
+                            "description": "Orden en el que se muestra el medio de pago."
+                          },
+                          "disabled": {
+                            "type": "boolean",
+                            "description": "Indica si el medio de pago está deshabilitado."
+                          },
+                          "settings": {
+                            "type": "object",
+                            "description": "Configuraciones propias del medio de pago."
+                          },
+                          "creditRules": {
+                            "type": "object",
+                            "description": "Reglas de crédito del medio de pago."
+                          }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/pagination-response"
+                    },
+                    "requestId": {
+                      "type": "integer",
+                      "description": "Identificador de la petición registrada en Kubrick."
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-10-02T10:00:00+00:00"
+                      },
+                      "paymentMethods": [
+                        {
+                          "id": 1717,
+                          "customerPaymentId": 1,
+                          "siteId": 17,
+                          "code": "RM_MC",
+                          "name": "MasterCard",
+                          "minAmount": 100,
+                          "maxAmount": 999999.99,
+                          "commissionModel": "F",
+                          "commissionValue": 1,
+                          "accountNumber": "123456878890",
+                          "accountType": 1,
+                          "franchise": "MASTERCARD",
+                          "financialEntity": 1,
+                          "order": 1,
+                          "disabled": false,
+                          "settings": {
+                            "allowedCardTypes": [
+                              "C",
+                              "P"
+                            ]
+                          },
+                          "creditRules": {}
+                        }
+                      ],
+                      "pagination": {
+                        "total": 1,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      },
+                      "requestId": 1717
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-10-02T10:00:00+00:00"
+                      },
+                      "paymentMethods": [
+                        {
+                          "id": 1717,
+                          "customerPaymentId": 1,
+                          "siteId": 17,
+                          "code": "RM_MC",
+                          "name": "MasterCard",
+                          "minAmount": 100,
+                          "maxAmount": 999999.99,
+                          "commissionModel": "F",
+                          "commissionValue": 1,
+                          "accountNumber": "123456878890",
+                          "accountType": 1,
+                          "franchise": "MASTERCARD",
+                          "financialEntity": 1,
+                          "order": 1,
+                          "disabled": false,
+                          "settings": {
+                            "allowedCardTypes": [
+                              "C",
+                              "P"
+                            ]
+                          },
+                          "creditRules": {}
+                        }
+                      ],
+                      "pagination": {
+                        "total": 1,
+                        "perPage": 15,
+                        "currentPage": 1,
+                        "lastPage": 1
+                      },
+                      "requestId": 1717
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "requestId": {
+                      "type": "integer",
+                      "description": "Identificador de la petición registrada en Kubrick. Solo se devuelve cuando el error proviene de Placetopay; los errores de validación de los campos enviados no lo incluyen."
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The site id must be an integer.",
+                        "date": "2026-10-02T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The site id must be an integer.",
+                        "date": "2026-10-02T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-10-02T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-10-02T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "requestId": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "description": "Identificador de la petición registrada en Kubrick. Es null cuando la petición no pudo ser registrada."
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "SPMSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-10-02T10:00:00+00:00"
+                      },
+                      "requestId": 1717
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "SPMSE",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-10-02T10:00:00+00:00"
+                      },
+                      "requestId": 1717
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/three-ds/create-token": {
       "post": {
         "summary": "create token",
