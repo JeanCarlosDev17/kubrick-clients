@@ -4648,6 +4648,239 @@
         ]
       }
     },
+    "/api/site/payment-methods/delete": {
+      "post": {
+        "summary": "delete site payment method",
+        "operationId": "post-api-site-payment-methods-delete",
+        "description": "Este endpoint permite eliminar un medio de pago de un sitio en Placetopay a partir de su identificador. Cada eliminación genera un requestId que se devuelve en la respuesta y queda registrada como evento de auditoría con la respuesta de Placetopay. La petición queda en estado FINISHED cuando el medio de pago se elimina y en estado FAILED cuando Placetopay rechaza la petición (4xx), responde con error (5xx) o ocurre un error interno en Kubrick.",
+        "tags": [
+          "SitePaymentMethods"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "paymentMethodId"
+                ],
+                "properties": {
+                  "paymentMethodId": {
+                    "type": "integer",
+                    "description": "Identificador en Placetopay del medio de pago del sitio que se quiere eliminar.",
+                    "example": 1717
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "paymentMethodId": 1717
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "paymentMethodId": 1717
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "requestId": {
+                      "type": "integer",
+                      "description": "Identificador de la petición registrada en Kubrick."
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-10-06T10:00:00+00:00"
+                      },
+                      "requestId": 1717
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "OK",
+                        "reason": "RC",
+                        "message": "The request has been processed successfully",
+                        "date": "2026-10-06T10:00:00+00:00"
+                      },
+                      "requestId": 1717
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Se devuelve por errores de validación de los campos enviados, sin requestId. Si Placetopay rechaza la petición, se devuelve el mismo código de estado 4xx de Placetopay con su mensaje, o \"Delete failed, client request error\" si no lo informa, junto con el requestId.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "requestId": {
+                      "type": "integer",
+                      "description": "Identificador de la petición registrada en Kubrick. Solo se devuelve cuando el error proviene de Placetopay."
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The payment method id field is required.",
+                        "date": "2026-10-06T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Error de validación": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "The payment method id field is required.",
+                        "date": "2026-10-06T10:00:00+00:00"
+                      }
+                    }
+                  },
+                  "Error informado por Placetopay": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "Client error",
+                        "date": "2026-10-06T10:00:00+00:00"
+                      },
+                      "requestId": 1717
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-10-06T10:00:00+00:00"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2026-10-06T10:00:00+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. El mensaje indica el origen del error: \"External service error\" cuando Placetopay responde con un error 5xx, e \"Internal server error, try later please\" cuando ocurre un error interno en Kubrick.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "requestId": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "description": "Identificador de la petición registrada en Kubrick. Es null cuando la petición no pudo ser registrada."
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FSPMD",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-10-06T10:00:00+00:00"
+                      },
+                      "requestId": 1717
+                    }
+                  }
+                },
+                "examples": {
+                  "Error interno": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FSPMD",
+                        "message": "Internal server error, try later please",
+                        "date": "2026-10-06T10:00:00+00:00"
+                      },
+                      "requestId": 1717
+                    }
+                  },
+                  "Error de Placetopay": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FSPMD",
+                        "message": "External service error",
+                        "date": "2026-10-06T10:00:00+00:00"
+                      },
+                      "requestId": 1717
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/three-ds/create-token": {
       "post": {
         "summary": "create token",
