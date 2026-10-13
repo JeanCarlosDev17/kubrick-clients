@@ -4652,7 +4652,7 @@
       "post": {
         "summary": "delete site payment method",
         "operationId": "post-api-site-payment-methods-delete",
-        "description": "Este endpoint permite eliminar un medio de pago de un sitio en Placetopay a partir de su identificador. Cada eliminación genera un requestId que se devuelve en la respuesta y queda registrada como evento de auditoría con la respuesta de Placetopay. La petición queda en estado FINISHED cuando el medio de pago se elimina y en estado FAILED cuando Placetopay rechaza la petición (4xx), responde con error (5xx) o ocurre un error interno en Kubrick.",
+        "description": "Este endpoint permite eliminar un medio de pago de un sitio en Placetopay. Antes de eliminar, Kubrick busca el medio de pago con el siteId y el id enviados y verifica que exista exactamente en ese sitio; si no existe, o la búsqueda falla, no se elimina nada. Cada eliminación genera un requestId que se devuelve en la respuesta y queda registrada como evento de auditoría con la respuesta de Placetopay o el motivo del rechazo. La petición queda en estado FINISHED cuando el medio de pago se elimina y en estado FAILED cuando no existe en el sitio, cuando Placetopay rechaza la búsqueda o la eliminación (4xx), responde con error (5xx) o ocurre un error interno en Kubrick.",
         "tags": [
           "SitePaymentMethods"
         ],
@@ -4662,25 +4662,35 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "paymentMethodId"
+                  "siteId",
+                  "id"
                 ],
                 "properties": {
-                  "paymentMethodId": {
+                  "siteId": {
                     "type": "integer",
+                    "minimum": 1,
+                    "description": "Identificador en Placetopay del sitio al que pertenece el medio de pago.",
+                    "example": 17
+                  },
+                  "id": {
+                    "type": "integer",
+                    "minimum": 1,
                     "description": "Identificador en Placetopay del medio de pago del sitio que se quiere eliminar.",
                     "example": 1717
                   }
                 },
                 "x-examples": {
                   "Example 1": {
-                    "paymentMethodId": 1717
+                    "siteId": 17,
+                    "id": 1717
                   }
                 }
               },
               "examples": {
                 "Example 1": {
                   "value": {
-                    "paymentMethodId": 1717
+                    "siteId": 17,
+                    "id": 1717
                   }
                 }
               }
@@ -4733,7 +4743,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Se devuelve por errores de validación de los campos enviados, sin requestId. Si Placetopay rechaza la petición, se devuelve el mismo código de estado 4xx de Placetopay con su mensaje, o \"Delete failed, client request error\" si no lo informa, junto con el requestId.",
+            "description": "Bad Request. Se devuelve por errores de validación de los campos enviados, sin requestId. Si Placetopay rechaza la búsqueda previa o la eliminación, se devuelve el mismo código de estado 4xx de Placetopay con su mensaje (precedido por \"Delete failed because the payment method search failed: \" cuando el rechazo ocurre en la búsqueda), o \"Delete failed, client request error\" si Placetopay no informa el mensaje, junto con el requestId.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4752,8 +4762,8 @@
                       "status": {
                         "status": "FAILED",
                         "reason": "BR",
-                        "message": "The payment method id field is required.",
-                        "date": "2026-10-06T10:00:00+00:00"
+                        "message": "The site id field is required.",
+                        "date": "2026-10-13T10:00:00+00:00"
                       }
                     }
                   }
@@ -4764,18 +4774,29 @@
                       "status": {
                         "status": "FAILED",
                         "reason": "BR",
-                        "message": "The payment method id field is required.",
-                        "date": "2026-10-06T10:00:00+00:00"
+                        "message": "The site id field is required.",
+                        "date": "2026-10-13T10:00:00+00:00"
                       }
                     }
                   },
-                  "Error informado por Placetopay": {
+                  "Búsqueda rechazada por Placetopay": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "BR",
+                        "message": "Delete failed because the payment method search failed: Client error",
+                        "date": "2026-10-13T10:00:00+00:00"
+                      },
+                      "requestId": 1717
+                    }
+                  },
+                  "Eliminación rechazada por Placetopay": {
                     "value": {
                       "status": {
                         "status": "FAILED",
                         "reason": "BR",
                         "message": "Client error",
-                        "date": "2026-10-06T10:00:00+00:00"
+                        "date": "2026-10-13T10:00:00+00:00"
                       },
                       "requestId": 1717
                     }
@@ -4821,8 +4842,51 @@
               }
             }
           },
+          "404": {
+            "description": "Not Found. El medio de pago no existe en el sitio indicado; no se intenta eliminar.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    },
+                    "requestId": {
+                      "type": "integer",
+                      "description": "Identificador de la petición registrada en Kubrick."
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "RNF",
+                        "message": "The payment method 1717 does not exist in site 17.",
+                        "date": "2026-10-13T10:00:00+00:00"
+                      },
+                      "requestId": 1717
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "RNF",
+                        "message": "The payment method 1717 does not exist in site 17.",
+                        "date": "2026-10-13T10:00:00+00:00"
+                      },
+                      "requestId": 1717
+                    }
+                  }
+                }
+              }
+            }
+          },
           "500": {
-            "description": "Internal Server Error. El mensaje indica el origen del error: \"External service error\" cuando Placetopay responde con un error 5xx, e \"Internal server error, try later please\" cuando ocurre un error interno en Kubrick.",
+            "description": "Internal Server Error. El mensaje indica el origen del error: \"External service error\" cuando Placetopay responde con un error 5xx, e \"Internal server error, try later please\" cuando ocurre un error interno en Kubrick. Si el error ocurre en la búsqueda previa, el mensaje va precedido por \"Delete failed because the payment method search failed: \".",
             "content": {
               "application/json": {
                 "schema": {
@@ -4845,7 +4909,7 @@
                         "status": "FAILED",
                         "reason": "FSPMD",
                         "message": "Internal server error, try later please",
-                        "date": "2026-10-06T10:00:00+00:00"
+                        "date": "2026-10-13T10:00:00+00:00"
                       },
                       "requestId": 1717
                     }
@@ -4858,7 +4922,7 @@
                         "status": "FAILED",
                         "reason": "FSPMD",
                         "message": "Internal server error, try later please",
-                        "date": "2026-10-06T10:00:00+00:00"
+                        "date": "2026-10-13T10:00:00+00:00"
                       },
                       "requestId": 1717
                     }
@@ -4869,7 +4933,18 @@
                         "status": "FAILED",
                         "reason": "FSPMD",
                         "message": "External service error",
-                        "date": "2026-10-06T10:00:00+00:00"
+                        "date": "2026-10-13T10:00:00+00:00"
+                      },
+                      "requestId": 1717
+                    }
+                  },
+                  "Error de Placetopay en la búsqueda previa": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FSPMD",
+                        "message": "Delete failed because the payment method search failed: External service error",
+                        "date": "2026-10-13T10:00:00+00:00"
                       },
                       "requestId": 1717
                     }
