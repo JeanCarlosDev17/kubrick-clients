@@ -9990,12 +9990,36 @@
             "pseAggregatorModel": false,
             "collectionId": "5645648",
             "accountVerification": true,
-            "merchantid": "12345678",
+            "merchantId": "12345678",
             "terminalId": "1234568",
-            "RUC": "MyRUC77",
-            "MID": "myMID77",
+            "RUC": "1790012345001",
+            "MID": "1000001717",
             "apiKey": "api-key-xyz",
-            "apiSecret": "api-secret-xyz"
+            "apiSecret": "api-secret-xyz",
+            "selectionRules": {
+              "selection_rules": {
+                "strict": true,
+                "bin": {
+                  "policy": "allows",
+                  "collection": [
+                    "411111",
+                    "4005"
+                  ]
+                },
+                "credit": {
+                  "policy": "allows",
+                  "useOnEmpty": true,
+                  "collection": [
+                    {
+                      "code": 1,
+                      "type": "00",
+                      "groupCode": "C",
+                      "installment": 1
+                    }
+                  ]
+                }
+              }
+            }
           }
         ],
         "properties": {
@@ -10157,7 +10181,7 @@
             },
             "default": true
           },
-          "merchantid": {
+          "merchantId": {
             "type": "string",
             "x-stoplight": {
               "id": "umm0pmb2lrfnd"
@@ -10182,7 +10206,7 @@
             },
             "description": "número de RUC (Registro Único de Contribuyentes) del comercio en Ecuador.",
             "maxLength": 20,
-            "example": "MyRUC77"
+            "example": "1790012345001"
           },
           "MID": {
             "type": "string",
@@ -10191,7 +10215,7 @@
             },
             "description": "identificador del comercio (Merchant ID) que le asigna la red de pagos.",
             "maxLength": 20,
-            "example": "myMID77"
+            "example": "1000001717"
           },
           "apiKey": {
             "type": "string",
@@ -10210,6 +10234,104 @@
             "description": "llave secreta que acompaña a la llave de acceso y permite validar la conexión de forma segura.",
             "maxLength": 36,
             "example": "api-secret-xyz"
+          },
+          "selectionRules": {
+            "type": "object",
+            "description": "Reglas de selección por BIN o crédito. Aplica a Interdin, Datafast, Medianet y Austro. Todo su contenido va bajo la llave selection_rules.",
+            "required": [
+              "selection_rules"
+            ],
+            "properties": {
+              "selection_rules": {
+                "type": "object",
+                "properties": {
+                  "strict": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Con true se deben cumplir todas las reglas (bin y credit); con false basta con que se cumpla una."
+                  },
+                  "bin": {
+                    "type": "object",
+                    "description": "Regla por BIN de la tarjeta.",
+                    "required": [
+                      "policy"
+                    ],
+                    "properties": {
+                      "policy": {
+                        "type": "string",
+                        "enum": [
+                          "allows",
+                          "denies"
+                        ],
+                        "description": "allows: solo permite los BIN de la colección. denies: rechaza los BIN de la colección."
+                      },
+                      "collection": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^\\d{1,8}$"
+                        },
+                        "description": "Lista de BIN, cada uno de 1 a 8 dígitos.",
+                        "example": [
+                          "411111",
+                          "4005"
+                        ]
+                      }
+                    }
+                  },
+                  "credit": {
+                    "type": "object",
+                    "description": "Regla por tipo de crédito.",
+                    "required": [
+                      "policy"
+                    ],
+                    "properties": {
+                      "policy": {
+                        "type": "string",
+                        "enum": [
+                          "allows",
+                          "denies"
+                        ],
+                        "description": "allows: solo permite los créditos de la colección. denies: rechaza los créditos de la colección."
+                      },
+                      "useOnEmpty": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Indica si el medio de pago se puede usar cuando la transacción no trae crédito."
+                      },
+                      "collection": {
+                        "type": "array",
+                        "description": "Lista de créditos. Cada elemento tiene code, type, groupCode e installment, o kind e installment.",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "type": {
+                              "type": "string",
+                              "example": "00"
+                            },
+                            "groupCode": {
+                              "type": "string",
+                              "example": "C"
+                            },
+                            "kind": {
+                              "type": "string"
+                            },
+                            "installment": {
+                              "type": "integer",
+                              "example": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
