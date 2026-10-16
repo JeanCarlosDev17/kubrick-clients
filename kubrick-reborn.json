@@ -3174,7 +3174,6 @@
                     "email": "email@test.com",
                     "currency": "COP",
                     "language": "ES",
-                    "analyticsCode": "UA-171315311-4, GTM-123422",
                     "isActive": true,
                     "onTest": false,
                     "expiration": "2025-12-31 23:59:59",
@@ -3183,7 +3182,7 @@
                     "integration": {
                       "allowPartial": false,
                       "connectionMethod": "REDIRECT",
-                      "checkoutVersion": "2",
+                      "checkoutVersion": "v3",
                       "notificationUrl": "https://midominio.com/notificacion",
                       "analyticsCode": "UA-171315311-4, GTM-123422",
                       "sourceRestriction": "api",
@@ -3204,7 +3203,7 @@
                       "filterPse": true,
                       "filterTuya": true,
                       "filterSafetypay": true,
-                      "prechargerFilter": "1",
+                      "prechargerFilter": 1,
                       "filterByBin": true,
                       "exceptionBinsList": [
                         "123456",
@@ -3213,7 +3212,7 @@
                     },
                     "threeDS": {
                       "setting": "LOW",
-                      "minAmount": "111111111111.1"
+                      "minAmount": 111111111111.1
                     },
                     "historic": {
                       "behaviour": "DISABLED",
@@ -3611,8 +3610,8 @@
                     "login": "89as7d978a67",
                     "secretKey": "kp777899f6544",
                     "md5Hash": "abcd1234abcd1234abcd1234abcd12",
-                    "name": "string",
-                    "displayName": "string",
+                    "name": "Site name example",
+                    "displayName": "Site display name",
                     "type": "INT",
                     "category": "ECOMMERCE",
                     "email": "admin@email.com",
@@ -3636,25 +3635,26 @@
                     },
                     "control": {
                       "allowedDays": 127,
-                      "allowedHours": "string",
+                      "allowedHours": "ffffffffffffffffffffffffffffffffffffffffff",
                       "allowedBankCountries": [
                         "DZ",
                         "BH"
                       ],
-                      "delegatedAuthorization": "string",
-                      "minAmount": "string",
-                      "maxAmount": "string",
+                      "delegatedAuthorization": "ffffffffffffffffffffffffffffffffffffffffff",
+                      "minAmount": "1.00",
+                      "maxAmount": "4000000.00",
                       "filterPse": true,
                       "filterTuya": true,
                       "filterSafetypay": true,
                       "prechargerFilter": 0,
                       "filterByBin": true,
                       "exceptionBinsList": [
-                        "127.0.0.1"
+                        "123456",
+                        "654321"
                       ]
                     },
                     "threeDS": {
-                      "setting": "string",
+                      "setting": "LOW",
                       "minAmount": 1.5
                     },
                     "historic": {
@@ -3686,7 +3686,7 @@
                       "minAmount": 30,
                       "approvalScore": 200,
                       "rejectionScore": 250,
-                      "onCaibration": true
+                      "onCalibration": true
                     },
                     "securityFilters": {
                       "allowedIssuerCountries": [
@@ -3713,7 +3713,7 @@
                       "disableTax": true,
                       "calculateTax": true,
                       "taxPercentage": 12,
-                      "patternReference": null,
+                      "patternReference": "29",
                       "mailCustomer": true,
                       "mailMerchant": true
                     }
