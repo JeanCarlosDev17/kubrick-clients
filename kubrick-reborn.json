@@ -3582,15 +3582,15 @@
                     }
                   },
                   "historic": {
-                    "$ref": "#/components/schemas/site-historic",
+                    "$ref": "#/components/schemas/site-update-historic",
                     "description": "Contiene la información de Histórico transaccional"
                   },
                   "creditBureau": {
-                    "$ref": "#/components/schemas/site-creditBureau",
+                    "$ref": "#/components/schemas/site-update-creditBureau",
                     "description": "Contiene los parámetros de configuración de información financiera. Para habilitar este módulo, debe enviarlo dentro de la solicitud, de lo contrario enviar como campo nulo o no enviarlo."
                   },
                   "riskEngine": {
-                    "$ref": "#/components/schemas/site-riskEngine",
+                    "$ref": "#/components/schemas/site-update-riskEngine",
                     "description": "Contiene las configuraciones de motores de riesgo"
                   },
                   "securityFilters": {
@@ -10681,6 +10681,37 @@
           }
         }
       },
+      "site-update-historic": {
+        "title": "site-update-historic",
+        "type": "object",
+        "properties": {
+          "behaviour": {
+            "type": "string",
+            "enum": [
+              "IGNORE",
+              "PROCESS",
+              "DISABLED"
+            ],
+            "description": "Comportamiento a seguir cuando el puntaje obtenido por la transacción sea igual o menor al establecido."
+          },
+          "lowerScore": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 999,
+            "default": null,
+            "example": 100,
+            "description": "Puntaje de apetito al riesgo, indica el puntaje máximo para categorizar las operaciones como operaciones de bajo riesgo. Es requerido cuando 'behaviour' es 'PROCESS' o 'IGNORE'."
+          },
+          "rejectionScore": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 999,
+            "default": null,
+            "example": 300,
+            "description": "Puntaje de tolerancia al riesgo, indica el puntaje a partir del cual se declinarán transacciones debido al riesgo. Es requerido cuando 'behaviour' es 'PROCESS' o 'IGNORE'."
+          }
+        }
+      },
       "site-creditBureau": {
         "title": "site-creditBureau",
         "x-stoplight": {
@@ -10780,6 +10811,97 @@
             "minimum": 0
           }
         }
+      },
+      "site-update-creditBureau": {
+        "title": "site-update-creditBureau",
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Contiene los parámetros de configuración de información financiera. Para habilitar este módulo, debe enviarlo dentro de la solicitud, de lo contrario enviar como campo nulo o no enviarlo.",
+        "examples": [
+          {
+            "behaviours": {
+              "onFailed": "REJECTED",
+              "onNoMatch": "REJECTED",
+              "onMatch": "PROCESS"
+            },
+            "paymentGroups": [
+              "CASH"
+            ],
+            "minAmount": 200
+          }
+        ],
+        "properties": {
+          "behaviours": {
+            "type": "object",
+            "description": "Contiene la información de comportamiento del módulo. Es requerido siempre que creditBureau se envíe.",
+            "properties": {
+              "onFailed": {
+                "type": "string",
+                "description": "Comportamiento a seguir cuando hay fallo.",
+                "enum": [
+                  "REJECTED",
+                  "MANUAL",
+                  "IGNORE"
+                ]
+              },
+              "onNoMatch": {
+                "type": "string",
+                "description": "Comportamiento a seguir en caso de no concordar.",
+                "enum": [
+                  "REJECTED",
+                  "MANUAL",
+                  "IGNORE"
+                ]
+              },
+              "onMatch": {
+                "type": "string",
+                "description": "Comportamiento del modulo cuando hay concordancia.",
+                "enum": [
+                  "PROCESS",
+                  "MANUAL",
+                  "IGNORE"
+                ]
+              }
+            },
+            "required": [
+              "onFailed",
+              "onNoMatch",
+              "onMatch"
+            ]
+          },
+          "paymentGroups": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "minItems": 1,
+            "description": "Contiene el grupo de medios de pago.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CASH",
+                "PRIVATECARD",
+                "CREDITCARD",
+                "E-WALLET",
+                "DEBITACCOUNT"
+              ]
+            }
+          },
+          "minAmount": {
+            "type": "number",
+            "description": "Monto mínimo para activar. Es requerido cuando se envie el objeto de CreditBureau.",
+            "default": 0,
+            "example": 200,
+            "maximum": 999999999,
+            "minimum": 0
+          }
+        },
+        "required": [
+          "behaviours",
+          "minAmount"
+        ]
       },
       "site-riskEngine": {
         "title": "site-riskEngine",
@@ -10930,6 +11052,131 @@
               "id": "q3k0lwq60w5uy"
             },
             "description": "Indica el estado en calibración. Este campo es requerido siempre que riskEngine sea enviado."
+          }
+        }
+      },
+      "site-update-riskEngine": {
+        "title": "site-update-riskEngine",
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Contiene las configuraciones de motores de riesgo.",
+        "examples": [
+          {
+            "behaviours": {
+              "onFailed": "REJECTED",
+              "onLowRisk": "MANUAL",
+              "onMediumRisk": "REJECTED",
+              "onHighRisk": "REJECTED"
+            },
+            "paymentGroups": [
+              "CASH"
+            ],
+            "minAmount": 30,
+            "approvalScore": 200,
+            "rejectionScore": 250,
+            "onCalibration": true
+          }
+        ],
+        "properties": {
+          "behaviours": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Contiene la información de comportamiento del módulo. Si se envía, sus cuatro campos son requeridos.",
+            "required": [
+              "onFailed",
+              "onLowRisk",
+              "onMediumRisk",
+              "onHighRisk"
+            ],
+            "properties": {
+              "onFailed": {
+                "type": "string",
+                "description": "Comportamiento a seguir en caso de fallo. Requerido si se envía behaviours.",
+                "enum": [
+                  "REJECTED",
+                  "MANUAL",
+                  "IGNORE"
+                ]
+              },
+              "onLowRisk": {
+                "type": "string",
+                "enum": [
+                  "MANUAL",
+                  "IGNORE",
+                  "PROCESS"
+                ],
+                "description": "Comportamiento a seguir ante nivel de riesgo bajo. Requerido si se envía behaviours."
+              },
+              "onMediumRisk": {
+                "type": "string",
+                "enum": [
+                  "REJECTED",
+                  "MANUAL",
+                  "IGNORE",
+                  "PROCESS"
+                ],
+                "description": "Comportamiento a seguir ante nivel de riesgo medio. Requerido si se envía behaviours."
+              },
+              "onHighRisk": {
+                "type": "string",
+                "enum": [
+                  "REJECTED",
+                  "MANUAL",
+                  "IGNORE"
+                ],
+                "description": "Comportamiento a seguir ante nivel de riesgo alto. Requerido si se envía behaviours."
+              }
+            }
+          },
+          "paymentGroups": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Grupo de medios de pago.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CASH",
+                "CREDITCARD",
+                "E-WALLET",
+                "DEBITACCOUNT",
+                "PRIVATECARD"
+              ]
+            },
+            "minItems": 1
+          },
+          "minAmount": {
+            "type": "number",
+            "default": 0,
+            "example": 30,
+            "maximum": 999999999,
+            "description": "Monto mínimo para activar.",
+            "minimum": 0
+          },
+          "approvalScore": {
+            "type": "integer",
+            "description": "Puntaje de apetito al riesgo.",
+            "default": 0,
+            "example": 200,
+            "minimum": 1,
+            "maximum": 999
+          },
+          "rejectionScore": {
+            "type": "integer",
+            "default": null,
+            "example": 250,
+            "description": "Puntaje de tolerancia al riesgo.",
+            "minimum": 1,
+            "maximum": 999
+          },
+          "onCalibration": {
+            "type": "boolean",
+            "description": "Indica el estado en calibración."
           }
         }
       },
