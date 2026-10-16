@@ -3335,6 +3335,7 @@
                       "string",
                       "null"
                     ],
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$",
                     "example": "2023-06-30 00:00:00",
                     "description": "Fecha de expiración el sitio, si no es definido o su valor es null la fecha de expiración sera ilimitada."
                   },
@@ -3343,6 +3344,7 @@
                       "string",
                       "null"
                     ],
+                    "format": "date",
                     "example": "2023-06-30",
                     "description": "fecha de salida a produccion formato Y-m-d"
                   },
@@ -3380,9 +3382,10 @@
                       },
                       "notificationUrl": {
                         "type": "string",
-                        "description": "En caso de que el tipo de conexión sea “REDIRECT”, a esta URL llegará el resultado de las transacciones.",
+                        "description": "En caso de que el tipo de conexión sea “REDIRECT”, a esta URL llegará el resultado de las transacciones. No se permite cuando `connectionMethod` es `SERVICES`.",
                         "example": "https://site-webhook.com",
-                        "maxLength": 128
+                        "format": "uri",
+                        "maxLength": 200
                       },
                       "sourceRestriction": {
                         "type": "string",
@@ -3420,7 +3423,10 @@
                         "description": "Permite devolver o no los datos adicionales"
                       },
                       "payerFieldsType": {
-                        "type": "integer",
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
                         "description": "Tipos del campo de pagador:\n\n0 = Con documento\n\n1 = Sin documento\n\n2 = Solo email",
                         "enum": [
                           0,
@@ -3442,7 +3448,8 @@
                       "allowedHours": {
                         "type": "string",
                         "description": "Horas de operación.",
-                        "pattern": "^([0-9a-f])"
+                        "pattern": "^([0-9a-f])",
+                        "maxLength": 42
                       },
                       "allowedBankCountries": {
                         "type": [
@@ -3455,8 +3462,7 @@
                           "x-stoplight": {
                             "id": "nv87akrjqhpdf"
                           },
-                          "type": "string",
-                          "maxLength": 3
+                          "$ref": "#/components/schemas/country-alpha-two"
                         }
                       },
                       "delegatedAuthorization": {
@@ -3464,8 +3470,9 @@
                           "string",
                           "null"
                         ],
+                        "minLength": 42,
                         "maxLength": 42,
-                        "pattern": "^[0-9a-f]{1,42}$",
+                        "pattern": "^[0-9a-f]{42}$",
                         "description": "Autorización delegada."
                       },
                       "minAmount": {
@@ -3475,7 +3482,7 @@
                       },
                       "maxAmount": {
                         "type": "string",
-                        "pattern": "^[\\d]{0,10}(\\.[\\d]{1,2})?$",
+                        "pattern": "^[\\d]{0,12}(\\.[\\d]{1,2})?$",
                         "description": "Máximo valor permitido por transacción. Este campo es requerido si el campo minAmount está presente."
                       },
                       "filterPse": {
@@ -3507,7 +3514,8 @@
                         "type": "array",
                         "description": "Lista de bines a excluir, esta llave solo es obligatoria si el filterByBin es enviado en \"true\".",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "pattern": "^\\d{6}$"
                         }
                       }
                     }
@@ -3521,6 +3529,12 @@
                     "properties": {
                       "setting": {
                         "type": "string",
+                        "enum": [
+                          "VERY_LOW",
+                          "LOW",
+                          "MEDIUM",
+                          "HIGH"
+                        ],
                         "description": "Nivel máximo de riesgo aceptado con threeDS."
                       },
                       "minAmount": {
@@ -10608,6 +10622,8 @@
           },
           "lowerScore": {
             "type": "integer",
+            "minimum": 1,
+            "maximum": 999,
             "x-stoplight": {
               "id": "vf40fo0ejfxei"
             },
@@ -10617,6 +10633,8 @@
           },
           "rejectionScore": {
             "type": "integer",
+            "minimum": 1,
+            "maximum": 999,
             "x-stoplight": {
               "id": "5b7tuhwq7rkm3"
             },
@@ -10925,8 +10943,7 @@
               "x-stoplight": {
                 "id": "z69lwl4nqni0d"
               },
-              "type": "string",
-              "example": "CL"
+              "$ref": "#/components/schemas/country-alpha-two"
             }
           },
           "onlyWhitelisted": {
@@ -11011,7 +11028,7 @@
               "id": "ehgbjp6bddldb"
             },
             "description": "Monto máximo por cliente al día. 0 indica ilimitado.",
-            "maximum": 99999999999999,
+            "maximum": 999999999999.99,
             "minimum": 0,
             "default": 100000000,
             "example": 30000
@@ -11033,7 +11050,7 @@
               "id": "1r3c3mxfg9djy"
             },
             "description": "Monto máximo por cliente al mes. 0 indica ilimitado.",
-            "maximum": 99999999999999,
+            "maximum": 999999999999.99,
             "default": 100000000,
             "example": 2000,
             "minimum": 0
@@ -11070,6 +11087,7 @@
             "format": "float",
             "default": 0,
             "example": 12,
+            "minimum": 1,
             "maximum": 50,
             "description": "Porcentaje de IVA."
           },
