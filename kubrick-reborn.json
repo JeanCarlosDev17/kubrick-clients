@@ -3070,6 +3070,43 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2025-08-11T16:48:48+00:00"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2025-08-11T16:48:48+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
