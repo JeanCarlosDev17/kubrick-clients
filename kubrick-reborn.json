@@ -3118,7 +3118,7 @@
         "x-stoplight": {
           "id": "n7z95km3h5t86"
         },
-        "description": "Este endpoint permite la actualización de sitios que hayan sido creados en kubrick, para ello el cliente debe ser el mismo que creo el sitio. ",
+        "description": "Este endpoint permite actualizar los datos de un sitio existente en Placetopay. Se debe enviar el `id` del sitio junto con al menos un campo a modificar.",
         "requestBody": {
           "content": {
             "application/json": {
