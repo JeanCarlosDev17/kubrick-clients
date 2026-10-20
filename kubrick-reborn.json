@@ -3070,6 +3070,43 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2025-08-11T16:48:48+00:00"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status-ok"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": {
+                        "status": "FAILED",
+                        "reason": "FA",
+                        "message": "Failed authentication check your credentials",
+                        "date": "2025-08-11T16:48:48+00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -3118,7 +3155,7 @@
         "x-stoplight": {
           "id": "n7z95km3h5t86"
         },
-        "description": "Este endpoint permite la actualización de sitios que hayan sido creados en kubrick, para ello el cliente debe ser el mismo que creo el sitio. ",
+        "description": "Este endpoint permite actualizar los datos de un sitio existente en Placetopay. Se debe enviar el `id` del sitio junto con al menos un campo a modificar.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3137,7 +3174,6 @@
                     "email": "email@test.com",
                     "currency": "COP",
                     "language": "ES",
-                    "analyticsCode": "UA-171315311-4, GTM-123422",
                     "isActive": true,
                     "onTest": false,
                     "expiration": "2025-12-31 23:59:59",
@@ -3146,7 +3182,7 @@
                     "integration": {
                       "allowPartial": false,
                       "connectionMethod": "REDIRECT",
-                      "checkoutVersion": "2",
+                      "checkoutVersion": "v3",
                       "notificationUrl": "https://midominio.com/notificacion",
                       "analyticsCode": "UA-171315311-4, GTM-123422",
                       "sourceRestriction": "api",
@@ -3167,7 +3203,7 @@
                       "filterPse": true,
                       "filterTuya": true,
                       "filterSafetypay": true,
-                      "prechargerFilter": "1",
+                      "prechargerFilter": 1,
                       "filterByBin": true,
                       "exceptionBinsList": [
                         "123456",
@@ -3176,7 +3212,7 @@
                     },
                     "threeDS": {
                       "setting": "LOW",
-                      "minAmount": "111111111111.1"
+                      "minAmount": 111111111111.1
                     },
                     "historic": {
                       "behaviour": "DISABLED",
@@ -3335,6 +3371,7 @@
                       "string",
                       "null"
                     ],
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$",
                     "example": "2023-06-30 00:00:00",
                     "description": "Fecha de expiración el sitio, si no es definido o su valor es null la fecha de expiración sera ilimitada."
                   },
@@ -3343,6 +3380,7 @@
                       "string",
                       "null"
                     ],
+                    "format": "date",
                     "example": "2023-06-30",
                     "description": "fecha de salida a produccion formato Y-m-d"
                   },
@@ -3380,9 +3418,10 @@
                       },
                       "notificationUrl": {
                         "type": "string",
-                        "description": "En caso de que el tipo de conexión sea “REDIRECT”, a esta URL llegará el resultado de las transacciones.",
+                        "description": "En caso de que el tipo de conexión sea “REDIRECT”, a esta URL llegará el resultado de las transacciones. No se permite cuando `connectionMethod` es `SERVICES`.",
                         "example": "https://site-webhook.com",
-                        "maxLength": 128
+                        "format": "uri",
+                        "maxLength": 200
                       },
                       "sourceRestriction": {
                         "type": "string",
@@ -3420,7 +3459,10 @@
                         "description": "Permite devolver o no los datos adicionales"
                       },
                       "payerFieldsType": {
-                        "type": "integer",
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
                         "description": "Tipos del campo de pagador:\n\n0 = Con documento\n\n1 = Sin documento\n\n2 = Solo email",
                         "enum": [
                           0,
@@ -3442,7 +3484,8 @@
                       "allowedHours": {
                         "type": "string",
                         "description": "Horas de operación.",
-                        "pattern": "^([0-9a-f])"
+                        "pattern": "^([0-9a-f])",
+                        "maxLength": 42
                       },
                       "allowedBankCountries": {
                         "type": [
@@ -3455,8 +3498,7 @@
                           "x-stoplight": {
                             "id": "nv87akrjqhpdf"
                           },
-                          "type": "string",
-                          "maxLength": 3
+                          "$ref": "#/components/schemas/country-alpha-two"
                         }
                       },
                       "delegatedAuthorization": {
@@ -3464,8 +3506,9 @@
                           "string",
                           "null"
                         ],
+                        "minLength": 42,
                         "maxLength": 42,
-                        "pattern": "^[0-9a-f]{1,42}$",
+                        "pattern": "^[0-9a-f]{42}$",
                         "description": "Autorización delegada."
                       },
                       "minAmount": {
@@ -3475,7 +3518,7 @@
                       },
                       "maxAmount": {
                         "type": "string",
-                        "pattern": "^[\\d]{0,10}(\\.[\\d]{1,2})?$",
+                        "pattern": "^[\\d]{0,12}(\\.[\\d]{1,2})?$",
                         "description": "Máximo valor permitido por transacción. Este campo es requerido si el campo minAmount está presente."
                       },
                       "filterPse": {
@@ -3507,7 +3550,8 @@
                         "type": "array",
                         "description": "Lista de bines a excluir, esta llave solo es obligatoria si el filterByBin es enviado en \"true\".",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "pattern": "^\\d{6}$"
                         }
                       }
                     }
@@ -3521,6 +3565,12 @@
                     "properties": {
                       "setting": {
                         "type": "string",
+                        "enum": [
+                          "VERY_LOW",
+                          "LOW",
+                          "MEDIUM",
+                          "HIGH"
+                        ],
                         "description": "Nivel máximo de riesgo aceptado con threeDS."
                       },
                       "minAmount": {
@@ -3532,15 +3582,15 @@
                     }
                   },
                   "historic": {
-                    "$ref": "#/components/schemas/site-historic",
+                    "$ref": "#/components/schemas/site-update-historic",
                     "description": "Contiene la información de Histórico transaccional"
                   },
                   "creditBureau": {
-                    "$ref": "#/components/schemas/site-creditBureau",
+                    "$ref": "#/components/schemas/site-update-creditBureau",
                     "description": "Contiene los parámetros de configuración de información financiera. Para habilitar este módulo, debe enviarlo dentro de la solicitud, de lo contrario enviar como campo nulo o no enviarlo."
                   },
                   "riskEngine": {
-                    "$ref": "#/components/schemas/site-riskEngine",
+                    "$ref": "#/components/schemas/site-update-riskEngine",
                     "description": "Contiene las configuraciones de motores de riesgo"
                   },
                   "securityFilters": {
@@ -3560,8 +3610,8 @@
                     "login": "89as7d978a67",
                     "secretKey": "kp777899f6544",
                     "md5Hash": "abcd1234abcd1234abcd1234abcd12",
-                    "name": "string",
-                    "displayName": "string",
+                    "name": "Site name example",
+                    "displayName": "Site display name",
                     "type": "INT",
                     "category": "ECOMMERCE",
                     "email": "admin@email.com",
@@ -3585,25 +3635,26 @@
                     },
                     "control": {
                       "allowedDays": 127,
-                      "allowedHours": "string",
+                      "allowedHours": "ffffffffffffffffffffffffffffffffffffffffff",
                       "allowedBankCountries": [
                         "DZ",
                         "BH"
                       ],
-                      "delegatedAuthorization": "string",
-                      "minAmount": "string",
-                      "maxAmount": "string",
+                      "delegatedAuthorization": "ffffffffffffffffffffffffffffffffffffffffff",
+                      "minAmount": "1.00",
+                      "maxAmount": "4000000.00",
                       "filterPse": true,
                       "filterTuya": true,
                       "filterSafetypay": true,
                       "prechargerFilter": 0,
                       "filterByBin": true,
                       "exceptionBinsList": [
-                        "127.0.0.1"
+                        "123456",
+                        "654321"
                       ]
                     },
                     "threeDS": {
-                      "setting": "string",
+                      "setting": "LOW",
                       "minAmount": 1.5
                     },
                     "historic": {
@@ -3635,7 +3686,7 @@
                       "minAmount": 30,
                       "approvalScore": 200,
                       "rejectionScore": 250,
-                      "onCaibration": true
+                      "onCalibration": true
                     },
                     "securityFilters": {
                       "allowedIssuerCountries": [
@@ -3662,7 +3713,7 @@
                       "disableTax": true,
                       "calculateTax": true,
                       "taxPercentage": 12,
-                      "patternReference": null,
+                      "patternReference": "29",
                       "mailCustomer": true,
                       "mailMerchant": true
                     }
@@ -8126,7 +8177,7 @@
           "CRC",
           "EUR",
           "GBP",
-          "HLN",
+          "HNL",
           "JPY",
           "MXN",
           "PEN",
@@ -10608,6 +10659,8 @@
           },
           "lowerScore": {
             "type": "integer",
+            "minimum": 1,
+            "maximum": 999,
             "x-stoplight": {
               "id": "vf40fo0ejfxei"
             },
@@ -10617,12 +10670,45 @@
           },
           "rejectionScore": {
             "type": "integer",
+            "minimum": 1,
+            "maximum": 999,
             "x-stoplight": {
               "id": "5b7tuhwq7rkm3"
             },
             "default": null,
             "example": 300,
             "description": "Puntaje de tolerancia al riesgo, indica el puntaje a partir del cual se declinarán transacciones debido al riesgo. Este parámetro es requerido cuando 'behaviour' tenga un valor diferente a 'DISABLED'."
+          }
+        }
+      },
+      "site-update-historic": {
+        "title": "site-update-historic",
+        "type": "object",
+        "properties": {
+          "behaviour": {
+            "type": "string",
+            "enum": [
+              "IGNORE",
+              "PROCESS",
+              "DISABLED"
+            ],
+            "description": "Comportamiento a seguir cuando el puntaje obtenido por la transacción sea igual o menor al establecido."
+          },
+          "lowerScore": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 999,
+            "default": null,
+            "example": 100,
+            "description": "Puntaje de apetito al riesgo, indica el puntaje máximo para categorizar las operaciones como operaciones de bajo riesgo. Es requerido cuando 'behaviour' es 'PROCESS' o 'IGNORE'."
+          },
+          "rejectionScore": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 999,
+            "default": null,
+            "example": 300,
+            "description": "Puntaje de tolerancia al riesgo, indica el puntaje a partir del cual se declinarán transacciones debido al riesgo. Es requerido cuando 'behaviour' es 'PROCESS' o 'IGNORE'."
           }
         }
       },
@@ -10725,6 +10811,97 @@
             "minimum": 0
           }
         }
+      },
+      "site-update-creditBureau": {
+        "title": "site-update-creditBureau",
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Contiene los parámetros de configuración de información financiera. Para habilitar este módulo, debe enviarlo dentro de la solicitud, de lo contrario enviar como campo nulo o no enviarlo.",
+        "examples": [
+          {
+            "behaviours": {
+              "onFailed": "REJECTED",
+              "onNoMatch": "REJECTED",
+              "onMatch": "PROCESS"
+            },
+            "paymentGroups": [
+              "CASH"
+            ],
+            "minAmount": 200
+          }
+        ],
+        "properties": {
+          "behaviours": {
+            "type": "object",
+            "description": "Contiene la información de comportamiento del módulo. Es requerido siempre que creditBureau se envíe.",
+            "properties": {
+              "onFailed": {
+                "type": "string",
+                "description": "Comportamiento a seguir cuando hay fallo.",
+                "enum": [
+                  "REJECTED",
+                  "MANUAL",
+                  "IGNORE"
+                ]
+              },
+              "onNoMatch": {
+                "type": "string",
+                "description": "Comportamiento a seguir en caso de no concordar.",
+                "enum": [
+                  "REJECTED",
+                  "MANUAL",
+                  "IGNORE"
+                ]
+              },
+              "onMatch": {
+                "type": "string",
+                "description": "Comportamiento del modulo cuando hay concordancia.",
+                "enum": [
+                  "PROCESS",
+                  "MANUAL",
+                  "IGNORE"
+                ]
+              }
+            },
+            "required": [
+              "onFailed",
+              "onNoMatch",
+              "onMatch"
+            ]
+          },
+          "paymentGroups": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "minItems": 1,
+            "description": "Contiene el grupo de medios de pago.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CASH",
+                "PRIVATECARD",
+                "CREDITCARD",
+                "E-WALLET",
+                "DEBITACCOUNT"
+              ]
+            }
+          },
+          "minAmount": {
+            "type": "number",
+            "description": "Monto mínimo para activar. Es requerido cuando se envie el objeto de CreditBureau.",
+            "default": 0,
+            "example": 200,
+            "maximum": 999999999,
+            "minimum": 0
+          }
+        },
+        "required": [
+          "behaviours",
+          "minAmount"
+        ]
       },
       "site-riskEngine": {
         "title": "site-riskEngine",
@@ -10878,6 +11055,131 @@
           }
         }
       },
+      "site-update-riskEngine": {
+        "title": "site-update-riskEngine",
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Contiene las configuraciones de motores de riesgo.",
+        "examples": [
+          {
+            "behaviours": {
+              "onFailed": "REJECTED",
+              "onLowRisk": "MANUAL",
+              "onMediumRisk": "REJECTED",
+              "onHighRisk": "REJECTED"
+            },
+            "paymentGroups": [
+              "CASH"
+            ],
+            "minAmount": 30,
+            "approvalScore": 200,
+            "rejectionScore": 250,
+            "onCalibration": true
+          }
+        ],
+        "properties": {
+          "behaviours": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Contiene la información de comportamiento del módulo. Si se envía, sus cuatro campos son requeridos.",
+            "required": [
+              "onFailed",
+              "onLowRisk",
+              "onMediumRisk",
+              "onHighRisk"
+            ],
+            "properties": {
+              "onFailed": {
+                "type": "string",
+                "description": "Comportamiento a seguir en caso de fallo. Requerido si se envía behaviours.",
+                "enum": [
+                  "REJECTED",
+                  "MANUAL",
+                  "IGNORE"
+                ]
+              },
+              "onLowRisk": {
+                "type": "string",
+                "enum": [
+                  "MANUAL",
+                  "IGNORE",
+                  "PROCESS"
+                ],
+                "description": "Comportamiento a seguir ante nivel de riesgo bajo. Requerido si se envía behaviours."
+              },
+              "onMediumRisk": {
+                "type": "string",
+                "enum": [
+                  "REJECTED",
+                  "MANUAL",
+                  "IGNORE",
+                  "PROCESS"
+                ],
+                "description": "Comportamiento a seguir ante nivel de riesgo medio. Requerido si se envía behaviours."
+              },
+              "onHighRisk": {
+                "type": "string",
+                "enum": [
+                  "REJECTED",
+                  "MANUAL",
+                  "IGNORE"
+                ],
+                "description": "Comportamiento a seguir ante nivel de riesgo alto. Requerido si se envía behaviours."
+              }
+            }
+          },
+          "paymentGroups": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Grupo de medios de pago.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CASH",
+                "CREDITCARD",
+                "E-WALLET",
+                "DEBITACCOUNT",
+                "PRIVATECARD"
+              ]
+            },
+            "minItems": 1
+          },
+          "minAmount": {
+            "type": "number",
+            "default": 0,
+            "example": 30,
+            "maximum": 999999999,
+            "description": "Monto mínimo para activar.",
+            "minimum": 0
+          },
+          "approvalScore": {
+            "type": "integer",
+            "description": "Puntaje de apetito al riesgo.",
+            "default": 0,
+            "example": 200,
+            "minimum": 1,
+            "maximum": 999
+          },
+          "rejectionScore": {
+            "type": "integer",
+            "default": null,
+            "example": 250,
+            "description": "Puntaje de tolerancia al riesgo.",
+            "minimum": 1,
+            "maximum": 999
+          },
+          "onCalibration": {
+            "type": "boolean",
+            "description": "Indica el estado en calibración."
+          }
+        }
+      },
       "site-securityFilters": {
         "title": "site-securityFilters",
         "x-stoplight": {
@@ -10925,8 +11227,7 @@
               "x-stoplight": {
                 "id": "z69lwl4nqni0d"
               },
-              "type": "string",
-              "example": "CL"
+              "$ref": "#/components/schemas/country-alpha-two"
             }
           },
           "onlyWhitelisted": {
@@ -11011,7 +11312,7 @@
               "id": "ehgbjp6bddldb"
             },
             "description": "Monto máximo por cliente al día. 0 indica ilimitado.",
-            "maximum": 99999999999999,
+            "maximum": 999999999999.99,
             "minimum": 0,
             "default": 100000000,
             "example": 30000
@@ -11033,7 +11334,7 @@
               "id": "1r3c3mxfg9djy"
             },
             "description": "Monto máximo por cliente al mes. 0 indica ilimitado.",
-            "maximum": 99999999999999,
+            "maximum": 999999999999.99,
             "default": 100000000,
             "example": 2000,
             "minimum": 0
@@ -11070,6 +11371,7 @@
             "format": "float",
             "default": 0,
             "example": 12,
+            "minimum": 1,
             "maximum": 50,
             "description": "Porcentaje de IVA."
           },
